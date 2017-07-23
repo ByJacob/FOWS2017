@@ -38,17 +38,6 @@ public class MainMenu extends AppCompatActivity implements FragmentDrawer.Fragme
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id==R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void onDrawerItemSelected(View view, int position) {
 
     }
