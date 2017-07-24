@@ -58,20 +58,7 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
         final DrawerMenuView fragment = this;
         adapter = new DrawerMenuAdapter(getActivity(), presenter);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                drawerListener.onDrawerItemSelected(view, position);
-                presenter.listItemOnClick(fragment);
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
+        setRecyclerView(fragment);
         return layout;
     }
 
@@ -110,6 +97,23 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
     @Override
     public void closeDrawer() {
         mDrawerLayout.closeDrawer(containerView);
+    }
+
+    private void setRecyclerView(final DrawerMenuView fragment) {
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                drawerListener.onDrawerItemSelected(view, position);
+                presenter.listItemOnClick(fragment);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
     }
 
     public static interface ClickListener {
