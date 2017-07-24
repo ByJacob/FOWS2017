@@ -1,39 +1,33 @@
 package pl.edu.pwr.fows.fows2017.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.Collections;
-import java.util.List;
-
 import pl.edu.pwr.fows.fows2017.R;
-import pl.edu.pwr.fows.fows2017.model.NavDrawerItem;
+import pl.edu.pwr.fows.fows2017.map.DrawerMenuItemMap;
+import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
+import pl.edu.pwr.fows.fows2017.view.DrawerMenuRowView;
 
 /**
  * Project: FoWS2017
  * Created by Jakub Rosa on 23.07.2017.
  */
 
-public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDrawerAdapter.NavViewHolder> {
+public class DrawerMenuAdapter extends RecyclerView.Adapter<DrawerMenuAdapter.NavViewHolder> {
 
-    List<NavDrawerItem> data = Collections.emptyList();
     private LayoutInflater inflater;
     private Context context;
+    private DrawerMenuPresenter presenter;
 
-    public NavigationDrawerAdapter(Context context, List<NavDrawerItem> data) {
-        this.data = data;
+    public DrawerMenuAdapter(Context context, DrawerMenuPresenter presenter) {
         this.context = context;
         inflater = LayoutInflater.from(context);
-    }
-
-    public void delete(int position) {
-        data.remove(position);
-        notifyItemRemoved(position);
-
+        this.presenter=presenter;
     }
 
     @Override
@@ -45,20 +39,29 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
 
     @Override
     public void onBindViewHolder(NavViewHolder holder, int position) {
-        NavDrawerItem current = data.get(position);
-        holder.title.setText(current.getTitle());
+        presenter.configureMenuRow(holder, position);
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return presenter.getMenusCount();
     }
 
-    public class NavViewHolder extends RecyclerView.ViewHolder {
-        TextView title;
+    public class NavViewHolder extends RecyclerView.ViewHolder implements DrawerMenuRowView {
+        private TextView title;
         public NavViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.title);
+        }
+
+        @Override
+        public void displayTitle(String tag) {
+            title.setText(context.getString(DrawerMenuItemMap.getTitle(tag)));
+        }
+
+        @Override
+        public void setIdFragment(String tag) {
+
         }
     }
 }

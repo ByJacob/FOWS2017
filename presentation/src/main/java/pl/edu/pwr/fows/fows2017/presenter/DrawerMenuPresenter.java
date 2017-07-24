@@ -38,7 +38,7 @@ public class DrawerMenuPresenter {
         return menus.size();
     }
 
-    public void configuremenuRow(DrawerMenuRowView view, int position){
+    public void configureMenuRow(DrawerMenuRowView view, int position){
         view.displayTitle(menus.get(position).getName());
         view.setIdFragment(menus.get(position).getName());
     }

@@ -15,12 +15,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import pl.edu.pwr.fows.fows2017.R;
-import pl.edu.pwr.fows.fows2017.adapter.NavigationDrawerAdapter;
-import pl.edu.pwr.fows.fows2017.model.NavDrawerItem;
+import pl.edu.pwr.fows.fows2017.adapter.DrawerMenuAdapter;
 import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
 import pl.edu.pwr.fows.fows2017.view.DrawerMenuView;
 
@@ -36,9 +32,8 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
     private RecyclerView recyclerView;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    private NavigationDrawerAdapter adapter;
+    private DrawerMenuAdapter adapter;
     private View containerView;
-    private static String[] titles = null;
     private FragmentDrawerListener drawerListener;
     private final DrawerMenuPresenter presenter;
 
@@ -50,21 +45,9 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
         this.drawerListener = listener;
     }
 
-    public static List<NavDrawerItem> getData() {
-        List<NavDrawerItem> data = new ArrayList<>();
-
-        for (int i=0; i< titles.length; i++) {
-            NavDrawerItem navItem = new NavDrawerItem();
-            navItem.setTitle(titles[i]);
-            data.add(navItem);
-        }
-        return data;
-    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        titles = getActivity().getResources().getStringArray(R.array.nav_drawer_labels);
         presenter.onViewTaken();
     }
 
@@ -74,7 +57,7 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer_menu, container, false);
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
         final DrawerMenuView fragment = this;
-        adapter = new NavigationDrawerAdapter(getActivity(), getData());
+        adapter = new DrawerMenuAdapter(getActivity(), presenter);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {

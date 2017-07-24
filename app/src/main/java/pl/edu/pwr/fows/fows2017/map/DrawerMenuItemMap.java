@@ -14,10 +14,11 @@ public class DrawerMenuItemMap {
                         R.string.nav_item_sponsors, R.string.nav_item_contact, R.string.nav_item_offer};
     private static final Integer[] idFragments = {0};
 
-    public static String getTitle(String tag) {
+    public static Integer getTitle(String tag) {
         for(int i=0; i<tags.length;  i++){
-            if(tag.equals(tags[i]))
-                return String.valueOf(idStrings[i]);
+            if(tag.equals(tags[i])) {
+                return idStrings[i];
+            }
         }
         return null; //todo make exception
     }
