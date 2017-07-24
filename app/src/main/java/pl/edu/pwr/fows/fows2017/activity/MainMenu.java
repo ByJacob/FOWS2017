@@ -5,16 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import pl.edu.pwr.fows.fows2017.R;
-import pl.edu.pwr.fows.fows2017.fragment.FragmentDrawer;
+import pl.edu.pwr.fows.fows2017.fragment.DrawerMenuFragment;
 
-public class MainMenu extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
+public class MainMenu extends AppCompatActivity implements DrawerMenuFragment.FragmentDrawerListener {
 
     private Toolbar mToolbar;
-    private FragmentDrawer drawerFragment;
+    private DrawerMenuFragment drawerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +25,7 @@ public class MainMenu extends AppCompatActivity implements FragmentDrawer.Fragme
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        drawerFragment = (FragmentDrawer)
+        drawerFragment = (DrawerMenuFragment)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
         drawerFragment.setDrawerListener(this);

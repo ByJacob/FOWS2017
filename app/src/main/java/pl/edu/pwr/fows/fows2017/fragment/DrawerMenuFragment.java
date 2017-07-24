@@ -21,15 +21,17 @@ import java.util.List;
 import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.adapter.NavigationDrawerAdapter;
 import pl.edu.pwr.fows.fows2017.model.NavDrawerItem;
+import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
+import pl.edu.pwr.fows.fows2017.view.DrawerMenuView;
 
 /**
  * Project: FoWS2017
  * Created by Jakub Rosa on 23.07.2017.
  */
 
-public class FragmentDrawer extends Fragment {
+public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
 
-    private static String TAG = FragmentDrawer.class.getSimpleName();
+    private static String TAG = DrawerMenuFragment.class.getSimpleName();
 
     private RecyclerView recyclerView;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -38,9 +40,10 @@ public class FragmentDrawer extends Fragment {
     private View containerView;
     private static String[] titles = null;
     private FragmentDrawerListener drawerListener;
+    private final DrawerMenuPresenter presenter;
 
-    public FragmentDrawer() {
-
+    public DrawerMenuFragment() {
+        presenter = new DrawerMenuPresenter();
     }
 
     public void setDrawerListener(FragmentDrawerListener listener) {
@@ -62,15 +65,15 @@ public class FragmentDrawer extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         titles = getActivity().getResources().getStringArray(R.array.nav_drawer_labels);
+        presenter.onViewTaken();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-
-        View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+        View layout = inflater.inflate(R.layout.fragment_navigation_drawer_menu, container, false);
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
-
+        final DrawerMenuView fragment = this;
         adapter = new NavigationDrawerAdapter(getActivity(), getData());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -78,7 +81,7 @@ public class FragmentDrawer extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 drawerListener.onDrawerItemSelected(view, position);
-                mDrawerLayout.closeDrawer(containerView);
+                presenter.listItemOnClick(fragment);
             }
 
             @Override
@@ -108,8 +111,7 @@ public class FragmentDrawer extends Fragment {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 super.onDrawerSlide(drawerView, slideOffset);
-                toolbar.getBackground().setAlpha(Math.round(255*(1-slideOffset/2)));
-                int test = toolbar.getBackground().getAlpha();
+                toolbar.getBackground().setAlpha(presenter.getBackgroundToolbarAlpha(slideOffset));
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
@@ -121,6 +123,12 @@ public class FragmentDrawer extends Fragment {
         });
 
     }
+
+    @Override
+    public void closeDrawer() {
+        mDrawerLayout.closeDrawer(containerView);
+    }
+
     public static interface ClickListener {
         public void onClick(View view, int position);
         public void onLongClick(View view, int position);
