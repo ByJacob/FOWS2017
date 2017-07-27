@@ -2,6 +2,8 @@ package pl.edu.pwr.fows.fows2017.menu;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import pl.edu.pwr.fows.fows2017.entity.Menu;
 import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
 
@@ -14,6 +16,7 @@ public class MenuClient implements MenuGateway {
 
     private final MenuProvider provider;
 
+    @Inject
     public MenuClient() {
         provider = new MenuProvider();
     }

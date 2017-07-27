@@ -15,8 +15,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import javax.inject.Inject;
+
 import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.adapter.DrawerMenuAdapter;
+import pl.edu.pwr.fows.fows2017.di.component.MainMenuComponent;
 import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
 import pl.edu.pwr.fows.fows2017.view.DrawerMenuView;
 
@@ -35,10 +38,12 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
     private DrawerMenuAdapter adapter;
     private View containerView;
     private FragmentDrawerListener drawerListener;
-    private final DrawerMenuPresenter presenter;
+
+    @Inject
+    public DrawerMenuPresenter presenter;
+    public MainMenuComponent component;
 
     public DrawerMenuFragment() {
-        presenter = new DrawerMenuPresenter();
     }
 
     public void setDrawerListener(FragmentDrawerListener listener) {
@@ -48,7 +53,6 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter.onViewTaken();
     }
 
     @Nullable
@@ -57,12 +61,15 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer_menu, container, false);
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
         final DrawerMenuView fragment = this;
-        adapter = new DrawerMenuAdapter(getActivity(), presenter);
+        adapter = new DrawerMenuAdapter(getActivity());
         setRecyclerView(fragment);
         return layout;
     }
 
-    public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar) {
+    public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar, final DrawerMenuPresenter presenter) {
+        this.presenter = presenter;
+        presenter.onViewTaken();
+        adapter.setPresenter(this.presenter);
         containerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
         mDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {

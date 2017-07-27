@@ -20,6 +20,7 @@ android {
 
 dependencies {
     final ANDROID_SUPPORT_VERSION = '25.3.1'
+    final DAGGER_VERSION = '2.9'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -28,7 +29,10 @@ dependencies {
     compile "com.android.support:design:$ANDROID_SUPPORT_VERSION"
     compile "com.android.support:recyclerview-v7:$ANDROID_SUPPORT_VERSION"
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta3'
-    testCompile 'junit:junit:4.12'
+    compile "com.google.dagger:dagger:$DAGGER_VERSION"
+    annotationProcessor "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    provided 'javax.annotation:jsr250-api:1.0'
+    compile 'javax.inject:javax.inject:1'
     compile project(path: ':presentation')
-    compile project(path: ':presentation')
+    compile project(path: ':data')
 }

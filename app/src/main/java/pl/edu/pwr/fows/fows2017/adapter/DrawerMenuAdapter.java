@@ -24,10 +24,13 @@ public class DrawerMenuAdapter extends RecyclerView.Adapter<DrawerMenuAdapter.Na
     private Context context;
     private DrawerMenuPresenter presenter;
 
-    public DrawerMenuAdapter(Context context, DrawerMenuPresenter presenter) {
+    public DrawerMenuAdapter(Context context) {
         this.context = context;
         inflater = LayoutInflater.from(context);
-        this.presenter=presenter;
+    }
+
+    public void setPresenter(DrawerMenuPresenter presenter){
+        this.presenter = presenter;
     }
 
     @Override

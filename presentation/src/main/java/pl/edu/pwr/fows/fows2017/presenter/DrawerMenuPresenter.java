@@ -2,9 +2,8 @@ package pl.edu.pwr.fows.fows2017.presenter;
 
 import java.util.List;
 
+import pl.edu.pwr.fows.fows2017.UseCaseFactory;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
-import pl.edu.pwr.fows.fows2017.menu.MenuClient;
-import pl.edu.pwr.fows.fows2017.usecase.MenuUseCase;
 import pl.edu.pwr.fows.fows2017.view.DrawerMenuRowView;
 import pl.edu.pwr.fows.fows2017.view.DrawerMenuView;
 
@@ -16,12 +15,11 @@ import pl.edu.pwr.fows.fows2017.view.DrawerMenuView;
 public class DrawerMenuPresenter {
     private static final Integer MAX_ALPHA_VALUE = 255;
     private static final Integer MAX_SLIDE_OFFSET_VALUE = 1;
-
-    private final MenuUseCase useCase = new MenuUseCase(new MenuClient()); //todo remove data compile when add DI
+    private final UseCaseFactory factory;
     private List<Menu> menus;
 
-    public DrawerMenuPresenter() {
-
+    public DrawerMenuPresenter(UseCaseFactory factory) {
+        this.factory = factory;
     }
     public void listItemOnClick(DrawerMenuView view){
         view.closeDrawer();
@@ -31,7 +29,7 @@ public class DrawerMenuPresenter {
     }
 
     public void onViewTaken() {
-        menus = useCase.execute();
+        menus = factory.getMenuUseCase().execute();
     }
 
     public int getMenusCount(){
