@@ -19,7 +19,6 @@ import javax.inject.Inject;
 
 import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.adapter.DrawerMenuAdapter;
-import pl.edu.pwr.fows.fows2017.di.component.MainMenuComponent;
 import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
 import pl.edu.pwr.fows.fows2017.view.DrawerMenuView;
 
@@ -41,7 +40,6 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
 
     @Inject
     public DrawerMenuPresenter presenter;
-    public MainMenuComponent component;
 
     public DrawerMenuFragment() {
     }
@@ -91,13 +89,8 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
                 toolbar.getBackground().setAlpha(presenter.getBackgroundToolbarAlpha(slideOffset));
             }
         };
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-        mDrawerLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                mDrawerToggle.syncState();
-            }
-        });
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
+        mDrawerLayout.post(() -> mDrawerToggle.syncState());
 
     }
 
@@ -123,9 +116,9 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
         }));
     }
 
-    public static interface ClickListener {
-        public void onClick(View view, int position);
-        public void onLongClick(View view, int position);
+    public interface ClickListener {
+        void onClick(View view, int position);
+        void onLongClick(View view, int position);
     }
 
     static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
@@ -145,7 +138,7 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
                 public void onLongPress(MotionEvent e) {
                     View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
                     if(child != null && clickListener != null){
-                        clickListener.onLongClick(child, recyclerView.getChildPosition(child));
+                        clickListener.onLongClick(child, recyclerView.getChildAdapterPosition(child));
                     }
                 }
             });
@@ -155,7 +148,7 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
         public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
             View child = rv.findChildViewUnder(e.getX(), e.getY());
             if(child != null && clickListener != null && gestureDetector.onTouchEvent(e)){
-                clickListener.onClick(child, rv.getChildPosition(child));
+                clickListener.onClick(child, rv.getChildAdapterPosition(child));
             }
             return false;
         }
@@ -172,6 +165,6 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
     }
 
     public interface FragmentDrawerListener {
-        public void onDrawerItemSelected(View view, int position);
+        void onDrawerItemSelected(View view, int position);
     }
 }

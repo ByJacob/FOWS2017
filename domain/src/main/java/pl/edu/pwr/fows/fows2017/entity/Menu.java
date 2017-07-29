@@ -47,8 +47,7 @@ public class Menu {
         }
 
         public Menu build() {
-            Menu menu = new Menu(id, name);
-            return menu;
+            return new Menu(id, name);
         }
     }
 }

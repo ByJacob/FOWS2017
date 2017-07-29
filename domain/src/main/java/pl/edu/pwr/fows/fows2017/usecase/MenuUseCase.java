@@ -7,7 +7,6 @@ import pl.edu.pwr.fows.fows2017.aux_data.FowsRxTransformerProvider;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
 import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
 import pl.edu.pwr.fows.fows2017.usecase.base.AbstractRxSingleUseCase;
-import pl.edu.pwr.fows.fows2017.usecase.base.UseCase;
 
 /**
  * Project: FoWS2017

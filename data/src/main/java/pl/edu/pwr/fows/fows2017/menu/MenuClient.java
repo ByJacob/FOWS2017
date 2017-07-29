@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
 import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;

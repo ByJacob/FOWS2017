@@ -3,9 +3,6 @@ package pl.edu.pwr.fows.fows2017.aux_data;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.ObservableTransformer;
 import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.SingleSource;
@@ -31,11 +28,6 @@ public final class FowsRxTransformerProvider {
     }
 
     public <T> SingleTransformer<T, T> getSingleSchedulers(){
-        return new SingleTransformer<T, T>() {
-            @Override
-            public SingleSource<T> apply(@NonNull Single<T> upstream) {
-                return upstream.observeOn(subscribeOnScheduler).observeOn(observerOnScheduler);
-            }
-        };
+        return upstream -> upstream.observeOn(subscribeOnScheduler).observeOn(observerOnScheduler);
     }
 }

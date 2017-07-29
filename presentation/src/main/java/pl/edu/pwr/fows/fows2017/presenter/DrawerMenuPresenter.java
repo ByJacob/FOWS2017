@@ -2,9 +2,6 @@ package pl.edu.pwr.fows.fows2017.presenter;
 
 import java.util.List;
 
-import io.reactivex.SingleObserver;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
 import pl.edu.pwr.fows.fows2017.UseCaseFactory;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
 import pl.edu.pwr.fows.fows2017.view.DrawerMenuRowView;

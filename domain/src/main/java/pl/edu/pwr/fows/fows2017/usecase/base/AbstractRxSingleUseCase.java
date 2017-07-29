@@ -18,7 +18,7 @@ public abstract class AbstractRxSingleUseCase<T> implements UseCase<Single<T>>{
 
     @Override
     public Single<T> execute() {
-        return createSingle().compose(rxTransformer.<T>getSingleSchedulers());
+        return createSingle().compose(rxTransformer.getSingleSchedulers());
     }
 
     protected abstract Single<T> createSingle();

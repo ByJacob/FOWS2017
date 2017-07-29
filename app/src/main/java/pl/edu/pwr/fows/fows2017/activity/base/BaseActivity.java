@@ -31,6 +31,7 @@ public abstract class BaseActivity extends AppCompatActivity{
     private AppComponent getAppComponent(){
         return AppComponentInitializer.INSTANCE.getFowsApplicationComponent();
     }
+    @SuppressWarnings("deprecation")
     private ActivityComponent getActivityComponent(){
         if (activityComponent == null) {
             activityComponent = DaggerActivityComponent.builder().appComponent(getAppComponent())

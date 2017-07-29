@@ -12,11 +12,14 @@ import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
  * Project: FoWS2017
  * Created by Jakub Rosa on 27.07.2017.
  */
+@SuppressWarnings("unused")
 @Singleton
 @Component(modules = AppModule.class)
 public interface AppComponent {
+    @SuppressWarnings("unused")
     void inject(FowsApplication fowsApplication);
 
+    @SuppressWarnings("unused")
     MenuGateway getMenuGateway();
 
     UseCaseFactory getUseCaseFactory();

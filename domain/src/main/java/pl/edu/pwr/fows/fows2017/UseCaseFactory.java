@@ -19,15 +19,15 @@ import pl.edu.pwr.fows.fows2017.usecase.base.UseCase;
 public class UseCaseFactory {
 
     private final MenuGateway menuGateway;
-    private final FowsRxTransformerProvider rxTansformer;
+    private final FowsRxTransformerProvider rxTransformer;
 
     @Inject
     public UseCaseFactory(FowsRxTransformerProvider rxTransformer, MenuGateway menuGateway){
         this.menuGateway = menuGateway;
-        this.rxTansformer = rxTransformer;
+        this.rxTransformer = rxTransformer;
     }
 
     public UseCase<Single<List<Menu>>> getMenuUseCase(){
-        return new MenuUseCase(rxTansformer, menuGateway);
+        return new MenuUseCase(rxTransformer, menuGateway);
     }
 }
