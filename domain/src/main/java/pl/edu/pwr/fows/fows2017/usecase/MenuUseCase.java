@@ -2,8 +2,11 @@ package pl.edu.pwr.fows.fows2017.usecase;
 
 import java.util.List;
 
+import io.reactivex.Single;
+import pl.edu.pwr.fows.fows2017.aux_data.FowsRxTransformerProvider;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
 import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
+import pl.edu.pwr.fows.fows2017.usecase.base.AbstractRxSingleUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.base.UseCase;
 
 /**
@@ -11,16 +14,17 @@ import pl.edu.pwr.fows.fows2017.usecase.base.UseCase;
  * Created by Jakub Rosa on 24.07.2017.
  */
 
-public class MenuUseCase implements UseCase<List<Menu>>{
+public class MenuUseCase extends AbstractRxSingleUseCase<List<Menu>> {
 
     private final MenuGateway gateway;
 
-    public MenuUseCase(MenuGateway gateway) {
+    public MenuUseCase(FowsRxTransformerProvider rxTransformer, MenuGateway gateway) {
+        super(rxTransformer);
         this.gateway = gateway;
     }
 
     @Override
-    public List<Menu> execute() {
+    protected Single<List<Menu>> createSingle() {
         return gateway.getMenus();
     }
 }

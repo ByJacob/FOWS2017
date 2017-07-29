@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
 import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
 
@@ -22,12 +24,12 @@ public class MenuClient implements MenuGateway {
     }
 
     @Override
-    public List<Menu> getMenus() {
-        return provider.getMenus();
+    public Single<List<Menu>> getMenus() {
+        return Single.just(provider.getMenus());
     }
 
     @Override
-    public Menu getMenu(int position) {
-        return provider.getMenus().get(position);
+    public Single<Menu> getMenu(int position) {
+        return Single.just(provider.getMenus().get(position));
     }
 }

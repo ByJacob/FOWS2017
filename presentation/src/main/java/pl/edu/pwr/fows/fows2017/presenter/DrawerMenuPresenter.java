@@ -2,6 +2,9 @@ package pl.edu.pwr.fows.fows2017.presenter;
 
 import java.util.List;
 
+import io.reactivex.SingleObserver;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 import pl.edu.pwr.fows.fows2017.UseCaseFactory;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
 import pl.edu.pwr.fows.fows2017.view.DrawerMenuRowView;
@@ -29,7 +32,7 @@ public class DrawerMenuPresenter {
     }
 
     public void onViewTaken() {
-        menus = factory.getMenuUseCase().execute();
+        factory.getMenuUseCase().execute().subscribe(this::onMenusListFetchSuccess);
     }
 
     public int getMenusCount(){
@@ -39,6 +42,10 @@ public class DrawerMenuPresenter {
     public void configureMenuRow(DrawerMenuRowView view, int position){
         view.displayTitle(menus.get(position).getName());
         view.setIdFragment(menus.get(position).getName());
+    }
+
+    private void onMenusListFetchSuccess(List<Menu> menus){
+        this.menus = menus;
     }
 
 }

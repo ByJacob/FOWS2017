@@ -2,6 +2,7 @@ package pl.edu.pwr.fows.fows2017.gateway;
 
 import java.util.List;
 
+import io.reactivex.Single;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
 
 /**
@@ -11,8 +12,8 @@ import pl.edu.pwr.fows.fows2017.entity.Menu;
 
 public interface MenuGateway {
 
-    List<Menu> getMenus();
+    Single<List<Menu>> getMenus();
 
-    Menu getMenu(int position);
+    Single<Menu> getMenu(int position);
 
 }

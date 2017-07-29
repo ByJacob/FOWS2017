@@ -1,9 +1,15 @@
 package pl.edu.pwr.fows.fows2017;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
+import io.reactivex.Single;
+import pl.edu.pwr.fows.fows2017.aux_data.FowsRxTransformerProvider;
+import pl.edu.pwr.fows.fows2017.entity.Menu;
 import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
 import pl.edu.pwr.fows.fows2017.usecase.MenuUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.base.UseCase;
 
 /**
  * Project: FoWS2017
@@ -12,14 +18,16 @@ import pl.edu.pwr.fows.fows2017.usecase.MenuUseCase;
 
 public class UseCaseFactory {
 
-    MenuGateway menuGateway;
+    private final MenuGateway menuGateway;
+    private final FowsRxTransformerProvider rxTansformer;
 
     @Inject
-    public UseCaseFactory(MenuGateway menuGateway){
+    public UseCaseFactory(FowsRxTransformerProvider rxTransformer, MenuGateway menuGateway){
         this.menuGateway = menuGateway;
+        this.rxTansformer = rxTransformer;
     }
 
-    public MenuUseCase getMenuUseCase(){
-        return new MenuUseCase(menuGateway);
+    public UseCase<Single<List<Menu>>> getMenuUseCase(){
+        return new MenuUseCase(rxTansformer, menuGateway);
     }
 }
