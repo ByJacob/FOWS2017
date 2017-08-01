@@ -9,4 +9,5 @@
     <dimen name="navigation_avatar_left_margin">@dimen/navigation_item_icon_margin_left_right</dimen>
     <dimen name="navigation_header_bottom_padding">8dp</dimen>
     <dimen name="navigation_list_top_margin">8dp</dimen>
+    <dimen name="fragment_main_item_size">24sp</dimen>
 </resources>
