@@ -66,7 +66,7 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
 
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar, final DrawerMenuPresenter presenter) {
         this.presenter = presenter;
-        presenter.onViewTaken();
+        this.presenter.onViewTaken();
         adapter.setPresenter(this.presenter);
         containerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
@@ -106,7 +106,7 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
             @Override
             public void onClick(View view, int position) {
                 drawerListener.onDrawerItemSelected(view, position);
-                presenter.listItemOnClick(fragment);
+                presenter.menuDrawerOnClick(fragment);
             }
 
             @Override

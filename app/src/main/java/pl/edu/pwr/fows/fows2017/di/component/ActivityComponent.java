@@ -1,8 +1,8 @@
 package pl.edu.pwr.fows.fows2017.di.component;
 
 import dagger.Component;
+import pl.edu.pwr.fows.fows2017.activity.BaseActivity;
 import pl.edu.pwr.fows.fows2017.di.module.ActivityModule;
-import pl.edu.pwr.fows.fows2017.di.module.MainMenuModule;
 import pl.edu.pwr.fows.fows2017.di.scope.ActivityScope;
 
 /**
@@ -13,6 +13,5 @@ import pl.edu.pwr.fows.fows2017.di.scope.ActivityScope;
 @ActivityScope
 @Component(dependencies = AppComponent.class, modules = ActivityModule.class)
 public interface ActivityComponent {
-
-    MainMenuComponent addModule(MainMenuModule module);
+    void inject(BaseActivity baseActivity);
 }

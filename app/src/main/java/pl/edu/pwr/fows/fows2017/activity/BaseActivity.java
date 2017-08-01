@@ -1,34 +1,48 @@
 package pl.edu.pwr.fows.fows2017.activity;
 
-import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.View;
 
 import javax.inject.Inject;
 
 import pl.edu.pwr.fows.fows2017.R;
-import pl.edu.pwr.fows.fows2017.activity.base.BaseActivity;
+import pl.edu.pwr.fows.fows2017.application.AppComponentInitializer;
 import pl.edu.pwr.fows.fows2017.di.component.ActivityComponent;
-import pl.edu.pwr.fows.fows2017.di.module.MainMenuModule;
+import pl.edu.pwr.fows.fows2017.di.component.AppComponent;
+import pl.edu.pwr.fows.fows2017.di.component.DaggerActivityComponent;
+import pl.edu.pwr.fows.fows2017.di.module.ActivityModule;
 import pl.edu.pwr.fows.fows2017.fragment.DrawerMenuFragment;
 import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
 
-public class MainMenu extends BaseActivity implements DrawerMenuFragment.FragmentDrawerListener {
+/**
+ * Project: FoWS2017
+ * Created by Jakub Rosa on 27.07.2017.
+ */
 
+public class BaseActivity extends AppCompatActivity implements DrawerMenuFragment.FragmentDrawerListener{
+
+    private ActivityComponent activityComponent;
+    @Inject
+    DrawerMenuPresenter menuPresenter;
     private Toolbar mToolbar;
     private DrawerMenuFragment drawerFragment;
 
-    @Inject
-    DrawerMenuPresenter menuPresenter;
+    private Integer getLayoutId(){
+        return R.layout.activity_main;
+    }
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(getLayoutId());
+        ActivityComponentInitializer.INSTANCE.initActivity(this);
+        ActivityComponentInitializer.INSTANCE.getFowsActivityComponent().inject(this);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -38,18 +52,9 @@ public class MainMenu extends BaseActivity implements DrawerMenuFragment.Fragmen
         drawerFragment.setDrawerListener(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return true;
-    }
 
     @Override
     public void onDrawerItemSelected(View view, int position) {
 
-    }
-
-    @Override
-    protected void performFieldInjection(ActivityComponent activityComponent) {
-        activityComponent.addModule(new MainMenuModule()).inject(this);
     }
 }

@@ -21,7 +21,7 @@ public class DrawerMenuPresenter {
     public DrawerMenuPresenter(UseCaseFactory factory) {
         this.factory = factory;
     }
-    public void listItemOnClick(DrawerMenuView view){
+    public void menuDrawerOnClick(DrawerMenuView view){
         view.closeDrawer();
     }
     public int getBackgroundToolbarAlpha(float slideOffset){

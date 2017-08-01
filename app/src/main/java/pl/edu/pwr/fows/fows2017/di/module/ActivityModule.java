@@ -5,7 +5,9 @@ import android.content.Intent;
 
 import dagger.Module;
 import dagger.Provides;
+import pl.edu.pwr.fows.fows2017.UseCaseFactory;
 import pl.edu.pwr.fows.fows2017.di.scope.ActivityScope;
+import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
 
 /**
  * Project: FoWS2017
@@ -31,6 +33,12 @@ public class ActivityModule {
     @Provides
     public Intent provideIntent(Activity activity) {
         return activity.getIntent();
+    }
+
+    @ActivityScope
+    @Provides
+    DrawerMenuPresenter getDrawerMenuPresenter(UseCaseFactory useCaseFactory) {
+        return new DrawerMenuPresenter(useCaseFactory);
     }
 
 }
