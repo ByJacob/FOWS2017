@@ -7,4 +7,8 @@
     <string name="nav_item_sponsors">Sponsorzy</string>
     <string name="drawer_close">Zamknięte</string>
     <string name="drawer_open">Otwarte</string>
+    <string name="fragment_main_item_agenda">Agenda</string>
+    <string name="fragment_main_item_contact">Kontakt</string>
+    <string name="fragment_main_item_location">Lokalizacja</string>
+    <string name="fragment_main_item_news">Aktualności</string>
 </resources>
