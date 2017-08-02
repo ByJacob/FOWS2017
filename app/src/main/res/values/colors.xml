@@ -8,7 +8,7 @@
     <color name="primary_text_default_material_light_fows">#424242</color>
     <color name="primary_text_default_material_light_inverse_fows">@color/background_material_fows</color>
     <color name="secondary_text_default_material_light_fows">#757575</color>
-    <color name="secondary_text_default_material_inverse_fows">@color/primary_text_default_material_light_inverse_fows</color>
+    <color name="secondary_text_default_material_light_inverse_fows">@color/primary_text_default_material_light_inverse_fows</color>
     <color name="fragment_main_item_color_1">#fb8c00</color>
     <color name="fragment_main_item_color_2">#b71c1c</color>
     <color name="fragment_main_item_color_3">#3949ab</color>

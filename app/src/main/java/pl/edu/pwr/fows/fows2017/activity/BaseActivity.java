@@ -10,12 +10,9 @@ import android.view.View;
 import javax.inject.Inject;
 
 import pl.edu.pwr.fows.fows2017.R;
-import pl.edu.pwr.fows.fows2017.application.AppComponentInitializer;
 import pl.edu.pwr.fows.fows2017.di.component.ActivityComponent;
-import pl.edu.pwr.fows.fows2017.di.component.AppComponent;
-import pl.edu.pwr.fows.fows2017.di.component.DaggerActivityComponent;
-import pl.edu.pwr.fows.fows2017.di.module.ActivityModule;
 import pl.edu.pwr.fows.fows2017.fragment.DrawerMenuFragment;
+import pl.edu.pwr.fows.fows2017.fragment.base.BaseFragment;
 import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
 
 /**
@@ -40,7 +37,7 @@ public class BaseActivity extends AppCompatActivity implements DrawerMenuFragmen
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        ActivityComponentInitializer.INSTANCE.initActivity(this);
+        ActivityComponentInitializer.INSTANCE.initFowsActivityComponent(this);
         ActivityComponentInitializer.INSTANCE.getFowsActivityComponent().inject(this);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -50,6 +47,8 @@ public class BaseActivity extends AppCompatActivity implements DrawerMenuFragmen
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar, menuPresenter);
         drawerFragment.setDrawerListener(this);
+        getSupportFragmentManager().beginTransaction().replace(R.id.container_body, new BaseFragment(), "MAIN").commit();
+        //BaseFragment baseFragment = (BaseFragment) getSupportFragmentManager().findFragmentByTag("MAIN");
     }
 
 
