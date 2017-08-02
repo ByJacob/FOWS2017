@@ -5,8 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pl.edu.pwr.fows.fows2017.activity.BaseActivity"
-    tools:openDrawer="start">
+    tools:context="pl.edu.pwr.fows.fows2017.activity.BaseActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,9 +25,9 @@
 
         <FrameLayout
             android:id="@+id/container_body"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_main" />
     </LinearLayout>
 
     <fragment
