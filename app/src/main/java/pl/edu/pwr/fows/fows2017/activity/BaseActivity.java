@@ -47,7 +47,7 @@ public class BaseActivity extends AppCompatActivity implements DrawerMenuFragmen
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar, menuPresenter);
         drawerFragment.setDrawerListener(this);
-        getSupportFragmentManager().beginTransaction().replace(R.id.container_body, new BaseFragment(), "MAIN").commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container_body, new BaseFragment(), "HOME").commit();
         //BaseFragment baseFragment = (BaseFragment) getSupportFragmentManager().findFragmentByTag("MAIN");
     }
 

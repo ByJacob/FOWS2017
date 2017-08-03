@@ -61,7 +61,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/fragment_main_item_background"
+            android:background="@drawable/fragment_home_item_background"
             android:backgroundTint="@color/fragment_main_item_color_1"
             android:elevation="@dimen/card_elevation"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
@@ -82,7 +82,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.39999998"
-                app:srcCompat="@drawable/fragment_menu_item_news" />
+                app:srcCompat="@drawable/fragment_home_item_news" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -107,7 +107,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/fragment_main_item_background"
+            android:background="@drawable/fragment_home_item_background"
             android:backgroundTint="@color/fragment_main_item_color_2"
             android:elevation="@dimen/card_elevation"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
@@ -133,7 +133,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.39999998"
-                app:srcCompat="@drawable/fragment_menu_item_agenda" />
+                app:srcCompat="@drawable/fragment_home_item_agenda" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -161,7 +161,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/fragment_main_item_background"
+            android:background="@drawable/fragment_home_item_background"
             android:backgroundTint="@color/fragment_main_item_color_3"
             android:elevation="@dimen/card_elevation"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -184,7 +184,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.4"
-                app:srcCompat="@drawable/fragment_menu_item_location" />
+                app:srcCompat="@drawable/fragment_home_item_location" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -211,7 +211,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/fragment_main_item_background"
+            android:background="@drawable/fragment_home_item_background"
             android:backgroundTint="@color/fragment_main_item_color_4"
             android:elevation="@dimen/card_elevation"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -234,7 +234,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.4"
-                app:srcCompat="@drawable/fragment_menu_item_contact" />
+                app:srcCompat="@drawable/fragment_home_item_contact" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -276,10 +276,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginLeft="-16dp"
-        android:layout_marginRight="-16dp"
-        android:layout_weight="1"
-        android:background="@android:drawable/editbox_dropdown_light_frame"
+        android:layout_weight="1.25"
+        android:background="@drawable/fragment_home_footer_background"
         android:clipToPadding="true"
         android:paddingBottom="8dp"
         android:paddingTop="8dp">
