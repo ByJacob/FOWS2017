@@ -76,6 +76,7 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
                 getActivity().invalidateOptionsMenu();
+                presenter.menuDrawerClose();
             }
 
             @Override

@@ -15,7 +15,8 @@
         android:layout_weight="1"
         android:elevation="@dimen/card_elevation"
         android:orientation="vertical"
-        android:paddingTop="8dp">
+        android:paddingTop="8dp"
+        app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -67,6 +68,7 @@
             android:background="@drawable/fragment_home_item_background"
             android:backgroundTint="@color/fragment_main_item_color_1"
             android:elevation="@dimen/card_elevation"
+            android:tag="NEWS"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/guideline"
@@ -113,6 +115,7 @@
             android:background="@drawable/fragment_home_item_background"
             android:backgroundTint="@color/fragment_main_item_color_2"
             android:elevation="@dimen/card_elevation"
+            android:tag="AGENDA"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="@+id/guideline"
@@ -167,6 +170,7 @@
             android:background="@drawable/fragment_home_item_background"
             android:backgroundTint="@color/fragment_main_item_color_3"
             android:elevation="@dimen/card_elevation"
+            android:tag="LOCATION"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/guideline"
@@ -217,6 +221,7 @@
             android:background="@drawable/fragment_home_item_background"
             android:backgroundTint="@color/fragment_main_item_color_4"
             android:elevation="@dimen/card_elevation"
+            android:tag="CONTACT"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="@+id/guideline"
             app:layout_constraintRight_toRightOf="parent"
@@ -276,14 +281,14 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <LinearLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.25"
-        android:background="@drawable/fragment_home_footer_background"
         android:clipToPadding="true"
         android:paddingBottom="8dp"
-        android:paddingTop="8dp">
+        android:paddingTop="8dp"
+        app:cardUseCompatPadding="true">
 
         <ImageView
             android:id="@+id/imageView4"
@@ -292,6 +297,6 @@
             android:layout_gravity="center"
             app:srcCompat="@drawable/logo_wg" />
 
-    </LinearLayout>
+    </android.support.v7.widget.CardView>
 </LinearLayout>
 

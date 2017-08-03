@@ -29,47 +29,55 @@ public class DrawerMenuPresenter {
         this.baseActivityView = baseActivityView;
         lastTimestampRefresh = 0L;
     }
-    public void menuItemClick(DrawerMenuView view, int position, String tag){
+
+    public void menuItemClick(DrawerMenuView view, int position, String tag) {
         view.closeDrawer();
+        baseActivityView.blockContainerClick(false);
         baseActivityView.changeMainFragment(tag);
     }
-    public int getBackgroundToolbarAlpha(float slideOffset){
-        return Math.round(MAX_ALPHA_VALUE*(MAX_SLIDE_OFFSET_VALUE-slideOffset/2));
+
+    public int getBackgroundToolbarAlpha(float slideOffset) {
+        return Math.round(MAX_ALPHA_VALUE * (MAX_SLIDE_OFFSET_VALUE - slideOffset / 2));
     }
 
     public void onViewTaken() {
         factory.getMenuUseCase().execute().subscribe(this::onMenusListFetchSuccess);
     }
 
-    public int getMenusCount(){
+    public int getMenusCount() {
         return menus.size();
     }
 
-    public void configureMenuRow(DrawerMenuRowView view, int position){
+    public void configureMenuRow(DrawerMenuRowView view, int position) {
         view.displayTitle(menus.get(position).getTag());
         view.setIdFragment(menus.get(position).getTag());
-        if(menus.get(position).getTag().equals(actualFragmentTag)){
+        if (menus.get(position).getTag().equals(actualFragmentTag)) {
             view.setIconToActive(true);
-        }
-        else{
+        } else {
             view.setIconToActive(false);
         }
         view.setTag(menus.get(position).getTag());
     }
 
-    private void onMenusListFetchSuccess(List<Menu> menus){
+    private void onMenusListFetchSuccess(List<Menu> menus) {
         this.menus = menus;
     }
 
     public void menuDrawerSlide(DrawerMenuView fragment) {
-        if(System.currentTimeMillis() - 100L > lastTimestampRefresh)
-        {
+        if (System.currentTimeMillis() - 100L > lastTimestampRefresh) {
             lastTimestampRefresh = System.currentTimeMillis();
             fragment.refreshMenuIcon();
         }
+        baseActivityView.blockContainerClick(true);
+    }
+
+    public void menuDrawerClose() {
+        baseActivityView.blockContainerClick(false);
     }
 
     public void setActualFragmentTag(String actualFragmentTag) {
         this.actualFragmentTag = actualFragmentTag;
     }
+
+
 }

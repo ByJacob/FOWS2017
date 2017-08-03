@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
+import pl.edu.pwr.fows.fows2017.BuildConfig;
 import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.di.component.ActivityComponent;
 import pl.edu.pwr.fows.fows2017.fragment.DrawerMenuFragment;
@@ -25,11 +26,11 @@ import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
 
 public class BaseActivity extends AppCompatActivity implements BaseActivityView{
 
-    private ActivityComponent activityComponent;
     @Inject
     DrawerMenuPresenter menuPresenter;
     private Toolbar mToolbar;
     private DrawerMenuFragment drawerFragment;
+    private Boolean isBlockClickContainerBody;
 
     private Integer getLayoutId(){
         return R.layout.activity_main;
@@ -38,6 +39,7 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView{
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        isBlockClickContainerBody = false;
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         ActivityComponentInitializer.INSTANCE.initFowsActivityComponent(this);
@@ -56,7 +58,15 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView{
 
     @Override
     public void changeMainFragment(String tag) {
-        Toast.makeText(this, tag, Toast.LENGTH_SHORT).show();
-        drawerFragment.presenter.setActualFragmentTag(tag);
+        if(!isBlockClickContainerBody) {
+            if(BuildConfig.DEBUG)
+                Toast.makeText(this, tag, Toast.LENGTH_SHORT).show();
+            drawerFragment.presenter.setActualFragmentTag(tag);
+        }
+    }
+
+    @Override
+    public void blockContainerClick(Boolean isBlock) {
+        this.isBlockClickContainerBody = isBlock;
     }
 }
