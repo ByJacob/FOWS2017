@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/navigation_item_height"
     android:clickable="true">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/menu_item_status_icon"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/navigation_item_icon_margin_left_right"
         android:layout_marginRight="@dimen/navigation_item_icon_margin_left_right"
-        android:scaleType="center"
         android:alpha="0.54"
-        app:srcCompat="@drawable/ic_navigation_item" />
+        android:scaleType="center"
+        app:srcCompat="@drawable/ic_navigation_item"
+        tools:alpha="1"
+        tools:tint="@color/colorPrimary"
+        tools:tintMode="src_atop" />
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/menu_item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"

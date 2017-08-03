@@ -1,5 +1,6 @@
 package pl.edu.pwr.fows.fows2017.presenter;
 
+import java.security.Timestamp;
 import java.util.List;
 
 import pl.edu.pwr.fows.fows2017.UseCaseFactory;
@@ -15,11 +16,16 @@ import pl.edu.pwr.fows.fows2017.view.DrawerMenuView;
 public class DrawerMenuPresenter {
     private static final Integer MAX_ALPHA_VALUE = 255;
     private static final Integer MAX_SLIDE_OFFSET_VALUE = 1;
+
+    private Long lastTimestampRefresh;
+    private String actualFragmentTag;
+
     private final UseCaseFactory factory;
     private List<Menu> menus;
 
     public DrawerMenuPresenter(UseCaseFactory factory) {
         this.factory = factory;
+        lastTimestampRefresh = 0L;
     }
     public void menuDrawerOnClick(DrawerMenuView view){
         view.closeDrawer();
@@ -39,10 +45,27 @@ public class DrawerMenuPresenter {
     public void configureMenuRow(DrawerMenuRowView view, int position){
         view.displayTitle(menus.get(position).getName());
         view.setIdFragment(menus.get(position).getName());
+        if(menus.get(position).getName().equals(actualFragmentTag)){
+            view.setIconToActive(true);
+        }
+        else{
+            view.setIconToActive(false);
+        }
     }
 
     private void onMenusListFetchSuccess(List<Menu> menus){
         this.menus = menus;
     }
 
+    public void menuDrawerSlide(DrawerMenuView fragment) {
+        if(System.currentTimeMillis() > lastTimestampRefresh)
+        {
+            lastTimestampRefresh = System.currentTimeMillis();
+            fragment.refreshMenuIcon();
+        }
+    }
+
+    public void setActualFragmentTag(String actualFragmentTag) {
+        this.actualFragmentTag = actualFragmentTag;
+    }
 }

@@ -1,10 +1,13 @@
 package pl.edu.pwr.fows.fows2017.adapter;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import pl.edu.pwr.fows.fows2017.R;
@@ -51,9 +54,11 @@ public class DrawerMenuAdapter extends RecyclerView.Adapter<DrawerMenuAdapter.Na
 
     public class NavViewHolder extends RecyclerView.ViewHolder implements DrawerMenuRowView {
         private TextView title;
+        private ImageView statusIcon;
         public NavViewHolder(View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.title);
+            title = itemView.findViewById(R.id.menu_item_title);
+            statusIcon = itemView.findViewById(R.id.menu_item_status_icon);
         }
 
         @Override
@@ -64,6 +69,17 @@ public class DrawerMenuAdapter extends RecyclerView.Adapter<DrawerMenuAdapter.Na
         @Override
         public void setIdFragment(String tag) {
 
+        }
+
+        @Override
+        public void setIconToActive(Boolean isActive) {
+            if(isActive){
+                statusIcon.setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.DST_ATOP);
+                statusIcon.setAlpha(1L);
+            }else{
+                statusIcon.setColorFilter(null);
+                statusIcon.setAlpha((float) 0.54);
+            }
         }
     }
 }

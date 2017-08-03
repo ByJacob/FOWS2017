@@ -7,4 +7,5 @@ package pl.edu.pwr.fows.fows2017.view;
 
 public interface DrawerMenuView {
     void closeDrawer();
+    void refreshMenuIcon();
 }

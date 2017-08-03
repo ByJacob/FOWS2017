@@ -37,6 +37,7 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
     private DrawerMenuAdapter adapter;
     private View containerView;
     private FragmentDrawerListener drawerListener;
+    final DrawerMenuView fragment = this;
 
     @Inject
     public DrawerMenuPresenter presenter;
@@ -57,8 +58,7 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer_menu, container, false);
-        recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
-        final DrawerMenuView fragment = this;
+        recyclerView = layout.findViewById(R.id.drawerList);
         adapter = new DrawerMenuAdapter(getActivity());
         setRecyclerView(fragment);
         return layout;
@@ -87,6 +87,7 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 super.onDrawerSlide(drawerView, slideOffset);
                 toolbar.getBackground().setAlpha(presenter.getBackgroundToolbarAlpha(slideOffset));
+                presenter.menuDrawerSlide(fragment);
             }
         };
         mDrawerLayout.addDrawerListener(mDrawerToggle);
@@ -97,6 +98,11 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
     @Override
     public void closeDrawer() {
         mDrawerLayout.closeDrawer(containerView);
+    }
+
+    @Override
+    public void refreshMenuIcon() {
+        adapter.notifyDataSetChanged();
     }
 
     private void setRecyclerView(final DrawerMenuView fragment) {
