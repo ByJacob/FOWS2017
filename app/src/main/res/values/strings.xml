@@ -1,16 +1,15 @@
 <resources>
     <string name="app_name" translatable="false">FoWS2017</string>
-    <string name="nav_item_home">Home</string>
-    <string name="nav_item_agenda">Agenda</string>
-    <string name="nav_item_sponsors">Sponsors</string>
-    <string name="nav_item_contact">Contact</string>
+    <string name="menu_item_home">Home</string>
+    <string name="menu_item_news">News</string>
+    <string name="menu_item_agenda">Agenda</string>
+    <string name="menu_item_sponsors">Sponsors</string>
+    <string name="menu_item_contact">Contact</string>
     <string name="nav_item_offer">Offer</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+    <string name="menu_item_location">Location</string>
     <string name="fows_title" translatable="false">Future of Wireless Systems</string>
     <string name="address" translatable="false">Janiszewskiego 8, 50–370 Wrocław</string>
-    <string name="fragment_main_item_news">News</string>
-    <string name="fragment_main_item_agenda">Agenda</string>
-    <string name="fragment_main_item_location">Location</string>
-    <string name="fragment_main_item_contact">Contact</string>
+
 </resources>

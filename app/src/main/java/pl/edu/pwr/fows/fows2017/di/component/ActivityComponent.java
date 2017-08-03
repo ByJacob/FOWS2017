@@ -3,7 +3,7 @@ package pl.edu.pwr.fows.fows2017.di.component;
 import dagger.Component;
 import pl.edu.pwr.fows.fows2017.activity.BaseActivity;
 import pl.edu.pwr.fows.fows2017.di.module.ActivityModule;
-import pl.edu.pwr.fows.fows2017.di.module.FragmentMainModule;
+import pl.edu.pwr.fows.fows2017.di.module.FragmentHomeModule;
 import pl.edu.pwr.fows.fows2017.di.scope.ActivityScope;
 
 /**
@@ -17,5 +17,5 @@ public interface ActivityComponent {
 
     void inject(BaseActivity baseActivity);
 
-    FragmentMainComponent addModule(FragmentMainModule module);
+    FragmentHomeComponent addModule(FragmentHomeModule module);
 }

@@ -1,10 +1,10 @@
 package pl.edu.pwr.fows.fows2017.presenter;
 
-import java.security.Timestamp;
 import java.util.List;
 
 import pl.edu.pwr.fows.fows2017.UseCaseFactory;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
+import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
 import pl.edu.pwr.fows.fows2017.view.DrawerMenuRowView;
 import pl.edu.pwr.fows.fows2017.view.DrawerMenuView;
 
@@ -21,14 +21,17 @@ public class DrawerMenuPresenter {
     private String actualFragmentTag;
 
     private final UseCaseFactory factory;
+    private final BaseActivityView baseActivityView;
     private List<Menu> menus;
 
-    public DrawerMenuPresenter(UseCaseFactory factory) {
+    public DrawerMenuPresenter(UseCaseFactory factory, BaseActivityView baseActivityView) {
         this.factory = factory;
+        this.baseActivityView = baseActivityView;
         lastTimestampRefresh = 0L;
     }
-    public void menuDrawerOnClick(DrawerMenuView view){
+    public void menuItemClick(DrawerMenuView view, int position, String tag){
         view.closeDrawer();
+        baseActivityView.changeMainFragment(tag);
     }
     public int getBackgroundToolbarAlpha(float slideOffset){
         return Math.round(MAX_ALPHA_VALUE*(MAX_SLIDE_OFFSET_VALUE-slideOffset/2));
@@ -43,14 +46,15 @@ public class DrawerMenuPresenter {
     }
 
     public void configureMenuRow(DrawerMenuRowView view, int position){
-        view.displayTitle(menus.get(position).getName());
-        view.setIdFragment(menus.get(position).getName());
-        if(menus.get(position).getName().equals(actualFragmentTag)){
+        view.displayTitle(menus.get(position).getTag());
+        view.setIdFragment(menus.get(position).getTag());
+        if(menus.get(position).getTag().equals(actualFragmentTag)){
             view.setIconToActive(true);
         }
         else{
             view.setIconToActive(false);
         }
+        view.setTag(menus.get(position).getTag());
     }
 
     private void onMenusListFetchSuccess(List<Menu> menus){
@@ -58,7 +62,7 @@ public class DrawerMenuPresenter {
     }
 
     public void menuDrawerSlide(DrawerMenuView fragment) {
-        if(System.currentTimeMillis() > lastTimestampRefresh)
+        if(System.currentTimeMillis() - 100L > lastTimestampRefresh)
         {
             lastTimestampRefresh = System.currentTimeMillis();
             fragment.refreshMenuIcon();

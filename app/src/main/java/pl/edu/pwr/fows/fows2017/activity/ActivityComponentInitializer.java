@@ -21,7 +21,7 @@ public enum ActivityComponentInitializer {
 
     private ActivityComponent component;
 
-    public void initFowsActivityComponent(AppCompatActivity activity){
+    public void initFowsActivityComponent(BaseActivity activity){
         if(component==null)
             component = DaggerActivityComponent.builder().appComponent(getAppComponent())
                 .activityModule(new ActivityModule(activity))

@@ -36,17 +36,12 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
     private DrawerLayout mDrawerLayout;
     private DrawerMenuAdapter adapter;
     private View containerView;
-    private FragmentDrawerListener drawerListener;
     final DrawerMenuView fragment = this;
 
     @Inject
     public DrawerMenuPresenter presenter;
 
     public DrawerMenuFragment() {
-    }
-
-    public void setDrawerListener(FragmentDrawerListener listener) {
-        this.drawerListener = listener;
     }
 
     @Override
@@ -111,8 +106,7 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                drawerListener.onDrawerItemSelected(view, position);
-                presenter.menuDrawerOnClick(fragment);
+                presenter.menuItemClick(fragment, position, view.getTag().toString());
             }
 
             @Override

@@ -48,10 +48,13 @@
     </android.support.v7.widget.CardView>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/fragment_menu_layout_items"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
-        android:clipToPadding="true">
+        android:clickable="true"
+        android:clipToPadding="true"
+        android:foreground="?attr/selectableItemBackground">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/fragment_menu_layout_item1"
@@ -91,7 +94,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="11dp"
-                android:text="@string/fragment_main_item_news"
+                android:text="@string/menu_item_news"
                 android:textColor="@color/primary_text_default_material_light_inverse_fows"
                 android:textSize="@dimen/fragment_main_item_size"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -144,7 +147,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/fragment_main_item_agenda"
+                android:text="@string/menu_item_agenda"
                 android:textColor="@color/primary_text_default_material_light_inverse_fows"
                 android:textSize="@dimen/fragment_main_item_size"
                 app:layout_constraintHorizontal_bias="0.51"
@@ -195,7 +198,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/fragment_main_item_location"
+                android:text="@string/menu_item_location"
                 android:textColor="@color/primary_text_default_material_light_inverse_fows"
                 android:textSize="@dimen/fragment_main_item_size"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -245,7 +248,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/fragment_main_item_contact"
+                android:text="@string/menu_item_contact"
                 android:textColor="@color/primary_text_default_material_light_inverse_fows"
                 android:textSize="@dimen/fragment_main_item_size"
                 app:layout_constraintLeft_toLeftOf="parent"

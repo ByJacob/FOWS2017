@@ -6,8 +6,10 @@ import android.content.Intent;
 import dagger.Module;
 import dagger.Provides;
 import pl.edu.pwr.fows.fows2017.UseCaseFactory;
+import pl.edu.pwr.fows.fows2017.activity.BaseActivity;
 import pl.edu.pwr.fows.fows2017.di.scope.ActivityScope;
 import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
+import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
 
 /**
  * Project: FoWS2017
@@ -17,11 +19,15 @@ import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
 @Module
 public class ActivityModule {
 
-    private final Activity activity;
+    private final BaseActivity activity;
 
-    public ActivityModule(Activity activity) {
+    public ActivityModule(BaseActivity activity) {
         this.activity = activity;
     }
+
+    @ActivityScope
+    @Provides
+    public BaseActivityView provideBaseActivity(){return activity;}
 
     @ActivityScope
     @Provides
@@ -37,8 +43,8 @@ public class ActivityModule {
 
     @ActivityScope
     @Provides
-    DrawerMenuPresenter getDrawerMenuPresenter(UseCaseFactory useCaseFactory) {
-        return new DrawerMenuPresenter(useCaseFactory);
+    DrawerMenuPresenter getDrawerMenuPresenter(UseCaseFactory useCaseFactory, BaseActivityView baseActivityView) {
+        return new DrawerMenuPresenter(useCaseFactory, baseActivityView);
     }
 
 }

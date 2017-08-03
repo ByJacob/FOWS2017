@@ -16,11 +16,13 @@ public class MenuProvider {
 
     public MenuProvider() {
         //Todo Add download menu status with internet
-        menus.add(Menu.Builder.aMenu().withId(1).withName("HOME").build());
-        menus.add(Menu.Builder.aMenu().withId(2).withName("AGENDA").build());
-        menus.add(Menu.Builder.aMenu().withId(3).withName("SPONSORS").build());
-        menus.add(Menu.Builder.aMenu().withId(4).withName("CONTACT").build());
-        menus.add(Menu.Builder.aMenu().withId(5).withName("OFFER").build());
+        menus.add(Menu.Builder.aMenu().withId(1).withTag("HOME").build());
+        menus.add(Menu.Builder.aMenu().withId(2).withTag("NEWS").build());
+        menus.add(Menu.Builder.aMenu().withId(3).withTag("AGENDA").build());
+        menus.add(Menu.Builder.aMenu().withId(4).withTag("SPONSORS").build());
+        menus.add(Menu.Builder.aMenu().withId(5).withTag("CONTACT").build());
+        menus.add(Menu.Builder.aMenu().withId(6).withTag("OFFER").build());
+        menus.add(Menu.Builder.aMenu().withId(7).withTag("LOCATION").build());
     }
 
     public List<Menu> getMenus() {
