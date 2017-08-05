@@ -10,6 +10,8 @@ import dagger.Provides;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import pl.edu.pwr.fows.fows2017.facebookPost.FacebookClient;
+import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
 import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
 import pl.edu.pwr.fows.fows2017.menu.MenuClient;
 
@@ -31,6 +33,12 @@ public class AppModule {
     @Singleton
     MenuGateway getMenuGateway(){
         return new MenuClient();
+    }
+
+    @Provides
+    @Singleton
+    FacebookPostGateway getFacebookPostsGateway(){
+        return new FacebookClient();
     }
 
     @Provides

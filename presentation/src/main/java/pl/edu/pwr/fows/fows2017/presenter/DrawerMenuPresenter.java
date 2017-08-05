@@ -79,5 +79,7 @@ public class DrawerMenuPresenter {
         this.actualFragmentTag = actualFragmentTag;
     }
 
-
+    public String getActualFragmentTag() {
+        return actualFragmentTag;
+    }
 }

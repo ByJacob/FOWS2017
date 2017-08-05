@@ -59,9 +59,18 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView{
     @Override
     public void changeMainFragment(String tag) {
         if(!isBlockClickContainerBody) {
-            if(BuildConfig.DEBUG)
-                Toast.makeText(this, tag, Toast.LENGTH_SHORT).show();
-            drawerFragment.presenter.setActualFragmentTag(tag);
+            if(!drawerFragment.presenter.getActualFragmentTag().equals(tag)) {
+                if (BuildConfig.DEBUG)
+                    Toast.makeText(this, tag, Toast.LENGTH_SHORT).show();
+                drawerFragment.presenter.setActualFragmentTag(tag);
+                switch (tag){
+                    case "HOME":
+                        BaseFragment fragment = (BaseFragment) getSupportFragmentManager().findFragmentByTag(tag);
+                        if(fragment==null)
+                            fragment = new FragmentHome();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container_body, fragment, tag).commit();
+                }
+            }
         }
     }
 
