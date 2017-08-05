@@ -61,7 +61,7 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
 
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar, final DrawerMenuPresenter presenter) {
         this.presenter = presenter;
-        this.presenter.onViewTaken();
+        this.presenter.onViewTaken(); //Todo make wait for take date for presenter
         adapter.setPresenter(this.presenter);
         containerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;

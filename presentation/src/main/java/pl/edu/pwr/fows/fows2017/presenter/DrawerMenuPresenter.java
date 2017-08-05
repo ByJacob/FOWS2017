@@ -44,6 +44,10 @@ public class DrawerMenuPresenter {
         factory.getMenuUseCase().execute().subscribe(this::onMenusListFetchSuccess);
     }
 
+    private void onMenusListFetchSuccess(List<Menu> menus) {
+        this.menus = menus;
+    }
+
     public int getMenusCount() {
         return menus.size();
     }
@@ -59,12 +63,8 @@ public class DrawerMenuPresenter {
         view.setTag(menus.get(position).getTag());
     }
 
-    private void onMenusListFetchSuccess(List<Menu> menus) {
-        this.menus = menus;
-    }
-
     public void menuDrawerSlide(DrawerMenuView fragment) {
-        if (System.currentTimeMillis() - 100L > lastTimestampRefresh) {
+        if (System.currentTimeMillis() - 500L > lastTimestampRefresh) {
             lastTimestampRefresh = System.currentTimeMillis();
             fragment.refreshMenuIcon();
         }

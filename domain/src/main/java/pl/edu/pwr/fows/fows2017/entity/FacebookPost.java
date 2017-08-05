@@ -15,9 +15,9 @@ public class FacebookPost {
     private String picture;
     private String link;
     private String story;
-    private String id;
+    private Integer id;
 
-    public FacebookPost(String full_picture, String message, Date created_time, String picture, String link, String story, String id) {
+    public FacebookPost(String full_picture, String message, Date created_time, String picture, String link, String story, Integer id) {
         this.full_picture = full_picture;
         this.message = message;
         this.created_time = created_time;
@@ -51,7 +51,7 @@ public class FacebookPost {
         return story;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -63,7 +63,7 @@ public class FacebookPost {
         private String picture;
         private String link;
         private String story;
-        private String id;
+        private Integer id;
 
         private Builder() {
         }
@@ -102,14 +102,13 @@ public class FacebookPost {
             return this;
         }
 
-        public Builder withId(String id) {
+        public Builder withId(Integer id) {
             this.id = id;
             return this;
         }
 
         public FacebookPost build() {
-            FacebookPost facebookPost = new FacebookPost(full_picture, message, created_time, picture, link, story, id);
-            return facebookPost;
+            return new FacebookPost(full_picture, message, created_time, picture, link, story, id);
         }
     }
 }

@@ -15,6 +15,7 @@ import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.di.component.ActivityComponent;
 import pl.edu.pwr.fows.fows2017.fragment.DrawerMenuFragment;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentHome;
+import pl.edu.pwr.fows.fows2017.fragment.FragmentNews;
 import pl.edu.pwr.fows.fows2017.fragment.base.BaseFragment;
 import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
 import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
@@ -24,7 +25,7 @@ import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
  * Created by Jakub Rosa on 27.07.2017.
  */
 
-public class BaseActivity extends AppCompatActivity implements BaseActivityView{
+public class BaseActivity extends AppCompatActivity implements BaseActivityView {
 
     @Inject
     DrawerMenuPresenter menuPresenter;
@@ -32,7 +33,7 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView{
     private DrawerMenuFragment drawerFragment;
     private Boolean isBlockClickContainerBody;
 
-    private Integer getLayoutId(){
+    private Integer getLayoutId() {
         return R.layout.activity_main;
     }
 
@@ -58,18 +59,24 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView{
 
     @Override
     public void changeMainFragment(String tag) {
-        if(!isBlockClickContainerBody) {
-            if(!drawerFragment.presenter.getActualFragmentTag().equals(tag)) {
+        if (!isBlockClickContainerBody) {
+            if (!drawerFragment.presenter.getActualFragmentTag().equals(tag)) {
                 if (BuildConfig.DEBUG)
                     Toast.makeText(this, tag, Toast.LENGTH_SHORT).show();
                 drawerFragment.presenter.setActualFragmentTag(tag);
-                switch (tag){
-                    case "HOME":
-                        BaseFragment fragment = (BaseFragment) getSupportFragmentManager().findFragmentByTag(tag);
-                        if(fragment==null)
+                BaseFragment fragment = (BaseFragment) getSupportFragmentManager().findFragmentByTag(tag);
+                if (fragment == null) {
+                    switch (tag) {
+                        case "HOME":
                             fragment = new FragmentHome();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container_body, fragment, tag).commit();
+                            break;
+                        case "NEWS":
+                            fragment = new FragmentNews();
+                            break;
+                    }
                 }
+                if (fragment != null)
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container_body, fragment, tag).commit();
             }
         }
     }
