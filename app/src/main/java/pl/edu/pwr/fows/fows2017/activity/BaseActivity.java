@@ -48,11 +48,9 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
+        menuPresenter.onViewTaken();
         drawerFragment = (DrawerMenuFragment)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar, menuPresenter);
-        getSupportFragmentManager().beginTransaction().replace(R.id.container_body, new FragmentHome(), "HOME").commit();
         menuPresenter.setActualFragmentTag("HOME");
         //BaseFragment baseFragment = (BaseFragment) getSupportFragmentManager().findFragmentByTag("MAIN");
     }
@@ -84,5 +82,11 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
     @Override
     public void blockContainerClick(Boolean isBlock) {
         this.isBlockClickContainerBody = isBlock;
+    }
+
+    @Override
+    public void disableLoading() {
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar, menuPresenter);
+        getSupportFragmentManager().beginTransaction().replace(R.id.container_body, new FragmentHome(), "HOME").commit();
     }
 }

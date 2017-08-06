@@ -46,6 +46,7 @@ public class DrawerMenuPresenter {
 
     private void onMenusListFetchSuccess(List<Menu> menus) {
         this.menus = menus;
+        baseActivityView.disableLoading();
     }
 
     public int getMenusCount() {

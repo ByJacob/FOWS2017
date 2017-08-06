@@ -8,4 +8,5 @@ package pl.edu.pwr.fows.fows2017.view;
 public interface BaseActivityView {
     void changeMainFragment(String tag);
     void blockContainerClick(Boolean isBlock);
+    void disableLoading();
 }
