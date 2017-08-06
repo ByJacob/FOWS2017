@@ -9,8 +9,6 @@ public interface DrawerMenuRowView {
 
     void displayTitle(String tag);
 
-    void setIdFragment(String tag);
-
     void setIconToActive(Boolean isActive);
 
     void setTag(String string);

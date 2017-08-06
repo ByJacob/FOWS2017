@@ -28,6 +28,7 @@ public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
         super(factory);
         this.baseActivityView = baseActivityView;
         lastTimestampRefresh = 0L;
+        actualFragmentTag = "";
     }
 
     @Override
@@ -51,7 +52,6 @@ public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
 
     public void configureMenuRow(DrawerMenuRowView view, int position) {
         view.displayTitle(menus.get(position).getTag());
-        view.setIdFragment(menus.get(position).getTag());
         if (menus.get(position).getTag().equals(actualFragmentTag)) {
             view.setIconToActive(true);
         } else {

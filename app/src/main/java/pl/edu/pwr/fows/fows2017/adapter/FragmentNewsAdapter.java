@@ -1,6 +1,9 @@
 package pl.edu.pwr.fows.fows2017.adapter;
 
 import android.content.Context;
+import android.media.MediaCodec;
+import android.text.util.Linkify;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.presenter.FragmentNewsPresenter;
@@ -94,6 +100,18 @@ public class FragmentNewsAdapter extends BaseExpandableListAdapter {
 
         TextView message = view.findViewById(R.id.row_fragment_news_item_text_view);
         message.setText(presenter.getMessage(i));
+        Linkify.TransformFilter filter = new Linkify.TransformFilter() {
+            public final String transformUrl(final Matcher match, String url) {
+                return match.group().replace("#", "");
+            }
+        };
+
+        Pattern hashtagPattern = Pattern.compile("#([A-Za-z0-9_-]+)");
+        String hashtagScheme = "fb://facewebmodal/f?href=https://www.facebook.com/hashtag/";
+        Linkify.addLinks(message, hashtagPattern, hashtagScheme, null, filter);
+
+        Pattern urlPattern = Patterns.WEB_URL;
+        Linkify.addLinks(message, urlPattern, null, null, filter);
 
         return view;
     }

@@ -70,11 +70,6 @@ public class DrawerMenuAdapter extends RecyclerView.Adapter<DrawerMenuAdapter.Na
         }
 
         @Override
-        public void setIdFragment(String tag) {
-
-        }
-
-        @Override
         public void setIconToActive(Boolean isActive) {
             if(isActive){
                 statusIcon.setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary));

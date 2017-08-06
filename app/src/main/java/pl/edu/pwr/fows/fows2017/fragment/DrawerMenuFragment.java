@@ -1,5 +1,6 @@
 package pl.edu.pwr.fows.fows2017.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -38,8 +39,8 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
     private View containerView;
     final DrawerMenuView fragment = this;
 
-    @Inject
     public DrawerMenuPresenter presenter;
+    private Activity activity;
 
     public DrawerMenuFragment() {
     }
@@ -55,26 +56,31 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer_menu, container, false);
         recyclerView = layout.findViewById(R.id.drawerList);
         adapter = new DrawerMenuAdapter(getActivity());
-        setRecyclerView(fragment);
         return layout;
     }
 
-    public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar, final DrawerMenuPresenter presenter) {
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar, final DrawerMenuPresenter presenter, Activity activity) {
         this.presenter = presenter;
+        this.activity = activity;
         adapter.setPresenter(this.presenter);
-        containerView = getActivity().findViewById(fragmentId);
+        containerView = this.activity.findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
         mDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                getActivity().invalidateOptionsMenu();
+                activity.invalidateOptionsMenu();
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-                getActivity().invalidateOptionsMenu();
+                activity.invalidateOptionsMenu();
                 presenter.menuDrawerClose();
             }
 
@@ -87,7 +93,7 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
         };
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mDrawerLayout.post(() -> mDrawerToggle.syncState());
-
+        setRecyclerView(fragment);
     }
 
     @Override
