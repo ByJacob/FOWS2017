@@ -4,6 +4,7 @@ import java.util.List;
 
 import pl.edu.pwr.fows.fows2017.UseCaseFactory;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
+import pl.edu.pwr.fows.fows2017.presenter.base.BasePresenter;
 import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
 import pl.edu.pwr.fows.fows2017.view.DrawerMenuRowView;
 import pl.edu.pwr.fows.fows2017.view.DrawerMenuView;
@@ -13,21 +14,25 @@ import pl.edu.pwr.fows.fows2017.view.DrawerMenuView;
  * Created by Jakub Rosa on 24.07.2017.
  */
 
-public class DrawerMenuPresenter {
+public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
     private static final Integer MAX_ALPHA_VALUE = 255;
     private static final Integer MAX_SLIDE_OFFSET_VALUE = 1;
 
     private Long lastTimestampRefresh;
     private String actualFragmentTag;
 
-    private final UseCaseFactory factory;
     private final BaseActivityView baseActivityView;
     private List<Menu> menus;
 
     public DrawerMenuPresenter(UseCaseFactory factory, BaseActivityView baseActivityView) {
-        this.factory = factory;
+        super(factory);
         this.baseActivityView = baseActivityView;
         lastTimestampRefresh = 0L;
+    }
+
+    @Override
+    public void onViewTaken(DrawerMenuView view) {
+        super.factory.getMenuUseCase().execute().subscribe(this::onMenusListFetchSuccess);
     }
 
     public void menuItemClick(DrawerMenuView view, int position, String tag) {
@@ -38,15 +43,6 @@ public class DrawerMenuPresenter {
 
     public int getBackgroundToolbarAlpha(float slideOffset) {
         return Math.round(MAX_ALPHA_VALUE * (MAX_SLIDE_OFFSET_VALUE - slideOffset / 2));
-    }
-
-    public void onViewTaken() {
-        factory.getMenuUseCase().execute().subscribe(this::onMenusListFetchSuccess);
-    }
-
-    private void onMenusListFetchSuccess(List<Menu> menus) {
-        this.menus = menus;
-        baseActivityView.disableLoading();
     }
 
     public int getMenusCount() {
@@ -82,5 +78,10 @@ public class DrawerMenuPresenter {
 
     public String getActualFragmentTag() {
         return actualFragmentTag;
+    }
+
+    private void onMenusListFetchSuccess(List<Menu> menus) {
+        this.menus = menus;
+        baseActivityView.disableLoading();
     }
 }

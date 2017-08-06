@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import pl.edu.pwr.fows.fows2017.UseCaseFactory;
 import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
+import pl.edu.pwr.fows.fows2017.presenter.base.BasePresenter;
 import pl.edu.pwr.fows.fows2017.view.FragmentNewsView;
 
 /**
@@ -14,19 +15,18 @@ import pl.edu.pwr.fows.fows2017.view.FragmentNewsView;
  * Created by Jakub Rosa on 05.08.2017.
  */
 
-public class FragmentNewsPresenter {
+public class FragmentNewsPresenter extends BasePresenter<FragmentNewsView>{
 
-    private final UseCaseFactory factory;
     private FragmentNewsView view;
     private List<FacebookPost> posts;
 
     public FragmentNewsPresenter(UseCaseFactory factory) {
-        this.factory = factory;
+        super(factory);
     }
 
     public void onViewTaken(FragmentNewsView view){
         this.view = view;
-        factory.getFacebookPosts().execute().subscribe(this::onFacebookPostsFetchSuccess);
+        super.factory.getFacebookPosts().execute().subscribe(this::onFacebookPostsFetchSuccess);
     }
 
     private void onFacebookPostsFetchSuccess(List<FacebookPost> posts){

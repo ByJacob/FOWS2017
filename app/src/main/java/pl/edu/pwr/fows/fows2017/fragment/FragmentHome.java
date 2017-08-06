@@ -3,10 +3,8 @@ package pl.edu.pwr.fows.fows2017.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import javax.inject.Inject;
 

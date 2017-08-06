@@ -100,6 +100,11 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
         adapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void disableLoading() {
+
+    }
+
     private void setRecyclerView(final DrawerMenuView fragment) {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

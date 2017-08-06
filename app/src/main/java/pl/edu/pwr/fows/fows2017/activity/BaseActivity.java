@@ -48,7 +48,7 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        menuPresenter.onViewTaken();
+        menuPresenter.onViewTaken(drawerFragment);
         drawerFragment = (DrawerMenuFragment)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         menuPresenter.setActualFragmentTag("HOME");
