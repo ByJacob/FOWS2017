@@ -2,6 +2,8 @@ package pl.edu.pwr.fows.fows2017.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
@@ -24,7 +26,7 @@ public class FragmentNews extends BaseFragment implements FragmentNewsView{
 
     @Inject
     FragmentNewsPresenter presenter;
-    private ExpandableListView expListView;
+    private RecyclerView recyclerView;
     @Override
     protected Integer getLayoutId() {
         return R.layout.fragment_news;
@@ -39,13 +41,14 @@ public class FragmentNews extends BaseFragment implements FragmentNewsView{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         presenter.onViewTaken(this);
-        expListView = getView().findViewById(R.id.fragment_news_exp_list);
+        recyclerView = getView().findViewById(R.id.fragment_news_recycler_list);
     }
 
     @Override
     public void disableLoading() {
         FragmentNewsAdapter adapter = new FragmentNewsAdapter(getActivity());
         adapter.setPresenter(presenter);
-        expListView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 }

@@ -59,11 +59,6 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
         return layout;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar, final DrawerMenuPresenter presenter, Activity activity) {
         this.presenter = presenter;
         this.activity = activity;

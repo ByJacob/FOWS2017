@@ -21,6 +21,7 @@
     <dimen name="fragment_news_item_top_bottom_padding">16sp</dimen>
     <dimen name="fragment_news_item_text_size">12sp</dimen>
     <dimen name="fragment_news_item_text_bottom_padding">16dp</dimen>
+    <dimen name="fragment_news_indicator_text_size">24sp</dimen>
 
     <dimen name="card_title_text_size">24sp</dimen>
     <dimen name="card_subtitle_text_size">14sp</dimen>
@@ -28,5 +29,7 @@
     <dimen name="card_padding_between_title_subtitle">4dp</dimen>
     <dimen name="card_elevation">2dp</dimen>
     <dimen name="card_elevation_click">8dp</dimen>
-    <dimen name="fragment_news_indicator_text_size">24sp</dimen>
+    <dimen name="card_media_area_size">96dp</dimen>
+    <dimen name="card_media_title_message_padding">16dp</dimen>
+    <dimen name="card_media_title_message_padding_v2">24dp</dimen>
 </resources>

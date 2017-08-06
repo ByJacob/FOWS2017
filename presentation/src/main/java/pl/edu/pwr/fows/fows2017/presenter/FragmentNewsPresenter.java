@@ -8,6 +8,7 @@ import java.util.Locale;
 import pl.edu.pwr.fows.fows2017.UseCaseFactory;
 import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
 import pl.edu.pwr.fows.fows2017.presenter.base.BasePresenter;
+import pl.edu.pwr.fows.fows2017.view.FragmentNewsRowView;
 import pl.edu.pwr.fows.fows2017.view.FragmentNewsView;
 
 /**
@@ -37,20 +38,10 @@ public class FragmentNewsPresenter extends BasePresenter<FragmentNewsView>{
         return posts.size();
     }
 
-    public Object getPost(int i) {
-        return posts.get(i);
-    }
-
-    public int getPostId(int i) {
-        return posts.get(i).getId();
-    }
-
-    public String getHeaderDate(int i, Locale locale) {
+    public void configureNewsRow(FragmentNewsRowView holder, int position, Locale locale) {
         DateFormat df = new SimpleDateFormat("dd MMMM yyyy HH:mm", locale);
-        return df.format(posts.get(i).getCreatedTime());
-    }
-
-    public String getMessage(int i) {
-        return posts.get(i).getMessage();
+        holder.setDate(df.format(posts.get(position).getCreatedTime()));
+        holder.setMessage(posts.get(position).getMessage());
+        holder.setPicture(posts.get(position).getPicture());
     }
 }
