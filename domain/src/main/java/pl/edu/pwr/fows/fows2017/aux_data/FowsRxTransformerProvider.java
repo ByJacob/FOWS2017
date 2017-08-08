@@ -28,6 +28,6 @@ public final class FowsRxTransformerProvider {
     }
 
     public <T> SingleTransformer<T, T> getSingleSchedulers(){
-        return upstream -> upstream.observeOn(subscribeOnScheduler).observeOn(observerOnScheduler);
+        return upstream -> upstream.subscribeOn(subscribeOnScheduler).observeOn(observerOnScheduler);
     }
 }

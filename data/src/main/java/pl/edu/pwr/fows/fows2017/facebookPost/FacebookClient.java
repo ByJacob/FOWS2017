@@ -15,11 +15,12 @@ import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
 
 public class FacebookClient implements FacebookPostGateway {
 
+    private static final String URL = "http://fows.pwr.edu.pl/cache/android.php";
     private FacebookProvider provider;
 
     @Inject
     public FacebookClient() {
-        provider = new FacebookProvider();
+        provider = new FacebookProvider(URL);
     }
 
     @Override

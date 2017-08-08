@@ -29,6 +29,8 @@
             android:layout_width="@dimen/card_media_area_size"
             android:layout_height="@dimen/card_media_area_size"
             android:layout_alignParentEnd="true"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
             android:paddingEnd="@dimen/card_media_title_message_padding"
             android:paddingTop="@dimen/card_media_title_message_padding"
             app:srcCompat="@mipmap/ic_launcher" />
@@ -52,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/row_fragment_news_item_image_view"
             android:alpha="0.87"
+            android:foreground="?attr/selectableItemBackground"
             android:maxLines="6"
             android:paddingEnd="@dimen/card_media_title_message_padding"
             android:paddingStart="@dimen/card_media_title_message_padding"

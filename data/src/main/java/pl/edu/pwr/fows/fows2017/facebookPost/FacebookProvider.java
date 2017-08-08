@@ -3,8 +3,6 @@ package pl.edu.pwr.fows.fows2017.facebookPost;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DateFormat;
@@ -16,6 +14,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
 
 /**
@@ -26,16 +27,45 @@ import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
 public class FacebookProvider {
 
     private final List<FacebookPost> posts = new ArrayList<>();
+    private final OkHttpClient client;
+    private final String url;
 
-    public FacebookProvider() {
-        String jsonString = templatePosts.template;
+    public FacebookProvider(String url) {
+        this.client = new OkHttpClient();
+        this.url = url;
+    }
+
+    public List<FacebookPost> getPosts() {
+        String response;
+        if (posts.size() < 1) {
+            try {
+                response = run(url);
+            } catch (IOException e) {
+                e.printStackTrace();
+                response = templatePosts.template;
+            }
+            parseJson(response);
+        }
+        return posts;
+    }
+
+    private String run(String url) throws IOException {
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        Response response = client.newCall(request).execute();
+        return response.body().string();
+    }
+
+    private void parseJson(String jsonString) {
         JSONObject jsonObj = new JSONObject(jsonString);
 
         JSONArray data = jsonObj.getJSONArray("data");
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.US);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ssXXX", Locale.US);
         Date today = Calendar.getInstance().getTime();
         String reportDate = df.format(today);
-        for(int i=0; i<data.length(); i++){
+        for (int i = 0; i < data.length(); i++) {
             JSONObject post = data.getJSONObject(i);
             String full_picture = post.getString("full_picture");
             String message = post.getString("message");
@@ -46,13 +76,15 @@ public class FacebookProvider {
                 story = post.getString("story");
             else
                 story = "";
+            String created_time_tmp = post.getJSONObject("created_time").getString("date").split("\\.")[0];
+            String timezone_time_tmp = post.getJSONObject("created_time").getString("timezone");
             BigDecimal tmpId = new BigDecimal(post.getString("id").split("_")[1]);
             BigDecimal tmpDivisor = new BigDecimal(Integer.MAX_VALUE);
             tmpId = tmpId.remainder(tmpDivisor);
             Integer id = tmpId.intValue();
             Date created_time = null;
             try {
-                created_time = df.parse(post.getString("created_time"));
+                created_time = df.parse(created_time_tmp + timezone_time_tmp);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -61,9 +93,5 @@ public class FacebookProvider {
                     .withId(id).withCreatedTime(created_time).build());
 
         }
-    }
-
-    public List<FacebookPost> getPosts() {
-        return posts;
     }
 }

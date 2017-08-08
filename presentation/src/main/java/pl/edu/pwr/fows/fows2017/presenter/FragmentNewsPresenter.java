@@ -42,6 +42,21 @@ public class FragmentNewsPresenter extends BasePresenter<FragmentNewsView>{
         DateFormat df = new SimpleDateFormat("dd MMMM yyyy HH:mm", locale);
         holder.setDate(df.format(posts.get(position).getCreatedTime()));
         holder.setMessage(posts.get(position).getMessage());
-        holder.setPicture(posts.get(position).getPicture());
+        holder.setPicture(posts.get(position).getPicture(), position);
+    }
+
+    public boolean onMessageClick(String clickLine, FragmentNewsRowView rowView) {
+        String [] splits = clickLine.split(" ");
+        for (String split : splits) {
+            if (split.contains("@")) {
+                rowView.openAppSendEmail(split);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void onPictureClick(Integer position, FragmentNewsRowView rowView) {
+        rowView.openFacebook(posts.get(position).getLink());
     }
 }
