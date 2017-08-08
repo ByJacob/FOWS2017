@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import io.reactivex.Single;
 import pl.edu.pwr.fows.fows2017.aux_data.FowsRxTransformerProvider;
 import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
@@ -37,7 +38,7 @@ public class UseCaseFactory {
         return new MenuUseCase(rxTransformer, menuGateway);
     }
 
-    public UseCase<Single<List<FacebookPost>>> getFacebookPosts(){
+    public UseCase<Observable<List<FacebookPost>>> getFacebookPosts(){
         return new FacebookPostsUseCase(rxTransformer, facebookPostGateway);
     }
 }

@@ -1,9 +1,11 @@
 package pl.edu.pwr.fows.fows2017.facebookPost;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import io.reactivex.Single;
 import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
@@ -24,12 +26,12 @@ public class FacebookClient implements FacebookPostGateway {
     }
 
     @Override
-    public Single<List<FacebookPost>> getPosts() {
-        return Single.just(provider.getPosts());
+    public Observable<List<FacebookPost>> getPosts() {
+        return Observable.fromCallable(() -> provider.getPosts());
     }
 
     @Override
-    public Single<FacebookPost> getPost(Integer position) {
+    public Observable<FacebookPost> getPost(Integer position) {
         return null;
     }
 }

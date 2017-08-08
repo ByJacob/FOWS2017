@@ -1,11 +1,14 @@
 package pl.edu.pwr.fows.fows2017.usecase;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
+import io.reactivex.Observable;
 import io.reactivex.Single;
 import pl.edu.pwr.fows.fows2017.aux_data.FowsRxTransformerProvider;
 import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
+import pl.edu.pwr.fows.fows2017.usecase.base.AbstractRxObservableUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.base.AbstractRxSingleUseCase;
 
 /**
@@ -13,7 +16,7 @@ import pl.edu.pwr.fows.fows2017.usecase.base.AbstractRxSingleUseCase;
  * Created by Jakub Rosa on 05.08.2017.
  */
 
-public class FacebookPostsUseCase extends AbstractRxSingleUseCase<List<FacebookPost>> {
+public class FacebookPostsUseCase extends AbstractRxObservableUseCase<List<FacebookPost>> {
 
     FacebookPostGateway gateway;
 
@@ -23,7 +26,7 @@ public class FacebookPostsUseCase extends AbstractRxSingleUseCase<List<FacebookP
     }
 
     @Override
-    protected Single<List<FacebookPost>> createSingle() {
+    protected Observable<List<FacebookPost>> createObservable() {
         return gateway.getPosts();
     }
 }
