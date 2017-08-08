@@ -12,4 +12,6 @@ public interface BaseActivityView extends BaseActivityAndFragmentView {
     void changeMainFragment(String tag);
 
     void blockContainerClick(Boolean isBlock);
+
+    void showOnError(String tagError, Boolean isCritic);
 }

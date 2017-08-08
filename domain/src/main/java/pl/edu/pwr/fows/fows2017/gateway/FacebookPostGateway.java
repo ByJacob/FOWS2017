@@ -14,5 +14,6 @@ import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
 public interface FacebookPostGateway {
 
     Observable<List<FacebookPost>> getPosts();
+    Single<List<FacebookPost>> getPostsFromMemory();
     Observable<FacebookPost> getPost(Integer position);
 }
