@@ -1,5 +1,6 @@
 package pl.edu.pwr.fows.fows2017;
 
+import java.io.FileOutputStream;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,11 +11,14 @@ import io.reactivex.Single;
 import pl.edu.pwr.fows.fows2017.aux_data.FowsRxTransformerProvider;
 import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
+import pl.edu.pwr.fows.fows2017.entity.Sponsor;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
 import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
+import pl.edu.pwr.fows.fows2017.gateway.SponsorGateway;
 import pl.edu.pwr.fows.fows2017.usecase.FacebookPostsSharedPrefUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.FacebookPostsUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.MenuUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.SponsorUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.base.UseCase;
 
 /**
@@ -28,15 +32,18 @@ public class UseCaseFactory {
     private final FowsRxTransformerProvider rxTransformer;
     private final FacebookPostGateway facebookPostGateway;
     private final FacebookPostGateway facebookPostGatewaySharedPref;
+    private final SponsorGateway sponsorGateway;
 
     @Inject
     public UseCaseFactory(FowsRxTransformerProvider rxTransformer, MenuGateway menuGateway,
                           @Named("NetworkGateway") FacebookPostGateway facebookPostGateway,
-                          @Named("LocalGateway") FacebookPostGateway facebookPostGatewaySharedPref){
+                          @Named("LocalGateway") FacebookPostGateway facebookPostGatewaySharedPref,
+                          SponsorGateway sponsorGateway){
         this.menuGateway = menuGateway;
         this.rxTransformer = rxTransformer;
         this.facebookPostGateway = facebookPostGateway;
         this.facebookPostGatewaySharedPref = facebookPostGatewaySharedPref;
+        this.sponsorGateway = sponsorGateway;
     }
 
     public UseCase<Single<List<Menu>>> getMenuUseCase(){
@@ -49,5 +56,9 @@ public class UseCaseFactory {
 
     public UseCase<Single<List<FacebookPost>>> getFacebookPostsSharedPref(){
         return new FacebookPostsSharedPrefUseCase(rxTransformer, facebookPostGatewaySharedPref);
+    }
+
+    public UseCase<Observable<List<List<Sponsor>>>> getSponsors(){
+        return new SponsorUseCase(rxTransformer, sponsorGateway);
     }
 }

@@ -7,14 +7,16 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
+import pl.edu.pwr.fows.fows2017.entity.Sponsor;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
+import pl.edu.pwr.fows.fows2017.gateway.SponsorGateway;
 
 /**
  * Project: FoWS2017
  * Created by Jakub Rosa on 08.08.2017.
  */
 
-public class SharedPreferencesAPIClient implements FacebookPostGateway{
+public class SharedPreferencesAPIClient implements FacebookPostGateway {
 
     private SharedPreferencesAPIProvider provider;
 

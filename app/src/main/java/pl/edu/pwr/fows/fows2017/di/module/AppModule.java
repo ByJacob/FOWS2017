@@ -14,9 +14,12 @@ import io.reactivex.schedulers.Schedulers;
 import pl.edu.pwr.fows.fows2017.facebookPost.FacebookClient;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
 import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
+import pl.edu.pwr.fows.fows2017.gateway.SponsorGateway;
 import pl.edu.pwr.fows.fows2017.menu.MenuClient;
 import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesAPIClient;
 import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesDataInterface;
+import pl.edu.pwr.fows.fows2017.sponsors.SponsorsClient;
+import pl.edu.pwr.fows.fows2017.sponsors.SponsorsProvider;
 import pl.edu.pwr.fows.fows2017.tools.SharedPreferencesAPI;
 
 /**
@@ -57,6 +60,12 @@ public class AppModule {
     @Named("NetworkGateway")
     FacebookPostGateway getFacebookPostsGateway(SharedPreferencesDataInterface sharedPreferences){
         return new FacebookClient(sharedPreferences);
+    }
+
+    @Provides
+    @Singleton
+    SponsorGateway getSponsorsGateway(){
+        return new SponsorsClient();
     }
 
     @Provides

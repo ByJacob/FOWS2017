@@ -23,6 +23,7 @@ import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.fragment.DrawerMenuFragment;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentHome;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentNews;
+import pl.edu.pwr.fows.fows2017.fragment.FragmentSponsor;
 import pl.edu.pwr.fows.fows2017.fragment.base.BaseFragment;
 import pl.edu.pwr.fows.fows2017.map.ExceptionMap;
 import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
@@ -79,6 +80,9 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
                             break;
                         case "NEWS":
                             fragment = new FragmentNews();
+                            break;
+                        case "SPONSORS":
+                            fragment = new FragmentSponsor();
                             break;
                     }
                 }
