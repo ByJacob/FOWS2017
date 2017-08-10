@@ -1,6 +1,7 @@
 package pl.edu.pwr.fows.fows2017.di.module;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -10,8 +11,13 @@ import dagger.Provides;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import pl.edu.pwr.fows.fows2017.facebookPost.FacebookClient;
+import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
 import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
 import pl.edu.pwr.fows.fows2017.menu.MenuClient;
+import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesAPIClient;
+import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesDataInterface;
+import pl.edu.pwr.fows.fows2017.tools.SharedPreferencesAPI;
 
 /**
  * Project: FoWS2017
@@ -31,6 +37,26 @@ public class AppModule {
     @Singleton
     MenuGateway getMenuGateway(){
         return new MenuClient();
+    }
+
+    @Provides
+    @Singleton
+    SharedPreferencesDataInterface getSharedPreferences(){
+        return new SharedPreferencesAPI(application);
+    }
+
+    @Provides
+    @Singleton
+    @Named("LocalGateway")
+    FacebookPostGateway getFacebookPostGatewaySharedPref(SharedPreferencesDataInterface sharedPreferences){
+        return new SharedPreferencesAPIClient(sharedPreferences);
+    }
+
+    @Provides
+    @Singleton
+    @Named("NetworkGateway")
+    FacebookPostGateway getFacebookPostsGateway(SharedPreferencesDataInterface sharedPreferences){
+        return new FacebookClient(sharedPreferences);
     }
 
     @Provides

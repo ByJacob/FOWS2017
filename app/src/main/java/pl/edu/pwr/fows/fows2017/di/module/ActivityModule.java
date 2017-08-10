@@ -27,17 +27,17 @@ public class ActivityModule {
 
     @ActivityScope
     @Provides
-    public BaseActivityView provideBaseActivity(){return activity;}
+    BaseActivityView provideBaseActivity(){return activity;}
 
     @ActivityScope
     @Provides
-    public Activity provideActivity() {
+    Activity provideActivity() {
         return activity;
     }
 
     @ActivityScope
     @Provides
-    public Intent provideIntent(Activity activity) {
+    Intent provideIntent(Activity activity) {
         return activity.getIntent();
     }
 

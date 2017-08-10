@@ -5,7 +5,9 @@
     <string name="menu_item_agenda">Agenda</string>
     <string name="menu_item_sponsors">Sponsors</string>
     <string name="menu_item_contact">Contact</string>
-    <string name="nav_item_offer">Offer</string>
+    <string name="menu_item_offer">Offer</string>
+    <string name="exception_default">ERROR!</string>
+    <string name="exception_network">No internet connection!</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
     <string name="menu_item_location">Location</string>

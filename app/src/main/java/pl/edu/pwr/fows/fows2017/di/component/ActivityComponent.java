@@ -4,6 +4,7 @@ import dagger.Component;
 import pl.edu.pwr.fows.fows2017.activity.BaseActivity;
 import pl.edu.pwr.fows.fows2017.di.module.ActivityModule;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentHomeModule;
+import pl.edu.pwr.fows.fows2017.di.module.FragmentNewsModule;
 import pl.edu.pwr.fows.fows2017.di.scope.ActivityScope;
 
 /**
@@ -18,4 +19,6 @@ public interface ActivityComponent {
     void inject(BaseActivity baseActivity);
 
     FragmentHomeComponent addModule(FragmentHomeModule module);
+
+    FragmentNewsComponent addModule(FragmentNewsModule module);
 }

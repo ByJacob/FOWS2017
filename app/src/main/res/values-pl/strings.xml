@@ -3,10 +3,12 @@
     <string name="menu_item_agenda">Agenda</string>
     <string name="menu_item_contact">Kontakt</string>
     <string name="menu_item_home">Główna</string>
-    <string name="nav_item_offer">Współpraca</string>
+    <string name="menu_item_offer">Współpraca</string>
     <string name="menu_item_sponsors">Sponsorzy</string>
     <string name="drawer_close">Zamknięte</string>
     <string name="drawer_open">Otwarte</string>
     <string name="menu_item_location">Lokalizacja</string>
     <string name="menu_item_news">Aktualności</string>
+    <string name="exception_network">Brak internetu!</string>
+    <string name="exception_default">BŁĄD!</string>
 </resources>

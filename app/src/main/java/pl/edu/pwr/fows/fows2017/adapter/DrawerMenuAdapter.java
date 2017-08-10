@@ -38,7 +38,7 @@ public class DrawerMenuAdapter extends RecyclerView.Adapter<DrawerMenuAdapter.Na
 
     @Override
     public NavViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.nav_drawer_row, parent, false);
+        View view = inflater.inflate(R.layout.row_navigation_drawer_menu, parent, false);
         return new NavViewHolder(view);
 
     }
@@ -67,11 +67,6 @@ public class DrawerMenuAdapter extends RecyclerView.Adapter<DrawerMenuAdapter.Na
         @Override
         public void displayTitle(String tag) {
             title.setText(context.getString(DrawerMenuItemMap.getTag(tag)));
-        }
-
-        @Override
-        public void setIdFragment(String tag) {
-
         }
 
         @Override
