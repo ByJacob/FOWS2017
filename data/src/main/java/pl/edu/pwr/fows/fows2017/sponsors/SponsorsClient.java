@@ -9,7 +9,6 @@ import io.reactivex.Single;
 import pl.edu.pwr.fows.fows2017.entity.Sponsor;
 import pl.edu.pwr.fows.fows2017.gateway.SponsorGateway;
 import pl.edu.pwr.fows.fows2017.interfave.SharedPreferencesDataInterface;
-import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesAPIClient;
 
 /**
  * Project: FoWS2017
@@ -18,8 +17,8 @@ import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesAPIClient;
 
 public class SponsorsClient implements SponsorGateway {
 
-    public static final String URL = "http://fows.pwr.edu.pl/images/sponsors/android-loga.php";
-    private SponsorsProvider provider;
+    private static final String URL = "http://fows.pwr.edu.pl/images/sponsors/android-logs.php";
+    private final SponsorsProvider provider;
 
     @Inject
     public SponsorsClient(SharedPreferencesDataInterface sharedPreferences) {

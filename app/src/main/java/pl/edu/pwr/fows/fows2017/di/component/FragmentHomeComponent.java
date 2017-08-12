@@ -3,7 +3,6 @@ package pl.edu.pwr.fows.fows2017.di.component;
 import dagger.Subcomponent;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentHomeModule;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentHome;
-import pl.edu.pwr.fows.fows2017.fragment.base.BaseFragment;
 
 /**
  * Project: FoWS2017

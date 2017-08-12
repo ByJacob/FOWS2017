@@ -16,8 +16,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import javax.inject.Inject;
-
 import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.adapter.DrawerMenuAdapter;
 import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
@@ -30,24 +28,18 @@ import pl.edu.pwr.fows.fows2017.view.DrawerMenuView;
 
 public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
 
-    private static String TAG = DrawerMenuFragment.class.getSimpleName();
-
     private RecyclerView recyclerView;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private DrawerMenuAdapter adapter;
     private View containerView;
-    final DrawerMenuView fragment = this;
+    private final DrawerMenuView fragment = this;
 
     public DrawerMenuPresenter presenter;
+    @SuppressWarnings("FieldCanBeLocal")
     private Activity activity;
 
     public DrawerMenuFragment() {
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Nullable
@@ -112,7 +104,7 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                presenter.menuItemClick(fragment, position, view.getTag().toString());
+                presenter.menuItemClick(fragment, view.getTag().toString());
             }
 
             @Override

@@ -12,7 +12,7 @@ public class Menu {
     private final int id;
     private final String tag;
 
-    public Menu(int id, String tag) {
+    private Menu(int id, String tag) {
         this.id = id;
         this.tag = tag;
     }

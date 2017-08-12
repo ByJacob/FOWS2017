@@ -15,7 +15,7 @@ import pl.edu.pwr.fows.fows2017.usecase.base.AbstractRxSingleUseCase;
 
 public class FacebookPostsSharedPrefUseCase extends AbstractRxSingleUseCase<List<FacebookPost>> {
 
-    FacebookPostGateway gateway;
+    private final FacebookPostGateway gateway;
 
     public FacebookPostsSharedPrefUseCase(FowsRxTransformerProvider rxTransformer, FacebookPostGateway gateway) {
         super(rxTransformer);

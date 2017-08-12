@@ -12,7 +12,6 @@ public class DrawerMenuItemMap {
     private static final String[] tags = {"HOME", "AGENDA", "SPONSORS", "CONTACT", "OFFER", "NEWS", "LOCATION"};
     private static final Integer[] idStrings = {R.string.menu_item_home, R.string.menu_item_agenda,
                         R.string.menu_item_sponsors, R.string.menu_item_contact, R.string.menu_item_offer, R.string.menu_item_news, R.string.menu_item_location};
-    private static final Integer[] idFragments = {0};
 
     public static Integer getTag(String tag) {
         for(int i=0; i<tags.length;  i++){

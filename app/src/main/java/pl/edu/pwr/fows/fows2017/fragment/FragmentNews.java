@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
 
 import javax.inject.Inject;
 
@@ -24,9 +22,10 @@ import pl.edu.pwr.fows.fows2017.view.FragmentNewsView;
 
 public class FragmentNews extends BaseFragment implements FragmentNewsView{
 
+    @SuppressWarnings("CanBeFinal")
     @Inject
     FragmentNewsPresenter presenter;
-    private RecyclerView recyclerView;
+    RecyclerView recyclerView;
     @Override
     protected Integer getLayoutId() {
         return R.layout.fragment_news;

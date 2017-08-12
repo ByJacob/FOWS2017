@@ -6,10 +6,10 @@ package pl.edu.pwr.fows.fows2017.entity;
  */
 
 public class Sponsor {
-    private String name;
-    private String url;
+    private final String name;
+    private final String url;
 
-    public Sponsor(String name, String url) {
+    private Sponsor(String name, String url) {
         this.name = name;
         this.url = url;
     }
@@ -45,8 +45,7 @@ public class Sponsor {
         }
 
         public Sponsor build() {
-            Sponsor sponsor = new Sponsor(name, url);
-            return sponsor;
+            return new Sponsor(name, url);
         }
     }
 }

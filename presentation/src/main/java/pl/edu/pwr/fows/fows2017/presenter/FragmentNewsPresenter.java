@@ -21,7 +21,7 @@ public class FragmentNewsPresenter extends BasePresenter<FragmentNewsView>{
 
     private FragmentNewsView view;
     private List<FacebookPost> posts;
-    private BaseActivityView baseActivityView;
+    private final BaseActivityView baseActivityView;
     private Boolean isNetwork;
 
     public FragmentNewsPresenter(UseCaseFactory factory, BaseActivityView baseActivityView) {
@@ -41,6 +41,7 @@ public class FragmentNewsPresenter extends BasePresenter<FragmentNewsView>{
         view.disableLoading();
     }
 
+    @SuppressWarnings("UnusedParameters")
     private void onFacebookPostsFetchFail(Throwable throwable) {
         isNetwork = false;
         super.factory.getFacebookPostsSharedPref().execute().subscribe(this::onFacebookPostsFromMemorySuccess);

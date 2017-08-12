@@ -12,6 +12,7 @@ import pl.edu.pwr.fows.fows2017.interfave.SharedPreferencesDataInterface;
 
 public class SharedPreferencesAPI implements SharedPreferencesDataInterface {
 
+    @SuppressWarnings("FieldCanBeLocal")
     private final String NAME_SHARED_PREF = "FoWS2016";
     private final SharedPreferences sharedPreferences;
 

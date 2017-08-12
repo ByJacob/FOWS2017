@@ -1,7 +1,6 @@
 package pl.edu.pwr.fows.fows2017.usecase.base;
 
 import io.reactivex.Observable;
-import io.reactivex.Single;
 import pl.edu.pwr.fows.fows2017.aux_data.FowsRxTransformerProvider;
 
 /**
@@ -13,7 +12,7 @@ public abstract class AbstractRxObservableUseCase<T> implements UseCase<Observab
 
     private final FowsRxTransformerProvider rxTransformer;
 
-    public AbstractRxObservableUseCase(FowsRxTransformerProvider rxTransformer) {
+    protected AbstractRxObservableUseCase(FowsRxTransformerProvider rxTransformer) {
         this.rxTransformer = rxTransformer;
     }
 

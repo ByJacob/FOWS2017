@@ -19,6 +19,7 @@ import pl.edu.pwr.fows.fows2017.view.FragmentSponsorView;
 
 public class FragmentSponsor extends BaseFragment implements FragmentSponsorView {
 
+    @SuppressWarnings("CanBeFinal")
     @Inject
     FragmentSponsorPresenter presenter;
 

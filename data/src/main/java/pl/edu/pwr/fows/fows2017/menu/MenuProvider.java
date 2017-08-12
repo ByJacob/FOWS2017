@@ -10,7 +10,7 @@ import pl.edu.pwr.fows.fows2017.entity.Menu;
  * Created by Jakub Rosa on 24.07.2017.
  */
 
-public class MenuProvider {
+class MenuProvider {
 
     private final List<Menu> menus = new ArrayList<>();
 

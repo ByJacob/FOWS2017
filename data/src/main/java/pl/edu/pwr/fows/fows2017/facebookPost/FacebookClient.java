@@ -18,7 +18,7 @@ import pl.edu.pwr.fows.fows2017.interfave.SharedPreferencesDataInterface;
 public class FacebookClient implements FacebookPostGateway {
 
     private static final String URL = "http://fows.pwr.edu.pl/cache/android.php";
-    private FacebookProvider provider;
+    private final FacebookProvider provider;
 
     @Inject
     public FacebookClient(SharedPreferencesDataInterface gatewaySharedPref) {

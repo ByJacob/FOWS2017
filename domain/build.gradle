@@ -7,5 +7,7 @@ dependencies {
 
     compile 'io.reactivex.rxjava2:rxjava:2.1.0'
 }
+//noinspection GroovyUnusedAssignment
 sourceCompatibility = "1.8"
+//noinspection GroovyUnusedAssignment
 targetCompatibility = "1.8"

@@ -3,7 +3,6 @@ package pl.edu.pwr.fows.fows2017.activity;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
@@ -11,7 +10,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,14 +34,17 @@ import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
 
 public class BaseActivity extends AppCompatActivity implements BaseActivityView {
 
+    @SuppressWarnings("CanBeFinal")
     @Inject
     DrawerMenuPresenter menuPresenter;
+    @SuppressWarnings("CanBeFinal")
     @Inject
     Activity activity;
     private Toolbar mToolbar;
     private DrawerMenuFragment drawerFragment;
     private Boolean isBlockClickContainerBody;
 
+    @SuppressWarnings("SameReturnValue")
     private Integer getLayoutId() {
         return R.layout.activity_main;
     }
@@ -58,7 +59,8 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
         ActivityComponentInitializer.INSTANCE.getFowsActivityComponent().inject(this);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
         drawerFragment = (DrawerMenuFragment)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         menuPresenter.onViewTaken(drawerFragment);
@@ -90,7 +92,7 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
                     try {
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.container_body, fragment, tag).addToBackStack(tag).commit();
-                    } catch (IllegalStateException ignores){
+                    } catch (IllegalStateException ignores) {
                         ignores.printStackTrace();
                     }
             }
@@ -120,12 +122,12 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
         FrameLayout container_body = (FrameLayout) findViewById(R.id.container_body);
         Snackbar snackbar = Snackbar.make(container_body,
                 this.getString(ExceptionMap.getTag(tagError)), BaseTransientBottomBar.LENGTH_LONG);
-        TextView textSnackbar = snackbar.getView()
+        TextView textSnackBar = snackbar.getView()
                 .findViewById(android.support.design.R.id.snackbar_text);
         if (isCritic)
-            textSnackbar.setTextColor(Color.RED);
+            textSnackBar.setTextColor(Color.RED);
         else
-            textSnackbar.setTextColor(Color.YELLOW);
+            textSnackBar.setTextColor(Color.YELLOW);
         snackbar.show();
     }
 

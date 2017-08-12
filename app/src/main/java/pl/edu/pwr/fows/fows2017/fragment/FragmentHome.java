@@ -22,6 +22,7 @@ import pl.edu.pwr.fows.fows2017.tools.Utils;
 
 public class FragmentHome extends BaseFragment {
 
+    @SuppressWarnings("CanBeFinal")
     @Inject
     FragmentHomePresenter presenter;
 

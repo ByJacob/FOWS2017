@@ -9,7 +9,7 @@ import pl.edu.pwr.fows.fows2017.UseCaseFactory;
 
 public abstract class BasePresenter<T> {
 
-    public final UseCaseFactory factory;
+    protected final UseCaseFactory factory;
 
     protected BasePresenter(UseCaseFactory factory) {
         this.factory = factory;

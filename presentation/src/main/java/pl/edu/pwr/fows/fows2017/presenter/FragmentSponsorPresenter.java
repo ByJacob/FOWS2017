@@ -14,6 +14,7 @@ import pl.edu.pwr.fows.fows2017.view.FragmentSponsorView;
 
 public class FragmentSponsorPresenter extends BasePresenter<FragmentSponsorView> {
 
+    @SuppressWarnings("FieldCanBeLocal")
     private FragmentSponsorView view;
 
     public FragmentSponsorPresenter(UseCaseFactory factory) {
@@ -31,10 +32,10 @@ public class FragmentSponsorPresenter extends BasePresenter<FragmentSponsorView>
     }
 
     private void onSponsorsFetchFail(Throwable throwable) {
-        factory.getSponsorsSharedPref().execute().subscribe(this::onSponsorsFromMemoryFetchSucess);
+        factory.getSponsorsSharedPref().execute().subscribe(this::onSponsorsFromMemoryFetchSuccess);
     }
 
-    private void onSponsorsFromMemoryFetchSucess(List<List<Sponsor>> sponsors){
+    private void onSponsorsFromMemoryFetchSuccess(List<List<Sponsor>> sponsors){
 
     }
 }

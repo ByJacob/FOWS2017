@@ -12,7 +12,7 @@ public abstract class AbstractRxSingleUseCase<T> implements UseCase<Single<T>>{
 
     private final FowsRxTransformerProvider rxTransformer;
 
-    public AbstractRxSingleUseCase(FowsRxTransformerProvider rxTransformer) {
+    protected AbstractRxSingleUseCase(FowsRxTransformerProvider rxTransformer) {
         this.rxTransformer = rxTransformer;
     }
 

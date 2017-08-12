@@ -3,7 +3,6 @@ package pl.edu.pwr.fows.fows2017.sharedPreferencesAPI;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
 import pl.edu.pwr.fows.fows2017.entity.Sponsor;
@@ -21,7 +20,7 @@ public class SharedPreferencesAPIProvider {
     public static final String TAG_FACEBOOK_POSTS = "_facebook_posts";
     public static final String TAG_SPONSORS = "_sponsors";
 
-    private SharedPreferencesDataInterface API;
+    private final SharedPreferencesDataInterface API;
 
     public SharedPreferencesAPIProvider(SharedPreferencesDataInterface API) {
         this.API = API;

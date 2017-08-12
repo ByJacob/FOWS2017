@@ -1,14 +1,11 @@
 package pl.edu.pwr.fows.fows2017.fragment.base;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import javax.inject.Inject;
 
 import pl.edu.pwr.fows.fows2017.activity.ActivityComponentInitializer;
 import pl.edu.pwr.fows.fows2017.di.component.ActivityComponent;
@@ -37,7 +34,7 @@ public abstract class BaseFragment extends Fragment{
         return inflater.inflate(getLayoutId(), container, false);
     }
 
-    protected ActivityComponent getActivityComponent() {
+    private ActivityComponent getActivityComponent() {
         return ActivityComponentInitializer.INSTANCE.getFowsActivityComponent();
     }
 }

@@ -35,8 +35,8 @@ import pl.edu.pwr.fows.fows2017.view.FragmentNewsRowView;
 public class FragmentNewsAdapter extends RecyclerView.Adapter<FragmentNewsAdapter.NewsAdapter> {
 
     private FragmentNewsPresenter presenter;
-    private Context context;
-    private LayoutInflater inflater;
+    private final Context context;
+    private final LayoutInflater inflater;
     private int lastPosition = -1;
 
     public FragmentNewsAdapter(Context context) {
@@ -57,6 +57,7 @@ public class FragmentNewsAdapter extends RecyclerView.Adapter<FragmentNewsAdapte
 
     @Override
     public void onBindViewHolder(NewsAdapter holder, int position) {
+        //noinspection deprecation
         presenter.configureNewsRow(holder, position, context.getResources().getConfiguration().locale);
         setAnimation(holder.itemView, position);
     }
@@ -77,10 +78,10 @@ public class FragmentNewsAdapter extends RecyclerView.Adapter<FragmentNewsAdapte
 
     public class NewsAdapter extends RecyclerView.ViewHolder implements FragmentNewsRowView {
 
-        private TextView date;
-        private ImageView picture;
-        private TextView message;
-        private ImageView indicator;
+        private final TextView date;
+        private final ImageView picture;
+        private final TextView message;
+        private final ImageView indicator;
 
         public NewsAdapter(View itemView) {
             super(itemView);
@@ -155,9 +156,9 @@ public class FragmentNewsAdapter extends RecyclerView.Adapter<FragmentNewsAdapte
             this.message.setText(message);
             Linkify.TransformFilter filterHashTag = (match, url) ->
                     match.group().replace("#", "");
-            Pattern hashtagPattern = Pattern.compile("#([\\w]+)");
-            String hashtagScheme = "fb://facewebmodal/f?href=https://www.facebook.com/hashtag/";
-            Linkify.addLinks(this.message, hashtagPattern, hashtagScheme, null, filterHashTag);
+            Pattern hashTagPattern = Pattern.compile("#([\\w]+)");
+            String hashTagScheme = "fb://facewebmodal/f?href=https://www.facebook.com/hashtag/";
+            Linkify.addLinks(this.message, hashTagPattern, hashTagScheme, null, filterHashTag);
             Pattern emailPattern = Patterns.EMAIL_ADDRESS;
             Linkify.addLinks(this.message, emailPattern, null, null, null);
             Pattern urlPattern = Patterns.WEB_URL;

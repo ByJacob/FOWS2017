@@ -14,7 +14,7 @@ import pl.edu.pwr.fows.fows2017.interfave.SharedPreferencesDataInterface;
  * Created by Jakub Rosa on 05.08.2017.
  */
 
-public class FacebookProvider extends OkHttpProvider{
+class FacebookProvider extends OkHttpProvider{
 
     private final List<FacebookPost> posts = new ArrayList<>();
     private final String url;

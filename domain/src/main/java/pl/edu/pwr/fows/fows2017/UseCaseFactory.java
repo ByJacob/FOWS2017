@@ -1,6 +1,5 @@
 package pl.edu.pwr.fows.fows2017;
 
-import java.io.FileOutputStream;
 import java.util.List;
 
 import javax.inject.Inject;

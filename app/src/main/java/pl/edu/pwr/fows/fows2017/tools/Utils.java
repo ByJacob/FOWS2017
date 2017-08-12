@@ -9,6 +9,7 @@ import android.view.ViewGroup;
  * Created by damphat on 17.01.2017.
  */
 
+@SuppressWarnings("CanBeFinal")
 public final class Utils {
     /**
      * find child View in a ViewGroup by its position (x, y)

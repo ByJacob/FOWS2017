@@ -1,7 +1,6 @@
 package pl.edu.pwr.fows.fows2017.sharedPreferencesAPI;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 
@@ -20,7 +19,7 @@ import pl.edu.pwr.fows.fows2017.interfave.SharedPreferencesDataInterface;
 
 public class SharedPreferencesAPIClient implements FacebookPostGateway, SponsorGateway {
 
-    private SharedPreferencesAPIProvider provider;
+    private final SharedPreferencesAPIProvider provider;
 
     @Inject
     public SharedPreferencesAPIClient(SharedPreferencesDataInterface API){

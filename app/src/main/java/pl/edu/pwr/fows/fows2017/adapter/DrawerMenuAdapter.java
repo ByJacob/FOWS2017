@@ -23,8 +23,8 @@ import pl.edu.pwr.fows.fows2017.view.DrawerMenuRowView;
 
 public class DrawerMenuAdapter extends RecyclerView.Adapter<DrawerMenuAdapter.NavViewHolder> {
 
-    private LayoutInflater inflater;
-    private Context context;
+    private final LayoutInflater inflater;
+    private final Context context;
     private DrawerMenuPresenter presenter;
 
     public DrawerMenuAdapter(Context context) {
@@ -54,9 +54,9 @@ public class DrawerMenuAdapter extends RecyclerView.Adapter<DrawerMenuAdapter.Na
     }
 
     public class NavViewHolder extends RecyclerView.ViewHolder implements DrawerMenuRowView {
-        private TextView title;
-        private ImageView statusIcon;
-        private RelativeLayout parent;
+        private final TextView title;
+        private final ImageView statusIcon;
+        private final RelativeLayout parent;
         public NavViewHolder(View itemView) {
             super(itemView);
             parent = (RelativeLayout) itemView;

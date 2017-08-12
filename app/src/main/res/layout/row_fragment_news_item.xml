@@ -19,8 +19,8 @@
             android:layout_alignParentStart="true"
             android:alpha="0.54"
             android:paddingStart="@dimen/card_media_title_message_padding"
+            android:paddingEnd="@dimen/card_media_title_message_padding"
             android:paddingTop="@dimen/card_media_title_message_padding_v2"
-            android:text="TextView"
             android:textColor="@color/black"
             android:textSize="@dimen/card_subtitle_text_size" />
 
@@ -59,8 +59,7 @@
             android:paddingEnd="@dimen/card_media_title_message_padding"
             android:paddingStart="@dimen/card_media_title_message_padding"
             android:paddingTop="@dimen/card_padding"
-            android:textColor="@color/black"
-            tools:text="dfsadsijfidsjfiusadfdsahfudsaifudfiudsjfudsjfdsfdsfdsfidsiujjadjsiuadjOISAJDOISAIJDOISAJDOISAJFODSAJDOSAJDOISAJDOIJSAOIDJAsoifdjosajduosajfdoisajdojsaodjsaofjisaodjsaoidjaSFOUASJOISADJSAODASASDSAIJUDSAIDHAIUSHDHUSAHDSAHUDSAHFHSADJSAJDJSAIUDSAUFUJSAJDIUJSAIUSAJDIUHFIUSAHDIUSAHDIUSAHIUFDHSAIUDHAhdiusahdiuashfiusahduisahDIUHSADIUHSAIUDHSAIUDIUSHSAIUDHIUSAHDIa" />
+            android:textColor="@color/black" />
 
     </RelativeLayout>
 

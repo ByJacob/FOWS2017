@@ -36,7 +36,7 @@ public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
         super.factory.getMenuUseCase().execute().subscribe(this::onMenusListFetchSuccess);
     }
 
-    public void menuItemClick(DrawerMenuView view, int position, String tag) {
+    public void menuItemClick(DrawerMenuView view, String tag) {
         view.closeDrawer();
         baseActivityView.blockContainerClick(false);
         baseActivityView.changeMainFragment(tag);

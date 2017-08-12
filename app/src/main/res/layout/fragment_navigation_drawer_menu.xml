@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/background_material_fows"
     android:elevation="16dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="Overdraw">
 
     <RelativeLayout
         android:id="@+id/nav_header_container"

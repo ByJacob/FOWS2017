@@ -1,12 +1,8 @@
 package pl.edu.pwr.fows.fows2017.sponsors;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import pl.edu.pwr.fows.fows2017.base.OkHttpProvider;
 import pl.edu.pwr.fows.fows2017.entity.Sponsor;
 import pl.edu.pwr.fows.fows2017.interfave.SharedPreferencesDataInterface;
@@ -18,7 +14,7 @@ import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesAPIProvide
  * Created by Jakub Rosa on 10.08.2017.
  */
 
-public class SponsorsProvider extends OkHttpProvider{
+class SponsorsProvider extends OkHttpProvider{
 
     final private List<List<Sponsor>> sponsors = new ArrayList<>();
     private final String url;
