@@ -1,4 +1,4 @@
-package pl.edu.pwr.fows.fows2017.sharedPreferencesAPI;
+package pl.edu.pwr.fows.fows2017.interfave;
 
 /**
  * Project: FoWS2017

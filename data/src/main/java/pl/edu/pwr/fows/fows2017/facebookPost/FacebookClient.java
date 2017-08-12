@@ -8,7 +8,7 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
-import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesDataInterface;
+import pl.edu.pwr.fows.fows2017.interfave.SharedPreferencesDataInterface;
 
 /**
  * Project: FoWS2017

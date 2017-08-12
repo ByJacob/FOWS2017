@@ -3,7 +3,7 @@ package pl.edu.pwr.fows.fows2017.tools;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesDataInterface;
+import pl.edu.pwr.fows.fows2017.interfave.SharedPreferencesDataInterface;
 
 /**
  * Project: FoWS2017
