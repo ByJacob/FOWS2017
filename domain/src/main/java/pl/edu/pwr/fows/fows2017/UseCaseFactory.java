@@ -18,6 +18,7 @@ import pl.edu.pwr.fows.fows2017.gateway.SponsorGateway;
 import pl.edu.pwr.fows.fows2017.usecase.FacebookPostsSharedPrefUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.FacebookPostsUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.MenuUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.SponsorSharedPrefUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SponsorUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.base.UseCase;
 
@@ -33,17 +34,20 @@ public class UseCaseFactory {
     private final FacebookPostGateway facebookPostGateway;
     private final FacebookPostGateway facebookPostGatewaySharedPref;
     private final SponsorGateway sponsorGateway;
+    private final SponsorGateway sponsorGatewaySharedPref;
 
     @Inject
     public UseCaseFactory(FowsRxTransformerProvider rxTransformer, MenuGateway menuGateway,
                           @Named("NetworkGateway") FacebookPostGateway facebookPostGateway,
                           @Named("LocalGateway") FacebookPostGateway facebookPostGatewaySharedPref,
-                          SponsorGateway sponsorGateway){
+                          @Named("NetworkGateway") SponsorGateway sponsorGateway,
+                          @Named("LocalGateway") SponsorGateway sponsorGatewaySharedPref){
         this.menuGateway = menuGateway;
         this.rxTransformer = rxTransformer;
         this.facebookPostGateway = facebookPostGateway;
         this.facebookPostGatewaySharedPref = facebookPostGatewaySharedPref;
         this.sponsorGateway = sponsorGateway;
+        this.sponsorGatewaySharedPref = sponsorGatewaySharedPref;
     }
 
     public UseCase<Single<List<Menu>>> getMenuUseCase(){
@@ -60,5 +64,9 @@ public class UseCaseFactory {
 
     public UseCase<Observable<List<List<Sponsor>>>> getSponsors(){
         return new SponsorUseCase(rxTransformer, sponsorGateway);
+    }
+
+    public UseCase<Single<List<List<Sponsor>>>> getSponsorsSharedPref(){
+        return new SponsorSharedPrefUseCase(rxTransformer, sponsorGatewaySharedPref);
     }
 }

@@ -1,7 +1,6 @@
 package pl.edu.pwr.fows.fows2017.di.module;
 
 import android.app.Application;
-import android.content.SharedPreferences;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -17,9 +16,8 @@ import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
 import pl.edu.pwr.fows.fows2017.gateway.SponsorGateway;
 import pl.edu.pwr.fows.fows2017.menu.MenuClient;
 import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesAPIClient;
-import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesDataInterface;
+import pl.edu.pwr.fows.fows2017.interfave.SharedPreferencesDataInterface;
 import pl.edu.pwr.fows.fows2017.sponsors.SponsorsClient;
-import pl.edu.pwr.fows.fows2017.sponsors.SponsorsProvider;
 import pl.edu.pwr.fows.fows2017.tools.SharedPreferencesAPI;
 
 /**
@@ -64,8 +62,16 @@ public class AppModule {
 
     @Provides
     @Singleton
-    SponsorGateway getSponsorsGateway(){
-        return new SponsorsClient();
+    @Named("NetworkGateway")
+    SponsorGateway getSponsorsGateway(SharedPreferencesDataInterface sharedPreferences){
+        return new SponsorsClient(sharedPreferences);
+    }
+
+    @Provides
+    @Singleton
+    @Named("LocalGateway")
+    SponsorGateway getSponsorsGatewaySharedPref(SharedPreferencesDataInterface sharedPreferences){
+        return new SharedPreferencesAPIClient(sharedPreferences);
     }
 
     @Provides

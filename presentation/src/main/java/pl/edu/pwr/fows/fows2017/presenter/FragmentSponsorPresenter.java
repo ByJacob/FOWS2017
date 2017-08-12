@@ -23,10 +23,18 @@ public class FragmentSponsorPresenter extends BasePresenter<FragmentSponsorView>
     @Override
     public void onViewTaken(FragmentSponsorView view) {
         this.view = view;
-        factory.getSponsors().execute().subscribe(this::onSponsorsFetchSuccess);
+        factory.getSponsors().execute().subscribe(this::onSponsorsFetchSuccess, this::onSponsorsFetchFail);
     }
 
     private void onSponsorsFetchSuccess(List<List<Sponsor>> sponsors){
+
+    }
+
+    private void onSponsorsFetchFail(Throwable throwable) {
+        factory.getSponsorsSharedPref().execute().subscribe(this::onSponsorsFromMemoryFetchSucess);
+    }
+
+    private void onSponsorsFromMemoryFetchSucess(List<List<Sponsor>> sponsors){
 
     }
 }

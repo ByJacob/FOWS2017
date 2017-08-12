@@ -7,23 +7,26 @@ import java.util.List;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import pl.edu.pwr.fows.fows2017.base.OkHttpProvider;
 import pl.edu.pwr.fows.fows2017.entity.Sponsor;
+import pl.edu.pwr.fows.fows2017.interfave.SharedPreferencesDataInterface;
 import pl.edu.pwr.fows.fows2017.parser.JsonParserSponsor;
+import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesAPIProvider;
 
 /**
  * Project: FoWS2017
  * Created by Jakub Rosa on 10.08.2017.
  */
 
-public class SponsorsProvider {
+public class SponsorsProvider extends OkHttpProvider{
 
     final private List<List<Sponsor>> sponsors = new ArrayList<>();
-    private String url;
-    private OkHttpClient client;
+    private final String url;
+    private final SharedPreferencesDataInterface sharedPreferences;
 
-    public SponsorsProvider(String url) {
+    public SponsorsProvider(String url, SharedPreferencesDataInterface sharedPreferences) {
         this.url = url;
-        this.client = new OkHttpClient();
+        this.sharedPreferences = sharedPreferences;
     }
 
     public List<List<Sponsor>> getSponsors() throws Exception {
@@ -37,7 +40,7 @@ public class SponsorsProvider {
         String response;
         if (sponsors.size() < 1) {
             response = run(url);
-            //gatewaySharedPref.save(SharedPreferencesAPIProvider.TAG_FACEBOOK_POSTS, response);
+            sharedPreferences.save(SharedPreferencesAPIProvider.TAG_SPONSORS, response);
             List<List<Sponsor>> sponsorsTMP = JsonParserSponsor.parseJson(response);
             for(int i=0; i<sponsorsTMP.size(); i++){
                 sponsors.add(i, new ArrayList<>());
@@ -45,14 +48,5 @@ public class SponsorsProvider {
                     sponsors.get(i).add(sponsorsTMP.get(i).get(j));
             }
         }
-    }
-
-    private String run(String url) throws IOException {
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-
-        Response response = client.newCall(request).execute();
-        return response.body().string();
     }
 }
