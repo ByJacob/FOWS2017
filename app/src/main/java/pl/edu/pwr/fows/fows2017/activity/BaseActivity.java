@@ -10,7 +10,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -132,7 +136,56 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
     }
 
     @Override
-    public void disableLoading() {
+    public void enableLoadingBar() {
+        ProgressBar loading = (ProgressBar) this.findViewById(R.id.loading_progressBar);
+        AlphaAnimation animation = new AlphaAnimation(0f, 0.75f);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                loading.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        animation.setDuration(100);
+        loading.startAnimation(animation);
+    }
+
+    @Override
+    public void disableLoadingBar() {
+        ProgressBar loading = (ProgressBar) findViewById(R.id.loading_progressBar);
+        AlphaAnimation animation = new AlphaAnimation(0.75f, 0f);
+        animation.setDuration(300);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                loading.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        loading.startAnimation(animation);
+
+    }
+
+    @Override
+    public void continueLoading() {
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar, menuPresenter, activity);
         changeMainFragment("HOME");
     }

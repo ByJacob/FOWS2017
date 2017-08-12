@@ -44,7 +44,7 @@ public class FragmentNews extends BaseFragment implements FragmentNewsView{
     }
 
     @Override
-    public void disableLoading() {
+    public void continueLoading() {
         FragmentNewsAdapter adapter = new FragmentNewsAdapter(getActivity());
         adapter.setPresenter(presenter);
         recyclerView.setAdapter(adapter);

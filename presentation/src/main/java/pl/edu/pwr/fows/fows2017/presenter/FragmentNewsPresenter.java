@@ -19,18 +19,16 @@ import pl.edu.pwr.fows.fows2017.view.FragmentNewsView;
 
 public class FragmentNewsPresenter extends BasePresenter<FragmentNewsView>{
 
-    private FragmentNewsView view;
     private List<FacebookPost> posts;
-    private final BaseActivityView baseActivityView;
     private Boolean isNetwork;
 
     public FragmentNewsPresenter(UseCaseFactory factory, BaseActivityView baseActivityView) {
-        super(factory);
-        this.baseActivityView = baseActivityView;
+        super(factory, baseActivityView);
     }
 
     public void onViewTaken(FragmentNewsView view){
         this.view = view;
+        baseActivityView.enableLoadingBar();
         super.factory.getFacebookPosts().execute().subscribe(this::onFacebookPostsFetchSuccess,
                 this::onFacebookPostsFetchFail);
     }
@@ -38,7 +36,8 @@ public class FragmentNewsPresenter extends BasePresenter<FragmentNewsView>{
     private void onFacebookPostsFetchSuccess(List<FacebookPost> posts){
         this.posts = posts;
         isNetwork = true;
-        view.disableLoading();
+        baseActivityView.disableLoadingBar();
+        view.continueLoading();
     }
 
     @SuppressWarnings("UnusedParameters")
@@ -53,7 +52,8 @@ public class FragmentNewsPresenter extends BasePresenter<FragmentNewsView>{
             baseActivityView.showOnError("NETWORK", true);
         else
             baseActivityView.showOnError("NETWORK", false);
-        view.disableLoading();
+        baseActivityView.disableLoadingBar();
+        view.continueLoading();
     }
 
     public int getPostsCount() {

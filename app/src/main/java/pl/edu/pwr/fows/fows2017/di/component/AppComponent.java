@@ -19,8 +19,5 @@ public interface AppComponent {
     @SuppressWarnings("unused")
     void inject(FowsApplication fowsApplication);
 
-    @SuppressWarnings("unused")
-    MenuGateway getMenuGateway();
-
     UseCaseFactory getUseCaseFactory();
 }

@@ -12,11 +12,9 @@ import pl.edu.pwr.fows.fows2017.view.FragmentHomeView;
 
 public class FragmentHomePresenter extends BasePresenter<FragmentHomeView>{
 
-    private final BaseActivityView baseActivityView;
 
     public FragmentHomePresenter(UseCaseFactory factory, BaseActivityView baseActivityView) {
-        super(factory);
-        this.baseActivityView = baseActivityView;
+        super(factory, baseActivityView);
     }
 
     public void clickItem(String tag) {
@@ -25,6 +23,7 @@ public class FragmentHomePresenter extends BasePresenter<FragmentHomeView>{
 
     @Override
     public void onViewTaken(FragmentHomeView view) {
-
+        this.view = view;
+        baseActivityView.disableLoadingBar();
     }
 }

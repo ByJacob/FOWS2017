@@ -94,7 +94,7 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
     }
 
     @Override
-    public void disableLoading() {
+    public void continueLoading() {
 
     }
 

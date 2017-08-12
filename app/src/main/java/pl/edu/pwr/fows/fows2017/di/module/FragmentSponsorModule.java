@@ -4,6 +4,7 @@ import dagger.Module;
 import dagger.Provides;
 import pl.edu.pwr.fows.fows2017.UseCaseFactory;
 import pl.edu.pwr.fows.fows2017.presenter.FragmentSponsorPresenter;
+import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
 
 /**
  * Project: FoWS2017
@@ -14,7 +15,7 @@ import pl.edu.pwr.fows.fows2017.presenter.FragmentSponsorPresenter;
 public class FragmentSponsorModule {
 
     @Provides
-    FragmentSponsorPresenter provideFragmentSponsorPresenter(UseCaseFactory factory){
-        return new FragmentSponsorPresenter(factory);
+    FragmentSponsorPresenter provideFragmentSponsorPresenter(UseCaseFactory factory, BaseActivityView baseActivityView){
+        return new FragmentSponsorPresenter(factory, baseActivityView);
     }
 }

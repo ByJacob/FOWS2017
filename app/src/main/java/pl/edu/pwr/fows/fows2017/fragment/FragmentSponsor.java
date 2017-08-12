@@ -40,7 +40,7 @@ public class FragmentSponsor extends BaseFragment implements FragmentSponsorView
     }
 
     @Override
-    public void disableLoading() {
+    public void continueLoading() {
 
     }
 }

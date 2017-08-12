@@ -5,6 +5,7 @@ import java.util.List;
 import pl.edu.pwr.fows.fows2017.UseCaseFactory;
 import pl.edu.pwr.fows.fows2017.entity.Sponsor;
 import pl.edu.pwr.fows.fows2017.presenter.base.BasePresenter;
+import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
 import pl.edu.pwr.fows.fows2017.view.FragmentSponsorView;
 
 /**
@@ -14,21 +15,20 @@ import pl.edu.pwr.fows.fows2017.view.FragmentSponsorView;
 
 public class FragmentSponsorPresenter extends BasePresenter<FragmentSponsorView> {
 
-    @SuppressWarnings("FieldCanBeLocal")
-    private FragmentSponsorView view;
-
-    public FragmentSponsorPresenter(UseCaseFactory factory) {
-        super(factory);
+    public FragmentSponsorPresenter(UseCaseFactory factory, BaseActivityView baseActivityView) {
+        super(factory, baseActivityView);
     }
 
     @Override
     public void onViewTaken(FragmentSponsorView view) {
         this.view = view;
+        baseActivityView.enableLoadingBar();
         factory.getSponsors().execute().subscribe(this::onSponsorsFetchSuccess, this::onSponsorsFetchFail);
     }
 
     private void onSponsorsFetchSuccess(List<List<Sponsor>> sponsors){
-
+        baseActivityView.disableLoadingBar();
+        view.continueLoading();
     }
 
     private void onSponsorsFetchFail(Throwable throwable) {
@@ -36,6 +36,7 @@ public class FragmentSponsorPresenter extends BasePresenter<FragmentSponsorView>
     }
 
     private void onSponsorsFromMemoryFetchSuccess(List<List<Sponsor>> sponsors){
-
+        baseActivityView.disableLoadingBar();
+        view.continueLoading();
     }
 }

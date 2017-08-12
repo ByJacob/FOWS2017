@@ -6,5 +6,5 @@ package pl.edu.pwr.fows.fows2017.view.base;
  */
 
 public interface BaseActivityAndFragmentView {
-    void disableLoading();
+    void continueLoading();
 }

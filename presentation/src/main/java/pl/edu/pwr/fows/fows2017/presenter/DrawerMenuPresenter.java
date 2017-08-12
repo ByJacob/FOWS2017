@@ -25,7 +25,7 @@ public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
     private List<Menu> menus;
 
     public DrawerMenuPresenter(UseCaseFactory factory, BaseActivityView baseActivityView) {
-        super(factory);
+        super(factory, baseActivityView);
         this.baseActivityView = baseActivityView;
         lastTimestampRefresh = 0L;
         actualFragmentTag = "";
@@ -82,6 +82,6 @@ public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
 
     private void onMenusListFetchSuccess(List<Menu> menus) {
         this.menus = menus;
-        baseActivityView.disableLoading();
+        baseActivityView.continueLoading();
     }
 }
