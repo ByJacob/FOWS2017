@@ -104,11 +104,11 @@ public class FragmentSponsorAdapter {
             Integer startChild = (grid.getRowCount() - 1) * (COLUMN_COUNT / columnTakes);
             Integer endChild = grid.getChildCount() - 1;
             Integer columnStart = (COLUMN_COUNT - ((startChild - endChild + 1) * columnTakes)) / 2;
+            Integer columnSize = grid.getWidth()/COLUMN_COUNT;
 
             for (int i = 0; i + startChild <= endChild; i++) {
-                GridLayout.LayoutParams param = (GridLayout.LayoutParams) grid.getChildAt(startChild + i).getLayoutParams();
-                param.columnSpec = GridLayout.spec(columnStart, columnTakes, 1f);
-                grid.getChildAt(startChild + i).setLayoutParams(param);
+                grid.getChildAt(startChild + i).animate().x(columnStart*columnSize).setDuration(0)
+                        .start();
                 columnStart += columnTakes;
             }
         }
