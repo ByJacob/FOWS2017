@@ -32,4 +32,8 @@
     <dimen name="card_media_area_size">96dp</dimen>
     <dimen name="card_media_title_message_padding">16dp</dimen>
     <dimen name="card_media_title_message_padding_v2">24dp</dimen>
+    <dimen name="grid_view_spacing">4dp</dimen>
+    <dimen name="fragment_sponsor_row_name_padding_vertical">16dp</dimen>
+    <dimen name="fragment_sponsor_row_name_min_height">48dp</dimen>
+    <dimen name="fragment_sponsor_row_name_text_size">16sp</dimen>
 </resources>

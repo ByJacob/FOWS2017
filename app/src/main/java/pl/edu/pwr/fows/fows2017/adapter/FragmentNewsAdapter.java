@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 
 import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.presenter.FragmentNewsPresenter;
-import pl.edu.pwr.fows.fows2017.view.FragmentNewsRowView;
+import pl.edu.pwr.fows.fows2017.view.row.FragmentNewsRowView;
 
 /**
  * Project: FoWS2017
@@ -59,7 +59,7 @@ public class FragmentNewsAdapter extends RecyclerView.Adapter<FragmentNewsAdapte
     public void onBindViewHolder(NewsAdapter holder, int position) {
         //noinspection deprecation
         presenter.configureNewsRow(holder, position, context.getResources().getConfiguration().locale);
-        setAnimation(holder.itemView, position);
+        setAnimation(holder.itemView, position); //todo change max scrool speed
     }
 
     private void setAnimation(View itemView, int position) {

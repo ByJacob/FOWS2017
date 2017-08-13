@@ -9,7 +9,7 @@ import pl.edu.pwr.fows.fows2017.UseCaseFactory;
 import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
 import pl.edu.pwr.fows.fows2017.presenter.base.BasePresenter;
 import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
-import pl.edu.pwr.fows.fows2017.view.FragmentNewsRowView;
+import pl.edu.pwr.fows.fows2017.view.row.FragmentNewsRowView;
 import pl.edu.pwr.fows.fows2017.view.FragmentNewsView;
 
 /**

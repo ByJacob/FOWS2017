@@ -6,7 +6,7 @@ import pl.edu.pwr.fows.fows2017.UseCaseFactory;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
 import pl.edu.pwr.fows.fows2017.presenter.base.BasePresenter;
 import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
-import pl.edu.pwr.fows.fows2017.view.DrawerMenuRowView;
+import pl.edu.pwr.fows.fows2017.view.row.DrawerMenuRowView;
 import pl.edu.pwr.fows.fows2017.view.DrawerMenuView;
 
 /**
