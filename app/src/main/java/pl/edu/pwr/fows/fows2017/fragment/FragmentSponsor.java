@@ -2,7 +2,7 @@ package pl.edu.pwr.fows.fows2017.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.GridView;
+import android.widget.LinearLayout;
 
 import javax.inject.Inject;
 
@@ -24,7 +24,7 @@ public class FragmentSponsor extends BaseFragment implements FragmentSponsorView
     @SuppressWarnings("CanBeFinal")
     @Inject
     FragmentSponsorPresenter presenter;
-    private GridView gridView;
+    private LinearLayout parent;
 
     @Override
     protected Integer getLayoutId() {
@@ -34,7 +34,7 @@ public class FragmentSponsor extends BaseFragment implements FragmentSponsorView
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        gridView = getView().findViewById(R.id.fragment_sponsor);
+        parent = getView().findViewById(R.id.fragment_sponsor);
         presenter.onViewTaken(this);
     }
 
@@ -47,6 +47,7 @@ public class FragmentSponsor extends BaseFragment implements FragmentSponsorView
     public void continueLoading() {
         FragmentSponsorAdapter adapter = new FragmentSponsorAdapter(getActivity());
         adapter.setPresenter(presenter);
-        gridView.setAdapter(adapter);
+        adapter.setParent(parent);
+        adapter.display();
     }
 }

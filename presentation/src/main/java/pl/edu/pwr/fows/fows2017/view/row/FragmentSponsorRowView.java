@@ -6,6 +6,5 @@ package pl.edu.pwr.fows.fows2017.view.row;
  */
 
 public interface FragmentSponsorRowView {
-    void setTitle(String title);
     void setImage(String url);
 }

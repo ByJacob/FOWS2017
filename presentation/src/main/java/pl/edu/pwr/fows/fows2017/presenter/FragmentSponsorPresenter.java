@@ -36,7 +36,8 @@ public class FragmentSponsorPresenter extends BasePresenter<FragmentSponsorView>
     }
 
     private void onSponsorsFetchFail(Throwable throwable) {
-        factory.getSponsorsSharedPref().execute().subscribe(this::onSponsorsFromMemoryFetchSuccess);
+        if(throwable.getMessage().contains("No address"))
+            factory.getSponsorsSharedPref().execute().subscribe(this::onSponsorsFromMemoryFetchSuccess);
     }
 
     private void onSponsorsFromMemoryFetchSuccess(List<List<Sponsor>> sponsors){
@@ -50,25 +51,14 @@ public class FragmentSponsorPresenter extends BasePresenter<FragmentSponsorView>
         view.continueLoading();
     }
 
-    public int getSponsorsCount() {
-        Integer size = 0;
-        for(int i=0; i<sponsors.size(); i++)
-            size += sponsors.get(i).size();
-        return size;
+    public int getSponsorsRowCount() {
+        return sponsors.size();
+    }
+    public int getSponsorsCountInRow(Integer row) {
+        return sponsors.get(row).size();
     }
 
-    public void configureRow(FragmentSponsorRowView holder, int position) {
-        int position1 = 0;
-        int position2 = 0;
-        for(int i=sponsors.size()-1; i>=0; i--){
-            if(position<sponsors.get(i).size()) {
-                position1 = i;
-                position2 = position;
-                break;
-            }
-            position -= sponsors.get(i).size();
-        }
-        holder.setTitle(sponsors.get(position1).get(position2).getName());
-        holder.setImage(sponsors.get(position1).get(position2).getUrl());
+    public void configureRow(FragmentSponsorRowView holder, int row, int position) {
+        holder.setImage(sponsors.get(row).get(position).getUrl());
     }
 }
