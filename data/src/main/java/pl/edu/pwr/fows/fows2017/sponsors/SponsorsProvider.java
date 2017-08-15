@@ -5,7 +5,7 @@ import java.util.List;
 
 import pl.edu.pwr.fows.fows2017.base.OkHttpProvider;
 import pl.edu.pwr.fows.fows2017.entity.Sponsor;
-import pl.edu.pwr.fows.fows2017.interfave.SharedPreferencesDataInterface;
+import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterface;
 import pl.edu.pwr.fows.fows2017.parser.JsonParserSponsor;
 import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesAPIProvider;
 

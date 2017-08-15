@@ -8,7 +8,7 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 import pl.edu.pwr.fows.fows2017.entity.Sponsor;
 import pl.edu.pwr.fows.fows2017.gateway.SponsorGateway;
-import pl.edu.pwr.fows.fows2017.interfave.SharedPreferencesDataInterface;
+import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterface;
 
 /**
  * Project: FoWS2017
@@ -17,7 +17,7 @@ import pl.edu.pwr.fows.fows2017.interfave.SharedPreferencesDataInterface;
 
 public class SponsorsClient implements SponsorGateway {
 
-    private static final String URL = "http://fows.pwr.edu.pl/images/sponsors/android-logs.php";
+    private static final String URL = "http://fows.pwr.edu.pl/images/sponsors_test/android-logs.php";
     private final SponsorsProvider provider;
 
     @Inject
@@ -28,10 +28,5 @@ public class SponsorsClient implements SponsorGateway {
     @Override
     public Observable<List<List<Sponsor>>> getSponsors() {
         return Observable.fromCallable(provider::getSponsors);
-    }
-
-    @Override
-    public Single<List<List<Sponsor>>> getSponsorsFromMemory() {
-        return null; //Don't use
     }
 }

@@ -1,4 +1,4 @@
-package pl.edu.pwr.fows.fows2017.interfave;
+package pl.edu.pwr.fows.fows2017.declarationInterface;
 
 /**
  * Project: FoWS2017

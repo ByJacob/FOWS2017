@@ -8,7 +8,7 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
-import pl.edu.pwr.fows.fows2017.interfave.SharedPreferencesDataInterface;
+import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterface;
 
 /**
  * Project: FoWS2017
@@ -27,12 +27,7 @@ public class FacebookClient implements FacebookPostGateway {
 
     @Override
     public Observable<List<FacebookPost>> getPosts() {
-        return Observable.fromCallable(() -> provider.getPosts());
-    }
-
-    @Override
-    public Single<List<FacebookPost>> getPostsFromMemory() {
-        return null; //Don't use
+        return Observable.fromCallable(provider::getPosts);
     }
 
     @Override

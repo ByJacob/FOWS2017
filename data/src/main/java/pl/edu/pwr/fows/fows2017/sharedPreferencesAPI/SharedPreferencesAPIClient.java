@@ -7,17 +7,19 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
+import pl.edu.pwr.fows.fows2017.entity.Lecture;
 import pl.edu.pwr.fows.fows2017.entity.Sponsor;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
+import pl.edu.pwr.fows.fows2017.gateway.LectureGateway;
 import pl.edu.pwr.fows.fows2017.gateway.SponsorGateway;
-import pl.edu.pwr.fows.fows2017.interfave.SharedPreferencesDataInterface;
+import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterface;
 
 /**
  * Project: FoWS2017
  * Created by Jakub Rosa on 08.08.2017.
  */
 
-public class SharedPreferencesAPIClient implements FacebookPostGateway, SponsorGateway {
+public class SharedPreferencesAPIClient implements FacebookPostGateway, SponsorGateway, LectureGateway {
 
     private final SharedPreferencesAPIProvider provider;
 
@@ -27,12 +29,7 @@ public class SharedPreferencesAPIClient implements FacebookPostGateway, SponsorG
     }
     @Override
     public Observable<List<FacebookPost>> getPosts() {
-        return null; //"Don't use"
-    }
-
-    @Override
-    public Single<List<FacebookPost>> getPostsFromMemory() {
-        return Single.just(provider.getFacebookPosts());
+        return Observable.just(provider.getFacebookPosts());
     }
 
     @Override
@@ -42,11 +39,12 @@ public class SharedPreferencesAPIClient implements FacebookPostGateway, SponsorG
 
     @Override
     public Observable<List<List<Sponsor>>> getSponsors() {
-        return null; //don't use
+        return Observable.just(provider.getSponsors());
     }
 
+
     @Override
-    public Single<List<List<Sponsor>>> getSponsorsFromMemory() {
-        return Single.just(provider.getSponsors());
+    public Observable<List<Lecture>> getLectures() {
+        return Observable.just(provider.getLectures());
     }
 }

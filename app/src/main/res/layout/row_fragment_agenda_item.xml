@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingEnd="@dimen/fragment_agenda_row_item_vertical_padding"
+    android:paddingStart="@dimen/fragment_agenda_row_item_vertical_padding"
+    android:paddingTop="@dimen/fragment_agenda_row_item_top_padding">
+
+    <TextView
+        android:id="@+id/row_fragment_agenda_description_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0.7"
+        android:textColor="@color/black"
+        android:textSize="@dimen/fragment_agenda_row_header_secondary_text_size"
+        tools:text="Opis" />
+
+    <ImageView
+        android:id="@+id/row_fragment_agenda_logo_image"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fragment_agenda_row_item_logo_height"
+        android:padding="@dimen/fragment_agenda_row_item_logo_padding"
+        tools:src="@drawable/logo_wg" />
+
+</LinearLayout>

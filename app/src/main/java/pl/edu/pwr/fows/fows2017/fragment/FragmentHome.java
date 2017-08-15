@@ -1,10 +1,19 @@
 package pl.edu.pwr.fows.fows2017.fragment;
 
+import android.animation.Animator;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
@@ -14,13 +23,14 @@ import pl.edu.pwr.fows.fows2017.di.module.FragmentHomeModule;
 import pl.edu.pwr.fows.fows2017.fragment.base.BaseFragment;
 import pl.edu.pwr.fows.fows2017.presenter.FragmentHomePresenter;
 import pl.edu.pwr.fows.fows2017.tools.Utils;
+import pl.edu.pwr.fows.fows2017.view.FragmentHomeView;
 
 /**
  * Project: FoWS2017
  * Created by Jakub Rosa on 03.08.2017.
  */
 
-public class FragmentHome extends BaseFragment {
+public class FragmentHome extends BaseFragment implements FragmentHomeView {
 
     @SuppressWarnings("CanBeFinal")
     @Inject
@@ -41,6 +51,8 @@ public class FragmentHome extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         ConstraintLayout items = getView().findViewById(R.id.fragment_menu_layout_items);
         items.setOnTouchListener(this::onTouchItemsListener);
+        presenter.setLocale(getResources().getConfiguration().locale);
+        presenter.onViewTaken(this);
         countEventMove = 0;
     }
 
@@ -65,4 +77,91 @@ public class FragmentHome extends BaseFragment {
         return false;
     }
 
+    @Override
+    public void continueLoading() {
+
+    }
+
+    @Override
+    public void displayLogo(String url) {
+        if (getView() != null) {
+            Handler handler = new Handler();
+            ImageView logo = getView().findViewById(R.id.fragment_home_logo_image);
+            View parentLogo = getView().findViewById(R.id.fragment_home_logo_image_parent);
+            int logoHeight = parentLogo.getHeight();
+            Runnable task1 = () -> {
+                Animation.AnimationListener listener = new Animation.AnimationListener() {
+
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        Picasso.with(getActivity()).load(url).into(logo);
+                        TranslateAnimation animation2 = new TranslateAnimation(0, 0, logoHeight, 0);
+                        animation2.setDuration(500);
+                        parentLogo.startAnimation(animation2);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                };
+                TranslateAnimation animation = new TranslateAnimation(0, 0, 0, logoHeight);
+                animation.setAnimationListener(listener);
+                animation.setDuration(500);
+                parentLogo.startAnimation(animation);
+            };
+            Runnable task2 = () -> presenter.displaySponsor();
+            handler.post(task1);
+            handler.postDelayed(task2, 5000);
+        }
+
+    }
+
+    @Override
+    public void displayLecture(String day, String theme, Boolean isNext) {
+        if (getView() != null) {
+            Handler handler = new Handler();
+            TextView dateView = getView().findViewById(R.id.fragment_home_textview_presentation_time);
+            TextView themeView = getView().findViewById(R.id.fragment_home_textview_presentation_theme);
+            TextView status = getView().findViewById(R.id.fragment_home_textview_status);
+            View parent = getView().findViewById(R.id.fragment_home_presentation);
+            Runnable task = () -> {
+                AlphaAnimation animation = new AlphaAnimation(1f, 0f);
+                animation.setDuration(200);
+                animation.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        dateView.setText(day);
+                        themeView.setText(theme);
+                        if (isNext)
+                            status.setText(getString(R.string.next));
+                        else
+                            status.setText(getString(R.string.now));
+                        AlphaAnimation animation2 = new AlphaAnimation(0f, 1f);
+                        animation2.setDuration(200);
+                        parent.startAnimation(animation2);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+                parent.startAnimation(animation);
+            };
+            Runnable task2 = () -> presenter.displayLecture(!isNext);
+            handler.post(task);
+            handler.postDelayed(task2, 8000);
+        }
+    }
 }

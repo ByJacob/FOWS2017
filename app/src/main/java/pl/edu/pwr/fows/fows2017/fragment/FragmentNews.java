@@ -39,8 +39,8 @@ public class FragmentNews extends BaseFragment implements FragmentNewsView{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        presenter.onViewTaken(this);
         recyclerView = getView().findViewById(R.id.fragment_news_recycler_list);
+        presenter.onViewTaken(this);
     }
 
     @Override

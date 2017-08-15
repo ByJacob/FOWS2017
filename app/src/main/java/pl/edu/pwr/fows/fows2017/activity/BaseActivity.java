@@ -23,6 +23,7 @@ import javax.inject.Inject;
 import pl.edu.pwr.fows.fows2017.BuildConfig;
 import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.fragment.DrawerMenuFragment;
+import pl.edu.pwr.fows.fows2017.fragment.FragmentAgenda;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentHome;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentNews;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentSponsor;
@@ -90,6 +91,9 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
                             break;
                         case "SPONSORS":
                             fragment = new FragmentSponsor();
+                            break;
+                        case "AGENDA":
+                            fragment = new FragmentAgenda();
                             break;
                     }
                 }
