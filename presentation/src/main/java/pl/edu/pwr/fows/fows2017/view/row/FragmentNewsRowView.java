@@ -1,4 +1,4 @@
-package pl.edu.pwr.fows.fows2017.view;
+package pl.edu.pwr.fows.fows2017.view.row;
 
 /**
  * Project: FoWS2017

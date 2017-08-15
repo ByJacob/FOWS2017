@@ -14,7 +14,7 @@ import android.widget.TextView;
 import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.map.DrawerMenuItemMap;
 import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
-import pl.edu.pwr.fows.fows2017.view.DrawerMenuRowView;
+import pl.edu.pwr.fows.fows2017.view.row.DrawerMenuRowView;
 
 /**
  * Project: FoWS2017

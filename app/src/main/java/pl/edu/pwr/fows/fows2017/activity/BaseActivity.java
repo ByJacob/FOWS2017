@@ -27,6 +27,7 @@ import pl.edu.pwr.fows.fows2017.fragment.FragmentHome;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentNews;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentSponsor;
 import pl.edu.pwr.fows.fows2017.fragment.base.BaseFragment;
+import pl.edu.pwr.fows.fows2017.map.DrawerMenuItemMap;
 import pl.edu.pwr.fows.fows2017.map.ExceptionMap;
 import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
 import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
@@ -96,6 +97,8 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
                     try {
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.container_body, fragment, tag).addToBackStack(tag).commit();
+                        if (getSupportActionBar() != null && DrawerMenuItemMap.getTag(tag) != null)
+                            getSupportActionBar().setTitle("FoWS 2017 - " + getString(DrawerMenuItemMap.getTag(tag)));
                     } catch (IllegalStateException ignores) {
                         ignores.printStackTrace();
                     }
