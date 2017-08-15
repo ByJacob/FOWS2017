@@ -13,4 +13,6 @@
     <string name="exception_default">BŁĄD!</string>
     <string name="next">później</string>
     <string name="now">teraz</string>
+    <string name="finish1">Konferencja się skończyła</string>
+    <string name="finish2">Dziękujemy za udział :)</string>
 </resources>

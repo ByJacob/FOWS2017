@@ -83,6 +83,8 @@ public class FragmentHomePresenter extends BasePresenter<FragmentHomeView>{
                 view.displayLecture(df.format(lectures.get(i).getStartTime()), theme, false);
                 return;
             }
+            if (i==lectures.size()-1)
+                isNext = !isNext;
         }
         for(int i=0; i<lectures.size() && isNext; i++){
             if (now.before(lectures.get(i).getStartTime())){

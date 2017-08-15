@@ -3,12 +3,12 @@ package pl.edu.pwr.fows.fows2017.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
 import javax.inject.Inject;
 
 import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.adapter.FragmentNewsAdapter;
+import pl.edu.pwr.fows.fows2017.customViews.CustomRecyclerView;
 import pl.edu.pwr.fows.fows2017.di.component.ActivityComponent;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentNewsModule;
 import pl.edu.pwr.fows.fows2017.fragment.base.BaseFragment;
@@ -20,12 +20,13 @@ import pl.edu.pwr.fows.fows2017.view.FragmentNewsView;
  * Created by Jakub Rosa on 05.08.2017.
  */
 
-public class FragmentNews extends BaseFragment implements FragmentNewsView{
+public class FragmentNews extends BaseFragment implements FragmentNewsView {
 
     @SuppressWarnings("CanBeFinal")
     @Inject
     FragmentNewsPresenter presenter;
-    RecyclerView recyclerView;
+    CustomRecyclerView recyclerView;
+
     @Override
     protected Integer getLayoutId() {
         return R.layout.fragment_news;
@@ -40,6 +41,7 @@ public class FragmentNews extends BaseFragment implements FragmentNewsView{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         recyclerView = getView().findViewById(R.id.fragment_news_recycler_list);
+        recyclerView.setMaxVelocityY(10000);
         presenter.onViewTaken(this);
     }
 

@@ -15,5 +15,7 @@
     <string name="address" translatable="false">Janiszewskiego 8, 50–370 Wrocław</string>
     <string name="now">now</string>
     <string name="next">next</string>
+    <string name="finish1">The conference ended</string>
+    <string name="finish2">Thank you for participating :)</string>
 
 </resources>

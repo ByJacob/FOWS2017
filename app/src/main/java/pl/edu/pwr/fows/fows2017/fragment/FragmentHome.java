@@ -1,6 +1,5 @@
 package pl.edu.pwr.fows.fows2017.fragment;
 
-import android.animation.Animator;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -130,6 +129,12 @@ public class FragmentHome extends BaseFragment implements FragmentHomeView {
             TextView themeView = getView().findViewById(R.id.fragment_home_textview_presentation_theme);
             TextView status = getView().findViewById(R.id.fragment_home_textview_status);
             View parent = getView().findViewById(R.id.fragment_home_presentation);
+            if (day.length() < 5)
+                day = getString(R.string.finish1);
+            if (theme.length() < 5)
+                theme = getString(R.string.finish2);
+            String finalDay = day;
+            String finalTheme = theme;
             Runnable task = () -> {
                 AlphaAnimation animation = new AlphaAnimation(1f, 0f);
                 animation.setDuration(200);
@@ -141,12 +146,13 @@ public class FragmentHome extends BaseFragment implements FragmentHomeView {
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
-                        dateView.setText(day);
-                        themeView.setText(theme);
-                        if (isNext)
-                            status.setText(getString(R.string.next));
-                        else
-                            status.setText(getString(R.string.now));
+                        dateView.setText(finalDay);
+                        themeView.setText(finalTheme);
+                        if (isNext != null)
+                            if (isNext)
+                                status.setText(getString(R.string.next));
+                            else
+                                status.setText(getString(R.string.now));
                         AlphaAnimation animation2 = new AlphaAnimation(0f, 1f);
                         animation2.setDuration(200);
                         parent.startAnimation(animation2);
@@ -161,7 +167,8 @@ public class FragmentHome extends BaseFragment implements FragmentHomeView {
             };
             Runnable task2 = () -> presenter.displayLecture(!isNext);
             handler.post(task);
-            handler.postDelayed(task2, 8000);
+            if (isNext != null)
+                handler.postDelayed(task2, 8000);
         }
     }
 }

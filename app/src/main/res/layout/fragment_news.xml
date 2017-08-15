@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
+    <pl.edu.pwr.fows.fows2017.customViews.CustomRecyclerView
         android:id="@+id/fragment_news_recycler_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

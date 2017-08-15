@@ -66,10 +66,13 @@ public class FragmentNewsAdapter extends RecyclerView.Adapter<FragmentNewsAdapte
         if (position > lastPosition)
         {
             Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+            animation.setDuration(300);
             itemView.startAnimation(animation);
             lastPosition = position;
         }
     }
+
+
 
     @Override
     public int getItemCount() {
