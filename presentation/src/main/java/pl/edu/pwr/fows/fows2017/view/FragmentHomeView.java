@@ -9,10 +9,8 @@ import pl.edu.pwr.fows.fows2017.view.base.BaseActivityAndFragmentView;
 
 public interface FragmentHomeView extends BaseActivityAndFragmentView {
 
-    void displayLogo();
+    void displayLogo(String url);
 
-    void displayPresentationTime(String string);
-
-    void displayPresentationTheme(String string);
+    void displayLecture(String day, String theme, Boolean isNext);
 
 }

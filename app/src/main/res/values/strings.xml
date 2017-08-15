@@ -13,5 +13,7 @@
     <string name="menu_item_location">Location</string>
     <string name="fows_title" translatable="false">Future of Wireless Systems</string>
     <string name="address" translatable="false">Janiszewskiego 8, 50–370 Wrocław</string>
+    <string name="now">now</string>
+    <string name="next">next</string>
 
 </resources>

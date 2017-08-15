@@ -38,10 +38,13 @@ public class JsonParserLecture {
                 String prelegentPicture = lecture.getString("prelegentPicture");
                 String prelegentPictureSmall = lecture.getString("prelegentPictureSmall");
                 String company = lecture.getString("company");
+                String themeEN = lecture.getString("themeEN");
+                String themePL = lecture.getString("themePL");
                 try {
                     response.add(Lecture.Builder.aLecture().withStartTime(df.parse(startTime))
                             .withEndTime(df.parse(endTime)).withDescriptionPL(descriptionPL)
                             .withDescriptionEN(descriptionEN).withLogoURL(logo)
+                            .withThemeEN(themeEN).withThemePL(themePL)
                             .withSpeakerPicture(prelegentPicture).withCompany(company)
                             .withSpeakerPictureSmall(prelegentPictureSmall)
                             .withSpeaker(prelegentName).build());

@@ -11,4 +11,6 @@
     <string name="menu_item_news">Aktualności</string>
     <string name="exception_network">Brak internetu!</string>
     <string name="exception_default">BŁĄD!</string>
+    <string name="next">później</string>
+    <string name="now">teraz</string>
 </resources>

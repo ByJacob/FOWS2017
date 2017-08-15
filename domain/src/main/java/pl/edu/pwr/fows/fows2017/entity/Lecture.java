@@ -13,19 +13,23 @@ public class Lecture {
     private String speaker;
     private String descriptionPL;
     private String descriptionEN;
+    private String themeEN;
+    private String themePL;
     private String logoURL;
     private String speakerPicture;
     private String speakerPictureSmall;
     private String company;
 
     public Lecture(Date startTime, Date endTime, String speaker, String descriptionPL,
-                   String descriptionEN, String logoURL, String speakerPicture,
+                   String descriptionEN, String themeEN, String themePL, String logoURL, String speakerPicture,
                    String speakerPictureSmall, String company) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.speaker = speaker;
         this.descriptionPL = descriptionPL;
         this.descriptionEN = descriptionEN;
+        this.themeEN = themeEN;
+        this.themePL = themePL;
         this.logoURL = logoURL;
         this.speakerPicture = speakerPicture;
         this.speakerPictureSmall = speakerPictureSmall;
@@ -68,6 +72,14 @@ public class Lecture {
         return company;
     }
 
+    public String getThemeEN() {
+        return themeEN;
+    }
+
+    public String getThemePL() {
+        return themePL;
+    }
+
 
     public static final class Builder {
         private Date startTime;
@@ -75,6 +87,8 @@ public class Lecture {
         private String speaker;
         private String descriptionPL;
         private String descriptionEN;
+        private String themeEN;
+        private String themePL;
         private String logoURL;
         private String speakerPicture;
         private String speakerPictureSmall;
@@ -112,6 +126,16 @@ public class Lecture {
             return this;
         }
 
+        public Builder withThemeEN(String themeEN) {
+            this.themeEN = themeEN;
+            return this;
+        }
+
+        public Builder withThemePL(String themePL) {
+            this.themePL = themePL;
+            return this;
+        }
+
         public Builder withLogoURL(String logoURL) {
             this.logoURL = logoURL;
             return this;
@@ -133,8 +157,7 @@ public class Lecture {
         }
 
         public Lecture build() {
-            Lecture lecture = new Lecture(startTime, endTime, speaker, descriptionPL, descriptionEN, logoURL, speakerPicture, speakerPictureSmall, company);
-            return lecture;
+            return new Lecture(startTime, endTime, speaker, descriptionPL, descriptionEN, themeEN, themePL, logoURL, speakerPicture, speakerPictureSmall, company);
         }
     }
 }

@@ -17,7 +17,7 @@ import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterf
 
 public class SponsorsClient implements SponsorGateway {
 
-    private static final String URL = "http://fows.pwr.edu.pl/images/sponsors/android-logs.php";
+    private static final String URL = "http://fows.pwr.edu.pl/images/sponsors_test/android-logs.php";
     private final SponsorsProvider provider;
 
     @Inject

@@ -10,8 +10,10 @@
     <dimen name="navigation_header_bottom_padding">8dp</dimen>
     <dimen name="navigation_list_top_margin">8dp</dimen>
 
-    <dimen name="fragment_main_item_size">24sp</dimen>
-    <dimen name="fragment_main_item_margin">16dp</dimen>
+    <dimen name="fragment_home_item_size">24sp</dimen>
+    <dimen name="fragment_home_item_margin">16dp</dimen>
+    <dimen name="fragment_home_logo_padding">8dp</dimen>
+    <dimen name="fragment_home_logo_paddingX2">16dp</dimen>
 
     <dimen name="fragment_news_row_left_padding">24dp</dimen>
     <dimen name="fragment_news_header_height">48dp</dimen>
