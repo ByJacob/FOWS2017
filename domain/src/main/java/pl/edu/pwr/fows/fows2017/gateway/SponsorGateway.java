@@ -14,5 +14,4 @@ import pl.edu.pwr.fows.fows2017.entity.Sponsor;
 public interface SponsorGateway {
 
     Observable<List<List<Sponsor>>> getSponsors();
-    Single<List<List<Sponsor>>> getSponsorsFromMemory();
 }

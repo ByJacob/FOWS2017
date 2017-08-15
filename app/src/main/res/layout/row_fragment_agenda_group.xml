@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/row_fragment_agenda_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:padding="@dimen/fragment_agenda_row_header_day_padding"
+        android:textColor="@color/black"
+        android:textSize="@dimen/fragment_agenda_row_header_day_size"
+        android:visibility="gone"
+        tools:text="1 grudnia 2017"
+        tools:visibility="visible" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/row_fragment_agenda_constraint"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fragment_agenda_row_header_height">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/row_fragment_agenda_spekacer_circle_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="@dimen/fragment_agenda_row_header_picture_vertical_padding"
+            android:layout_marginRight="@dimen/fragment_agenda_row_header_picture_vertical_padding"
+            android:layout_marginTop="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/row_fragment_agenda_speaker_name_text"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/logo_wg" />
+
+        <TextView
+            android:id="@+id/row_fragment_agenda_time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/fragment_agenda_row_header_text_left_padding"
+            android:layout_marginTop="0dp"
+            android:alpha="0.7"
+            android:textColor="@color/black"
+            android:textSize="@dimen/fragment_agenda_row_header_secondary_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline2"
+            tools:text="07:00" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <TextView
+            android:id="@+id/row_fragment_agenda_speaker_name_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="@dimen/fragment_agenda_row_header_text_left_padding"
+            android:layout_marginRight="@dimen/fragment_agenda_row_header_text_right_padding"
+            android:alpha="0.8"
+            android:textColor="@color/black"
+            android:textSize="@dimen/fragment_agenda_row_header_primary_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/row_fragment_agenda_indicator_image"
+            tools:text="Imię i nazwisko" />
+
+        <ImageView
+            android:id="@+id/row_fragment_agenda_indicator_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginRight="@dimen/fragment_agenda_row_header_indicator_right_padding"
+            android:layout_marginTop="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/group_indicator" />
+
+        <TextView
+            android:id="@+id/row_fragment_agenda_company_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="@dimen/fragment_agenda_row_header_text_right_padding"
+            android:layout_marginTop="0dp"
+            android:alpha="0.5"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/fragment_agenda_row_header_secondary_text_size"
+            app:layout_constraintLeft_toRightOf="@+id/row_fragment_agenda_time_text"
+            app:layout_constraintRight_toLeftOf="@+id/row_fragment_agenda_indicator_image"
+            app:layout_constraintTop_toTopOf="@+id/guideline2"
+            tools:text="Nokia" />
+
+        <ImageView
+            android:id="@+id/row_fragment_agenda_status_image"
+            android:layout_width="3dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@color/colorAccent"
+            tools:visibility="visible" />
+
+    </android.support.constraint.ConstraintLayout>
+</LinearLayout>

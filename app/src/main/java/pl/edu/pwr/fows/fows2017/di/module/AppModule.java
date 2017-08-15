@@ -12,11 +12,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import pl.edu.pwr.fows.fows2017.facebookPost.FacebookClient;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
+import pl.edu.pwr.fows.fows2017.gateway.LectureGateway;
 import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
 import pl.edu.pwr.fows.fows2017.gateway.SponsorGateway;
+import pl.edu.pwr.fows.fows2017.lecture.LectureClient;
 import pl.edu.pwr.fows.fows2017.menu.MenuClient;
 import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesAPIClient;
-import pl.edu.pwr.fows.fows2017.interfave.SharedPreferencesDataInterface;
+import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterface;
 import pl.edu.pwr.fows.fows2017.sponsors.SponsorsClient;
 import pl.edu.pwr.fows.fows2017.tools.SharedPreferencesAPI;
 
@@ -48,16 +50,16 @@ public class AppModule {
 
     @Provides
     @Singleton
-    @Named("LocalGateway")
-    FacebookPostGateway getFacebookPostGatewaySharedPref(SharedPreferencesDataInterface sharedPreferences){
-        return new SharedPreferencesAPIClient(sharedPreferences);
+    @Named("NetworkGateway")
+    FacebookPostGateway getFacebookPostsGateway(SharedPreferencesDataInterface sharedPreferences){
+        return new FacebookClient(sharedPreferences);
     }
 
     @Provides
     @Singleton
-    @Named("NetworkGateway")
-    FacebookPostGateway getFacebookPostsGateway(SharedPreferencesDataInterface sharedPreferences){
-        return new FacebookClient(sharedPreferences);
+    @Named("LocalGateway")
+    FacebookPostGateway getFacebookPostGatewaySharedPref(SharedPreferencesDataInterface sharedPreferences){
+        return new SharedPreferencesAPIClient(sharedPreferences);
     }
 
     @Provides
@@ -71,6 +73,20 @@ public class AppModule {
     @Singleton
     @Named("LocalGateway")
     SponsorGateway getSponsorsGatewaySharedPref(SharedPreferencesDataInterface sharedPreferences){
+        return new SharedPreferencesAPIClient(sharedPreferences);
+    }
+
+    @Provides
+    @Singleton
+    @Named("NetworkGateway")
+    LectureGateway getLectureGateway(SharedPreferencesDataInterface sharedPreferences) {
+        return new LectureClient(sharedPreferences);
+    }
+
+    @Provides
+    @Singleton
+    @Named("LocalGateway")
+    LectureGateway getLectureGatewaySharedPref(SharedPreferencesDataInterface sharedPreferences){
         return new SharedPreferencesAPIClient(sharedPreferences);
     }
 

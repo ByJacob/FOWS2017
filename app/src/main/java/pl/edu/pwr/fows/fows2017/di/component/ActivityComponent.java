@@ -3,6 +3,7 @@ package pl.edu.pwr.fows.fows2017.di.component;
 import dagger.Component;
 import pl.edu.pwr.fows.fows2017.activity.BaseActivity;
 import pl.edu.pwr.fows.fows2017.di.module.ActivityModule;
+import pl.edu.pwr.fows.fows2017.di.module.FragmentAgendaModule;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentHomeModule;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentNewsModule;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentSponsorModule;
@@ -24,4 +25,6 @@ public interface ActivityComponent {
     FragmentNewsComponent addModule(FragmentNewsModule module);
 
     FragmentSponsorComponent addModule(FragmentSponsorModule module);
+
+    FragmentAgendaComponent addModule(FragmentAgendaModule module);
 }
