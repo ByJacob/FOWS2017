@@ -1,6 +1,7 @@
 package pl.edu.pwr.fows.fows2017.adapter;
 
 import android.content.Context;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +49,7 @@ public class FragmentSponsorAdapter {
     }
 
     public void display() {
+        float scale = context.getResources().getDisplayMetrics().density;
         for (int i = presenter.getSponsorsRowCount() - 1; i >= 0; i--) {
             Integer columnStart = 0;
             Integer rowStart = 0;
@@ -77,7 +79,7 @@ public class FragmentSponsorAdapter {
             }
             for (int j = presenter.getSponsorsCountInRow(i) - 1; j >= 0 && grid != null; j--) {
                 GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-                params.height = GridLayout.LayoutParams.WRAP_CONTENT;
+                params.height = (int) (columnTakes * 1.6 * scale);
                 params.width = 0;
                 params.columnSpec = GridLayout.spec(columnStart, columnTakes, 1f);
                 params.setGravity(Gravity.FILL);
@@ -106,7 +108,7 @@ public class FragmentSponsorAdapter {
             Integer columnStart = (COLUMN_COUNT - ((startChild - endChild + 1) * columnTakes)) / 2;
             Integer columnSize = grid.getWidth()/COLUMN_COUNT;
 
-            for (int i = 0; i + startChild <= endChild; i++) {
+            for (int i = 0; i + startChild <= endChild && grid.getRowCount()>1; i++) {
                 grid.getChildAt(startChild + i).animate().x(columnStart*columnSize).setDuration(0)
                         .start();
                 columnStart += columnTakes;

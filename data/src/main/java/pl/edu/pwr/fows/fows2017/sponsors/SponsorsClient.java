@@ -27,7 +27,7 @@ public class SponsorsClient implements SponsorGateway {
 
     @Override
     public Observable<List<List<Sponsor>>> getSponsors() {
-        return Observable.fromCallable(() -> provider.getSponsors());
+        return Observable.fromCallable(provider::getSponsors);
     }
 
     @Override
