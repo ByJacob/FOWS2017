@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 import javax.inject.Inject;
 
 import pl.edu.pwr.fows.fows2017.R;
@@ -99,7 +101,7 @@ public class FragmentHome extends BaseFragment implements FragmentHomeView {
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         Picasso.with(getActivity()).load(url).into(logo);
-                        TranslateAnimation animation2 = new TranslateAnimation(0, 0, logoHeight, 0);
+                        TranslateAnimation animation2 = new TranslateAnimation(0, 0, logoHeight*1.2f, 0);
                         animation2.setDuration(500);
                         parentLogo.startAnimation(animation2);
                     }
@@ -129,10 +131,10 @@ public class FragmentHome extends BaseFragment implements FragmentHomeView {
             TextView themeView = getView().findViewById(R.id.fragment_home_textview_presentation_theme);
             TextView status = getView().findViewById(R.id.fragment_home_textview_status);
             View parent = getView().findViewById(R.id.fragment_home_presentation);
-            if (day.length() < 5)
+            if (isNext == null) {
                 day = getString(R.string.finish1);
-            if (theme.length() < 5)
                 theme = getString(R.string.finish2);
+            }
             String finalDay = day;
             String finalTheme = theme;
             Runnable task = () -> {
@@ -165,10 +167,13 @@ public class FragmentHome extends BaseFragment implements FragmentHomeView {
                 });
                 parent.startAnimation(animation);
             };
-            Runnable task2 = () -> presenter.displayLecture(!isNext);
-            handler.post(task);
-            if (isNext != null)
+            if (!Objects.equals(themeView.getText().toString(), theme)
+                    && !Objects.equals(dateView.getText().toString(), day))
+                handler.post(task);
+            if (isNext != null) {
+                Runnable task2 = () -> presenter.displayLecture(!isNext);
                 handler.postDelayed(task2, 8000);
+            }
         }
     }
 }
