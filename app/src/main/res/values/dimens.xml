@@ -39,8 +39,8 @@
     <dimen name="fragment_sponsor_row_name_padding_vertical">16dp</dimen>
     <dimen name="fragment_sponsor_row_name_min_height">48dp</dimen>
     <dimen name="fragment_sponsor_row_name_text_size">16sp</dimen>
-    <dimen name="fragment_agenda_row_header_height">72dp</dimen>
 
+    <dimen name="fragment_agenda_row_header_height">88dp</dimen>
     <dimen name="fragment_agenda_row_header_text_left_padding">72dp</dimen>
     <dimen name="fragment_agenda_row_header_text_right_padding">16dp</dimen>
     <dimen name="fragment_agenda_row_header_indicator_right_padding">16dp</dimen>

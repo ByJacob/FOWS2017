@@ -12,5 +12,6 @@ public interface FragmentAgendaRowViewHeader {
     void displaySpeaker(String name);
     void displaySpeakerPicture(String urlSpeaker);
     void displayNameCompany(String name);
+    void displayTheme(String theme);
     void setStatusLecture(STATUS statusLecture);
 }

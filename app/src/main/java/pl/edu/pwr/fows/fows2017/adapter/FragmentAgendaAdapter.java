@@ -106,6 +106,7 @@ public class FragmentAgendaAdapter extends BaseExpandableListAdapter {
         private TextView day;
         private ImageView statusImage;
         private ConstraintLayout constraint;
+        private TextView theme;
 
         public HeaderHolder(View parent) {
             speakerPicture = parent.findViewById(R.id.row_fragment_agenda_spekacer_circle_view);
@@ -115,6 +116,7 @@ public class FragmentAgendaAdapter extends BaseExpandableListAdapter {
             indicator = parent.findViewById(R.id.row_fragment_agenda_indicator_image);
             day = parent.findViewById(R.id.row_fragment_agenda_day);
             statusImage = parent.findViewById(R.id.row_fragment_agenda_status_image);
+            theme = parent.findViewById(R.id.row_fragment_agenda_theme_text);
             constraint = parent.findViewById(R.id.row_fragment_agenda_constraint);
         }
 
@@ -146,6 +148,11 @@ public class FragmentAgendaAdapter extends BaseExpandableListAdapter {
         @Override
         public void displayNameCompany(String name) {
             this.company.setText(name);
+        }
+
+        @Override
+        public void displayTheme(String theme) {
+            this.theme.setText(theme);
         }
 
         @Override

@@ -76,6 +76,10 @@ public class FragmentAgendaPresenter extends BasePresenter<FragmentAgendaView> {
         holder.displayNameCompany(lectures.get(position).getCompany());
         holder.displaySpeaker(lectures.get(position).getSpeaker());
         holder.displaySpeakerPicture(lectures.get(position).getSpeakerPictureSmall());
+        if (Objects.equals(locale.getLanguage(), "pl"))
+            holder.displayTheme(lectures.get(position).getThemePL());
+        else
+            holder.displayTheme(lectures.get(position).getThemeEN());
         holder.displayTime(df.format(lectures.get(position).getStartTime())
                 + "-" + df.format(lectures.get(position).getEndTime()));
         if (position>0){
