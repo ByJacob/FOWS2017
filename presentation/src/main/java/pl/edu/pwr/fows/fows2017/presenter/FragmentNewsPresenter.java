@@ -42,10 +42,11 @@ public class FragmentNewsPresenter extends BasePresenter<FragmentNewsView> {
 
     @SuppressWarnings("UnusedParameters")
     private void onFacebookPostsFetchFail(Throwable throwable) {
-        if (throwable.getMessage().contains("No address")) {
-            isNetwork = false;
-            super.factory.getFacebookPostsSharedPref().execute().subscribe(this::onFacebookPostsFromMemorySuccess);
-        }
+        if (throwable.getMessage() != null)
+            if (throwable.getMessage().contains("No address")) {
+                isNetwork = false;
+                super.factory.getFacebookPostsSharedPref().execute().subscribe(this::onFacebookPostsFromMemorySuccess);
+            }
     }
 
     private void onFacebookPostsFromMemorySuccess(List<FacebookPost> posts) {

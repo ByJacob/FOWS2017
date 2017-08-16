@@ -8,8 +8,8 @@ android {
         applicationId "pl.edu.pwr.fows.fows2017"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 101
+        versionName "1.01"
         jackOptions {
             enabled false
         }
