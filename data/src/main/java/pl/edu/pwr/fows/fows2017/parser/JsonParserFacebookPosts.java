@@ -27,7 +27,7 @@ public class JsonParserFacebookPosts {
         JSONObject jsonObj = new JSONObject(jsonString);
 
         JSONArray data = jsonObj.getJSONArray("data");
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ssXXX", Locale.US);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ssZ", Locale.US);
         Date today = Calendar.getInstance().getTime();
         String reportDate = df.format(today);
         for (int i = 0; i < data.length(); i++) {
@@ -42,7 +42,7 @@ public class JsonParserFacebookPosts {
             else
                 story = "";
             String created_time_tmp = post.getJSONObject("created_time").getString("date").split("\\.")[0];
-            String timezone_time_tmp = post.getJSONObject("created_time").getString("timezone");
+            String timezone_time_tmp = post.getJSONObject("created_time").getString("timezone").replace(":", "");
             BigDecimal tmpId = new BigDecimal(post.getString("id").split("_")[1]);
             BigDecimal tmpDivisor = new BigDecimal(Integer.MAX_VALUE);
             tmpId = tmpId.remainder(tmpDivisor);

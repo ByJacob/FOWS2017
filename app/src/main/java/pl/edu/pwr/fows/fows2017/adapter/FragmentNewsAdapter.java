@@ -2,8 +2,10 @@ package pl.edu.pwr.fows.fows2017.adapter;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
@@ -34,6 +36,7 @@ import pl.edu.pwr.fows.fows2017.view.row.FragmentNewsRowView;
 
 public class FragmentNewsAdapter extends RecyclerView.Adapter<FragmentNewsAdapter.NewsAdapter> {
 
+    public static String FB_PACKAGE = "com.facebook.katana";
     private FragmentNewsPresenter presenter;
     private final Context context;
     private final LayoutInflater inflater;
@@ -160,7 +163,11 @@ public class FragmentNewsAdapter extends RecyclerView.Adapter<FragmentNewsAdapte
             Linkify.TransformFilter filterHashTag = (match, url) ->
                     match.group().replace("#", "");
             Pattern hashTagPattern = Pattern.compile("#([\\w]+)");
-            String hashTagScheme = "fb://facewebmodal/f?href=https://www.facebook.com/hashtag/";
+            String hashTagScheme;
+            if(appInstalledOrNot(FB_PACKAGE))
+                hashTagScheme = "fb://facewebmodal/f?href=https://www.facebook.com/hashtag/";
+            else
+                hashTagScheme = "https://www.facebook.com/hashtag/";
             Linkify.addLinks(this.message, hashTagPattern, hashTagScheme, null, filterHashTag);
             Pattern emailPattern = Patterns.EMAIL_ADDRESS;
             Linkify.addLinks(this.message, emailPattern, null, null, null);
@@ -189,7 +196,16 @@ public class FragmentNewsAdapter extends RecyclerView.Adapter<FragmentNewsAdapte
         public void openFacebook(String url) {
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse("fb://facewebmodal/f?href=" + url));
-            context.startActivity(i);
+            try {
+                context.startActivity(i);
+            }catch( ActivityNotFoundException e) {
+                try {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    context.startActivity(browserIntent);
+                } catch (ActivityNotFoundException ee) {
+                    ee.printStackTrace();
+                }
+            }
         }
 
         private boolean onMessageClick(View view, MotionEvent motionEvent) {
@@ -214,6 +230,19 @@ public class FragmentNewsAdapter extends RecyclerView.Adapter<FragmentNewsAdapte
                 return presenter.onMessageClick(clickLine, this);
             }
             return false;
+        }
+
+        private boolean appInstalledOrNot(String uri) {
+            PackageManager pm = context.getPackageManager();
+            boolean app_installed = false;
+            try {
+                pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
+                app_installed = true;
+            }
+            catch (PackageManager.NameNotFoundException e) {
+                app_installed = false;
+            }
+            return app_installed ;
         }
     }
 }
