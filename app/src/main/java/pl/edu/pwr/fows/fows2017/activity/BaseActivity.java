@@ -24,6 +24,7 @@ import pl.edu.pwr.fows.fows2017.BuildConfig;
 import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.fragment.DrawerMenuFragment;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentAgenda;
+import pl.edu.pwr.fows.fows2017.fragment.FragmentContact;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentHome;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentNews;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentSponsor;
@@ -95,6 +96,8 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
                         case "AGENDA":
                             fragment = new FragmentAgenda();
                             break;
+                        case "CONTACT":
+                            fragment = new FragmentContact();
                     }
                 }
                 if (fragment != null)

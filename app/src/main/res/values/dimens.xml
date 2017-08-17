@@ -53,4 +53,11 @@
     <dimen name="fragment_agenda_row_item_logo_padding">8dp</dimen>
     <dimen name="fragment_agenda_row_header_day_padding">8dp</dimen>
     <dimen name="fragment_agenda_row_header_day_size">20sp</dimen>
+    <dimen name="fragment_contact_row_item_height">72dp</dimen>
+    <dimen name="fragment_contact_row_text_left_padding">72dp</dimen>
+    <dimen name="fragment_contact_text_right_padding">16dp</dimen>
+    <dimen name="fragment_contact_row_avatar_vertical_padding">16dp</dimen>
+    <dimen name="fragment_contact_row_icon_right_padding">16dp</dimen>
+    <dimen name="fragment_contact_row_first_text_size">16sp</dimen>
+    <dimen name="fragment_contact_row_second_text_size">14sp</dimen>
 </resources>

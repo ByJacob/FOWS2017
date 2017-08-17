@@ -11,14 +11,17 @@ import pl.edu.pwr.fows.fows2017.aux_data.FowsRxTransformerProvider;
 import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
 import pl.edu.pwr.fows.fows2017.entity.Lecture;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
+import pl.edu.pwr.fows.fows2017.entity.Organizer;
 import pl.edu.pwr.fows.fows2017.entity.Sponsor;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
 import pl.edu.pwr.fows.fows2017.gateway.LectureGateway;
 import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
+import pl.edu.pwr.fows.fows2017.gateway.OrganizerGateway;
 import pl.edu.pwr.fows.fows2017.gateway.SponsorGateway;
 import pl.edu.pwr.fows.fows2017.usecase.FacebookPostsUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.LecturesUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.MenuUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.OrganizersUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SponsorUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.base.UseCase;
 
@@ -37,6 +40,7 @@ public class UseCaseFactory {
     private final SponsorGateway sponsorGatewaySharedPref;
     private final LectureGateway lectureGateway;
     private final LectureGateway lectureGatewaySharedPref;
+    private final OrganizerGateway organizerGateway;
 
     @Inject
     public UseCaseFactory(FowsRxTransformerProvider rxTransformer, MenuGateway menuGateway,
@@ -45,7 +49,8 @@ public class UseCaseFactory {
                           @Named("NetworkGateway") SponsorGateway sponsorGateway,
                           @Named("LocalGateway") SponsorGateway sponsorGatewaySharedPref,
                           @Named("NetworkGateway") LectureGateway lectureGateway,
-                          @Named("LocalGateway") LectureGateway lectureGatewaySharedPref){
+                          @Named("LocalGateway") LectureGateway lectureGatewaySharedPref,
+                          OrganizerGateway organizerGateway){
         this.menuGateway = menuGateway;
         this.rxTransformer = rxTransformer;
         this.facebookPostGateway = facebookPostGateway;
@@ -54,6 +59,7 @@ public class UseCaseFactory {
         this.sponsorGatewaySharedPref = sponsorGatewaySharedPref;
         this.lectureGateway = lectureGateway;
         this.lectureGatewaySharedPref = lectureGatewaySharedPref;
+        this.organizerGateway = organizerGateway;
     }
 
     public UseCase<Single<List<Menu>>> getMenuUseCase(){
@@ -82,5 +88,9 @@ public class UseCaseFactory {
 
     public UseCase<Observable<List<Lecture>>> getLecturesSharedPref(){
         return new LecturesUseCase(rxTransformer, lectureGatewaySharedPref);
+    }
+
+    public UseCase<Single<List<Organizer>>> getOrganizers(){
+        return new OrganizersUseCase(rxTransformer, organizerGateway);
     }
 }
