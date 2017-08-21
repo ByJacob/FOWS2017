@@ -8,8 +8,8 @@ import pl.edu.pwr.fows.fows2017.R;
  */
 
 public class ExceptionMap {
-    private static final String[] tags = {"NETWORK", "BROWSER"};
-    private static final Integer[] textsId = {R.string.exception_network, R.string.exception_browser};
+    private static final String[] tags = {"NETWORK", "BROWSER", "MAP"};
+    private static final Integer[] textsId = {R.string.exception_network, R.string.exception_browser, R.string.exception_map};
 
     public static Integer getTag(String tag) {
         for(int i=0; i<tags.length;  i++){

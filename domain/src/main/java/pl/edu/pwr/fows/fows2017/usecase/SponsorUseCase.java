@@ -22,7 +22,7 @@ public class SponsorUseCase extends AbstractRxObservableUseCase<List<List<Sponso
     }
 
     @Override
-    protected Observable<List<List<Sponsor>>> createSingle() {
+    protected Observable<List<List<Sponsor>>> createObservable() {
         return gateway.getSponsors();
     }
 }

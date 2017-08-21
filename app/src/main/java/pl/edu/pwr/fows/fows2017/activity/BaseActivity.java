@@ -21,8 +21,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Locale;
-
 import javax.inject.Inject;
 
 import pl.edu.pwr.fows.fows2017.BuildConfig;
@@ -106,6 +104,8 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
                         case "OFFER":
                             menuPresenter.clickOffer(getResources().getConfiguration().locale);
                             break;
+                        case "LOCATION":
+                            menuPresenter.clickLocation();
                     }
                 }
                 if (fragment != null)
@@ -209,8 +209,21 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
         intent.setData(Uri.parse(url));
         try {
             startActivity(intent);
-        }catch (ActivityNotFoundException exception){
+        } catch (ActivityNotFoundException exception) {
             showOnError("BROWSER", true);
+        }
+    }
+
+    @Override
+    public void startMaps(String place) {
+        String url = "https://www.google.com/maps/dir/?api=1&destination=" + place;
+        Uri gmmIntentUri = Uri.parse(url);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        } else {
+            showOnError("MAP", true);
         }
     }
 

@@ -18,8 +18,8 @@ public abstract class AbstractRxObservableUseCase<T> implements UseCase<Observab
 
     @Override
     public Observable<T> execute() {
-        return createSingle().compose(rxTransformer.getObservableSchedulers());
+        return createObservable().compose(rxTransformer.getObservableSchedulers());
     }
 
-    protected abstract Observable<T> createSingle();
+    protected abstract Observable<T> createObservable();
 }

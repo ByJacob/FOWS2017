@@ -68,7 +68,7 @@ public class UseCaseFactory {
         this.offerUrlGateway = offerUrlGateway;
     }
 
-    public UseCase<Single<List<Menu>>> getMenuUseCase(){
+    public UseCase<Observable<List<Menu>>> getMenuUseCase(){
         return new MenuUseCase(rxTransformer, menuGateway);
     }
 

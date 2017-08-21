@@ -23,7 +23,7 @@ public class LecturesUseCase extends AbstractRxObservableUseCase<List<Lecture>> 
     }
 
     @Override
-    protected Observable<List<Lecture>> createSingle() {
+    protected Observable<List<Lecture>> createObservable() {
         return gateway.getLectures();
     }
 }

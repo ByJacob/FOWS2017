@@ -17,4 +17,5 @@
     <string name="finish2">Dziękujemy za udział :)</string>
     <string name="errorEmail">Nie można wysłać e-maila. Czy masz program pocztowy?</string>
     <string name="exception_browser">Nie można uruchomić przeglądarki</string>
+    <string name="exception_map">Nie można uruchomić mapy</string>
 </resources>

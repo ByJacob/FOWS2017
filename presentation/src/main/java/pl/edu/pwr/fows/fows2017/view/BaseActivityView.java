@@ -20,4 +20,6 @@ public interface BaseActivityView extends BaseActivityAndFragmentView {
     void disableLoadingBar();
 
     void startBrowser(String url);
+
+    void startMaps(String place);
 }
