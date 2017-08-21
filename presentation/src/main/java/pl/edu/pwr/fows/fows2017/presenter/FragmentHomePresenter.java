@@ -49,8 +49,12 @@ public class FragmentHomePresenter extends BasePresenter<FragmentHomeView>{
     public void onViewTaken(FragmentHomeView view) {
         this.view = view;
         baseActivityView.disableLoadingBar();
-        factory.isMenuWithTag(TAG_AGENDA).execute().subscribe(this::displayLecureOnMenuWithTagFetchSuccess);
-        factory.getSponsors().execute().subscribe(this::onSponsorsFetchSuccess);
+        factory.isMenuWithTag(TAG_AGENDA).execute().subscribe(this::displayLectureOnMenuWithTagFetchSuccess);
+        factory.getSponsors().execute().subscribe(this::onSponsorsFetchSuccess, this::onSponsorsFetchFail);
+    }
+
+    private void onSponsorsFetchFail(Throwable throwable) {
+        throwable.printStackTrace();
     }
 
     private void onSponsorsFetchSuccess(List<List<Sponsor>> lists) {
@@ -67,7 +71,7 @@ public class FragmentHomePresenter extends BasePresenter<FragmentHomeView>{
         displayLecture(false);
     }
 
-    private void displayLecureOnMenuWithTagFetchSuccess(Menu menu){
+    private void displayLectureOnMenuWithTagFetchSuccess(Menu menu){
         if(!Objects.equals(menu.getTag(), "ERROR"))
             factory.getLectures().execute().subscribe(this::onLecturesFetchSuccess, this::onLecturesFetchFail);
         else
@@ -82,7 +86,13 @@ public class FragmentHomePresenter extends BasePresenter<FragmentHomeView>{
 
     private void onLecturesSharedPrefFetchSuccess(List<Lecture> lectures) {
         this.lectures = lectures;
-        displayLecture(false);
+        if(lectures.size()<1) {
+            baseActivityView.showOnError("NETWORK", true);
+            view.displayLecture("","",null, false);
+        } else {
+            baseActivityView.showOnError("NETWORK", false);
+            displayLecture(false);
+        }
     }
 
     public void displayLecture(Boolean isNext){

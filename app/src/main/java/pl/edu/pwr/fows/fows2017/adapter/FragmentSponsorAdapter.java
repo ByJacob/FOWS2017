@@ -1,7 +1,6 @@
 package pl.edu.pwr.fows.fows2017.adapter;
 
 import android.content.Context;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.squareup.picasso.Picasso;
+
+import java.util.Objects;
 
 import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.presenter.FragmentSponsorPresenter;
@@ -77,6 +78,10 @@ public class FragmentSponsorAdapter {
                     columnTakes = SIZE_0_COLUMN_TAKES;
                     break;
             }
+            if (!presenter.getIsNetwork()) {
+                grid = parent.findViewById(R.id.fragment_news_row_4);
+                columnTakes = SIZE_4_COLUMN_TAKES;
+            }
             for (int j = presenter.getSponsorsCountInRow(i) - 1; j >= 0 && grid != null; j--) {
                 GridLayout.LayoutParams params = new GridLayout.LayoutParams();
                 params.height = (int) (columnTakes * 1.6 * scale);
@@ -106,10 +111,10 @@ public class FragmentSponsorAdapter {
             Integer startChild = (grid.getRowCount() - 1) * (COLUMN_COUNT / columnTakes);
             Integer endChild = grid.getChildCount() - 1;
             Integer columnStart = (COLUMN_COUNT - ((startChild - endChild + 1) * columnTakes)) / 2;
-            Integer columnSize = grid.getWidth()/COLUMN_COUNT;
+            Integer columnSize = grid.getWidth() / COLUMN_COUNT;
 
-            for (int i = 0; i + startChild <= endChild && grid.getRowCount()>1; i++) {
-                grid.getChildAt(startChild + i).animate().x(columnStart*columnSize).setDuration(0)
+            for (int i = 0; i + startChild <= endChild && grid.getRowCount() > 1; i++) {
+                grid.getChildAt(startChild + i).animate().x(columnStart * columnSize).setDuration(0)
                         .start();
                 columnStart += columnTakes;
             }
@@ -133,7 +138,10 @@ public class FragmentSponsorAdapter {
 
         @Override
         public void setImage(String url) {
-            Picasso.with(context).load(url).into(logo);
+            if (Objects.equals(url, "ERROR"))
+                logo.setImageResource(R.drawable.no_network);
+            else
+                Picasso.with(context).load(url).into(logo);
         }
     }
 }

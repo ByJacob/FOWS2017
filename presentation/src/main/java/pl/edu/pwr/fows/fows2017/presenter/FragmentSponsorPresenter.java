@@ -1,5 +1,6 @@
 package pl.edu.pwr.fows.fows2017.presenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pl.edu.pwr.fows.fows2017.UseCaseFactory;
@@ -16,7 +17,8 @@ import pl.edu.pwr.fows.fows2017.view.row.FragmentSponsorRowView;
 
 public class FragmentSponsorPresenter extends BasePresenter<FragmentSponsorView> {
 
-    private List<List<Sponsor>> sponsors;
+    private List<List<Sponsor>> sponsors = new ArrayList<>();
+    private Boolean isNetwork;
 
     public FragmentSponsorPresenter(UseCaseFactory factory, BaseActivityView baseActivityView) {
         super(factory, baseActivityView);
@@ -26,6 +28,7 @@ public class FragmentSponsorPresenter extends BasePresenter<FragmentSponsorView>
     public void onViewTaken(FragmentSponsorView view) {
         this.view = view;
         baseActivityView.enableLoadingBar();
+        isNetwork=true;
         factory.getSponsors().execute().subscribe(this::onSponsorsFetchSuccess, this::onSponsorsFetchFail);
     }
 
@@ -36,27 +39,31 @@ public class FragmentSponsorPresenter extends BasePresenter<FragmentSponsorView>
     }
 
     private void onSponsorsFetchFail(Throwable throwable) {
-        if(throwable.getMessage().contains("No address"))
-            factory.getSponsorsSharedPref().execute().subscribe(this::onSponsorsFromMemoryFetchSuccess);
-    }
-
-    private void onSponsorsFromMemoryFetchSuccess(List<List<Sponsor>> sponsors){
-        baseActivityView.disableLoadingBar();
-        this.sponsors = sponsors;
-        if(sponsors.size()<1){
+        throwable.printStackTrace();
+        if(throwable.getMessage().contains("No address")){
+            isNetwork=false;
             baseActivityView.showOnError("NETWORK", true);
-        } else {
-            baseActivityView.showOnError("NETWORK", false);
+            List<Sponsor> error = new ArrayList<>();
+            error.add(Sponsor.Builder.aSponsor().withUrl("ERROR").build());
+            this.sponsors.add(error);
+            view.continueLoading();
         }
-        view.continueLoading();
+        baseActivityView.disableLoadingBar();
+
     }
 
     public int getSponsorsRowCount() {
         return sponsors.size();
     }
+
     public int getSponsorsCountInRow(Integer row) {
         return sponsors.get(row).size();
     }
+
+    public Boolean getIsNetwork(){
+        return isNetwork;
+    }
+
 
     public void configureRow(FragmentSponsorRowView holder, int row, int position) {
         holder.setImage(sponsors.get(row).get(position).getUrl());

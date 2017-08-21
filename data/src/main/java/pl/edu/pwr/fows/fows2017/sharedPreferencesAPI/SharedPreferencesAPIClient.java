@@ -19,7 +19,7 @@ import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterf
  * Created by Jakub Rosa on 08.08.2017.
  */
 
-public class SharedPreferencesAPIClient implements FacebookPostGateway, SponsorGateway, LectureGateway {
+public class SharedPreferencesAPIClient implements FacebookPostGateway, LectureGateway {
 
     private final SharedPreferencesAPIProvider provider;
 
@@ -35,11 +35,6 @@ public class SharedPreferencesAPIClient implements FacebookPostGateway, SponsorG
     @Override
     public Observable<FacebookPost> getPost(Integer position) {
         return null;
-    }
-
-    @Override
-    public Observable<List<List<Sponsor>>> getSponsors() {
-        return Observable.just(provider.getSponsors());
     }
 
 

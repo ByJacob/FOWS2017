@@ -18,11 +18,9 @@ class SponsorsProvider extends OkHttpProvider{
 
     final private List<List<Sponsor>> sponsors = new ArrayList<>();
     private final String url;
-    private final SharedPreferencesDataInterface sharedPreferences;
 
-    public SponsorsProvider(String url, SharedPreferencesDataInterface sharedPreferences) {
+    public SponsorsProvider(String url) {
         this.url = url;
-        this.sharedPreferences = sharedPreferences;
     }
 
     public List<List<Sponsor>> getSponsors() throws Exception {
@@ -36,7 +34,6 @@ class SponsorsProvider extends OkHttpProvider{
         String response;
         if (sponsors.size() < 1) {
             response = run(url);
-            sharedPreferences.save(SharedPreferencesAPIProvider.TAG_SPONSORS, response);
             List<List<Sponsor>> sponsorsTMP = JsonParserSponsor.parseJson(response);
             for(int i=0; i<sponsorsTMP.size(); i++){
                 sponsors.add(i, new ArrayList<>());

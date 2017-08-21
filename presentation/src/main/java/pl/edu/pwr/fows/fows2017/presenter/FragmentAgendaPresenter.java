@@ -53,6 +53,11 @@ public class FragmentAgendaPresenter extends BasePresenter<FragmentAgendaView> {
     private void OnLecturesSharedPrefFetchSuccess(List<Lecture> lectures) {
         baseActivityView.disableLoadingBar();
         this.lectures = lectures;
+        if(lectures.size()<1) {
+            baseActivityView.showOnError("NETWORK", true);
+        } else {
+            baseActivityView.showOnError("NETWORK", false);
+        }
         view.continueLoading();
     }
 

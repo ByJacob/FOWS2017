@@ -41,7 +41,6 @@ public class UseCaseFactory {
     private final FacebookPostGateway facebookPostGateway;
     private final FacebookPostGateway facebookPostGatewaySharedPref;
     private final SponsorGateway sponsorGateway;
-    private final SponsorGateway sponsorGatewaySharedPref;
     private final LectureGateway lectureGateway;
     private final LectureGateway lectureGatewaySharedPref;
     private final OrganizerGateway organizerGateway;
@@ -52,7 +51,6 @@ public class UseCaseFactory {
                           @Named("NetworkGateway") FacebookPostGateway facebookPostGateway,
                           @Named("LocalGateway") FacebookPostGateway facebookPostGatewaySharedPref,
                           @Named("NetworkGateway") SponsorGateway sponsorGateway,
-                          @Named("LocalGateway") SponsorGateway sponsorGatewaySharedPref,
                           @Named("NetworkGateway") LectureGateway lectureGateway,
                           @Named("LocalGateway") LectureGateway lectureGatewaySharedPref,
                           OrganizerGateway organizerGateway,
@@ -62,7 +60,6 @@ public class UseCaseFactory {
         this.facebookPostGateway = facebookPostGateway;
         this.facebookPostGatewaySharedPref = facebookPostGatewaySharedPref;
         this.sponsorGateway = sponsorGateway;
-        this.sponsorGatewaySharedPref = sponsorGatewaySharedPref;
         this.lectureGateway = lectureGateway;
         this.lectureGatewaySharedPref = lectureGatewaySharedPref;
         this.organizerGateway = organizerGateway;
@@ -87,10 +84,6 @@ public class UseCaseFactory {
 
     public UseCase<Observable<List<List<Sponsor>>>> getSponsors(){
         return new SponsorUseCase(rxTransformer, sponsorGateway);
-    }
-
-    public UseCase<Observable<List<List<Sponsor>>>> getSponsorsSharedPref(){
-        return new SponsorUseCase(rxTransformer, sponsorGatewaySharedPref);
     }
 
     public  UseCase<Observable<List<Lecture>>> getLectures(){

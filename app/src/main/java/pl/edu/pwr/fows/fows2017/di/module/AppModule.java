@@ -69,15 +69,8 @@ public class AppModule {
     @Provides
     @Singleton
     @Named("NetworkGateway")
-    SponsorGateway getSponsorsGateway(SharedPreferencesDataInterface sharedPreferences){
-        return new SponsorsClient(sharedPreferences);
-    }
-
-    @Provides
-    @Singleton
-    @Named("LocalGateway")
-    SponsorGateway getSponsorsGatewaySharedPref(SharedPreferencesDataInterface sharedPreferences){
-        return new SharedPreferencesAPIClient(sharedPreferences);
+    SponsorGateway getSponsorsGateway(){
+        return new SponsorsClient();
     }
 
     @Provides

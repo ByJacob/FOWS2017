@@ -20,8 +20,8 @@ public class SponsorsClient implements SponsorGateway {
     private final SponsorsProvider provider;
 
     @Inject
-    public SponsorsClient(SharedPreferencesDataInterface sharedPreferences) {
-        this.provider = new SponsorsProvider(URL, sharedPreferences);
+    public SponsorsClient() {
+        this.provider = new SponsorsProvider(URL);
     }
 
     @Override
