@@ -1,7 +1,10 @@
 package pl.edu.pwr.fows.fows2017.activity;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BaseTransientBottomBar;
@@ -17,6 +20,8 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -80,7 +85,6 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
             if (!drawerFragment.presenter.getActualFragmentTag().equals(tag)) {
                 if (BuildConfig.DEBUG)
                     Toast.makeText(this, tag, Toast.LENGTH_SHORT).show();
-                drawerFragment.presenter.setActualFragmentTag(tag);
                 BaseFragment fragment = (BaseFragment) getSupportFragmentManager().findFragmentByTag(tag);
                 if (fragment == null) {
                     switch (tag) {
@@ -98,6 +102,10 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
                             break;
                         case "CONTACT":
                             fragment = new FragmentContact();
+                            break;
+                        case "OFFER":
+                            menuPresenter.clickOffer(getResources().getConfiguration().locale);
+                            break;
                     }
                 }
                 if (fragment != null)
@@ -106,6 +114,7 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
                                 .replace(R.id.container_body, fragment, tag).addToBackStack(tag).commit();
                         if (getSupportActionBar() != null && DrawerMenuItemMap.getTag(tag) != null)
                             getSupportActionBar().setTitle("FoWS 2017 - " + getString(DrawerMenuItemMap.getTag(tag)));
+                        drawerFragment.presenter.setActualFragmentTag(tag);
                     } catch (IllegalStateException ignores) {
                         ignores.printStackTrace();
                     }
@@ -192,6 +201,17 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
         });
         loading.startAnimation(animation);
 
+    }
+
+    @Override
+    public void startBrowser(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        try {
+            startActivity(intent);
+        }catch (ActivityNotFoundException exception){
+            showOnError("BROWSER", true);
+        }
     }
 
     @Override

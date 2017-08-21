@@ -1,6 +1,7 @@
 package pl.edu.pwr.fows.fows2017.presenter;
 
 import java.util.List;
+import java.util.Locale;
 
 import pl.edu.pwr.fows.fows2017.UseCaseFactory;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
@@ -83,5 +84,13 @@ public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
     private void onMenusListFetchSuccess(List<Menu> menus) {
         this.menus = menus;
         baseActivityView.continueLoading();
+    }
+
+    public void clickOffer(Locale locale) {
+        factory.getOfferUrl(locale).execute().subscribe(this::fetchSuccessOfferUrl);
+    }
+
+    private void fetchSuccessOfferUrl(String url) {
+        baseActivityView.startBrowser(url);
     }
 }

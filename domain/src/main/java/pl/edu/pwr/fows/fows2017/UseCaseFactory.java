@@ -1,6 +1,7 @@
 package pl.edu.pwr.fows.fows2017;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -16,11 +17,13 @@ import pl.edu.pwr.fows.fows2017.entity.Sponsor;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
 import pl.edu.pwr.fows.fows2017.gateway.LectureGateway;
 import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
+import pl.edu.pwr.fows.fows2017.gateway.OfferUrlGateway;
 import pl.edu.pwr.fows.fows2017.gateway.OrganizerGateway;
 import pl.edu.pwr.fows.fows2017.gateway.SponsorGateway;
 import pl.edu.pwr.fows.fows2017.usecase.FacebookPostsUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.LecturesUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.MenuUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.OfferUrlUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.OrganizersUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SponsorUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.base.UseCase;
@@ -41,6 +44,7 @@ public class UseCaseFactory {
     private final LectureGateway lectureGateway;
     private final LectureGateway lectureGatewaySharedPref;
     private final OrganizerGateway organizerGateway;
+    private final OfferUrlGateway offerUrlGateway;
 
     @Inject
     public UseCaseFactory(FowsRxTransformerProvider rxTransformer, MenuGateway menuGateway,
@@ -50,7 +54,8 @@ public class UseCaseFactory {
                           @Named("LocalGateway") SponsorGateway sponsorGatewaySharedPref,
                           @Named("NetworkGateway") LectureGateway lectureGateway,
                           @Named("LocalGateway") LectureGateway lectureGatewaySharedPref,
-                          OrganizerGateway organizerGateway){
+                          OrganizerGateway organizerGateway,
+                          OfferUrlGateway offerUrlGateway){
         this.menuGateway = menuGateway;
         this.rxTransformer = rxTransformer;
         this.facebookPostGateway = facebookPostGateway;
@@ -60,6 +65,7 @@ public class UseCaseFactory {
         this.lectureGateway = lectureGateway;
         this.lectureGatewaySharedPref = lectureGatewaySharedPref;
         this.organizerGateway = organizerGateway;
+        this.offerUrlGateway = offerUrlGateway;
     }
 
     public UseCase<Single<List<Menu>>> getMenuUseCase(){
@@ -92,5 +98,9 @@ public class UseCaseFactory {
 
     public UseCase<Single<List<Organizer>>> getOrganizers(){
         return new OrganizersUseCase(rxTransformer, organizerGateway);
+    }
+
+    public UseCase<Single<String>> getOfferUrl(Locale locale){
+        return new OfferUrlUseCase(rxTransformer, offerUrlGateway, locale);
     }
 }

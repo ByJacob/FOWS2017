@@ -18,5 +18,6 @@
     <string name="finish1">The conference ended</string>
     <string name="finish2">Thank you for participating :)</string>
     <string name="errorEmail">Unable to send email. Do you have a mail program installed?</string>
+    <string name="exception_browser">Unable to start browser</string>
 
 </resources>
