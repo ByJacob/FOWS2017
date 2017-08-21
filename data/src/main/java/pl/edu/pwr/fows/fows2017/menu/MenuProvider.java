@@ -3,6 +3,7 @@ package pl.edu.pwr.fows.fows2017.menu;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import pl.edu.pwr.fows.fows2017.base.OkHttpProvider;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
@@ -27,15 +28,21 @@ class MenuProvider extends OkHttpProvider {
 
     public List<Menu> getMenus() throws IOException {
         if(menus.size()<1 || !isNetwork ){
-            String response = run(url);
-            List<Menu> menusTmp = JsonParserMenu.parseJson(response);
-            menus.addAll(menusTmp);
+            getDate();
+            isNetwork = true;
         }
         return menus;
     }
 
-    public Menu getMenu(String tag) {
-        return null;
+    public Menu getMenu(String tag) throws IOException {
+        if(menus.size()<1){
+            getDate();
+        }
+        for(Menu menu: menus){
+            if(Objects.equals(menu.getTag(), tag))
+                return menu;
+        }
+        return Menu.Builder.aMenu().withTag("ERROR").build();
     }
 
     public List<Menu> constructDefaultMenu(){
@@ -49,5 +56,11 @@ class MenuProvider extends OkHttpProvider {
         menus.add(Menu.Builder.aMenu().withId(6).withTag("OFFER").build());
         menus.add(Menu.Builder.aMenu().withId(7).withTag("LOCATION").build());
         return menus;
+    }
+
+    private void getDate() throws IOException {
+        String response = run(url);
+        List<Menu> menusTmp = JsonParserMenu.parseJson(response);
+        menus.addAll(menusTmp);
     }
 }

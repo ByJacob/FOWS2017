@@ -18,4 +18,7 @@
     <string name="errorEmail">Nie można wysłać e-maila. Czy masz program pocztowy?</string>
     <string name="exception_browser">Nie można uruchomić przeglądarki</string>
     <string name="exception_map">Nie można uruchomić mapy</string>
+    <string name="notStart1">Agenda nie jest jeszcze dostępna</string>
+    <string name="notStart2">Szczegóły wkrótce</string>
+    <string name="exception_disable">Opcja narazie wyłączona</string>
 </resources>

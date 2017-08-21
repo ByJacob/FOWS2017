@@ -11,6 +11,6 @@ public interface FragmentHomeView extends BaseActivityAndFragmentView {
 
     void displayLogo(String url);
 
-    void displayLecture(String day, String theme, Boolean isNext);
+    void displayLecture(String day, String theme, Boolean isNext, Boolean isAgenda);
 
 }

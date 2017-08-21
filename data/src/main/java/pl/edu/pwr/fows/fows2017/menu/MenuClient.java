@@ -39,6 +39,13 @@ public class MenuClient implements MenuGateway {
 
     @Override
     public Observable<Menu> getMenu(String tag) {
-        return Observable.fromCallable(() -> provider.getMenu(tag));
+        return Observable.fromCallable(() -> {
+            try {
+                return provider.getMenu(tag);
+            } catch (Exception e){
+                provider.constructDefaultMenu();
+                return provider.getMenu(tag);
+            }
+        });
     }
 }

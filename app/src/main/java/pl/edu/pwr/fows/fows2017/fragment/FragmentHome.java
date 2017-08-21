@@ -124,7 +124,7 @@ public class FragmentHome extends BaseFragment implements FragmentHomeView {
     }
 
     @Override
-    public void displayLecture(String day, String theme, Boolean isNext) {
+    public void displayLecture(String day, String theme, Boolean isNext, Boolean isAgenda) {
         if (getView() != null) {
             Handler handler = new Handler();
             TextView dateView = getView().findViewById(R.id.fragment_home_textview_presentation_time);
@@ -134,6 +134,10 @@ public class FragmentHome extends BaseFragment implements FragmentHomeView {
             if (isNext == null) {
                 day = getString(R.string.finish1);
                 theme = getString(R.string.finish2);
+            }
+            if(!isAgenda) {
+                day = getString(R.string.notStart2);
+                theme = getString(R.string.notStart1);
             }
             String finalDay = day;
             String finalTheme = theme;

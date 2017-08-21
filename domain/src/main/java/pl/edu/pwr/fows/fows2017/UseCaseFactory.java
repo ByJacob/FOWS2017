@@ -23,6 +23,7 @@ import pl.edu.pwr.fows.fows2017.gateway.SponsorGateway;
 import pl.edu.pwr.fows.fows2017.usecase.FacebookPostsUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.LecturesUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.MenuUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.MenuWithTagUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.OfferUrlUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.OrganizersUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SponsorUseCase;
@@ -70,6 +71,10 @@ public class UseCaseFactory {
 
     public UseCase<Observable<List<Menu>>> getMenuUseCase(){
         return new MenuUseCase(rxTransformer, menuGateway);
+    }
+
+    public UseCase<Observable<Menu>> isMenuWithTag(String tag){
+        return new MenuWithTagUseCase(rxTransformer, menuGateway, tag);
     }
 
     public UseCase<Observable<List<FacebookPost>>> getFacebookPosts(){

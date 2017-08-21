@@ -11,11 +11,11 @@ import java.util.Random;
 
 import pl.edu.pwr.fows.fows2017.UseCaseFactory;
 import pl.edu.pwr.fows.fows2017.entity.Lecture;
+import pl.edu.pwr.fows.fows2017.entity.Menu;
 import pl.edu.pwr.fows.fows2017.entity.Sponsor;
 import pl.edu.pwr.fows.fows2017.presenter.base.BasePresenter;
 import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
 import pl.edu.pwr.fows.fows2017.view.FragmentHomeView;
-import pl.edu.pwr.fows.fows2017.view.row.FragmentAgendaRowViewHeader;
 
 /**
  * Project: FoWS2017
@@ -24,6 +24,7 @@ import pl.edu.pwr.fows.fows2017.view.row.FragmentAgendaRowViewHeader;
 
 public class FragmentHomePresenter extends BasePresenter<FragmentHomeView>{
 
+    private final static String TAG_AGENDA = "AGENDA";
     private List<Lecture> lectures = new ArrayList<>();
     private List<List<Sponsor>> sponsors = new ArrayList<>();
     private Locale locale;
@@ -34,14 +35,21 @@ public class FragmentHomePresenter extends BasePresenter<FragmentHomeView>{
     }
 
     public void clickItem(String tag) {
-        baseActivityView.changeMainFragment(tag);
+        factory.isMenuWithTag(tag).execute().subscribe(this::clickItemOnMenuWithTagFetchSuccess);
+    }
+
+    private void clickItemOnMenuWithTagFetchSuccess(Menu menu) {
+        if(!Objects.equals(menu.getTag(), "ERROR"))
+            baseActivityView.changeMainFragment(menu.getTag());
+        else
+            baseActivityView.showOnError("DISABLE", false);
     }
 
     @Override
     public void onViewTaken(FragmentHomeView view) {
         this.view = view;
         baseActivityView.disableLoadingBar();
-        factory.getLectures().execute().subscribe(this::onLecturesFetchSuccess, this::onLecturesFetchFail);
+        factory.isMenuWithTag(TAG_AGENDA).execute().subscribe(this::displayLecureOnMenuWithTagFetchSuccess);
         factory.getSponsors().execute().subscribe(this::onSponsorsFetchSuccess);
     }
 
@@ -57,6 +65,13 @@ public class FragmentHomePresenter extends BasePresenter<FragmentHomeView>{
     private void onLecturesFetchSuccess(List<Lecture> lectures) {
         this.lectures = lectures;
         displayLecture(false);
+    }
+
+    private void displayLecureOnMenuWithTagFetchSuccess(Menu menu){
+        if(!Objects.equals(menu.getTag(), "ERROR"))
+            factory.getLectures().execute().subscribe(this::onLecturesFetchSuccess, this::onLecturesFetchFail);
+        else
+            view.displayLecture("","",null, false);
     }
 
     private void onLecturesFetchFail(Throwable throwable) {
@@ -80,7 +95,7 @@ public class FragmentHomePresenter extends BasePresenter<FragmentHomeView>{
                     theme = lectures.get(i).getThemePL();
                 else
                     theme = lectures.get(i).getThemeEN();
-                view.displayLecture(df.format(lectures.get(i).getStartTime()), theme, false);
+                view.displayLecture(df.format(lectures.get(i).getStartTime()), theme, false, true);
                 return;
             }
             if (i==lectures.size()-1)
@@ -93,11 +108,11 @@ public class FragmentHomePresenter extends BasePresenter<FragmentHomeView>{
                     theme = lectures.get(i).getThemePL();
                 else
                     theme = lectures.get(i).getThemeEN();
-                view.displayLecture(df.format(lectures.get(i).getStartTime()), theme, true);
+                view.displayLecture(df.format(lectures.get(i).getStartTime()), theme, true, true);
                 return;
             }
         }
-        view.displayLecture("","",null);
+        view.displayLecture("","",null, true);
 
     }
 
