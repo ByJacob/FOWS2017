@@ -46,6 +46,7 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxjava:2.1.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.google.android:flexbox:0.3.0'
     compile project(path: ':presentation')
     compile project(path: ':data')
 }

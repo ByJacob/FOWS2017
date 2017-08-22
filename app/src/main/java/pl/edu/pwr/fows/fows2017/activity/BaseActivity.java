@@ -30,6 +30,7 @@ import pl.edu.pwr.fows.fows2017.fragment.FragmentAgenda;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentContact;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentHome;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentNews;
+import pl.edu.pwr.fows.fows2017.fragment.FragmentQuestionnaire;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentSponsor;
 import pl.edu.pwr.fows.fows2017.fragment.base.BaseFragment;
 import pl.edu.pwr.fows.fows2017.map.DrawerMenuItemMap;
@@ -100,6 +101,9 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
                             break;
                         case "CONTACT":
                             fragment = new FragmentContact();
+                            break;
+                        case "QUESTIONNAIRE":
+                            fragment = new FragmentQuestionnaire();
                             break;
                         case "OFFER":
                             menuPresenter.clickOffer(getResources().getConfiguration().locale);

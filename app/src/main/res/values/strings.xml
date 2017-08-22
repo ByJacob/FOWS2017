@@ -23,5 +23,6 @@
     <string name="notStart1">The Agenda is not yet available</string>
     <string name="notStart2">Details soon</string>
     <string name="exception_disable">The option is disabled at the moment</string>
+    <string name="menu_item_questionnaire">Questionnaire</string>
 
 </resources>
