@@ -8,10 +8,24 @@ import java.util.List;
  */
 
 public class Question {
-    public enum TYPE{SELECT, SELECT_OTHER, OTHER}
+    private TYPE type;
+    private String questionPL;
+    private String questionEN;
+    private List<String> answersPL;
+    private List<String> answersEN;
+    private String userAnswer;
 
-    public static TYPE getType(String type){
-        switch (type){
+    public Question(TYPE type, String questionPL, String questionEN, List<String> answersPL, List<String> answersEN, String userAnswer) {
+        this.type = type;
+        this.questionPL = questionPL;
+        this.questionEN = questionEN;
+        this.answersPL = answersPL;
+        this.answersEN = answersEN;
+        this.userAnswer = userAnswer;
+    }
+
+    public static TYPE getType(String type) {
+        switch (type) {
             case "SELECT":
                 return TYPE.SELECT;
             case "SELECT_OTHER":
@@ -21,18 +35,15 @@ public class Question {
         }
     }
 
-    private TYPE type;
-    private String questionPL;
-    private String questionEN;
-    private List<String> answersPL;
-    private List<String> answersEN;
-
-    public Question(TYPE type, String questionPL, String questionEN, List<String> answersPL, List<String> answersEN) {
-        this.type = type;
-        this.questionPL = questionPL;
-        this.questionEN = questionEN;
-        this.answersPL = answersPL;
-        this.answersEN = answersEN;
+    public static String getTypeString(Question.TYPE type) {
+        switch (type) {
+            case SELECT:
+                return "SELECT";
+            case SELECT_OTHER:
+                return "SELECT_OTHER";
+            default:
+                return "OTHER";
+        }
     }
 
     public TYPE getType() {
@@ -55,6 +66,15 @@ public class Question {
         return answersEN;
     }
 
+    public String getUserAnswer() {
+        return userAnswer;
+    }
+
+    public void setUserAnswer(String userAnswer) {
+        this.userAnswer = userAnswer;
+    }
+
+    public enum TYPE {SELECT, SELECT_OTHER, OTHER}
 
     public static final class Builder {
         private TYPE type;
@@ -62,8 +82,10 @@ public class Question {
         private String questionEN;
         private List<String> answersPL;
         private List<String> answersEN;
+        private String userAnswer;
 
         private Builder() {
+            this.userAnswer = "";
         }
 
         public static Builder aQuestion() {
@@ -96,7 +118,7 @@ public class Question {
         }
 
         public Question build() {
-            return new Question(type, questionPL, questionEN, answersPL, answersEN);
+            return new Question(type, questionPL, questionEN, answersPL, answersEN, userAnswer);
         }
     }
 }

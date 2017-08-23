@@ -47,6 +47,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.google.android:flexbox:0.3.0'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile project(path: ':presentation')
     compile project(path: ':data')
 }
