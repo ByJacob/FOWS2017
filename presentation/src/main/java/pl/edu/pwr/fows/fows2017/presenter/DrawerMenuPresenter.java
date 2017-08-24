@@ -38,6 +38,7 @@ public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
 
     @Override
     public void onViewTaken(DrawerMenuView view) {
+        baseActivityView.enableLoadingBar();
         super.factory.getMenuUseCase().execute().subscribe(this::onMenusListFetchSuccess);
     }
 
@@ -87,6 +88,7 @@ public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
 
     private void onMenusListFetchSuccess(List<Menu> menus) {
         this.menus = menus;
+        baseActivityView.disableLoadingBar();
         baseActivityView.continueLoading();
     }
 

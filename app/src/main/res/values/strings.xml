@@ -28,5 +28,7 @@
     <string name="exception_disable">The option is disabled at the moment</string>
     <string name="fragment_row_questionnaire_other" >Other</string>
     <string name="fragment_row_questionnaire_answer">Answer</string>
+    <string name="fragment_row_questionaire_send">Send</string>
+    <string name="message_send">Thank you for completing the questionnaire. It was sent correctly.</string>
 
 </resources>

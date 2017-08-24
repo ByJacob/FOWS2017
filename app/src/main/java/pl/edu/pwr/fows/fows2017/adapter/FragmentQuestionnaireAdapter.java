@@ -2,11 +2,13 @@ package pl.edu.pwr.fows.fows2017.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -29,6 +31,8 @@ import pl.edu.pwr.fows.fows2017.view.row.FragmentQuestionnaireRowView;
 
 public class FragmentQuestionnaireAdapter extends RecyclerView.Adapter<FragmentQuestionnaireAdapter.QuestionHolder> {
 
+    private final Integer VIEW_QUESTION = 0;
+    private final Integer VIEW_BUTTON = 1;
     private final Context context;
     private final LayoutInflater inflater;
     private FragmentQuestionnairePresenter presenter;
@@ -44,25 +48,39 @@ public class FragmentQuestionnaireAdapter extends RecyclerView.Adapter<FragmentQ
 
     @Override
     public QuestionHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.row_fragment_questionnaire_select_base, parent, false);
+        View view;
+        if(viewType==VIEW_QUESTION) {
+            view = inflater.inflate(R.layout.row_fragment_questionnaire_select_base, parent, false);
+        } else {
+            view = inflater.inflate(R.layout.row_fragment_questionnaire_button, parent, false);
+        }
         return new QuestionHolder(view);
     }
 
     @Override
     public void onBindViewHolder(QuestionHolder holder, int position) {
-        holder.setInflater(inflater);
-        presenter.configureRow(holder, position, context.getResources().getConfiguration().locale);
+        if (holder.getItemViewType()==VIEW_QUESTION) {
+            holder.configure();
+            holder.setViewType(VIEW_QUESTION);
+            holder.setInflater(inflater);
+            presenter.configureRow(holder, position, context.getResources().getConfiguration().locale);
+        } else {
+            holder.setViewType(VIEW_BUTTON);
+            holder.configureButton();
+        }
     }
 
     @Override
     public int getItemCount() {
-        return presenter.getQuestionCount();
+        return presenter.getQuestionCount()+1;
     }
 
     @Override
-    public void onViewRecycled(QuestionHolder holder) {
-        Integer position = holder.getAdapterPosition();
-        super.onViewRecycled(holder);
+    public int getItemViewType(int position) {
+        if(position<presenter.getQuestionCount())
+            return VIEW_QUESTION;
+        else
+            return VIEW_BUTTON;
     }
 
     class QuestionHolder extends RecyclerView.ViewHolder implements FragmentQuestionnaireRowView {
@@ -75,9 +93,13 @@ public class FragmentQuestionnaireAdapter extends RecyclerView.Adapter<FragmentQ
         private RadioButton otherButton;
         private MaterialEditText otherText;
         private LayoutInflater inflater;
+        private Integer viewType;
 
         QuestionHolder(View itemView) {
             super(itemView);
+        }
+
+        public void configure(){
             question = itemView.findViewById(R.id.row_fragment_questionnaire_question_text);
             answerLayout = itemView.findViewById(R.id.row_fragment_questionnaire_answer_layout);
             otherLayout = itemView.findViewById(R.id.row_fragment_questionnaire_other_layout);
@@ -86,6 +108,15 @@ public class FragmentQuestionnaireAdapter extends RecyclerView.Adapter<FragmentQ
             setOtherTextChangedListener();
             otherText.addTextChangedListener(this.onOtherTextChange);
             answerButtons = new ArrayList<>();
+        }
+
+        public void configureButton(){
+            Button button = itemView.findViewById(R.id.row_fragment_questionnaire_button);
+            button.setOnClickListener(view -> presenter.setAnswer());
+        }
+
+        public void setViewType(Integer viewType) {
+            this.viewType = viewType;
         }
 
         @Override
@@ -195,5 +226,6 @@ public class FragmentQuestionnaireAdapter extends RecyclerView.Adapter<FragmentQ
                 }
             };
         }
+
     }
 }

@@ -29,6 +29,7 @@ import pl.edu.pwr.fows.fows2017.usecase.MenuWithTagUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.OfferUrlUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.OrganizersUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.QuestionnaireUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.SendQuestionnaireUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SponsorUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.base.UseCase;
 
@@ -110,5 +111,9 @@ public class UseCaseFactory {
 
     public UseCase<Observable<List<Question>>> getQuestionnaire(){
         return new QuestionnaireUseCase(rxTransformer, questionGateway);
+    }
+
+    public UseCase<Observable<String>> sendQuestionnaire(List<Question> questionnaire){
+        return new SendQuestionnaireUseCase(rxTransformer, questionGateway, questionnaire);
     }
 }

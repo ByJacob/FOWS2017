@@ -24,4 +24,6 @@
     <string name="menu_item_questionnaire">Ankieta</string>
     <string name="fragment_row_questionnaire_other">Inne</string>
     <string name="fragment_row_questionnaire_answer">Odpowiedź</string>
+    <string name="fragment_row_questionaire_send">Wyślij</string>
+    <string name="message_send">Dziękujemy za wypełnienie ankiety. Została ona poprawnie przesłana.</string>
 </resources>

@@ -42,7 +42,7 @@ public class FragmentHomePresenter extends BasePresenter<FragmentHomeView>{
         if(!Objects.equals(menu.getTag(), "ERROR"))
             baseActivityView.changeMainFragment(menu.getTag());
         else
-            baseActivityView.showOnError("DISABLE", false);
+            baseActivityView.showMessage("DISABLE", false);
     }
 
     @Override
@@ -87,10 +87,10 @@ public class FragmentHomePresenter extends BasePresenter<FragmentHomeView>{
     private void onLecturesSharedPrefFetchSuccess(List<Lecture> lectures) {
         this.lectures = lectures;
         if(lectures.size()<1) {
-            baseActivityView.showOnError("NETWORK", true);
+            baseActivityView.showMessage("NETWORK", true);
             view.displayLecture("","",null, false);
         } else {
-            baseActivityView.showOnError("NETWORK", false);
+            baseActivityView.showMessage("NETWORK", false);
             displayLecture(false);
         }
     }

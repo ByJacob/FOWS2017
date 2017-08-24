@@ -42,6 +42,21 @@ public class FragmentQuestionnairePresenter extends BasePresenter<FragmentQuesti
         throwable.printStackTrace();
     }
 
+    public void setAnswer() {
+        factory.sendQuestionnaire(questionList).execute()
+                .subscribe(this::onSendSuccessQuestionnaire, this::onSendFailQuestionnaire);
+    }
+
+    private void onSendFailQuestionnaire(Throwable throwable) {
+        if (throwable.getMessage().contains("No address")) {
+            baseActivityView.showMessage("NETWORK", true);
+        }
+    }
+
+    private void onSendSuccessQuestionnaire(String s) {
+        baseActivityView.showMessage("SEND", null);
+    }
+
     public void configureRow(FragmentQuestionnaireRowView holder, int position, Locale locale) {
         holder.setType(Question.getTypeString(questionList.get(position).getType()));
         if (Objects.equals(locale.getLanguage(), "pl")) {

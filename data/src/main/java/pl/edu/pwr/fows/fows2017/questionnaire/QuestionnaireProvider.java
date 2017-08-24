@@ -29,7 +29,7 @@ public class QuestionnaireProvider extends OkHttpProvider{
     }
 
     private void getDate() throws IOException {
-        String response = run(url);
+        String response = run(url+ "?android");
         questions.addAll(JsonParserQuestions.parseJson(response));
     }
 }

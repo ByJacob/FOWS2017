@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/row_fragment_questionnaire_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/fragment_questionnaire_row_question_vertical_padding"
+        android:layout_marginEnd="@dimen/fragment_questionnaire_row_question_vertical_padding"
+        android:layout_marginStart="@dimen/fragment_questionnaire_row_question_vertical_padding"
+        android:layout_marginTop="@dimen/fragment_questionnaire_row_question_vertical_padding"
+        android:text="@string/fragment_row_questionaire_send" />
+</LinearLayout>

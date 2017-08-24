@@ -13,7 +13,7 @@ import pl.edu.pwr.fows.fows2017.gateway.QuestionGateway;
 
 public class QuestionnaireClient implements QuestionGateway {
 
-    private static final String URL = "http://fows.pwr.edu.pl/sections/android-questions.php?android";
+    private static final String URL = "http://fows.pwr.edu.pl/sections/android-questions.php";
     private QuestionnaireProvider provider;
 
     public QuestionnaireClient() {
@@ -28,5 +28,10 @@ public class QuestionnaireClient implements QuestionGateway {
             e.printStackTrace();
             return null; //TODO change
         }
+    }
+
+    @Override
+    public String sendQuestionnaire(List<Question> questionList) throws IOException {
+        return "201";
     }
 }
