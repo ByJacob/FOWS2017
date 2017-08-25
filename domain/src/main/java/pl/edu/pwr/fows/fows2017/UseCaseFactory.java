@@ -113,7 +113,7 @@ public class UseCaseFactory {
         return new QuestionnaireUseCase(rxTransformer, questionGateway);
     }
 
-    public UseCase<Observable<String>> sendQuestionnaire(List<Question> questionnaire){
+    public UseCase<Observable<Integer>> sendQuestionnaire(List<Question> questionnaire){
         return new SendQuestionnaireUseCase(rxTransformer, questionGateway, questionnaire);
     }
 }

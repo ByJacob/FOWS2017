@@ -13,7 +13,7 @@ import pl.edu.pwr.fows.fows2017.usecase.base.AbstractRxObservableUseCase;
  * Created by Jakub Rosa on 24.08.2017.
  */
 
-public class SendQuestionnaireUseCase extends AbstractRxObservableUseCase<String> {
+public class SendQuestionnaireUseCase extends AbstractRxObservableUseCase<Integer> {
 
     private QuestionGateway gateway;
     private List<Question> questionList;
@@ -26,7 +26,7 @@ public class SendQuestionnaireUseCase extends AbstractRxObservableUseCase<String
     }
 
     @Override
-    protected Observable<String> createObservable() {
+    protected Observable<Integer> createObservable() {
         return Observable.fromCallable(() -> gateway.sendQuestionnaire(questionList));
     }
 }

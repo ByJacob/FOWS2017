@@ -1,5 +1,8 @@
 package pl.edu.pwr.fows.fows2017.questionnaire;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +10,7 @@ import java.util.List;
 import pl.edu.pwr.fows.fows2017.base.OkHttpProvider;
 import pl.edu.pwr.fows.fows2017.entity.Question;
 import pl.edu.pwr.fows.fows2017.parser.JsonParserQuestions;
+import sun.rmi.runtime.Log;
 
 /**
  * Project: FoWS2017
@@ -31,5 +35,19 @@ public class QuestionnaireProvider extends OkHttpProvider{
     private void getDate() throws IOException {
         String response = run(url+ "?android");
         questions.addAll(JsonParserQuestions.parseJson(response));
+    }
+
+    public int sendAnswer(List<Question> questionList) throws IOException {
+        JSONArray answers = new JSONArray();
+        for(int i=0; i<questionList.size(); i++)
+        {
+            JSONObject object = new JSONObject();
+            object.put("question", questionList.get(i).getQuestionPL());
+            String answer = questionList.get(i).getUserAnswer();
+            String[] splitAnswer = answer.split(":");
+            object.put("answer", answer.replace(splitAnswer[0]+":", ""));
+            answers.put(object);
+        }
+        return sendData(url, answers.toString());
     }
 }

@@ -31,7 +31,7 @@ public class QuestionnaireClient implements QuestionGateway {
     }
 
     @Override
-    public String sendQuestionnaire(List<Question> questionList) throws IOException {
-        return "201";
+    public int sendQuestionnaire(List<Question> questionList) throws IOException {
+        return provider.sendAnswer(questionList);
     }
 }

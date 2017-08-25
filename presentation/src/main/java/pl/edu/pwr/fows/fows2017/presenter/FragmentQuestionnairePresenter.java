@@ -53,7 +53,7 @@ public class FragmentQuestionnairePresenter extends BasePresenter<FragmentQuesti
         }
     }
 
-    private void onSendSuccessQuestionnaire(String s) {
+    private void onSendSuccessQuestionnaire(Integer responseCode) {
         baseActivityView.showMessage("SEND", null);
     }
 

@@ -12,5 +12,5 @@ import pl.edu.pwr.fows.fows2017.entity.Question;
 
 public interface QuestionGateway {
     List<Question> getQuestionnaire() throws IOException;
-    String sendQuestionnaire(List<Question> questionList) throws IOException;
+    int sendQuestionnaire(List<Question> questionList) throws IOException;
 }
