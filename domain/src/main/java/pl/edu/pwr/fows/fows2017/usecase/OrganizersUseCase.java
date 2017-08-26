@@ -24,6 +24,6 @@ public class OrganizersUseCase extends AbstractRxSingleUseCase<List<Organizer>>{
 
     @Override
     protected Single<List<Organizer>> createSingle() {
-        return gateway.getOrganizers();
+        return Single.just(gateway.getOrganizers());
     }
 }

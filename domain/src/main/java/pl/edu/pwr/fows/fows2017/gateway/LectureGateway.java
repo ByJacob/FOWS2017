@@ -1,5 +1,6 @@
 package pl.edu.pwr.fows.fows2017.gateway;
 
+import java.io.IOException;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -12,6 +13,6 @@ import pl.edu.pwr.fows.fows2017.entity.Lecture;
 
 public interface LectureGateway {
 
-    Observable<List<Lecture>> getLectures();
+    List<Lecture> getLectures() throws IOException;
 
 }

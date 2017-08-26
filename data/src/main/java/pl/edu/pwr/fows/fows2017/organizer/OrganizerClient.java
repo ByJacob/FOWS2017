@@ -23,7 +23,7 @@ public class OrganizerClient implements OrganizerGateway {
     }
 
     @Override
-    public Single<List<Organizer>> getOrganizers() {
-        return Single.just(provider.getOrganizers());
+    public List<Organizer> getOrganizers() {
+        return provider.getOrganizers();
     }
 }

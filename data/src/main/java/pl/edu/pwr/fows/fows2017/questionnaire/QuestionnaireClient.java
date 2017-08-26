@@ -15,8 +15,8 @@ import pl.edu.pwr.fows.fows2017.gateway.QuestionnaireVersionGateway;
 
 public class QuestionnaireClient implements QuestionGateway, QuestionnaireVersionGateway {
 
-    //private static final String URL = "http://fows.pwr.edu.pl/sections/android-questions.php";
-    private static final String URL = "http://192.168.0.28/fows2017/sections/android-questions.php";
+    private static final String URL = "http://fows.pwr.edu.pl/sections/android-questions.php";
+    //private static final String URL = "http://192.168.0.28/fows2017/sections/android-questions.php";
     private QuestionnaireProvider provider;
 
     public QuestionnaireClient(SharedPreferencesDataInterface sharedPreferences) {

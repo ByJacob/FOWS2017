@@ -23,7 +23,7 @@ import pl.edu.pwr.fows.fows2017.gateway.OrganizerGateway;
 import pl.edu.pwr.fows.fows2017.gateway.QuestionGateway;
 import pl.edu.pwr.fows.fows2017.gateway.QuestionnaireVersionGateway;
 import pl.edu.pwr.fows.fows2017.gateway.SponsorGateway;
-import pl.edu.pwr.fows.fows2017.usecase.ChechQuestionnaireVersionUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.CheckQuestionnaireVersionUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.FacebookPostsUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.LecturesUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.MenuUseCase;
@@ -122,7 +122,7 @@ public class UseCaseFactory {
     }
 
     public UseCase<Observable<Boolean>> isQuestionnaireDone(){
-        return new ChechQuestionnaireVersionUseCase(rxTransformer, questionnaireVersionGateway,
+        return new CheckQuestionnaireVersionUseCase(rxTransformer, questionnaireVersionGateway,
                 questionnaireVersionGatewaySharedPref);
     }
 

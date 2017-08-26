@@ -11,6 +11,6 @@ import io.reactivex.Single;
 
 public interface OfferUrlGateway {
 
-    Single<String> getOfferUrl(Locale locale);
+    String getOfferUrl(Locale locale);
 
 }

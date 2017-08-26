@@ -1,5 +1,6 @@
 package pl.edu.pwr.fows.fows2017.lecture;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,7 +28,7 @@ public class LectureClient implements LectureGateway {
 
 
     @Override
-    public Observable<List<Lecture>> getLectures() {
-        return Observable.fromCallable(() -> provider.getLectures());
+    public List<Lecture> getLectures() throws IOException {
+        return provider.getLectures();
     }
 }

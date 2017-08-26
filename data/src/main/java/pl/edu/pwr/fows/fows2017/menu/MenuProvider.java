@@ -38,6 +38,15 @@ class MenuProvider extends OkHttpProvider {
         return Menu.Builder.aMenu().withTag("ERROR").build();
     }
 
+    public Menu getMenuDefaultConstruct(String tag){
+        constructDefaultMenu();
+        for (Menu menu : menus) {
+            if (Objects.equals(menu.getTag(), tag))
+                return menu;
+        }
+        return Menu.Builder.aMenu().withTag("ERROR").build();
+    }
+
     public List<Menu> constructDefaultMenu() {
         menus.clear();
         menus.add(Menu.Builder.aMenu().withId(1).withTag("HOME").build());

@@ -26,6 +26,6 @@ public class MenuUseCase extends AbstractRxObservableUseCase<List<Menu>> {
 
     @Override
     protected Observable<List<Menu>> createObservable() {
-        return gateway.getMenus();
+        return Observable.fromCallable(gateway::getMenus);
     }
 }

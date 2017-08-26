@@ -26,12 +26,7 @@ public class FacebookClient implements FacebookPostGateway {
     }
 
     @Override
-    public Observable<List<FacebookPost>> getPosts() {
-        return Observable.fromCallable(provider::getPosts);
-    }
-
-    @Override
-    public Observable<FacebookPost> getPost(Integer position) {
-        return null;
+    public List<FacebookPost> getPosts() throws Exception {
+        return provider.getPosts();
     }
 }

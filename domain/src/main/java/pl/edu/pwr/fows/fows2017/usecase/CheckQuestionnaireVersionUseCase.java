@@ -13,12 +13,12 @@ import pl.edu.pwr.fows.fows2017.usecase.base.AbstractRxObservableUseCase;
  * Created by Jakub Rosa on 26.08.2017.
  */
 
-public class ChechQuestionnaireVersionUseCase extends AbstractRxObservableUseCase<Boolean> {
+public class CheckQuestionnaireVersionUseCase extends AbstractRxObservableUseCase<Boolean> {
 
     private QuestionnaireVersionGateway questionnaireVersionGateway;
     private QuestionnaireVersionGateway questionnaireVersionGatewaySharedPref;
 
-    public ChechQuestionnaireVersionUseCase(FowsRxTransformerProvider rxTransformer,
+    public CheckQuestionnaireVersionUseCase(FowsRxTransformerProvider rxTransformer,
                                             QuestionnaireVersionGateway questionnaireVersionGateway,
                                             QuestionnaireVersionGateway questionnaireVersionGatewaySharedPref) {
         super(rxTransformer);

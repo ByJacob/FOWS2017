@@ -24,6 +24,6 @@ public class FacebookPostsUseCase extends AbstractRxObservableUseCase<List<Faceb
 
     @Override
     protected Observable<List<FacebookPost>> createObservable() {
-        return gateway.getPosts();
+        return Observable.fromCallable(gateway::getPosts);
     }
 }

@@ -13,9 +13,9 @@ import pl.edu.pwr.fows.fows2017.entity.Menu;
 
 public interface MenuGateway {
 
-    Observable<List<Menu>> getMenus();
+    List<Menu> getMenus();
 
-    Observable<Menu> getMenu(String tag);
+    Menu getMenu(String tag);
 
 
 }

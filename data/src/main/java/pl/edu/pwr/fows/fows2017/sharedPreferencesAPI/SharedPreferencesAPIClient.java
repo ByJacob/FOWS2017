@@ -4,13 +4,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
+import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterface;
 import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
 import pl.edu.pwr.fows.fows2017.entity.Lecture;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
 import pl.edu.pwr.fows.fows2017.gateway.LectureGateway;
 import pl.edu.pwr.fows.fows2017.gateway.QuestionnaireVersionGateway;
-import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterface;
 
 /**
  * Project: FoWS2017
@@ -22,23 +21,19 @@ public class SharedPreferencesAPIClient implements FacebookPostGateway, LectureG
     private final SharedPreferencesAPIProvider provider;
 
     @Inject
-    public SharedPreferencesAPIClient(SharedPreferencesDataInterface API){
+    public SharedPreferencesAPIClient(SharedPreferencesDataInterface API) {
         provider = new SharedPreferencesAPIProvider(API);
     }
-    @Override
-    public Observable<List<FacebookPost>> getPosts() {
-        return Observable.just(provider.getFacebookPosts());
-    }
 
     @Override
-    public Observable<FacebookPost> getPost(Integer position) {
-        return null;
+    public List<FacebookPost> getPosts() {
+        return provider.getFacebookPosts();
     }
 
 
     @Override
-    public Observable<List<Lecture>> getLectures() {
-        return Observable.just(provider.getLectures());
+    public List<Lecture> getLectures() {
+        return provider.getLectures();
     }
 
     @Override

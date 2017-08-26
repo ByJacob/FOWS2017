@@ -13,6 +13,5 @@ import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
 
 public interface FacebookPostGateway {
 
-    Observable<List<FacebookPost>> getPosts();
-    Observable<FacebookPost> getPost(Integer position);
+    List<FacebookPost> getPosts() throws Exception;
 }

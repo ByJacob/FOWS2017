@@ -22,7 +22,7 @@ public class OfferUrlClient implements OfferUrlGateway{
     }
 
     @Override
-    public Single<String> getOfferUrl(Locale locale) {
-        return Single.just(provider.getOfferUrl(locale));
+    public String getOfferUrl(Locale locale) {
+        return provider.getOfferUrl(locale);
     }
 }

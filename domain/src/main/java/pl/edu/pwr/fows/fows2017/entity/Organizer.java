@@ -1,21 +1,11 @@
 package pl.edu.pwr.fows.fows2017.entity;
 
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
-
-import sun.nio.cs.ISO_8859_2;
-
-import static java.nio.charset.StandardCharsets.ISO_8859_1;
-import static java.nio.charset.StandardCharsets.UTF_16;
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 /**
  * Project: FoWS2017
  * Created by Jakub Rosa on 17.08.2017.
  */
 
 public class Organizer {
-    public enum TYPE {PERSON, FACEBOOK}
     private String firstName;
     private String lastName;
     private String email;
@@ -23,7 +13,6 @@ public class Organizer {
     private TYPE type;
     private String rolePL;
     private String roleEN;
-
     public Organizer(String firstName, String lastName, String email, String urlPicture, TYPE type, String rolePL, String roleEN) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -62,6 +51,7 @@ public class Organizer {
         return roleEN;
     }
 
+    public enum TYPE {PERSON, FACEBOOK}
 
     public static final class Builder {
         private String firstName;

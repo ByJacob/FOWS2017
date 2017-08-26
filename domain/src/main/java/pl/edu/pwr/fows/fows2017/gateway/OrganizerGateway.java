@@ -12,5 +12,5 @@ import pl.edu.pwr.fows.fows2017.entity.Organizer;
 
 public interface OrganizerGateway {
 
-    Single<List<Organizer>> getOrganizers();
+    List<Organizer> getOrganizers();
 }

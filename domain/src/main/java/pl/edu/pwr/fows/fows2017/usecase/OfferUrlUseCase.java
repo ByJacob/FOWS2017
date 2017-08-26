@@ -26,6 +26,6 @@ public class OfferUrlUseCase extends AbstractRxSingleUseCase<String> {
 
     @Override
     protected Single<String> createSingle() {
-        return gateway.getOfferUrl(locale);
+        return Single.just(gateway.getOfferUrl(locale));
     }
 }
