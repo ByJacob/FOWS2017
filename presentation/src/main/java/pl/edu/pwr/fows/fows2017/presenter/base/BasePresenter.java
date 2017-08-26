@@ -12,7 +12,7 @@ import pl.edu.pwr.fows.fows2017.view.base.BaseActivityAndFragmentView;
 public abstract class BasePresenter<T extends BaseActivityAndFragmentView> {
 
     protected final UseCaseFactory factory;
-    protected final BaseActivityView baseActivityView;
+    protected BaseActivityView baseActivityView;
     protected T view;
 
     protected BasePresenter(UseCaseFactory factory, BaseActivityView baseActivityView) {

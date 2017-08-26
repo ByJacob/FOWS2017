@@ -12,6 +12,8 @@
     <string name="exception_default">ERROR!</string>
     <string name="exception_network">No internet connection!</string>
     <string name="drawer_open">Open</string>
+    <string name="open">Open now</string>
+    <string name="open_later">Open later</string>
     <string name="drawer_close">Close</string>
     <string name="menu_item_location">Location</string>
     <string name="fows_title" translatable="false">Future of Wireless Systems</string>

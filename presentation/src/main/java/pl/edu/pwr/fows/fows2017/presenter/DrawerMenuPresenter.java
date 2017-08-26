@@ -23,8 +23,6 @@ public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
 
     private Long lastTimestampRefresh;
     private String actualFragmentTag;
-
-    private final BaseActivityView baseActivityView;
     private List<Menu> menus;
 
     public DrawerMenuPresenter(UseCaseFactory factory, BaseActivityView baseActivityView) {
@@ -38,10 +36,12 @@ public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
     public void onViewTaken(DrawerMenuView view) {
         baseActivityView.enableLoadingBar();
         super.factory.getMenuUseCase().execute().subscribe(this::onMenusListFetchSuccess);
+        this.view = view;
     }
 
-    public void menuItemClick(DrawerMenuView view, String tag) {
-        view.closeDrawer();
+    public void openFragment(String tag) {
+        if (view != null)
+            view.closeDrawer();
         baseActivityView.blockContainerClick(false);
         baseActivityView.changeMainFragment(tag);
     }

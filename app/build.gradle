@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
@@ -9,10 +8,16 @@ android {
         applicationId "pl.edu.pwr.fows.fows2017"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 105
-        versionName "1.05"
+        versionCode 106
+        versionName "1.06"
         jackOptions {
             enabled false
+        }
+    }
+    configurations {
+        all {
+            resolutionStrategy.force 'com.google.code.findbugs:jsr305:2.0.1'
+            exclude module: 'json'
         }
     }
     buildTypes {
@@ -30,6 +35,7 @@ android {
 dependencies {
     final ANDROID_SUPPORT_VERSION = '26.+'
     final DAGGER_VERSION = '2.+'
+    final FIREBASE_VERSION = '11.2.0'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -39,6 +45,10 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$ANDROID_SUPPORT_VERSION"
     compile "com.android.support:cardview-v7:$ANDROID_SUPPORT_VERSION"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile "com.google.android.gms:play-services-gcm:11.2.0"
+    compile "com.google.firebase:firebase-core:$FIREBASE_VERSION"
+    compile "com.google.firebase:firebase-messaging:$FIREBASE_VERSION"
+    compile "com.google.firebase:firebase-crash:$FIREBASE_VERSION" //Todo add check crashing report
     compile "com.google.dagger:dagger:$DAGGER_VERSION"
     annotationProcessor "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
     provided 'javax.annotation:jsr250-api:1.0'
@@ -52,3 +62,5 @@ dependencies {
     compile project(path: ':presentation')
     compile project(path: ':data')
 }
+
+apply plugin: 'com.google.gms.google-services'

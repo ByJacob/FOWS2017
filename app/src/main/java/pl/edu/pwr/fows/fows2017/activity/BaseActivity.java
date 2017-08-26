@@ -2,7 +2,10 @@ package pl.edu.pwr.fows.fows2017.activity;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,6 +29,7 @@ import javax.inject.Inject;
 
 import pl.edu.pwr.fows.fows2017.BuildConfig;
 import pl.edu.pwr.fows.fows2017.R;
+import pl.edu.pwr.fows.fows2017.customViews.MessagingServiceAlertDialog;
 import pl.edu.pwr.fows.fows2017.fragment.DrawerMenuFragment;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentAgenda;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentContact;
@@ -54,12 +59,18 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
     private Toolbar mToolbar;
     private DrawerMenuFragment drawerFragment;
     private Boolean isBlockClickContainerBody;
+    private String openFragmentTag;
+    private BroadcastReceiver messageServiceBroadcast = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            MessagingServiceAlertDialog.showAlertDialog(activity, intent, menuPresenter);
+        }
+    };
 
     @SuppressWarnings("SameReturnValue")
     private Integer getLayoutId() {
         return R.layout.activity_main;
     }
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,10 +83,29 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayShowHomeEnabled(true);
+        openFragmentTag = "HOME";
+        if (getIntent().getExtras() != null) {
+            if (getIntent().getExtras().getBoolean("restart")) {
+                openFragmentTag = getIntent().getExtras().getString("openTag");
+                menuPresenter.setActualFragmentTag("");
+            }
+        }
         drawerFragment = (DrawerMenuFragment)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         menuPresenter.onViewTaken(drawerFragment);
         //BaseFragment baseFragment = (BaseFragment) getSupportFragmentManager().findFragmentByTag("MAIN");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LocalBroadcastManager.getInstance(this).registerReceiver(messageServiceBroadcast, new IntentFilter("messageServiceBroadcast"));
+    }
+
+    @Override
+    protected void onStop() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(messageServiceBroadcast);
+        super.onStop();
     }
 
     @Override
@@ -156,7 +186,7 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
                 this.getString(SnackBarMessageMap.getTag(messageTag)), BaseTransientBottomBar.LENGTH_LONG);
         TextView textSnackBar = snackbar.getView()
                 .findViewById(android.support.design.R.id.snackbar_text);
-        if(isCritic==null)
+        if (isCritic == null)
             textSnackBar.setTextColor(Color.GREEN);
         else {
             if (isCritic)
@@ -243,6 +273,6 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
     @Override
     public void continueLoading() {
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar, menuPresenter, activity);
-        changeMainFragment("HOME");
+        changeMainFragment(openFragmentTag);
     }
 }
