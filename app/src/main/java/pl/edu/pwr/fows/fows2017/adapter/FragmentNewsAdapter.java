@@ -62,7 +62,7 @@ public class FragmentNewsAdapter extends RecyclerView.Adapter<FragmentNewsAdapte
     public void onBindViewHolder(NewsAdapter holder, int position) {
         //noinspection deprecation
         presenter.configureNewsRow(holder, position, context.getResources().getConfiguration().locale);
-        setAnimation(holder.itemView, position); //todo change max scrool speed
+        setAnimation(holder.itemView, position);
     }
 
     private void setAnimation(View itemView, int position) {

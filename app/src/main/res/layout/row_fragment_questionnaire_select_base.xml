@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/row_fragment_questionnaire_question_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0.87"
+        android:paddingBottom="@dimen/fragment_questionnaire_row_question_text_horizontal_padding"
+        android:paddingEnd="@dimen/fragment_questionnaire_row_question_vertical_padding"
+        android:paddingStart="@dimen/fragment_questionnaire_row_question_vertical_padding"
+        android:paddingTop="@dimen/fragment_questionnaire_row_question_text_horizontal_padding"
+        android:textColor="@color/black"
+        android:textSize="@dimen/fragment_questionnaire_row_question_text_size"
+        tools:text="Pytanie czy to jest czy to nie jest bla bla bla bla bla bla" />
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/row_fragment_questionnaire_answer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingEnd="@dimen/fragment_questionnaire_row_question_vertical_padding"
+        android:paddingStart="@dimen/fragment_questionnaire_row_question_vertical_padding"
+        app:alignContent="flex_start"
+        app:alignItems="flex_start"
+        app:flexWrap="wrap"
+        app:justifyContent="center">
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+    <LinearLayout
+        android:id="@+id/row_fragment_questionnaire_other_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingEnd="@dimen/fragment_questionnaire_row_question_vertical_padding"
+        android:paddingStart="@dimen/fragment_questionnaire_row_question_vertical_padding">
+
+        <RadioButton
+            android:id="@+id/row_fragment_questionnaire_other_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/row_fragment_questionnaire_other_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/fragment_row_questionnaire_other"
+            app:met_clearButton="true"
+            app:met_floatingLabel="normal"
+            tools:text="@string/templateMulti">
+
+        </com.rengwuxian.materialedittext.MaterialEditText>
+    </LinearLayout>
+
+</LinearLayout>

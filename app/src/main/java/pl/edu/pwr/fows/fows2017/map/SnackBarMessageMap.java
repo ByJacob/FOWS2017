@@ -7,10 +7,12 @@ import pl.edu.pwr.fows.fows2017.R;
  * Created by Jakub Rosa on 08.08.2017.
  */
 
-public class ExceptionMap {
-    private static final String[] tags = {"NETWORK", "BROWSER", "MAP", "DISABLE"};
+public class SnackBarMessageMap {
+    private static final String[] tags = {"NETWORK", "BROWSER", "MAP", "DISABLE", "SEND",
+            "QUESTIONNAIRE_DONE", "INCOMPLETE"};
     private static final Integer[] textsId = {R.string.exception_network, R.string.exception_browser,
-            R.string.exception_map, R.string.exception_disable};
+            R.string.exception_map, R.string.exception_disable, R.string.message_send,
+            R.string.message_questionnaire_done, R.string.exception_incomplete};
 
     public static Integer getTag(String tag) {
         for(int i=0; i<tags.length;  i++){

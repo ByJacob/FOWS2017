@@ -13,19 +13,25 @@ import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
 import pl.edu.pwr.fows.fows2017.entity.Lecture;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
 import pl.edu.pwr.fows.fows2017.entity.Organizer;
+import pl.edu.pwr.fows.fows2017.entity.Question;
 import pl.edu.pwr.fows.fows2017.entity.Sponsor;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
 import pl.edu.pwr.fows.fows2017.gateway.LectureGateway;
 import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
 import pl.edu.pwr.fows.fows2017.gateway.OfferUrlGateway;
 import pl.edu.pwr.fows.fows2017.gateway.OrganizerGateway;
+import pl.edu.pwr.fows.fows2017.gateway.QuestionGateway;
+import pl.edu.pwr.fows.fows2017.gateway.QuestionnaireVersionGateway;
 import pl.edu.pwr.fows.fows2017.gateway.SponsorGateway;
+import pl.edu.pwr.fows.fows2017.usecase.ChechQuestionnaireVersionUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.FacebookPostsUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.LecturesUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.MenuUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.MenuWithTagUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.OfferUrlUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.OrganizersUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.QuestionnaireUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.SendQuestionnaireUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SponsorUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.base.UseCase;
 
@@ -45,6 +51,9 @@ public class UseCaseFactory {
     private final LectureGateway lectureGatewaySharedPref;
     private final OrganizerGateway organizerGateway;
     private final OfferUrlGateway offerUrlGateway;
+    private final QuestionGateway questionGateway;
+    private final QuestionnaireVersionGateway questionnaireVersionGateway;
+    private final QuestionnaireVersionGateway questionnaireVersionGatewaySharedPref;
 
     @Inject
     public UseCaseFactory(FowsRxTransformerProvider rxTransformer, MenuGateway menuGateway,
@@ -54,7 +63,10 @@ public class UseCaseFactory {
                           @Named("NetworkGateway") LectureGateway lectureGateway,
                           @Named("LocalGateway") LectureGateway lectureGatewaySharedPref,
                           OrganizerGateway organizerGateway,
-                          OfferUrlGateway offerUrlGateway){
+                          OfferUrlGateway offerUrlGateway,
+                          QuestionGateway questionGateway,
+                          @Named("NetworkGateway") QuestionnaireVersionGateway questionnaireVersionGateway,
+                          @Named("LocalGateway") QuestionnaireVersionGateway questionnaireVersionGatewaySharedPref){
         this.menuGateway = menuGateway;
         this.rxTransformer = rxTransformer;
         this.facebookPostGateway = facebookPostGateway;
@@ -64,6 +76,9 @@ public class UseCaseFactory {
         this.lectureGatewaySharedPref = lectureGatewaySharedPref;
         this.organizerGateway = organizerGateway;
         this.offerUrlGateway = offerUrlGateway;
+        this.questionGateway = questionGateway;
+        this.questionnaireVersionGateway = questionnaireVersionGateway;
+        this.questionnaireVersionGatewaySharedPref = questionnaireVersionGatewaySharedPref;
     }
 
     public UseCase<Observable<List<Menu>>> getMenuUseCase(){
@@ -100,5 +115,18 @@ public class UseCaseFactory {
 
     public UseCase<Single<String>> getOfferUrl(Locale locale){
         return new OfferUrlUseCase(rxTransformer, offerUrlGateway, locale);
+    }
+
+    public UseCase<Observable<List<Question>>> getQuestionnaire(){
+        return new QuestionnaireUseCase(rxTransformer, questionGateway);
+    }
+
+    public UseCase<Observable<Boolean>> isQuestionnaireDone(){
+        return new ChechQuestionnaireVersionUseCase(rxTransformer, questionnaireVersionGateway,
+                questionnaireVersionGatewaySharedPref);
+    }
+
+    public UseCase<Observable<Integer>> sendQuestionnaire(List<Question> questionnaire){
+        return new SendQuestionnaireUseCase(rxTransformer, questionGateway, questionnaire);
     }
 }

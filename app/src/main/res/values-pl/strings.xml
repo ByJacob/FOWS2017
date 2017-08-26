@@ -21,4 +21,11 @@
     <string name="notStart1">Agenda nie jest jeszcze dostępna</string>
     <string name="notStart2">Szczegóły wkrótce</string>
     <string name="exception_disable">Opcja narazie wyłączona</string>
+    <string name="menu_item_questionnaire">Ankieta</string>
+    <string name="fragment_row_questionnaire_other">Inne</string>
+    <string name="fragment_row_questionnaire_answer">Odpowiedź</string>
+    <string name="fragment_row_questionaire_send">Wyślij</string>
+    <string name="message_send">Dziękujemy za wypełnienie ankiety. Została ona poprawnie przesłana.</string>
+    <string name="message_questionnaire_done">Ta ankieta została już wypełniona przez Ciebie. Dziękujemy :)</string>
+    <string name="exception_incomplete">Nie odpowiedziano na wymagane pytania oznaczone gwiazdką (*)</string>
 </resources>

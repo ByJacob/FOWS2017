@@ -52,9 +52,9 @@ public class FragmentNewsPresenter extends BasePresenter<FragmentNewsView> {
     private void onFacebookPostsFromMemorySuccess(List<FacebookPost> posts) {
         this.posts = posts;
         if (getPostsCount() < 1)
-            baseActivityView.showOnError("NETWORK", true);
+            baseActivityView.showMessage("NETWORK", true);
         else
-            baseActivityView.showOnError("NETWORK", false);
+            baseActivityView.showMessage("NETWORK", false);
         baseActivityView.disableLoadingBar();
         view.continueLoading();
     }

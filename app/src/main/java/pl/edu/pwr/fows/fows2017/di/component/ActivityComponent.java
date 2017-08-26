@@ -7,8 +7,10 @@ import pl.edu.pwr.fows.fows2017.di.module.FragmentAgendaModule;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentContactModule;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentHomeModule;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentNewsModule;
+import pl.edu.pwr.fows.fows2017.di.module.FragmentQuestionnaireModule;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentSponsorModule;
 import pl.edu.pwr.fows.fows2017.di.scope.ActivityScope;
+import pl.edu.pwr.fows.fows2017.fragment.FragmentQuestionnaire;
 
 /**
  * Project: FoWS2017
@@ -30,4 +32,6 @@ public interface ActivityComponent {
     FragmentAgendaComponent addModule(FragmentAgendaModule module);
 
     FragmentContactComponent addModule(FragmentContactModule module);
+
+    FragmentQuestionnaireComponent addModule(FragmentQuestionnaireModule module);
 }

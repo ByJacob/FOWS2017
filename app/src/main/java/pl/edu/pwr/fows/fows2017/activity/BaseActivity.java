@@ -30,10 +30,11 @@ import pl.edu.pwr.fows.fows2017.fragment.FragmentAgenda;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentContact;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentHome;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentNews;
+import pl.edu.pwr.fows.fows2017.fragment.FragmentQuestionnaire;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentSponsor;
 import pl.edu.pwr.fows.fows2017.fragment.base.BaseFragment;
 import pl.edu.pwr.fows.fows2017.map.DrawerMenuItemMap;
-import pl.edu.pwr.fows.fows2017.map.ExceptionMap;
+import pl.edu.pwr.fows.fows2017.map.SnackBarMessageMap;
 import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
 import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
 
@@ -101,6 +102,9 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
                         case "CONTACT":
                             fragment = new FragmentContact();
                             break;
+                        case "QUESTIONNAIRE":
+                            fragment = new FragmentQuestionnaire();
+                            break;
                         case "OFFER":
                             menuPresenter.clickOffer(getResources().getConfiguration().locale);
                             break;
@@ -123,6 +127,11 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
     }
 
     @Override
+    public void showPreviousFragment() {
+        onBackPressed();
+    }
+
+    @Override
     public void onBackPressed() {
         FragmentManager fm = getSupportFragmentManager();
         if (fm.getBackStackEntryCount() > 1) {
@@ -141,16 +150,20 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
     }
 
     @Override
-    public void showOnError(String tagError, Boolean isCritic) {
+    public void showMessage(String messageTag, Boolean isCritic) {
         FrameLayout container_body = (FrameLayout) findViewById(R.id.container_body);
         Snackbar snackbar = Snackbar.make(container_body,
-                this.getString(ExceptionMap.getTag(tagError)), BaseTransientBottomBar.LENGTH_LONG);
+                this.getString(SnackBarMessageMap.getTag(messageTag)), BaseTransientBottomBar.LENGTH_LONG);
         TextView textSnackBar = snackbar.getView()
                 .findViewById(android.support.design.R.id.snackbar_text);
-        if (isCritic)
-            textSnackBar.setTextColor(Color.RED);
-        else
-            textSnackBar.setTextColor(Color.YELLOW);
+        if(isCritic==null)
+            textSnackBar.setTextColor(Color.GREEN);
+        else {
+            if (isCritic)
+                textSnackBar.setTextColor(Color.RED);
+            else
+                textSnackBar.setTextColor(Color.YELLOW);
+        }
         snackbar.show();
     }
 
@@ -210,7 +223,7 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
         try {
             startActivity(intent);
         } catch (ActivityNotFoundException exception) {
-            showOnError("BROWSER", true);
+            showMessage("BROWSER", true);
         }
     }
 
@@ -223,7 +236,7 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
         if (mapIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(mapIntent);
         } else {
-            showOnError("MAP", true);
+            showMessage("MAP", true);
         }
     }
 

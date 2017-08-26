@@ -1,0 +1,55 @@
+package pl.edu.pwr.fows.fows2017.fragment;
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+
+import javax.inject.Inject;
+
+import pl.edu.pwr.fows.fows2017.R;
+import pl.edu.pwr.fows.fows2017.adapter.FragmentQuestionnaireAdapter;
+import pl.edu.pwr.fows.fows2017.di.component.ActivityComponent;
+import pl.edu.pwr.fows.fows2017.di.module.FragmentQuestionnaireModule;
+import pl.edu.pwr.fows.fows2017.fragment.base.BaseFragment;
+import pl.edu.pwr.fows.fows2017.presenter.FragmentQuestionnairePresenter;
+import pl.edu.pwr.fows.fows2017.view.FragmentQuestionnaireView;
+
+/**
+ * Project: FoWS2017
+ * Created by Jakub Rosa on 22.08.2017.
+ */
+
+public class FragmentQuestionnaire extends BaseFragment implements FragmentQuestionnaireView {
+
+    @Inject
+    FragmentQuestionnairePresenter presenter;
+    private RecyclerView list;
+
+    @Override
+    protected Integer getLayoutId() {
+        return R.layout.fragment_questionnaire;
+    }
+
+    @Override
+    protected void performFieldInjection(ActivityComponent activityComponent) {
+        activityComponent.addModule(new FragmentQuestionnaireModule()).inject(this);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        list = getView().findViewById(R.id.fragment_questionnaire);
+        list.setLayoutManager(new LinearLayoutManager(getActivity()));
+        list.setItemAnimator(new DefaultItemAnimator());
+        presenter.onViewTaken(this);
+    }
+
+    @Override
+    public void continueLoading() {
+        FragmentQuestionnaireAdapter adapter = new FragmentQuestionnaireAdapter(getActivity());
+        adapter.setPresenter(presenter);
+        list.setAdapter(adapter);
+    }
+}

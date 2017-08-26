@@ -1,6 +1,5 @@
 package pl.edu.pwr.fows.fows2017.presenter;
 
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -54,9 +53,9 @@ public class FragmentAgendaPresenter extends BasePresenter<FragmentAgendaView> {
         baseActivityView.disableLoadingBar();
         this.lectures = lectures;
         if(lectures.size()<1) {
-            baseActivityView.showOnError("NETWORK", true);
+            baseActivityView.showMessage("NETWORK", true);
         } else {
-            baseActivityView.showOnError("NETWORK", false);
+            baseActivityView.showMessage("NETWORK", false);
         }
         view.continueLoading();
     }

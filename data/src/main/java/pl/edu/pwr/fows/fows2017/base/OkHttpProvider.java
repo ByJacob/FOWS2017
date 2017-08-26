@@ -2,8 +2,10 @@ package pl.edu.pwr.fows.fows2017.base;
 
 import java.io.IOException;
 
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -25,5 +27,14 @@ public class OkHttpProvider {
 
         Response response = client.newCall(request).execute();
         return response.body().string();
+    }
+
+    protected int sendData(String url, String json) throws IOException {
+        Request request = new Request.Builder().url(url)
+                .addHeader("Content-Type","text/html; charset=UTF-8")
+                .method("POST", RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json))
+                .build();
+        Response response = client.newCall(request).execute();
+        return response.code();
     }
 }

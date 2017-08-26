@@ -1,4 +1,6 @@
 <resources>
+    <string name="template1" translatable="false">It is a long established fact that a reader will be</string>
+    <string name="templateMulti" translatable="false">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</string>
     <string name="app_name" translatable="false">FoWS2017</string>
     <string name="menu_item_home">Home</string>
     <string name="menu_item_news">News</string>
@@ -6,6 +8,7 @@
     <string name="menu_item_sponsors">Sponsors</string>
     <string name="menu_item_contact">Contact</string>
     <string name="menu_item_offer">Offer</string>
+    <string name="menu_item_questionnaire">Questionnaire</string>
     <string name="exception_default">ERROR!</string>
     <string name="exception_network">No internet connection!</string>
     <string name="drawer_open">Open</string>
@@ -23,5 +26,11 @@
     <string name="notStart1">The Agenda is not yet available</string>
     <string name="notStart2">Details soon</string>
     <string name="exception_disable">The option is disabled at the moment</string>
+    <string name="fragment_row_questionnaire_other" >Other</string>
+    <string name="fragment_row_questionnaire_answer">Answer</string>
+    <string name="fragment_row_questionaire_send">Send</string>
+    <string name="message_send">Thank you for completing the questionnaire. It was sent correctly.</string>
+    <string name="message_questionnaire_done">This questionnaire has already been completed by you. Thanks :)</string>
+    <string name="exception_incomplete">No questions answered with star (*)</string>
 
 </resources>

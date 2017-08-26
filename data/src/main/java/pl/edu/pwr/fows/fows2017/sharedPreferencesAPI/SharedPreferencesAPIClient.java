@@ -5,13 +5,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import io.reactivex.Single;
 import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
 import pl.edu.pwr.fows.fows2017.entity.Lecture;
-import pl.edu.pwr.fows.fows2017.entity.Sponsor;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
 import pl.edu.pwr.fows.fows2017.gateway.LectureGateway;
-import pl.edu.pwr.fows.fows2017.gateway.SponsorGateway;
+import pl.edu.pwr.fows.fows2017.gateway.QuestionnaireVersionGateway;
 import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterface;
 
 /**
@@ -19,7 +17,7 @@ import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterf
  * Created by Jakub Rosa on 08.08.2017.
  */
 
-public class SharedPreferencesAPIClient implements FacebookPostGateway, LectureGateway {
+public class SharedPreferencesAPIClient implements FacebookPostGateway, LectureGateway, QuestionnaireVersionGateway {
 
     private final SharedPreferencesAPIProvider provider;
 
@@ -41,5 +39,10 @@ public class SharedPreferencesAPIClient implements FacebookPostGateway, LectureG
     @Override
     public Observable<List<Lecture>> getLectures() {
         return Observable.just(provider.getLectures());
+    }
+
+    @Override
+    public String getVersion() {
+        return provider.getQuestionnaireVersion();
     }
 }

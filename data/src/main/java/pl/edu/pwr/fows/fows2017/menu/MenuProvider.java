@@ -18,36 +18,28 @@ class MenuProvider extends OkHttpProvider {
 
     private final List<Menu> menus = new ArrayList<>();
     private final String url;
-    private Boolean isNetwork;
 
     public MenuProvider(String url) {
         this.url = url;
-        isNetwork = true;
 
     }
 
     public List<Menu> getMenus() throws IOException {
-        if(menus.size()<1 || !isNetwork ){
-            getDate();
-            isNetwork = true;
-        }
+        getDate();
         return menus;
     }
 
     public Menu getMenu(String tag) throws IOException {
-        if(menus.size()<1){
-            getDate();
-        }
-        for(Menu menu: menus){
-            if(Objects.equals(menu.getTag(), tag))
+        getDate();
+        for (Menu menu : menus) {
+            if (Objects.equals(menu.getTag(), tag))
                 return menu;
         }
         return Menu.Builder.aMenu().withTag("ERROR").build();
     }
 
-    public List<Menu> constructDefaultMenu(){
+    public List<Menu> constructDefaultMenu() {
         menus.clear();
-        isNetwork = false;
         menus.add(Menu.Builder.aMenu().withId(1).withTag("HOME").build());
         menus.add(Menu.Builder.aMenu().withId(2).withTag("NEWS").build());
         menus.add(Menu.Builder.aMenu().withId(3).withTag("AGENDA").build());
@@ -61,6 +53,7 @@ class MenuProvider extends OkHttpProvider {
     private void getDate() throws IOException {
         String response = run(url);
         List<Menu> menusTmp = JsonParserMenu.parseJson(response);
+        menus.clear();
         menus.addAll(menusTmp);
     }
 }

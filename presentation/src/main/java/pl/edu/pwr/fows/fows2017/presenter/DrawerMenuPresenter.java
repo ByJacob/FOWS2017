@@ -19,8 +19,6 @@ public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
     private static final Integer MAX_ALPHA_VALUE = 255;
     private static final Integer MAX_SLIDE_OFFSET_VALUE = 1;
 
-    private static final Double LOCATION_D20_LAT = 51.110401;
-    private static final Double LOCATION_D20_LNG = 17.059875;
     private static final String LOCATION_D20_ID = "D-20, Janiszewskiego, 52-007 Wroc\u0142aw, Polska";
 
     private Long lastTimestampRefresh;
@@ -38,6 +36,7 @@ public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
 
     @Override
     public void onViewTaken(DrawerMenuView view) {
+        baseActivityView.enableLoadingBar();
         super.factory.getMenuUseCase().execute().subscribe(this::onMenusListFetchSuccess);
     }
 
@@ -87,6 +86,7 @@ public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
 
     private void onMenusListFetchSuccess(List<Menu> menus) {
         this.menus = menus;
+        baseActivityView.disableLoadingBar();
         baseActivityView.continueLoading();
     }
 
