@@ -17,7 +17,8 @@ public class JsonParserQuestions {
 
     public static List<Question> parseJson(String json){
         List<Question> response = new ArrayList<>();
-        JSONArray array = new JSONArray(json);
+        JSONObject all = new JSONObject(json);
+        JSONArray array = all.getJSONArray("questionare");
         for(int i=0; i<array.length(); i++){
             JSONObject question = array.getJSONObject(i);
             Question.TYPE type = Question.getType(question.getString("type"));
@@ -44,5 +45,10 @@ public class JsonParserQuestions {
                     .build());
         }
         return response;
+    }
+
+    public static String getVersion(String json){
+        JSONObject object = new JSONObject(json);
+        return object.getString("version");
     }
 }

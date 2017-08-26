@@ -127,6 +127,11 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
     }
 
     @Override
+    public void showPreviousFragment() {
+        onBackPressed();
+    }
+
+    @Override
     public void onBackPressed() {
         FragmentManager fm = getSupportFragmentManager();
         if (fm.getBackStackEntryCount() > 1) {

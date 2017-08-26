@@ -21,7 +21,9 @@ import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
 import pl.edu.pwr.fows.fows2017.gateway.OfferUrlGateway;
 import pl.edu.pwr.fows.fows2017.gateway.OrganizerGateway;
 import pl.edu.pwr.fows.fows2017.gateway.QuestionGateway;
+import pl.edu.pwr.fows.fows2017.gateway.QuestionnaireVersionGateway;
 import pl.edu.pwr.fows.fows2017.gateway.SponsorGateway;
+import pl.edu.pwr.fows.fows2017.usecase.ChechQuestionnaireVersionUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.FacebookPostsUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.LecturesUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.MenuUseCase;
@@ -50,6 +52,8 @@ public class UseCaseFactory {
     private final OrganizerGateway organizerGateway;
     private final OfferUrlGateway offerUrlGateway;
     private final QuestionGateway questionGateway;
+    private final QuestionnaireVersionGateway questionnaireVersionGateway;
+    private final QuestionnaireVersionGateway questionnaireVersionGatewaySharedPref;
 
     @Inject
     public UseCaseFactory(FowsRxTransformerProvider rxTransformer, MenuGateway menuGateway,
@@ -60,7 +64,9 @@ public class UseCaseFactory {
                           @Named("LocalGateway") LectureGateway lectureGatewaySharedPref,
                           OrganizerGateway organizerGateway,
                           OfferUrlGateway offerUrlGateway,
-                          QuestionGateway questionGateway){
+                          QuestionGateway questionGateway,
+                          @Named("NetworkGateway") QuestionnaireVersionGateway questionnaireVersionGateway,
+                          @Named("LocalGateway") QuestionnaireVersionGateway questionnaireVersionGatewaySharedPref){
         this.menuGateway = menuGateway;
         this.rxTransformer = rxTransformer;
         this.facebookPostGateway = facebookPostGateway;
@@ -71,6 +77,8 @@ public class UseCaseFactory {
         this.organizerGateway = organizerGateway;
         this.offerUrlGateway = offerUrlGateway;
         this.questionGateway = questionGateway;
+        this.questionnaireVersionGateway = questionnaireVersionGateway;
+        this.questionnaireVersionGatewaySharedPref = questionnaireVersionGatewaySharedPref;
     }
 
     public UseCase<Observable<List<Menu>>> getMenuUseCase(){
@@ -111,6 +119,11 @@ public class UseCaseFactory {
 
     public UseCase<Observable<List<Question>>> getQuestionnaire(){
         return new QuestionnaireUseCase(rxTransformer, questionGateway);
+    }
+
+    public UseCase<Observable<Boolean>> isQuestionnaireDone(){
+        return new ChechQuestionnaireVersionUseCase(rxTransformer, questionnaireVersionGateway,
+                questionnaireVersionGatewaySharedPref);
     }
 
     public UseCase<Observable<Integer>> sendQuestionnaire(List<Question> questionnaire){

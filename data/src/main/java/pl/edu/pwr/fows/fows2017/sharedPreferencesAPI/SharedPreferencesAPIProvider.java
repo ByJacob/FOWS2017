@@ -20,8 +20,8 @@ import pl.edu.pwr.fows.fows2017.parser.JsonParserSponsor;
 public class SharedPreferencesAPIProvider {
 
     public static final String TAG_FACEBOOK_POSTS = "_facebook_posts";
-    public static final String TAG_SPONSORS = "_sponsors";
     public static final String TAG_LECTURES = "_lectures";
+    public static final String TAG_QUESTIONNAIRE = "_questionnaire";
 
     private final SharedPreferencesDataInterface API;
 
@@ -36,17 +36,14 @@ public class SharedPreferencesAPIProvider {
         return JsonParserFacebookPosts.parseJson(json);
     }
 
-    public List<List<Sponsor>> getSponsors() {
-        String json = API.get(TAG_SPONSORS, "");
-        if (json.length()<1)
-            return new ArrayList<>();
-        return JsonParserSponsor.parseJson(json);
-    }
-
     public List<Lecture> getLectures() {
         String json = API.get(TAG_LECTURES, "");
         if (json.length()<1)
             return new ArrayList<>();
         return JsonParserLecture.parseJson(json);
+    }
+
+    public String getQuestionnaireVersion(){
+        return API.get(TAG_QUESTIONNAIRE, "");
     }
 }

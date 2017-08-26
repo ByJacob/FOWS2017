@@ -11,6 +11,8 @@ public interface BaseActivityView extends BaseActivityAndFragmentView {
 
     void changeMainFragment(String tag);
 
+    void showPreviousFragment();
+
     void blockContainerClick(Boolean isBlock);
 
     void showMessage(String tagError, Boolean isCritic);

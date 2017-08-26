@@ -43,10 +43,7 @@ public class FragmentSponsorPresenter extends BasePresenter<FragmentSponsorView>
         if(throwable.getMessage().contains("No address")){
             isNetwork=false;
             baseActivityView.showMessage("NETWORK", true);
-            List<Sponsor> error = new ArrayList<>();
-            error.add(Sponsor.Builder.aSponsor().withUrl("ERROR").build());
-            this.sponsors.add(error);
-            view.continueLoading();
+            baseActivityView.showPreviousFragment();
         }
         baseActivityView.disableLoadingBar();
 

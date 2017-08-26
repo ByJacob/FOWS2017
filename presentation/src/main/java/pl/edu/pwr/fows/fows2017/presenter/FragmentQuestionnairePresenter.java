@@ -29,7 +29,17 @@ public class FragmentQuestionnairePresenter extends BasePresenter<FragmentQuesti
     public void onViewTaken(FragmentQuestionnaireView view) {
         baseActivityView.enableLoadingBar();
         this.view = view;
-        factory.getQuestionnaire().execute().subscribe(this::onFetchSuccessQuestionnaire, this::onFetchFailQuestionnaire);
+        factory.isQuestionnaireDone().execute().subscribe(this::onFetchSuccessQuestionnaireStatus,
+                this::onFetchFailQuestionnaire);
+    }
+
+    private void onFetchSuccessQuestionnaireStatus(Boolean isDone) {
+        if (isDone) {
+            baseActivityView.showMessage("QUESTIONNAIRE_DONE", null);
+            baseActivityView.showPreviousFragment();
+        } else {
+            factory.getQuestionnaire().execute().subscribe(this::onFetchSuccessQuestionnaire, this::onFetchFailQuestionnaire);
+        }
     }
 
     private void onFetchSuccessQuestionnaire(List<Question> questions) {
@@ -39,31 +49,22 @@ public class FragmentQuestionnairePresenter extends BasePresenter<FragmentQuesti
     }
 
     private void onFetchFailQuestionnaire(Throwable throwable) {
-        throwable.printStackTrace();
-    }
-
-    public void setAnswer() {
-        factory.sendQuestionnaire(questionList).execute()
-                .subscribe(this::onSendSuccessQuestionnaire, this::onSendFailQuestionnaire);
-    }
-
-    private void onSendFailQuestionnaire(Throwable throwable) {
         if (throwable.getMessage().contains("No address")) {
             baseActivityView.showMessage("NETWORK", true);
+            baseActivityView.showPreviousFragment();
         }
-    }
-
-    private void onSendSuccessQuestionnaire(Integer responseCode) {
-        baseActivityView.showMessage("SEND", null);
     }
 
     public void configureRow(FragmentQuestionnaireRowView holder, int position, Locale locale) {
         holder.setType(Question.getTypeString(questionList.get(position).getType()));
+        String isRequired = "";
+        if (Question.getTypeString(questionList.get(position).getType()).contains("SELECT"))
+            isRequired = "*";
         if (Objects.equals(locale.getLanguage(), "pl")) {
-            holder.setQuestion((position + 1) + "." + questionList.get(position).getQuestionPL());
+            holder.setQuestion((position + 1) + isRequired + "." + questionList.get(position).getQuestionPL());
             holder.setAnswer(questionList.get(position).getAnswersPL(), position);
         } else {
-            holder.setQuestion((position + 1) + "." + questionList.get(position).getQuestionEN());
+            holder.setQuestion((position + 1) + isRequired + "." + questionList.get(position).getQuestionEN());
             holder.setAnswer(questionList.get(position).getAnswersEN(), position);
         }
         String userAnswer = questionList.get(position).getUserAnswer();
@@ -87,5 +88,32 @@ public class FragmentQuestionnairePresenter extends BasePresenter<FragmentQuesti
             answer = text;
         answer = tag + ":" + answer;
         questionList.get(Integer.parseInt(tagSplit[0])).setUserAnswer(answer);
+    }
+
+    public void setAnswer() {
+        Boolean isComplete = true;
+        for (int i = 0; i < questionList.size(); i++) {
+            if (Question.getTypeString(questionList.get(i).getType()).contains("SELECT"))
+                isComplete = questionList.get(i).getUserAnswer().length() > 0;
+        }
+        if (isComplete)
+            factory.sendQuestionnaire(questionList).execute()
+                    .subscribe(this::onSendSuccessQuestionnaire, this::onSendFailQuestionnaire);
+        else
+            baseActivityView.showMessage("INCOMPLETE", false);
+    }
+
+    private void onSendFailQuestionnaire(Throwable throwable) {
+        if (throwable.getMessage().contains("No address")) {
+            baseActivityView.showMessage("NETWORK", true);
+        }
+    }
+
+    private void onSendSuccessQuestionnaire(Integer responseCode) {
+        for(int i=0; i<questionList.size(); i++){
+            questionList.get(i).setUserAnswer("");
+        }
+        baseActivityView.showMessage("SEND", null);
+        baseActivityView.showPreviousFragment();
     }
 }
