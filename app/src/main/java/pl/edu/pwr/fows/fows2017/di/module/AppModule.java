@@ -2,6 +2,8 @@ package pl.edu.pwr.fows.fows2017.di.module;
 
 import android.app.Application;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -11,6 +13,7 @@ import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import pl.edu.pwr.fows.fows2017.facebookPost.FacebookClient;
+import pl.edu.pwr.fows.fows2017.firebase.LogEvent;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
 import pl.edu.pwr.fows.fows2017.gateway.LectureGateway;
 import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
@@ -140,5 +143,17 @@ public class AppModule {
     @Named("ObserveOnScheduler")
     public Scheduler provideAndroidMainThread() {
         return AndroidSchedulers.mainThread();
+    }
+
+    @Provides
+    @Singleton
+    public FirebaseAnalytics provideFirebaseAnalytics(){
+        return FirebaseAnalytics.getInstance(application);
+    }
+
+    @Provides
+    @Singleton
+    public LogEvent provideLogEvent(FirebaseAnalytics firebaseAnalytics){
+        return new LogEvent(firebaseAnalytics);
     }
 }

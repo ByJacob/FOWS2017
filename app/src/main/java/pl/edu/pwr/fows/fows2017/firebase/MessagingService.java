@@ -1,6 +1,5 @@
 package pl.edu.pwr.fows.fows2017.firebase;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
@@ -34,16 +33,16 @@ public class MessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         Log.d(TAG, "From: " + remoteMessage.getFrom());
-        Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-        // Check if message contains a notification payload.
+        if (remoteMessage.getNotification() != null)
+            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
         if (remoteMessage.getData() != null) {
             Map<String, String> params = remoteMessage.getData();
             JSONObject object = new JSONObject(params);
             Intent intent = new Intent("messageServiceBroadcast");
             try {
-                intent.putExtra(MessagingServiceAlertDialog.MESSAGING_SERVICE_TITLE,object.getString("title"));
-                intent.putExtra(MessagingServiceAlertDialog.MESSAGING_SERVICE_MESSAGE,object.getString("body"));
-                intent.putExtra(MessagingServiceAlertDialog.MESSAGING_SERVICE_FRAGMENT_TAG,object.getString("tag"));
+                intent.putExtra(MessagingServiceAlertDialog.MESSAGING_SERVICE_TITLE, object.getString("title"));
+                intent.putExtra(MessagingServiceAlertDialog.MESSAGING_SERVICE_MESSAGE, object.getString("body"));
+                intent.putExtra(MessagingServiceAlertDialog.MESSAGING_SERVICE_FRAGMENT_TAG, object.getString("tag"));
                 broadcaster.sendBroadcast(intent);
             } catch (JSONException e) {
                 e.printStackTrace();

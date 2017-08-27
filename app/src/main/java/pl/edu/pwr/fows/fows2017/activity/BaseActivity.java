@@ -25,11 +25,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import javax.inject.Inject;
 
 import pl.edu.pwr.fows.fows2017.BuildConfig;
 import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.customViews.MessagingServiceAlertDialog;
+import pl.edu.pwr.fows.fows2017.firebase.LogEvent;
 import pl.edu.pwr.fows.fows2017.fragment.DrawerMenuFragment;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentAgenda;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentContact;
@@ -56,6 +59,9 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
     @SuppressWarnings("CanBeFinal")
     @Inject
     Activity activity;
+    @SuppressWarnings("CanBeFinal")
+    @Inject
+    LogEvent logEvent;
     private Toolbar mToolbar;
     private DrawerMenuFragment drawerFragment;
     private Boolean isBlockClickContainerBody;
@@ -115,6 +121,7 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
                 if (BuildConfig.DEBUG)
                     Toast.makeText(this, tag, Toast.LENGTH_SHORT).show();
                 BaseFragment fragment = (BaseFragment) getSupportFragmentManager().findFragmentByTag(tag);
+                logEvent.openFragment(tag);
                 if (fragment == null) {
                     switch (tag) {
                         case "HOME":

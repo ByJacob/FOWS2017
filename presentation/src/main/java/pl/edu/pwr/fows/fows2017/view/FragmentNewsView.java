@@ -8,4 +8,6 @@ import pl.edu.pwr.fows.fows2017.view.base.BaseActivityAndFragmentView;
  */
 
 public interface FragmentNewsView extends BaseActivityAndFragmentView {
+
+    void firebaseLogPost(String postId, Boolean isOpen);
 }

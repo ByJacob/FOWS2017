@@ -11,6 +11,7 @@ import pl.edu.pwr.fows.fows2017.adapter.FragmentNewsAdapter;
 import pl.edu.pwr.fows.fows2017.customViews.CustomRecyclerView;
 import pl.edu.pwr.fows.fows2017.di.component.ActivityComponent;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentNewsModule;
+import pl.edu.pwr.fows.fows2017.firebase.LogEvent;
 import pl.edu.pwr.fows.fows2017.fragment.base.BaseFragment;
 import pl.edu.pwr.fows.fows2017.presenter.FragmentNewsPresenter;
 import pl.edu.pwr.fows.fows2017.view.FragmentNewsView;
@@ -26,6 +27,8 @@ public class FragmentNews extends BaseFragment implements FragmentNewsView {
     @Inject
     FragmentNewsPresenter presenter;
     CustomRecyclerView recyclerView;
+    @Inject
+    LogEvent logEvent;
 
     @Override
     protected Integer getLayoutId() {
@@ -51,5 +54,13 @@ public class FragmentNews extends BaseFragment implements FragmentNewsView {
         adapter.setPresenter(presenter);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
+
+    @Override
+    public void firebaseLogPost(String postId, Boolean isOpen) {
+        if (isOpen)
+            logEvent.clickPost(postId);
+        else
+            logEvent.showPost(postId);
     }
 }
