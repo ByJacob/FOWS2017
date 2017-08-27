@@ -14,7 +14,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import pl.edu.pwr.fows.fows2017.facebookPost.FacebookClient;
 import pl.edu.pwr.fows.fows2017.firebase.LogEvent;
+import pl.edu.pwr.fows.fows2017.firebaseToken.FirebaseTokenClient;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
+import pl.edu.pwr.fows.fows2017.gateway.FirebaseTokenGateway;
 import pl.edu.pwr.fows.fows2017.gateway.LectureGateway;
 import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
 import pl.edu.pwr.fows.fows2017.gateway.OfferUrlGateway;
@@ -123,6 +125,12 @@ public class AppModule {
     @Named("LocalGateway")
     QuestionnaireVersionGateway getQuestionnaireVersionGatewaySharedPref(SharedPreferencesDataInterface sharedPreferences){
         return new SharedPreferencesAPIClient(sharedPreferences);
+    }
+
+    @Provides
+    @Singleton
+    FirebaseTokenGateway getFirebaseTokenGateway(){
+        return new FirebaseTokenClient();
     }
 
     @Provides

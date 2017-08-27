@@ -18,7 +18,6 @@ public class LogEvent {
 
     public void joinGroup(String groupId){
         Bundle bundle = new Bundle();
-        bundle.putString(FirebaseAnalytics.Param.GROUP_ID, groupId);
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.JOIN_GROUP, bundle);
     }
 

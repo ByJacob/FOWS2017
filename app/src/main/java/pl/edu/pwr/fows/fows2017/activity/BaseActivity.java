@@ -25,7 +25,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import javax.inject.Inject;
 
@@ -72,6 +72,12 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
             MessagingServiceAlertDialog.showAlertDialog(activity, intent, menuPresenter);
         }
     };
+    private BroadcastReceiver instanceIdServiceBroadcast = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            checkFirebaseToken();
+        }
+    };
 
     @SuppressWarnings("SameReturnValue")
     private Integer getLayoutId() {
@@ -98,6 +104,7 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
         }
         drawerFragment = (DrawerMenuFragment)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        checkFirebaseToken();
         menuPresenter.onViewTaken(drawerFragment);
         //BaseFragment baseFragment = (BaseFragment) getSupportFragmentManager().findFragmentByTag("MAIN");
     }
@@ -106,11 +113,13 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
     protected void onStart() {
         super.onStart();
         LocalBroadcastManager.getInstance(this).registerReceiver(messageServiceBroadcast, new IntentFilter("messageServiceBroadcast"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(instanceIdServiceBroadcast, new IntentFilter("instanceIdServiceBroadcast"));
     }
 
     @Override
     protected void onStop() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(messageServiceBroadcast);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(instanceIdServiceBroadcast);
         super.onStop();
     }
 
@@ -275,6 +284,16 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
         } else {
             showMessage("MAP", true);
         }
+    }
+
+    private void checkFirebaseToken() {
+        if (FirebaseInstanceId.getInstance().getToken() != null)
+            menuPresenter.sendToken(FirebaseInstanceId.getInstance().getToken(), getResources().getConfiguration().locale);
+    }
+
+    @Override
+    public void sendLogEvent() {
+        logEvent.joinGroup(FirebaseInstanceId.getInstance().getToken());
     }
 
     @Override

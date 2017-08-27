@@ -24,4 +24,6 @@ public interface BaseActivityView extends BaseActivityAndFragmentView {
     void startBrowser(String url);
 
     void startMaps(String place);
+
+    void sendLogEvent();
 }

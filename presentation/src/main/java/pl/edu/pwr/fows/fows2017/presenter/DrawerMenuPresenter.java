@@ -7,8 +7,8 @@ import pl.edu.pwr.fows.fows2017.UseCaseFactory;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
 import pl.edu.pwr.fows.fows2017.presenter.base.BasePresenter;
 import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
-import pl.edu.pwr.fows.fows2017.view.row.DrawerMenuRowView;
 import pl.edu.pwr.fows.fows2017.view.DrawerMenuView;
+import pl.edu.pwr.fows.fows2017.view.row.DrawerMenuRowView;
 
 /**
  * Project: FoWS2017
@@ -76,12 +76,12 @@ public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
         baseActivityView.blockContainerClick(false);
     }
 
-    public void setActualFragmentTag(String actualFragmentTag) {
-        this.actualFragmentTag = actualFragmentTag;
-    }
-
     public String getActualFragmentTag() {
         return actualFragmentTag;
+    }
+
+    public void setActualFragmentTag(String actualFragmentTag) {
+        this.actualFragmentTag = actualFragmentTag;
     }
 
     private void onMenusListFetchSuccess(List<Menu> menus) {
@@ -99,6 +99,19 @@ public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
     }
 
     public void clickLocation() {
-        baseActivityView.startMaps(LOCATION_D20_ID.replace(",","%2C").replace(" ","+"));
+        baseActivityView.startMaps(LOCATION_D20_ID.replace(",", "%2C").replace(" ", "+"));
+    }
+
+    public void sendToken(String token, Locale locale){
+        factory.sendFirebaseToken(token, locale.getLanguage()).execute().subscribe(this::onSendSuccess, this::onSendFail);
+    }
+
+    private void onSendFail(Throwable throwable) {
+        throwable.printStackTrace();
+    }
+
+    private void onSendSuccess(Boolean isNewToken) {
+        if(isNewToken)
+            baseActivityView.sendLogEvent();
     }
 }
