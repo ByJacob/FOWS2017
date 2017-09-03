@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.view.WindowManager;
 
 import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
@@ -27,6 +28,10 @@ public class MessagingServiceAlertDialog {
                 presenter.openFragment(intent.getExtras().getString(MESSAGING_SERVICE_FRAGMENT_TAG)));
         builder.setNegativeButton(R.string.open_later, null);
         AlertDialog dialog = builder.create();
-        dialog.show();
+        try {
+            dialog.show();
+        } catch (WindowManager.BadTokenException e) {
+            e.printStackTrace();
+        }
     }
 }

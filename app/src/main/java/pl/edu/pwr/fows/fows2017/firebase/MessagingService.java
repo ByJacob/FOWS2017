@@ -50,4 +50,12 @@ public class MessagingService extends FirebaseMessagingService {
         }
         super.onMessageReceived(remoteMessage);
     }
+
+    @Override
+    public void handleIntent(Intent intent) {
+        intent.putExtra(MessagingServiceAlertDialog.MESSAGING_SERVICE_TITLE, intent.getExtras().getString("title"));
+        intent.putExtra(MessagingServiceAlertDialog.MESSAGING_SERVICE_MESSAGE, intent.getExtras().getString("body"));
+        intent.putExtra(MessagingServiceAlertDialog.MESSAGING_SERVICE_FRAGMENT_TAG, intent.getExtras().getString("tag"));
+        super.handleIntent(intent);
+    }
 }

@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
@@ -105,8 +106,25 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
         drawerFragment = (DrawerMenuFragment)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         checkFirebaseToken();
+        int test = 1;
+        if (this.getIntent().getExtras() != null) {
+            String string = this.getIntent().getExtras().getString("tag");
+            test = 0;
+        }
         menuPresenter.onViewTaken(drawerFragment);
         //BaseFragment baseFragment = (BaseFragment) getSupportFragmentManager().findFragmentByTag("MAIN");
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        if (intent.getExtras() != null)
+            if (intent.getExtras().containsKey(MessagingServiceAlertDialog.MESSAGING_SERVICE_FRAGMENT_TAG)) {
+                Handler handler = new Handler();
+                Runnable runnable = () -> MessagingServiceAlertDialog
+                        .showAlertDialog(activity, intent, menuPresenter);
+                handler.postDelayed(runnable, 0);
+            }
+        super.onNewIntent(intent);
     }
 
     @Override
