@@ -95,7 +95,8 @@ public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
     }
 
     private void fetchSuccessOfferUrl(String url) {
-        baseActivityView.startBrowser(url);
+        String[] urls = url.split(";");
+        baseActivityView.startBrowser(urls[0], urls[1]);
     }
 
     public void clickLocation() {

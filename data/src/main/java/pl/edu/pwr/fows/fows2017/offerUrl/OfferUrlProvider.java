@@ -16,16 +16,19 @@ public class OfferUrlProvider {
     private static final Integer EN = 1;
 
     private final List<String> offersUrl = new ArrayList<>();
+    private final List<String> mediaOffersUrl = new ArrayList<>();
 
     public OfferUrlProvider() {
         offersUrl.add(PL, "http://fows.pwr.edu.pl/FoWS2017_oferta%20wsp%C3%B3%C5%82pracy.pdf");
         offersUrl.add(EN, "http://fows.pwr.edu.pl/FoWS2017_partnership%20proposal.pdf");
+        mediaOffersUrl.add(PL, "http://fows.pwr.edu.pl/FoWS2017_oferta%20wsp%C3%B3%C5%82pracy%20dla%20patron%C3%B3w%20medialnych.pdf");
+        mediaOffersUrl.add(EN, "http://fows.pwr.edu.pl/FoWS2017_oferta%20wsp%C3%B3%C5%82pracy%20dla%20patron%C3%B3w%20medialnych.pdf");
     }
 
     public String getOfferUrl(Locale locale) {
         if (Objects.equals(locale.getLanguage(), "pl"))
-            return offersUrl.get(PL);
+            return offersUrl.get(PL) + ";" + mediaOffersUrl.get(PL);
         else
-            return offersUrl.get(EN);
+            return offersUrl.get(EN) + ";" + mediaOffersUrl.get(EN);
     }
 }

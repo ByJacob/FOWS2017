@@ -32,6 +32,7 @@ import javax.inject.Inject;
 
 import pl.edu.pwr.fows.fows2017.BuildConfig;
 import pl.edu.pwr.fows.fows2017.R;
+import pl.edu.pwr.fows.fows2017.customViews.MessageOffers;
 import pl.edu.pwr.fows.fows2017.customViews.MessagingServiceAlertDialog;
 import pl.edu.pwr.fows.fows2017.firebase.LogEvent;
 import pl.edu.pwr.fows.fows2017.fragment.DrawerMenuFragment;
@@ -281,14 +282,8 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
     }
 
     @Override
-    public void startBrowser(String url) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(url));
-        try {
-            startActivity(intent);
-        } catch (ActivityNotFoundException exception) {
-            showMessage("BROWSER", true);
-        }
+    public void startBrowser(String offer, String media) {
+        MessageOffers.showMessageOffer(this, offer, media, this);
     }
 
     @Override
