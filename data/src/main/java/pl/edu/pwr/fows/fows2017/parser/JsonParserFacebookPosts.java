@@ -43,10 +43,7 @@ public class JsonParserFacebookPosts {
                 story = "";
             String created_time_tmp = post.getJSONObject("created_time").getString("date").split("\\.")[0];
             String timezone_time_tmp = post.getJSONObject("created_time").getString("timezone").replace(":", "");
-            BigDecimal tmpId = new BigDecimal(post.getString("id").split("_")[1]);
-            BigDecimal tmpDivisor = new BigDecimal(Integer.MAX_VALUE);
-            tmpId = tmpId.remainder(tmpDivisor);
-            Integer id = tmpId.intValue();
+            String id = post.getString("id").split("_")[1];
             Date created_time = null;
             try {
                 created_time = df.parse(created_time_tmp + timezone_time_tmp);

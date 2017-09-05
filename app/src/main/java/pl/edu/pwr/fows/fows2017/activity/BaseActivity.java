@@ -2,14 +2,19 @@ package pl.edu.pwr.fows.fows2017.activity;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,10 +26,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
 import javax.inject.Inject;
 
 import pl.edu.pwr.fows.fows2017.BuildConfig;
 import pl.edu.pwr.fows.fows2017.R;
+import pl.edu.pwr.fows.fows2017.customViews.MessageOffers;
+import pl.edu.pwr.fows.fows2017.customViews.MessagingServiceAlertDialog;
+import pl.edu.pwr.fows.fows2017.firebase.LogEvent;
 import pl.edu.pwr.fows.fows2017.fragment.DrawerMenuFragment;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentAgenda;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentContact;
@@ -51,15 +61,30 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
     @SuppressWarnings("CanBeFinal")
     @Inject
     Activity activity;
+    @SuppressWarnings("CanBeFinal")
+    @Inject
+    LogEvent logEvent;
     private Toolbar mToolbar;
     private DrawerMenuFragment drawerFragment;
     private Boolean isBlockClickContainerBody;
+    private String openFragmentTag;
+    private BroadcastReceiver messageServiceBroadcast = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            MessagingServiceAlertDialog.showAlertDialog(activity, intent, menuPresenter);
+        }
+    };
+    private BroadcastReceiver instanceIdServiceBroadcast = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            checkFirebaseToken();
+        }
+    };
 
     @SuppressWarnings("SameReturnValue")
     private Integer getLayoutId() {
         return R.layout.activity_main;
     }
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,10 +97,49 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayShowHomeEnabled(true);
+        openFragmentTag = "HOME";
+        if (getIntent().getExtras() != null) {
+            if (getIntent().getExtras().getBoolean("restart")) {
+                openFragmentTag = getIntent().getExtras().getString("openTag");
+                menuPresenter.setActualFragmentTag("");
+            }
+        }
         drawerFragment = (DrawerMenuFragment)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        checkFirebaseToken();
+        int test = 1;
+        if (this.getIntent().getExtras() != null) {
+            String string = this.getIntent().getExtras().getString("tag");
+            test = 0;
+        }
         menuPresenter.onViewTaken(drawerFragment);
         //BaseFragment baseFragment = (BaseFragment) getSupportFragmentManager().findFragmentByTag("MAIN");
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        if (intent.getExtras() != null)
+            if (intent.getExtras().containsKey(MessagingServiceAlertDialog.MESSAGING_SERVICE_FRAGMENT_TAG)) {
+                Handler handler = new Handler();
+                Runnable runnable = () -> MessagingServiceAlertDialog
+                        .showAlertDialog(activity, intent, menuPresenter);
+                handler.postDelayed(runnable, 0);
+            }
+        super.onNewIntent(intent);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LocalBroadcastManager.getInstance(this).registerReceiver(messageServiceBroadcast, new IntentFilter("messageServiceBroadcast"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(instanceIdServiceBroadcast, new IntentFilter("instanceIdServiceBroadcast"));
+    }
+
+    @Override
+    protected void onStop() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(messageServiceBroadcast);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(instanceIdServiceBroadcast);
+        super.onStop();
     }
 
     @Override
@@ -85,6 +149,7 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
                 if (BuildConfig.DEBUG)
                     Toast.makeText(this, tag, Toast.LENGTH_SHORT).show();
                 BaseFragment fragment = (BaseFragment) getSupportFragmentManager().findFragmentByTag(tag);
+                logEvent.openFragment(tag);
                 if (fragment == null) {
                     switch (tag) {
                         case "HOME":
@@ -156,7 +221,7 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
                 this.getString(SnackBarMessageMap.getTag(messageTag)), BaseTransientBottomBar.LENGTH_LONG);
         TextView textSnackBar = snackbar.getView()
                 .findViewById(android.support.design.R.id.snackbar_text);
-        if(isCritic==null)
+        if (isCritic == null)
             textSnackBar.setTextColor(Color.GREEN);
         else {
             if (isCritic)
@@ -217,14 +282,8 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
     }
 
     @Override
-    public void startBrowser(String url) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(url));
-        try {
-            startActivity(intent);
-        } catch (ActivityNotFoundException exception) {
-            showMessage("BROWSER", true);
-        }
+    public void startBrowser(String offer, String media) {
+        MessageOffers.showMessageOffer(this, offer, media, this);
     }
 
     @Override
@@ -240,9 +299,19 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
         }
     }
 
+    private void checkFirebaseToken() {
+        if (FirebaseInstanceId.getInstance().getToken() != null)
+            menuPresenter.sendToken(FirebaseInstanceId.getInstance().getToken(), getResources().getConfiguration().locale);
+    }
+
+    @Override
+    public void sendLogEvent() {
+        logEvent.joinGroup(FirebaseInstanceId.getInstance().getToken());
+    }
+
     @Override
     public void continueLoading() {
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar, menuPresenter, activity);
-        changeMainFragment("HOME");
+        changeMainFragment(openFragmentTag);
     }
 }

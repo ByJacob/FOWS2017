@@ -15,7 +15,7 @@ import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
 public class FragmentContactModule {
 
     @Provides
-    FragmentContactPresenter profideFragmentContactPresenter(UseCaseFactory factory, BaseActivityView baseActivityView){
+    FragmentContactPresenter provideFragmentContactPresenter(UseCaseFactory factory, BaseActivityView baseActivityView){
         return new FragmentContactPresenter(factory, baseActivityView);
     }
 }

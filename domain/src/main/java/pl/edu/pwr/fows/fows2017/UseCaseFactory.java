@@ -16,6 +16,7 @@ import pl.edu.pwr.fows.fows2017.entity.Organizer;
 import pl.edu.pwr.fows.fows2017.entity.Question;
 import pl.edu.pwr.fows.fows2017.entity.Sponsor;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
+import pl.edu.pwr.fows.fows2017.gateway.FirebaseTokenGateway;
 import pl.edu.pwr.fows.fows2017.gateway.LectureGateway;
 import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
 import pl.edu.pwr.fows.fows2017.gateway.OfferUrlGateway;
@@ -31,6 +32,7 @@ import pl.edu.pwr.fows.fows2017.usecase.MenuWithTagUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.OfferUrlUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.OrganizersUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.QuestionnaireUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.SendFirebaseTokenUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SendQuestionnaireUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SponsorUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.base.UseCase;
@@ -54,6 +56,7 @@ public class UseCaseFactory {
     private final QuestionGateway questionGateway;
     private final QuestionnaireVersionGateway questionnaireVersionGateway;
     private final QuestionnaireVersionGateway questionnaireVersionGatewaySharedPref;
+    private final FirebaseTokenGateway firebaseTokenGateway;
 
     @Inject
     public UseCaseFactory(FowsRxTransformerProvider rxTransformer, MenuGateway menuGateway,
@@ -66,7 +69,8 @@ public class UseCaseFactory {
                           OfferUrlGateway offerUrlGateway,
                           QuestionGateway questionGateway,
                           @Named("NetworkGateway") QuestionnaireVersionGateway questionnaireVersionGateway,
-                          @Named("LocalGateway") QuestionnaireVersionGateway questionnaireVersionGatewaySharedPref){
+                          @Named("LocalGateway") QuestionnaireVersionGateway questionnaireVersionGatewaySharedPref,
+                          FirebaseTokenGateway firebaseTokenGateway){
         this.menuGateway = menuGateway;
         this.rxTransformer = rxTransformer;
         this.facebookPostGateway = facebookPostGateway;
@@ -79,6 +83,7 @@ public class UseCaseFactory {
         this.questionGateway = questionGateway;
         this.questionnaireVersionGateway = questionnaireVersionGateway;
         this.questionnaireVersionGatewaySharedPref = questionnaireVersionGatewaySharedPref;
+        this.firebaseTokenGateway = firebaseTokenGateway;
     }
 
     public UseCase<Observable<List<Menu>>> getMenuUseCase(){
@@ -128,5 +133,9 @@ public class UseCaseFactory {
 
     public UseCase<Observable<Integer>> sendQuestionnaire(List<Question> questionnaire){
         return new SendQuestionnaireUseCase(rxTransformer, questionGateway, questionnaire);
+    }
+
+    public UseCase<Observable<Boolean>> sendFirebaseToken(String token, String language){
+        return new SendFirebaseTokenUseCase(rxTransformer, firebaseTokenGateway, token, language);
     }
 }

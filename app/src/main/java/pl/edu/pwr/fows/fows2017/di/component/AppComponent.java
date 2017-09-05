@@ -1,11 +1,14 @@
 package pl.edu.pwr.fows.fows2017.di.component;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import javax.inject.Singleton;
 
 import dagger.Component;
 import pl.edu.pwr.fows.fows2017.UseCaseFactory;
 import pl.edu.pwr.fows.fows2017.application.FowsApplication;
 import pl.edu.pwr.fows.fows2017.di.module.AppModule;
+import pl.edu.pwr.fows.fows2017.firebase.LogEvent;
 import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
 
 /**
@@ -20,4 +23,8 @@ public interface AppComponent {
     void inject(FowsApplication fowsApplication);
 
     UseCaseFactory getUseCaseFactory();
+
+    FirebaseAnalytics getFirebaseAnalytics();
+
+    LogEvent getLogEvent();
 }

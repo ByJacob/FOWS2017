@@ -104,7 +104,7 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                presenter.menuItemClick(fragment, view.getTag().toString());
+                presenter.openFragment(view.getTag().toString());
             }
 
             @Override
