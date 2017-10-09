@@ -37,5 +37,11 @@
     <string name="offers">Which offers do you want to open?</string>
     <string name="offer1">Partnership proposal</string>
     <string name="offer2">Media partnership</string>
+    <string name="StrategicSponsor_0">Strategic Sponsor</string>
+    <string name="HonorarySponsor_1">Honorary Sponsor</string>
+    <string name="Sponsors_2">Sponsors</string>
+    <string name="Partners_8">Partners</string>
+    <string name="MediaPartners_10">Media Partners</string>
+    <string name="AwardSponsors_12">Award Sponsors</string>
 
 </resources>

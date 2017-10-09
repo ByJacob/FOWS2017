@@ -33,4 +33,10 @@
     <string name="offers">Którą oferte chcesz otworzyć ?</string>
     <string name="offer1">Oferta współpracy</string>
     <string name="offer2">Oferta medialna</string>
+    <string name="Sponsors_2">Sponsorzy</string>
+    <string name="StrategicSponsor_0">Sponsor Strategiczny</string>
+    <string name="HonorarySponsor_1">Sponsor Honorowy</string>
+    <string name="MediaPartners_10">Patroni Medialni</string>
+    <string name="Partners_8">Patroni</string>
+    <string name="AwardSponsors_12">Fundatorzy Nagród</string>
 </resources>

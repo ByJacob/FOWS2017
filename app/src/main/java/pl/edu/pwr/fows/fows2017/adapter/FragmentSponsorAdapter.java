@@ -24,11 +24,14 @@ import pl.edu.pwr.fows.fows2017.view.row.FragmentSponsorRowView;
 public class FragmentSponsorAdapter {
 
     private static final Integer COLUMN_COUNT = 120;
-    private static final Integer SIZE_4_COLUMN_TAKES = COLUMN_COUNT;
-    private static final Integer SIZE_3_COLUMN_TAKES = COLUMN_COUNT / 2;
-    private static final Integer SIZE_2_COLUMN_TAKES = COLUMN_COUNT / 3;
-    private static final Integer SIZE_1_COLUMN_TAKES = COLUMN_COUNT / 4;
-    private static final Integer SIZE_0_COLUMN_TAKES = COLUMN_COUNT / 5;
+    private static final Integer SIZE_0_COLUMN_TAKES = COLUMN_COUNT;
+    private static final Integer SIZE_1_COLUMN_TAKES = Math.round(COLUMN_COUNT / 1.5f);
+    private static final Integer SIZE_2_COLUMN_TAKES = COLUMN_COUNT / 2;
+    private static final Integer SIZE_4_COLUMN_TAKES = COLUMN_COUNT / 3;
+    private static final Integer SIZE_6_COLUMN_TAKES = COLUMN_COUNT / 4;
+    private static final Integer SIZE_8_COLUMN_TAKES = COLUMN_COUNT / 5;
+    private static final Integer SIZE_10_COLUMN_TAKES = COLUMN_COUNT / 5;
+    private static final Integer SIZE_12_COLUMN_TAKES = COLUMN_COUNT / 5;
     private static final Integer MAX_CHILDREN = 5;
 
     private final Context context;
@@ -57,25 +60,37 @@ public class FragmentSponsorAdapter {
             GridLayout grid = null;
             Integer columnTakes = 0;
             switch (i) {
-                case 4:
-                    grid = parent.findViewById(R.id.fragment_news_row_4);
-                    columnTakes = SIZE_4_COLUMN_TAKES;
-                    break;
-                case 3:
-                    grid = parent.findViewById(R.id.fragment_news_row_3);
-                    columnTakes = SIZE_3_COLUMN_TAKES;
-                    break;
-                case 2:
-                    grid = parent.findViewById(R.id.fragment_news_row_2);
-                    columnTakes = SIZE_2_COLUMN_TAKES;
+                case 0:
+                    grid = parent.findViewById(R.id.fragment_news_row_0);
+                    columnTakes = SIZE_0_COLUMN_TAKES;
                     break;
                 case 1:
                     grid = parent.findViewById(R.id.fragment_news_row_1);
                     columnTakes = SIZE_1_COLUMN_TAKES;
                     break;
-                case 0:
-                    grid = parent.findViewById(R.id.fragment_news_row_0);
-                    columnTakes = SIZE_0_COLUMN_TAKES;
+                case 2:
+                    grid = parent.findViewById(R.id.fragment_news_row_2);
+                    columnTakes = SIZE_2_COLUMN_TAKES;
+                    break;
+                case 3:
+                    grid = parent.findViewById(R.id.fragment_news_row_4);
+                    columnTakes = SIZE_4_COLUMN_TAKES;
+                    break;
+                case 4:
+                    grid = parent.findViewById(R.id.fragment_news_row_6);
+                    columnTakes = SIZE_6_COLUMN_TAKES;
+                    break;
+                case 5:
+                    grid = parent.findViewById(R.id.fragment_news_row_8);
+                    columnTakes = SIZE_8_COLUMN_TAKES;
+                    break;
+                case 6:
+                    grid = parent.findViewById(R.id.fragment_news_row_10);
+                    columnTakes = SIZE_10_COLUMN_TAKES;
+                    break;
+                case 7:
+                    grid = parent.findViewById(R.id.fragment_news_row_12);
+                    columnTakes = SIZE_12_COLUMN_TAKES;
                     break;
             }
             if (!presenter.getIsNetwork()) {
