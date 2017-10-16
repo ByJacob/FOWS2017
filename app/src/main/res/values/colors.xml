@@ -16,4 +16,6 @@
 
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
+    <color name="menu1">#9e9e9e</color>
+    <color name="menu2">#bdbdbd</color>
 </resources>

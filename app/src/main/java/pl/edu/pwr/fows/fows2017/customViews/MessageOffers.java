@@ -20,7 +20,7 @@ public class MessageOffers {
     static public void showMessageOffer(Context context, String normal, String media,
                                         BaseActivityView view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage(R.string.offers)
+        builder//.setMessage(R.string.offers)
                 .setPositiveButton(R.string.offer1, clickOffer(normal, context, view))
                 .setNegativeButton(R.string.offer2, clickOffer(media, context, view));
         AlertDialog dialog = builder.create();
