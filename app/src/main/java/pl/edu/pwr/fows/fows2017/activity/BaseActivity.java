@@ -40,6 +40,7 @@ import pl.edu.pwr.fows.fows2017.fragment.FragmentAgenda;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentContact;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentHome;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentNews;
+import pl.edu.pwr.fows.fows2017.fragment.FragmentOrganiser;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentQuestionnaire;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentSponsor;
 import pl.edu.pwr.fows.fows2017.fragment.base.BaseFragment;
@@ -175,6 +176,9 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
                             break;
                         case "LOCATION":
                             menuPresenter.clickLocation();
+                            break;
+                        case "ORGANISERS":
+                            fragment = new FragmentOrganiser();
                     }
                 }
                 if (fragment != null)
