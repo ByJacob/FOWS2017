@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.map.DrawerMenuItemMap;
 import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
@@ -67,6 +69,7 @@ public class DrawerMenuAdapter extends RecyclerView.Adapter<DrawerMenuAdapter.Na
         @Override
         public void displayTitle(String tag) {
             title.setText(context.getString(DrawerMenuItemMap.getTag(tag)));
+            Picasso.with(context).load(DrawerMenuItemMap.getIcon(tag)).into(statusIcon);
         }
 
         @Override
