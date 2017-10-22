@@ -69,5 +69,5 @@
     <dimen name="fragment_organiser_row_texts_padding_bottom">16dp</dimen>
     <dimen name="fragment_organiser_row_texts_padding_vertical">16dp</dimen>
     <dimen name="fragment_organiser_row_ptext_size">24sp</dimen>
-    <dimen name="fragment_organiser_row_ptext_padding_top">24sp</dimen>
+    <dimen name="fragment_organiser_row_ptext_padding_top">20dp</dimen>
 </resources>

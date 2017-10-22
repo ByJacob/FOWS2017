@@ -7,11 +7,12 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/row_fragment_organiser_card_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/card_padding">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -20,6 +21,9 @@
                 android:id="@+id/row_fragment_organiser_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@drawable/logo_wg_kwadrat" />
 
             <TextView
@@ -33,6 +37,10 @@
                 android:paddingTop="@dimen/fragment_organiser_row_ptext_padding_top"
                 android:textColor="@color/black"
                 android:textSize="@dimen/fragment_organiser_row_ptext_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/row_fragment_organiser_image"
                 tools:text="prof. dr hab. inż. Tadeusz Więckowski" />
 
             <TextView
@@ -45,7 +53,11 @@
                 android:paddingStart="@dimen/fragment_organiser_row_texts_padding_vertical"
                 android:textColor="@color/black"
                 android:textSize="@dimen/fragment_organiser_row_subtext_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/row_fragment_organiser_ptext"
                 tools:text="Honorowy przewodniczący Komitetu" />
-        </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

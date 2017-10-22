@@ -16,7 +16,7 @@ public class DrawerMenuItemMap {
 
     private static final Integer[] idIcons= {R.drawable.ic_home, R.drawable.ic_agenda, R.drawable.ic_sponsors,
                         R.drawable.ic_contact, R.drawable.ic_offer, R.drawable.ic_news, R.drawable.ic_location,
-                        R.drawable.ic_questionnaire, R.drawable.ic_navigation_item};
+                        R.drawable.ic_questionnaire, R.drawable.ic_organisers};
 
     public static Integer getTag(String tag) {
         for(int i=0; i<tags.length;  i++){
