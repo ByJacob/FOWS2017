@@ -1,9 +1,17 @@
 package pl.edu.pwr.fows.fows2017.adapter;
 
 import android.content.Context;
+import android.support.v4.view.GestureDetectorCompat;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
@@ -31,6 +39,7 @@ public class FragmentOrganiserAdapter {
             R.id.fragment_organiser_tab3, R.id.fragment_organiser_tab4, R.id.fragment_organiser_tab5};
     private FragmentOrganiserPresenter presenter;
     private TabHost tabHost;
+    private int currentTab;
 
     public FragmentOrganiserAdapter(Context context) {
         this.context = context;
@@ -47,11 +56,13 @@ public class FragmentOrganiserAdapter {
 
     public void display() {
         tabHost.setup();
+        currentTab = 0;
         for (int i = 0; i < tabs.length && i < presenter.getOrganiserGroupCount(); i++) {
             String specName = presenter.getNameTab(i, context.getResources().getConfiguration().locale);
             TabHost.TabSpec spec = tabHost.newTabSpec(specName);
             LinearLayout viewContent = tabHost.findViewById(tabs[i]);
             spec.setContent(scrollTabs[i]);
+            configureGestureDetector(tabHost.findViewById(scrollTabs[i]));
             spec.setIndicator(specName);
             tabHost.addTab(spec);
             for (int j = 0; j < presenter.getOrganiserGroupPeopleCount(i); j++) {
@@ -63,6 +74,107 @@ public class FragmentOrganiserAdapter {
                 viewContent.addView(view);
                 presenter.configureOrganiserRowView(organiserHolder, i, j, context.getResources().getConfiguration().locale);
             }
+        }
+        configureAnimationAndScroll();
+    }
+
+    private void configureAnimationAndScroll() {
+        HorizontalScrollView scrollView = tabHost.findViewById(R.id.fragment_organiser_horizontal_scroll);
+        tabHost.setOnTabChangedListener(s -> {
+            View currentView = tabHost.getCurrentView();
+            if (tabHost.getCurrentTab() > currentTab) {
+                currentView.setAnimation(getAnimation(false));
+            } else {
+                currentView.setAnimation(getAnimation(true));
+            }
+            currentTab = tabHost.getCurrentTab();
+            int toScrollX = tabHost.findViewById(android.R.id.tabs).getWidth()/
+                    tabHost.getTabWidget().getTabCount()*currentTab;
+            scrollView.smoothScrollTo(toScrollX, 0);
+        });
+    }
+
+    private Animation getAnimation(boolean isMoveRight) {
+        float fromXValue = +1.0f;
+        if (isMoveRight)
+            fromXValue = -1.0f;
+        Animation animation = new TranslateAnimation(
+                Animation.RELATIVE_TO_PARENT, fromXValue,
+                Animation.RELATIVE_TO_PARENT, 0.0f,
+                Animation.RELATIVE_TO_PARENT, 0.0f,
+                Animation.RELATIVE_TO_PARENT, 0.0f);
+        animation.setDuration(240);
+        animation.setInterpolator(new AccelerateInterpolator());
+        return animation;
+    }
+
+    private void configureGestureDetector(View view) {
+        GestureDetectorCompat gestureDetectorCompat = new GestureDetectorCompat(context, new GestureDetector.OnGestureListener() {
+            @Override
+            public boolean onDown(MotionEvent motionEvent) {
+                return false;
+            }
+
+            @Override
+            public void onShowPress(MotionEvent motionEvent) {
+
+            }
+
+            @Override
+            public boolean onSingleTapUp(MotionEvent motionEvent) {
+                return false;
+            }
+
+            @Override
+            public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+                return false;
+            }
+
+            @Override
+            public void onLongPress(MotionEvent motionEvent) {
+
+            }
+
+            @Override
+            public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1,
+                                   float velocityX, float velocityY) {
+                final int SWIPE_MIN_DISTANCE = 120;
+                final int SWIPE_MAX_OFF_PATH = 250;
+                final int SWIPE_THRESHOLD_VELOCITY = 200;
+                try {
+                    if (Math.abs(motionEvent.getY() - motionEvent1.getY()) > SWIPE_MAX_OFF_PATH)
+                        return false;
+                    if (motionEvent.getX() - motionEvent1.getX() > SWIPE_MIN_DISTANCE
+                            && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                        switchTabs(false);
+                    } else if (motionEvent.getX() - motionEvent1.getX() < -SWIPE_MIN_DISTANCE
+                            && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                        switchTabs(true);
+                    }
+                } catch (Exception e) {
+                    // nothing
+                }
+                return false;
+            }
+        });
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return gestureDetectorCompat.onTouchEvent(motionEvent);
+            }
+        });
+    }
+
+    private void switchTabs(boolean direction) {
+        if (direction) // true = move left
+        {
+            if (tabHost.getCurrentTab() != 0)
+                tabHost.setCurrentTab(tabHost.getCurrentTab() - 1);
+        } else // move right
+        {
+            if (tabHost.getCurrentTab() != (tabHost.getTabWidget()
+                    .getTabCount() - 1))
+                tabHost.setCurrentTab(tabHost.getCurrentTab() + 1);
         }
     }
 

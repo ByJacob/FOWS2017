@@ -22,6 +22,7 @@ public class FragmentOrganiser extends BaseFragment implements FragmentOrganiser
 
     @Inject
     FragmentOrganiserPresenter presenter;
+    private FragmentOrganiserAdapter adapter;
 
     @Override
     protected Integer getLayoutId() {
@@ -41,10 +42,11 @@ public class FragmentOrganiser extends BaseFragment implements FragmentOrganiser
 
     @Override
     public void continueLoading() {
-        FragmentOrganiserAdapter adapter = new FragmentOrganiserAdapter(getContext());
+        adapter = new FragmentOrganiserAdapter(getContext());
         adapter.setPresenter(presenter);
-        if(getView() != null) {
+        if (getView() != null) {
             adapter.setTabHost(getView().findViewById(R.id.fragment_organiser_tabhost));
+            //configureGestureDetector(getView().findViewById(R.id.fragment_organiser_contener));
             adapter.display();
         }
     }
