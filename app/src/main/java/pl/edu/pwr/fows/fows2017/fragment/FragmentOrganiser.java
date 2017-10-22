@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import javax.inject.Inject;
 
 import pl.edu.pwr.fows.fows2017.R;
+import pl.edu.pwr.fows.fows2017.adapter.FragmentOrganiserAdapter;
 import pl.edu.pwr.fows.fows2017.di.component.ActivityComponent;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentOrganiserModule;
 import pl.edu.pwr.fows.fows2017.fragment.base.BaseFragment;
@@ -40,6 +41,11 @@ public class FragmentOrganiser extends BaseFragment implements FragmentOrganiser
 
     @Override
     public void continueLoading() {
-
+        FragmentOrganiserAdapter adapter = new FragmentOrganiserAdapter(getContext());
+        adapter.setPresenter(presenter);
+        if(getView() != null) {
+            adapter.setTabHost(getView().findViewById(R.id.fragment_organiser_tabhost));
+            adapter.display();
+        }
     }
 }

@@ -5,28 +5,16 @@ import java.util.List;
 /**
  * Awesome Pojo Generator
  * */
-public class Organiser {
-  @SerializedName("person")
-  @Expose
-  private String person;
+public class OrganiserTeam{
   @SerializedName("namePL")
   @Expose
   private String namePL;
   @SerializedName("nameEN")
   @Expose
   private String nameEN;
-  @SerializedName("team")
+  @SerializedName("people")
   @Expose
-  private List<Team> team;
-  @SerializedName("picture")
-  @Expose
-  private String picture;
-  public void setPerson(String person){
-   this.person=person;
-  }
-  public String getPerson(){
-   return person;
-  }
+  private List<People> people;
   public void setNamePL(String namePL){
    this.namePL=namePL;
   }
@@ -39,16 +27,10 @@ public class Organiser {
   public String getNameEN(){
    return nameEN;
   }
-  public void setTeam(List<Team> team){
-   this.team=team;
+  public void setPeople(List<People> people){
+   this.people=people;
   }
-  public List<Team> getTeam(){
-   return team;
-  }
-  public void setPicture(String picture){
-   this.picture=picture;
-  }
-  public String getPicture(){
-   return picture;
+  public List<People> getPeople(){
+   return people;
   }
 }

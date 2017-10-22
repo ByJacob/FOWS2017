@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/card_padding">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/row_fragment_organiser_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:srcCompat="@drawable/logo_wg_kwadrat" />
+
+            <TextView
+                android:id="@+id/row_fragment_organiser_ptext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="0.87"
+                android:paddingBottom="@dimen/fragment_organiser_row_texts_padding_bottom"
+                android:paddingRight="@dimen/fragment_organiser_row_texts_padding_vertical"
+                android:paddingStart="@dimen/fragment_organiser_row_texts_padding_vertical"
+                android:paddingTop="@dimen/fragment_organiser_row_ptext_padding_top"
+                android:textColor="@color/black"
+                android:textSize="@dimen/fragment_organiser_row_ptext_size"
+                tools:text="prof. dr hab. inż. Tadeusz Więckowski" />
+
+            <TextView
+                android:id="@+id/row_fragment_organiser_subtext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="0.5"
+                android:paddingBottom="@dimen/fragment_organiser_row_texts_padding_bottom"
+                android:paddingEnd="@dimen/fragment_organiser_row_texts_padding_vertical"
+                android:paddingStart="@dimen/fragment_organiser_row_texts_padding_vertical"
+                android:textColor="@color/black"
+                android:textSize="@dimen/fragment_organiser_row_subtext_size"
+                tools:text="Honorowy przewodniczący Komitetu" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

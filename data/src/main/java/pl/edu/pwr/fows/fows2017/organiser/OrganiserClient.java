@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.edu.pwr.fows.fows2017.entity.Organiser;
+import pl.edu.pwr.fows.fows2017.entity.OrganiserTeam;
 import pl.edu.pwr.fows.fows2017.gateway.OrganiserGateway;
 
 /**
@@ -22,7 +22,7 @@ public class OrganiserClient implements OrganiserGateway {
     }
 
     @Override
-    public List<Organiser> getOrganisers() {
+    public List<OrganiserTeam> getOrganisers() {
         try {
             return provider.getOrganisers();
         } catch (IOException e) {

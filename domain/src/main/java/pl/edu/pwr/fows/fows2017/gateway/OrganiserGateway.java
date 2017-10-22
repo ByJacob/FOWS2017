@@ -2,7 +2,7 @@ package pl.edu.pwr.fows.fows2017.gateway;
 
 import java.util.List;
 
-import pl.edu.pwr.fows.fows2017.entity.Organiser;
+import pl.edu.pwr.fows.fows2017.entity.OrganiserTeam;
 
 /**
  * Project: FoWS2017
@@ -11,5 +11,5 @@ import pl.edu.pwr.fows.fows2017.entity.Organiser;
 
 public interface OrganiserGateway {
 
-    List<Organiser> getOrganisers();
+    List<OrganiserTeam> getOrganisers();
 }

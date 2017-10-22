@@ -12,7 +12,7 @@ import pl.edu.pwr.fows.fows2017.aux_data.FowsRxTransformerProvider;
 import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
 import pl.edu.pwr.fows.fows2017.entity.Lecture;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
-import pl.edu.pwr.fows.fows2017.entity.Organiser;
+import pl.edu.pwr.fows.fows2017.entity.OrganiserTeam;
 import pl.edu.pwr.fows.fows2017.entity.Organizer;
 import pl.edu.pwr.fows.fows2017.entity.Question;
 import pl.edu.pwr.fows.fows2017.entity.Sponsor;
@@ -123,7 +123,7 @@ public class UseCaseFactory {
     public UseCase<Single<List<Organizer>>> getOrganizers(){
         return new OrganizersUseCase(rxTransformer, organizerGateway);
     }
-    public UseCase<Observable<List<Organiser>>> getOrganisers(){
+    public UseCase<Observable<List<OrganiserTeam>>> getOrganisers(){
         return new OrganisersUseCase(rxTransformer, organiserGateway);
     }
 
