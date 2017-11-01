@@ -12,6 +12,11 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
@@ -81,9 +86,19 @@ public class FragmentHome extends BaseFragment implements FragmentHomeView {
 
     @Override
     public void continueLoading() {
-        Handler handler = new Handler();
-        presenter.refreshMainIcon();
-        handler.postDelayed(this::continueLoading, 10000);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("menu");
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                presenter.refreshMainIcon();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        databaseReference.addValueEventListener(postListener);
     }
 
     @Override

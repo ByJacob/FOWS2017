@@ -16,6 +16,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.adapter.DrawerMenuAdapter;
 import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
@@ -95,7 +101,19 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
 
     @Override
     public void continueLoading() {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("menu");
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                presenter.changeMenusInDatabase();
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        databaseReference.addValueEventListener(postListener);
     }
 
     private void setRecyclerView(final DrawerMenuView fragment) {
