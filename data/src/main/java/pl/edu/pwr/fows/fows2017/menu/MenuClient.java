@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
 import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
 
@@ -34,10 +33,10 @@ public class MenuClient implements MenuGateway {
 
     @Override
     public Menu getMenu(String tag) {
-            try {
-                return provider.getMenu(tag);
-            } catch (Exception e) {
-                return provider.getMenuDefaultConstruct(tag);
-            }
+        try {
+            return provider.getMenu(tag);
+        } catch (Exception e) {
+            return provider.getMenuDefaultConstruct(tag);
+        }
     }
 }
