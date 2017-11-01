@@ -17,6 +17,10 @@ public class DrawerMenuItemMap {
     private static final Integer[] idIcons= {R.drawable.ic_home, R.drawable.ic_agenda, R.drawable.ic_sponsors,
                         R.drawable.ic_contact, R.drawable.ic_offer, R.drawable.ic_news, R.drawable.ic_location,
                         R.drawable.ic_questionnaire, R.drawable.ic_organisers};
+    private static final Integer[] idMainIcons= {R.drawable.ic_main_home, R.drawable.ic_main_agenda,
+            R.drawable.ic_main_sponsors, R.drawable.ic_main_contact, R.drawable.ic_main_offer,
+            R.drawable.ic_main_news, R.drawable.ic_main_location, R.drawable.ic_main_questionnaire,
+            R.drawable.ic_main_organiser};
 
     public static Integer getTag(String tag) {
         for(int i=0; i<tags.length;  i++){
@@ -24,13 +28,22 @@ public class DrawerMenuItemMap {
                 return idStrings[i];
             }
         }
-        return null; //todo make exception
+        return R.string.exception_default;
     }
 
     public static Integer getIcon(String tag) {
         for(int i=0; i<tags.length;  i++){
             if(tag.equals(tags[i])) {
                 return idIcons[i];
+            }
+        }
+        return R.drawable.ic_navigation_item;
+    }
+
+    public static Integer getMainIcon(String tag) {
+        for(int i=0; i<tags.length;  i++){
+            if(tag.equals(tags[i])) {
+                return idMainIcons[i];
             }
         }
         return R.drawable.ic_navigation_item;

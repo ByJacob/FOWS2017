@@ -49,8 +49,20 @@ public class FragmentHomePresenter extends BasePresenter<FragmentHomeView>{
     public void onViewTaken(FragmentHomeView view) {
         this.view = view;
         baseActivityView.disableLoadingBar();
+        view.continueLoading();
         factory.isMenuWithTag(TAG_AGENDA).execute().subscribe(this::displayLectureOnMenuWithTagFetchSuccess);
         factory.getSponsors().execute().subscribe(this::onSponsorsFetchSuccess, this::onSponsorsFetchFail);
+    }
+
+    public void refreshMainIcon(){
+        factory.getMenuUseCase().execute().subscribe(this::onMenusListFetchSuccess);
+    }
+
+    private void onMenusListFetchSuccess(List<Menu> menus) {
+        for(Menu menu : menus){
+            if(menu.getPositionInMainMenu()>0)
+                view.updateIcon(menu.getPositionInMainMenu(), menu.getTag());
+        }
     }
 
     private void onSponsorsFetchFail(Throwable throwable) {
