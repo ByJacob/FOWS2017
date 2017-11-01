@@ -1,32 +1,42 @@
 package pl.edu.pwr.fows.fows2017.entity;
-
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 /**
- * Project: FoWS2017
- * Created by Jakub Rosa on 24.07.2017.
- */
+ * Awesome Pojo Generator
+ * */
+public class Menu{
+  @SerializedName("enable")
+  @Expose
+  private Boolean enable;
+  @SerializedName("position")
+  @Expose
+  private Integer position;
+  @SerializedName("tag")
+  @Expose
+  private String tag;
+  public void setEnable(Boolean enable){
+   this.enable=enable;
+  }
+  public Boolean getEnable(){
+   return enable;
+  }
+  public void setPosition(Integer position){
+   this.position=position;
+  }
+  public Integer getPosition(){
+   return position;
+  }
+  public void setTag(String tag){
+   this.tag=tag;
+  }
+  public String getTag(){
+   return tag;
+  }
 
-public class Menu {
-
-
-
-    private final int id;
-    private final String tag;
-
-    private Menu(int id, String tag) {
-        this.id = id;
-        this.tag = tag;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getTag() {
-        return tag;
-    }
 
     public static final class Builder {
-        private int id;
+        private Boolean enable;
+        private Integer position;
         private String tag;
 
         private Builder() {
@@ -36,18 +46,27 @@ public class Menu {
             return new Builder();
         }
 
-        public Builder withId(int id) {
-            this.id = id;
+        public Builder withEnable(Boolean enable) {
+            this.enable = enable;
             return this;
         }
 
-        public Builder withTag(String name) {
-            this.tag = name;
+        public Builder withPosition(Integer position) {
+            this.position = position;
+            return this;
+        }
+
+        public Builder withTag(String tag) {
+            this.tag = tag;
             return this;
         }
 
         public Menu build() {
-            return new Menu(id, tag);
+            Menu menu = new Menu();
+            menu.setEnable(enable);
+            menu.setPosition(position);
+            menu.setTag(tag);
+            return menu;
         }
     }
 }

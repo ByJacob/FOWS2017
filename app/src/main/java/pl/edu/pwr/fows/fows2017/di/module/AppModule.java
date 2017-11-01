@@ -3,6 +3,7 @@ package pl.edu.pwr.fows.fows2017.di.module;
 import android.app.Application;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.database.FirebaseDatabase;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -12,6 +13,7 @@ import dagger.Provides;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import pl.edu.pwr.fows.fows2017.declarationInterface.FirebaseDatabaseInterface;
 import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterface;
 import pl.edu.pwr.fows.fows2017.facebookPost.FacebookClient;
 import pl.edu.pwr.fows.fows2017.firebase.LogEvent;
@@ -34,6 +36,7 @@ import pl.edu.pwr.fows.fows2017.organizer.OrganizerClient;
 import pl.edu.pwr.fows.fows2017.questionnaire.QuestionnaireClient;
 import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesAPIClient;
 import pl.edu.pwr.fows.fows2017.sponsors.SponsorsClient;
+import pl.edu.pwr.fows.fows2017.tools.FirebaseDatabaseAPI;
 import pl.edu.pwr.fows.fows2017.tools.SharedPreferencesAPI;
 
 /**
@@ -49,18 +52,12 @@ public class AppModule {
     public AppModule(Application application) {
         this.application = application;
     }
-    /*
+
     @Provides
     @Singleton
-    Datastore getDatastore(){
-        try {
-            return DatastoreOptions.newBuilder().setCredentials(ServiceAccountCredentials
-                    .fromStream(new FileInputStream("FoWS2017-User.json"))).build().getService();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        throw new NoSuchElementException("Can't read file with credentials");
-    } */
+    FirebaseDatabaseInterface getDatabase(){
+        return new FirebaseDatabaseAPI();
+    }
 
     @Provides
     @Singleton

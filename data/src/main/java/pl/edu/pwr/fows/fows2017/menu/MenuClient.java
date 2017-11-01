@@ -14,7 +14,7 @@ import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
 
 public class MenuClient implements MenuGateway {
 
-    private final static String URL = "http://fows.pwr.edu.pl/sections/android-menu.php?android";
+    private final static String URL = "https://fows-2017.firebaseio.com/menu.json";
     private final MenuProvider provider;
 
     @Inject
