@@ -5,6 +5,7 @@ dependencies {
     compile 'javax.inject:javax.inject:1'
 
     compile 'io.reactivex.rxjava2:rxjava:2.1.0'
+    compile 'com.google.code.gson:gson:2.8.2'
 }
 //noinspection GroovyUnusedAssignment
 sourceCompatibility = "1.8"

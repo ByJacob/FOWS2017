@@ -7,7 +7,7 @@ android {
         applicationId "pl.edu.pwr.fows.fows2017"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 110
+        versionCode 111
         versionName "1.10"
     }
     configurations {
@@ -53,7 +53,7 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxjava:2.1.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'de.hdodenhof:circleimageview:2.1.0'
-    compile 'com.google.android:flexbox:0.3.0'
+    compile 'com.google.android:flexbox:0.3.1'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile project(path: ':presentation')
     compile project(path: ':data')

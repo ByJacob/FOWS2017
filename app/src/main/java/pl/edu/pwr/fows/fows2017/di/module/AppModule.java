@@ -20,6 +20,7 @@ import pl.edu.pwr.fows.fows2017.gateway.FirebaseTokenGateway;
 import pl.edu.pwr.fows.fows2017.gateway.LectureGateway;
 import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
 import pl.edu.pwr.fows.fows2017.gateway.OfferUrlGateway;
+import pl.edu.pwr.fows.fows2017.gateway.OrganiserGateway;
 import pl.edu.pwr.fows.fows2017.gateway.OrganizerGateway;
 import pl.edu.pwr.fows.fows2017.gateway.QuestionGateway;
 import pl.edu.pwr.fows.fows2017.gateway.QuestionnaireVersionGateway;
@@ -27,6 +28,7 @@ import pl.edu.pwr.fows.fows2017.gateway.SponsorGateway;
 import pl.edu.pwr.fows.fows2017.lecture.LectureClient;
 import pl.edu.pwr.fows.fows2017.menu.MenuClient;
 import pl.edu.pwr.fows.fows2017.offerUrl.OfferUrlClient;
+import pl.edu.pwr.fows.fows2017.organiser.OrganiserClient;
 import pl.edu.pwr.fows.fows2017.organizer.OrganizerClient;
 import pl.edu.pwr.fows.fows2017.questionnaire.QuestionnaireClient;
 import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesAPIClient;
@@ -99,6 +101,12 @@ public class AppModule {
     @Singleton
     OrganizerGateway getOrganizerGateway(){
         return new OrganizerClient();
+    }
+
+    @Provides
+    @Singleton
+    OrganiserGateway getOrganiserGateway(){
+        return new OrganiserClient();
     }
 
     @Provides
