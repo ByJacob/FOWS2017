@@ -7,8 +7,8 @@ android {
         applicationId "pl.edu.pwr.fows.fows2017"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 111
-        versionName "1.10"
+        versionCode 112
+        versionName "1.12"
     }
     configurations {
         all {
@@ -44,7 +44,7 @@ dependencies {
     compile "com.google.android.gms:play-services-gcm:11.4.2"
     compile "com.google.firebase:firebase-core:$FIREBASE_VERSION"
     compile "com.google.firebase:firebase-messaging:$FIREBASE_VERSION"
-    compile "com.google.firebase:firebase-crash:$FIREBASE_VERSION" //Todo add check crashing report
+    compile "com.google.firebase:firebase-crash:$FIREBASE_VERSION"
     compile "com.google.firebase:firebase-database:$FIREBASE_VERSION"
     compile "com.google.dagger:dagger:$DAGGER_VERSION"
     compile 'com.google.android:flexbox:0.3.1'
