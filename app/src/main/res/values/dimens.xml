@@ -5,7 +5,7 @@
     <dimen name="navigation_item_icon_margin_left_right">16dp</dimen>
     <dimen name="navigation_item_text_left_margin">72dp</dimen>
     <dimen name="navigation_header_texts_height">56dp</dimen>
-    <dimen name="navigation_header_texts_left_margin">@dimen/navigation_item_icon_margin_left_right</dimen>
+    <dimen name="navigation_header_texts_left_margin">8dp</dimen>
     <dimen name="navigation_avatar_left_margin">@dimen/navigation_item_icon_margin_left_right</dimen>
     <dimen name="navigation_header_bottom_padding">8dp</dimen>
     <dimen name="navigation_list_top_margin">8dp</dimen>
