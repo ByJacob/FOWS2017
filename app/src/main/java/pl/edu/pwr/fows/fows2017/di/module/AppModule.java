@@ -3,7 +3,6 @@ package pl.edu.pwr.fows.fows2017.di.module;
 import android.app.Application;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.database.FirebaseDatabase;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -126,15 +125,17 @@ public class AppModule {
 
     @Provides
     @Singleton
-    QuestionGateway getQuestionGateway(SharedPreferencesDataInterface sharedPreferences) {
-        return new QuestionnaireClient(sharedPreferences);
+    QuestionGateway getQuestionGateway(SharedPreferencesDataInterface sharedPreferences,
+                                       FirebaseDatabaseInterface databaseInterface) {
+        return new QuestionnaireClient(sharedPreferences, databaseInterface);
     }
 
     @Provides
     @Singleton
     @Named("NetworkGateway")
-    QuestionnaireVersionGateway getQuestionnaireVersionGateway(SharedPreferencesDataInterface sharedPreferences) {
-        return new QuestionnaireClient(sharedPreferences);
+    QuestionnaireVersionGateway getQuestionnaireVersionGateway(SharedPreferencesDataInterface sharedPreferences,
+                                                               FirebaseDatabaseInterface databaseInterface) {
+        return new QuestionnaireClient(sharedPreferences, databaseInterface);
     }
 
     @Provides

@@ -1,16 +1,19 @@
 package pl.edu.pwr.fows.fows2017.questionnaire;
 
-import org.json.JSONArray;
+import com.google.gson.Gson;
+
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import pl.edu.pwr.fows.fows2017.base.OkHttpProvider;
+import pl.edu.pwr.fows.fows2017.declarationInterface.FirebaseDatabaseInterface;
 import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterface;
 import pl.edu.pwr.fows.fows2017.entity.Question;
-import pl.edu.pwr.fows.fows2017.parser.JsonParserQuestions;
+import pl.edu.pwr.fows.fows2017.entity.Questionnaire;
 import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesAPIProvider;
 
 /**
@@ -20,14 +23,17 @@ import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesAPIProvide
 
 public class QuestionnaireProvider extends OkHttpProvider {
 
+    private final FirebaseDatabaseInterface databaseInterface;
     private String url;
     private List<Question> questions = new ArrayList<>();
     private SharedPreferencesDataInterface sharedPreferences;
     private String version;
 
-    public QuestionnaireProvider(String url, SharedPreferencesDataInterface sharedPreferences) {
+    public QuestionnaireProvider(String url, SharedPreferencesDataInterface sharedPreferences,
+                                 FirebaseDatabaseInterface databaseInterface) {
         this.url = url;
         this.sharedPreferences = sharedPreferences;
+        this.databaseInterface = databaseInterface;
     }
 
     public List<Question> getQuestion() throws IOException {
@@ -37,17 +43,16 @@ public class QuestionnaireProvider extends OkHttpProvider {
     }
 
     public int sendAnswer(List<Question> questionList) throws IOException {
-        JSONArray answers = new JSONArray();
+        String uuid = UUID.randomUUID().toString();
         for (int i = 0; i < questionList.size(); i++) {
-            JSONObject object = new JSONObject();
-            object.put("question", questionList.get(i).getQuestionPL());
+            String questionString = questionList.get(i).getQuestionPL();
             String answer = questionList.get(i).getUserAnswer();
             String[] splitAnswer = answer.split(":");
-            object.put("answer", answer.replace(splitAnswer[0] + ":", ""));
-            answers.put(object);
+            String answerString = answer.replace(splitAnswer[0] + ":", "");
+            databaseInterface.sendQuestionnaireAnswers(uuid, i, questionString, answerString);
         }
         sharedPreferences.save(SharedPreferencesAPIProvider.TAG_QUESTIONNAIRE, version);
-        return sendData(url, answers.toString());
+        return 1;
     }
 
     public String getVersion() throws IOException {
@@ -56,9 +61,19 @@ public class QuestionnaireProvider extends OkHttpProvider {
     }
 
     private void getDate() throws IOException {
-        String response = run(url + "?android");
-        version = JsonParserQuestions.getVersion(response);
+        Gson gson = new Gson();
+        Questionnaire questionnaire = gson.fromJson(run(url), Questionnaire.class);
+        version = String.valueOf(questionnaire.getVersion());
         questions.clear();
-        questions.addAll(JsonParserQuestions.parseJson(response));
+        questions.addAll(questionnaire.getQuestion());
+        for (Question question : questions) {
+            if (question.getAnswer() != null) {
+                question.setAnswer(question.getAnswer());
+            }
+            if (question.getAnswerPL() == null)
+                question.setAnswerPL(new ArrayList<>());
+            if (question.getAnswerEN() == null)
+                question.setAnswerEN(new ArrayList<>());
+        }
     }
 }
