@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import pl.edu.pwr.fows.fows2017.R;
+import pl.edu.pwr.fows.fows2017.adapter.DrawerLoginAdapter;
 import pl.edu.pwr.fows.fows2017.adapter.DrawerMenuAdapter;
 import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
 import pl.edu.pwr.fows.fows2017.view.DrawerMenuView;
@@ -38,6 +39,7 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private DrawerMenuAdapter adapter;
+    private DrawerLoginAdapter loginAdapter;
     private View containerView;
     private final DrawerMenuView fragment = this;
 
@@ -54,6 +56,7 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer_menu, container, false);
         recyclerView = layout.findViewById(R.id.drawerList);
         adapter = new DrawerMenuAdapter(getActivity());
+        loginAdapter = new DrawerLoginAdapter(layout.findViewById(R.id.nav_spinner), getContext());
         return layout;
     }
 
@@ -61,6 +64,8 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
         this.presenter = presenter;
         this.activity = activity;
         adapter.setPresenter(this.presenter);
+        loginAdapter.setPresenter(this.presenter);
+        loginAdapter.setNotLogginCategories();
         containerView = this.activity.findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
         mDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {

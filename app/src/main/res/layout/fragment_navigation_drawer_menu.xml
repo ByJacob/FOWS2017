@@ -67,11 +67,25 @@
 
     </RelativeLayout>
 
+
+    <RelativeLayout
+        android:id="@+id/nav_login_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/navigation_item_height"
+        android:layout_below="@+id/nav_text_contener"
+        android:layout_marginTop="@dimen/navigation_list_top_margin">
+
+        <Spinner
+            android:id="@+id/nav_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/drawerList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/nav_text_contener"
+        android:layout_below="@+id/nav_login_container"
         android:layout_marginTop="@dimen/navigation_list_top_margin">
 
     </android.support.v7.widget.RecyclerView>

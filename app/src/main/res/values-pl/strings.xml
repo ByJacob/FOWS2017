@@ -40,4 +40,7 @@
     <string name="Partners_8">Patroni</string>
     <string name="AwardSponsors_12">Fundatorzy Nagród</string>
     <string name="menu_item_organisers">Organizatorzy</string>
+    <string name="login">Zaloguj</string>
+    <string name="createAccount">Utwórz konto</string>
+    <string name="loginWithFacebook">Zaloguj z Facebooka</string>
 </resources>

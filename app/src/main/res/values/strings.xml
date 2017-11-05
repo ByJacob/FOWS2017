@@ -44,5 +44,8 @@
     <string name="MediaPartners_10">Media Partners</string>
     <string name="AwardSponsors_12">Award Sponsors</string>
     <string name="menu_item_organisers">Organisers</string>
+    <string name="login">Login</string>
+    <string name="createAccount">Create account</string>
+    <string name="loginWithFacebook">Login with Facebook</string>
 
 </resources>
