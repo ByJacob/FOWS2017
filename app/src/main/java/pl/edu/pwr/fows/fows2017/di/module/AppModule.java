@@ -3,6 +3,7 @@ package pl.edu.pwr.fows.fows2017.di.module;
 import android.app.Application;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.auth.FirebaseAuth;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -12,7 +13,8 @@ import dagger.Provides;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import pl.edu.pwr.fows.fows2017.declarationInterface.FirebaseDatabaseInterface;
+import pl.edu.pwr.fows.fows2017.declarationInterface.AuthInterface;
+import pl.edu.pwr.fows.fows2017.declarationInterface.DatabaseInterface;
 import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterface;
 import pl.edu.pwr.fows.fows2017.facebookPost.FacebookClient;
 import pl.edu.pwr.fows.fows2017.firebase.LogEvent;
@@ -27,7 +29,9 @@ import pl.edu.pwr.fows.fows2017.gateway.OrganizerGateway;
 import pl.edu.pwr.fows.fows2017.gateway.QuestionGateway;
 import pl.edu.pwr.fows.fows2017.gateway.QuestionnaireVersionGateway;
 import pl.edu.pwr.fows.fows2017.gateway.SponsorGateway;
+import pl.edu.pwr.fows.fows2017.gateway.UserGateway;
 import pl.edu.pwr.fows.fows2017.lecture.LectureClient;
+import pl.edu.pwr.fows.fows2017.login.LoginClient;
 import pl.edu.pwr.fows.fows2017.menu.MenuClient;
 import pl.edu.pwr.fows.fows2017.offerUrl.OfferUrlClient;
 import pl.edu.pwr.fows.fows2017.organiser.OrganiserClient;
@@ -35,6 +39,7 @@ import pl.edu.pwr.fows.fows2017.organizer.OrganizerClient;
 import pl.edu.pwr.fows.fows2017.questionnaire.QuestionnaireClient;
 import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesAPIClient;
 import pl.edu.pwr.fows.fows2017.sponsors.SponsorsClient;
+import pl.edu.pwr.fows.fows2017.tools.FirebaseAuthAPI;
 import pl.edu.pwr.fows.fows2017.tools.FirebaseDatabaseAPI;
 import pl.edu.pwr.fows.fows2017.tools.SharedPreferencesAPI;
 
@@ -54,8 +59,14 @@ public class AppModule {
 
     @Provides
     @Singleton
-    FirebaseDatabaseInterface getDatabase(){
+    DatabaseInterface getDatabase(){
         return new FirebaseDatabaseAPI();
+    }
+
+    @Provides
+    @Singleton
+    AuthInterface getAuth(){
+        return new FirebaseAuthAPI();
     }
 
     @Provides
@@ -126,7 +137,7 @@ public class AppModule {
     @Provides
     @Singleton
     QuestionGateway getQuestionGateway(SharedPreferencesDataInterface sharedPreferences,
-                                       FirebaseDatabaseInterface databaseInterface) {
+                                       DatabaseInterface databaseInterface) {
         return new QuestionnaireClient(sharedPreferences, databaseInterface);
     }
 
@@ -134,7 +145,7 @@ public class AppModule {
     @Singleton
     @Named("NetworkGateway")
     QuestionnaireVersionGateway getQuestionnaireVersionGateway(SharedPreferencesDataInterface sharedPreferences,
-                                                               FirebaseDatabaseInterface databaseInterface) {
+                                                               DatabaseInterface databaseInterface) {
         return new QuestionnaireClient(sharedPreferences, databaseInterface);
     }
 
@@ -143,6 +154,12 @@ public class AppModule {
     @Named("LocalGateway")
     QuestionnaireVersionGateway getQuestionnaireVersionGatewaySharedPref(SharedPreferencesDataInterface sharedPreferences) {
         return new SharedPreferencesAPIClient(sharedPreferences);
+    }
+
+    @Provides
+    @Singleton
+    UserGateway getUserGateway(AuthInterface auth){
+        return new LoginClient(auth);
     }
 
     @Provides

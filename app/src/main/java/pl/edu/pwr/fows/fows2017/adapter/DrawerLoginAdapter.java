@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.customViews.CustomSpinnerLoginAdapter;
-import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
+import pl.edu.pwr.fows.fows2017.presenter.LoginPresenter;
 
 /**
  * Project: FoWS2017
@@ -21,28 +21,29 @@ public class DrawerLoginAdapter implements AdapterView.OnItemSelectedListener {
 
     private final Spinner spinner;
     private final Context context;
-    private DrawerMenuPresenter presenter;
+    private LoginPresenter presenter;
+    private ArrayList<String> categoriesTag;
 
     public DrawerLoginAdapter(Spinner spinner, Context context) {
         this.spinner = spinner;
         this.context = context;
+        categoriesTag = new ArrayList<>();
         spinner.setOnItemSelectedListener(this);
     }
 
-    public void setPresenter(DrawerMenuPresenter presenter) {
+    public void setPresenter(LoginPresenter presenter) {
         this.presenter = presenter;
     }
 
     public void setNotLogginCategories() {
-        ArrayList<String> categories = new ArrayList<>();
-        categories.add(context.getResources().getString(R.string.login));
-        categories.add(context.getResources().getString(R.string.loginWithFacebook));
-        categories.add(context.getResources().getString(R.string.createAccount));
-        setSpinner(categories);
+        categoriesTag.clear();
+        categoriesTag.add("LOGIN");
+        categoriesTag.add("CREATE_ACCOUNT");
+        setSpinner(categoriesTag);
     }
 
-    private void setSpinner(ArrayList<String> categories) {
-        CustomSpinnerLoginAdapter adapter = new CustomSpinnerLoginAdapter(context, R.layout.row_navigation_spinner_text, categories);
+    private void setSpinner(ArrayList<String> categoriesTag) {
+        CustomSpinnerLoginAdapter adapter = new CustomSpinnerLoginAdapter(context, R.layout.row_navigation_spinner_text, categoriesTag);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
@@ -50,10 +51,13 @@ public class DrawerLoginAdapter implements AdapterView.OnItemSelectedListener {
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         // On selecting a spinner item
-        String item = adapterView.getItemAtPosition(position).toString();
-
-        // Showing selected spinner item
-        Toast.makeText(adapterView.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+        if (position > 0) {
+            String item = adapterView.getItemAtPosition(position).toString();
+            presenter.showFragment(categoriesTag.get(position));
+            spinner.setSelection(0);
+            // Showing selected spinner item
+            Toast.makeText(adapterView.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

@@ -2,15 +2,13 @@ package pl.edu.pwr.fows.fows2017.questionnaire;
 
 import com.google.gson.Gson;
 
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import pl.edu.pwr.fows.fows2017.base.OkHttpProvider;
-import pl.edu.pwr.fows.fows2017.declarationInterface.FirebaseDatabaseInterface;
+import pl.edu.pwr.fows.fows2017.declarationInterface.DatabaseInterface;
 import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterface;
 import pl.edu.pwr.fows.fows2017.entity.Question;
 import pl.edu.pwr.fows.fows2017.entity.Questionnaire;
@@ -23,14 +21,14 @@ import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesAPIProvide
 
 public class QuestionnaireProvider extends OkHttpProvider {
 
-    private final FirebaseDatabaseInterface databaseInterface;
+    private final DatabaseInterface databaseInterface;
     private String url;
     private List<Question> questions = new ArrayList<>();
     private SharedPreferencesDataInterface sharedPreferences;
     private String version;
 
     public QuestionnaireProvider(String url, SharedPreferencesDataInterface sharedPreferences,
-                                 FirebaseDatabaseInterface databaseInterface) {
+                                 DatabaseInterface databaseInterface) {
         this.url = url;
         this.sharedPreferences = sharedPreferences;
         this.databaseInterface = databaseInterface;

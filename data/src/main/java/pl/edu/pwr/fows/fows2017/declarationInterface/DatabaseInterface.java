@@ -7,6 +7,6 @@ import java.util.Map;
  * Created by Jakub Rosa on 01.11.2017.
  */
 
-public interface FirebaseDatabaseInterface {
+public interface DatabaseInterface {
     int sendQuestionnaireAnswers(String uuid, Integer number, String question, String answer);
 }

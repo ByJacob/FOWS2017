@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import pl.edu.pwr.fows.fows2017.R;
+import pl.edu.pwr.fows.fows2017.map.DrawerMenuItemMap;
 
 /**
  * Project: FoWS2017
@@ -23,6 +24,7 @@ public class CustomSpinnerLoginAdapter extends ArrayAdapter {
     private final Context context;
     private TextView initials;
     private TextView text;
+    private ArrayList<String> categoriesTag;
     private ArrayList<String> categories;
 
 
@@ -31,10 +33,15 @@ public class CustomSpinnerLoginAdapter extends ArrayAdapter {
         this.context = context;
     }
 
-    public CustomSpinnerLoginAdapter(@NonNull Context context, int resource, @NonNull ArrayList<String> categories) {
-        super(context, resource, categories);
+    public CustomSpinnerLoginAdapter(@NonNull Context context, int resource, @NonNull ArrayList<String> categoriesTag) {
+        super(context, resource);
+        this.categoriesTag = categoriesTag;
+        this.categories = new ArrayList<>();
+        for(String tag: categoriesTag){
+            categories.add(context.getResources().getString(DrawerMenuItemMap.getTag(tag)));
+        }
+        super.addAll(categories);
         this.context = context;
-        this.categories = categories;
     }
 
     public View getCustomView(int position, View conventView, ViewGroup viewGroup) {

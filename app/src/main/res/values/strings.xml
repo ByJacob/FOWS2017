@@ -33,7 +33,7 @@
     <string name="fragment_row_questionaire_send">Send</string>
     <string name="message_send">Thank you for completing the questionnaire. It was sent correctly.</string>
     <string name="message_questionnaire_done">This questionnaire has already been completed by you. Thanks :)</string>
-    <string name="exception_incomplete">No questions answered with star (*)</string>
+    <string name="exception_incomplete">No fields filled with star (*)</string>
     <string name="offers">Which offers do you want to open?</string>
     <string name="offer1">Partnership proposal</string>
     <string name="offer2">Media partnership</string>
@@ -47,5 +47,13 @@
     <string name="login">Login</string>
     <string name="createAccount">Create account</string>
     <string name="loginWithFacebook">Login with Facebook</string>
+    <string name="email">E-mail adress*</string>
+    <string name="password">Password*</string>
+    <string name="password2">Confirm Password*</string>
+    <string name="userName">Name*</string>
+    <string name="userSurname">Surname*</string>
+    <string name="exception_pass_not_equal">Passwords are not the same</string>
+    <string name="exception_fail_email">Invalid email</string>
+    <string name="message_add_account">Added user. Please check your email to finish the activation.</string>
 
 </resources>

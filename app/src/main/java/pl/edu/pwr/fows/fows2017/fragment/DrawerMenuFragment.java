@@ -22,10 +22,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import javax.inject.Inject;
+
 import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.adapter.DrawerLoginAdapter;
 import pl.edu.pwr.fows.fows2017.adapter.DrawerMenuAdapter;
 import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
+import pl.edu.pwr.fows.fows2017.presenter.LoginPresenter;
 import pl.edu.pwr.fows.fows2017.view.DrawerMenuView;
 
 /**
@@ -44,6 +47,7 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
     private final DrawerMenuView fragment = this;
 
     public DrawerMenuPresenter presenter;
+    public LoginPresenter loginPresenter;
     @SuppressWarnings("FieldCanBeLocal")
     private Activity activity;
 
@@ -60,11 +64,13 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
         return layout;
     }
 
-    public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar, final DrawerMenuPresenter presenter, Activity activity) {
+    public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar, final DrawerMenuPresenter presenter,
+                      Activity activity, LoginPresenter loginPresenter) {
         this.presenter = presenter;
+        this.loginPresenter = loginPresenter;
         this.activity = activity;
         adapter.setPresenter(this.presenter);
-        loginAdapter.setPresenter(this.presenter);
+        loginAdapter.setPresenter(this.loginPresenter);
         loginAdapter.setNotLogginCategories();
         containerView = this.activity.findViewById(fragmentId);
         mDrawerLayout = drawerLayout;

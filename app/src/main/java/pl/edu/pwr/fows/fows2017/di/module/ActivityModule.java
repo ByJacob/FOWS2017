@@ -9,6 +9,7 @@ import pl.edu.pwr.fows.fows2017.UseCaseFactory;
 import pl.edu.pwr.fows.fows2017.activity.BaseActivity;
 import pl.edu.pwr.fows.fows2017.di.scope.ActivityScope;
 import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
+import pl.edu.pwr.fows.fows2017.presenter.LoginPresenter;
 import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
 
 /**
@@ -45,6 +46,12 @@ public class ActivityModule {
     @Provides
     DrawerMenuPresenter getDrawerMenuPresenter(UseCaseFactory useCaseFactory, BaseActivityView baseActivityView) {
         return new DrawerMenuPresenter(useCaseFactory, baseActivityView);
+    }
+
+    @ActivityScope
+    @Provides
+    LoginPresenter getLoginPresenter(UseCaseFactory useCaseFactory, BaseActivityView baseActivityView) {
+        return new LoginPresenter(useCaseFactory, baseActivityView);
     }
 
 }

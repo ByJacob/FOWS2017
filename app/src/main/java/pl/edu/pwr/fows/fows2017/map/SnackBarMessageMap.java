@@ -9,10 +9,11 @@ import pl.edu.pwr.fows.fows2017.R;
 
 public class SnackBarMessageMap {
     private static final String[] tags = {"NETWORK", "BROWSER", "MAP", "DISABLE", "SEND",
-            "QUESTIONNAIRE_DONE", "INCOMPLETE"};
+            "QUESTIONNAIRE_DONE", "INCOMPLETE", "PASS_NOT_EQUAL", "FAIL_EMAIL", "ADD_ACCOUNT"};
     private static final Integer[] textsId = {R.string.exception_network, R.string.exception_browser,
             R.string.exception_map, R.string.exception_disable, R.string.message_send,
-            R.string.message_questionnaire_done, R.string.exception_incomplete};
+            R.string.message_questionnaire_done, R.string.exception_incomplete,
+            R.string.exception_pass_not_equal, R.string.exception_fail_email, R.string.message_add_account};
 
     public static Integer getTag(String tag) {
         for(int i=0; i<tags.length;  i++){
