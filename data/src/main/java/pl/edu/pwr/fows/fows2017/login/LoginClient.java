@@ -19,14 +19,12 @@ public class LoginClient implements UserGateway {
 
     @Override
     public Boolean addUserAndLogin(String email, String password, String displayName) {
-        provider.addUser(email, password, displayName);
-        return true;
+        return provider.addUser(email, password, displayName);
     }
 
     @Override
     public Boolean login(String email, String password) {
-        provider.loginUser(email, password);
-        return true;
+        return provider.loginUser(email, password);
     }
 
     @Override
@@ -46,7 +44,6 @@ public class LoginClient implements UserGateway {
 
     @Override
     public Boolean sendPasswordResetEmail(String email) {
-        provider.sendPasswordResetEmail(email);
-        return true;
+        return provider.sendPasswordResetEmail(email);
     }
 }

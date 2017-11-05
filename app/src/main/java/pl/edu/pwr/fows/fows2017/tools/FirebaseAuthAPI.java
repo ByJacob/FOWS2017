@@ -1,9 +1,13 @@
 package pl.edu.pwr.fows.fows2017.tools;
 
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+
+import java.util.concurrent.ExecutionException;
 
 import pl.edu.pwr.fows.fows2017.declarationInterface.AuthInterface;
 
@@ -21,23 +25,27 @@ public class FirebaseAuthAPI implements AuthInterface {
     }
 
     @Override
-    public void addUserAndLogin(String email, String password, String displayName) {
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                FirebaseUser user = auth.getCurrentUser();
-                UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
-                        .setDisplayName(displayName).build();
-                if (user != null) {
-                    user.updateProfile(profileChangeRequest);
-                }
-                sendEmailVerification();
-            }
-        });
+    public Boolean addUserAndLogin(String email, String password, String displayName) {
+        Task<AuthResult> resultTask = auth.createUserWithEmailAndPassword(email, password);
+        try {
+            Tasks.await(resultTask);
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return updateDisplayName(displayName) && sendEmailVerification();
     }
 
     @Override
-    public void login(String email, String password) {
-        auth.signInWithEmailAndPassword(email, password);
+    public Boolean login(String email, String password) {
+        Task<AuthResult> authResultTask = auth.signInWithEmailAndPassword(email, password);
+        try {
+            Tasks.await(authResultTask);
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -67,15 +75,28 @@ public class FirebaseAuthAPI implements AuthInterface {
     @Override
     public Boolean sendEmailVerification() {
         if (auth.getCurrentUser() != null) {
-            auth.getCurrentUser().sendEmailVerification();
+            Task<Void> voidTask = auth.getCurrentUser().sendEmailVerification();
+            try {
+                Tasks.await(voidTask);
+            } catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+                return false;
+            }
             return true;
         } else
             return false;
     }
 
     @Override
-    public void sendPasswordResetEmail(String email) {
-        auth.sendPasswordResetEmail(email);
+    public Boolean sendPasswordResetEmail(String email) {
+        Task<Void> voidTask = auth.sendPasswordResetEmail(email);
+        try {
+            Tasks.await(voidTask);
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -86,7 +107,13 @@ public class FirebaseAuthAPI implements AuthInterface {
     @Override
     public Boolean updateEmail(String email, String password) {
         if (auth.getCurrentUser() != null) {
-            auth.getCurrentUser().updateEmail(email).addOnCompleteListener(task -> reAuth(email, password));
+            Task<Void> voidTask = auth.getCurrentUser().updateEmail(email).addOnCompleteListener(task -> reAuth(email, password));
+            try {
+                Tasks.await(voidTask);
+            } catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+                return false;
+            }
             return true;
         } else
             return false;
@@ -96,7 +123,13 @@ public class FirebaseAuthAPI implements AuthInterface {
     public Boolean updatePassword(String password) {
         if (auth.getCurrentUser() != null) {
             String email = getUserEmail();
-            auth.getCurrentUser().updatePassword(password).addOnCompleteListener(task -> reAuth(email, password));
+            Task<Void> voidTask = auth.getCurrentUser().updatePassword(password).addOnCompleteListener(task -> reAuth(email, password));
+            try {
+                Tasks.await(voidTask);
+            } catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+                return false;
+            }
             return true;
         } else
             return false;
@@ -107,13 +140,19 @@ public class FirebaseAuthAPI implements AuthInterface {
         if (auth.getCurrentUser() != null) {
             UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
                     .setDisplayName(displayName).build();
-            auth.getCurrentUser().updateProfile(profileChangeRequest);
+            Task<Void> voidTask = auth.getCurrentUser().updateProfile(profileChangeRequest);
+            try {
+                Tasks.await(voidTask);
+            } catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+                return false;
+            }
             return true;
         } else
             return false;
     }
 
-    private void reAuth(String email, String password){
-        auth.getCurrentUser().reauthenticate(EmailAuthProvider.getCredential(email, password));
+    private void reAuth(String email, String password) {
+        Task<Void> reauthenticate = auth.getCurrentUser().reauthenticate(EmailAuthProvider.getCredential(email, password));
     }
 }

@@ -68,16 +68,15 @@ public class FragmentCreateAccount extends BaseFragment implements FragmentLogin
 
     @Override
     public Boolean isAllCorrect() {
-        return email.getText().toString().length()>1
-                && password.getText().toString().length()>1
-                && password2.getText().toString().length()>1
-                && name.getText().toString().length()>1
-                && surname.getText().toString().length()>1;
+        return email.getText().toString().length()>=email.getMinCharacters()
+                && password.getText().toString().length()>=password.getMinCharacters()
+                && password2.getText().toString().length()>=password2.getMinCharacters()
+                && name.getText().toString().length()>=name.getMinCharacters()
+                && surname.getText().toString().length()>=surname.getMinCharacters();
     }
 
     @Override
     public Boolean isCorrectPassword() {
-        Log.d("CreateAccount", password.getText().toString() + " " + password2.getText().toString());
         return password.getText().toString().equals(password2.getText().toString());
     }
 

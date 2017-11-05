@@ -55,5 +55,8 @@
     <string name="exception_pass_not_equal">Passwords are not the same</string>
     <string name="exception_fail_email">Invalid email</string>
     <string name="message_add_account">Added user. Please check your email to finish the activation.</string>
+    <string name="anonymous">Anonymous</string>
+    <string name="account">Account</string>
+    <string name="signOut">Sign Out</string>
 
 </resources>

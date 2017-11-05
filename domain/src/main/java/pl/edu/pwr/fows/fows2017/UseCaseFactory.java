@@ -16,6 +16,7 @@ import pl.edu.pwr.fows.fows2017.entity.OrganiserTeam;
 import pl.edu.pwr.fows.fows2017.entity.Organizer;
 import pl.edu.pwr.fows.fows2017.entity.Question;
 import pl.edu.pwr.fows.fows2017.entity.Sponsor;
+import pl.edu.pwr.fows.fows2017.entity.User;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
 import pl.edu.pwr.fows.fows2017.gateway.FirebaseTokenGateway;
 import pl.edu.pwr.fows.fows2017.gateway.LectureGateway;
@@ -30,6 +31,7 @@ import pl.edu.pwr.fows.fows2017.gateway.UserGateway;
 import pl.edu.pwr.fows.fows2017.usecase.AddUserAndLoginUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.CheckQuestionnaireVersionUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.FacebookPostsUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.GetUserUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.LecturesUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.MenuUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.MenuWithTagUseCase;
@@ -155,5 +157,9 @@ public class UseCaseFactory {
 
     public UseCase<Observable<Boolean>> addUserAndLogin(String email, String password, String displayName){
         return new AddUserAndLoginUseCase(rxTransformer,userGateway,email, password, displayName);
+    }
+
+    public UseCase<Observable<User>> getUser(){
+        return new GetUserUseCase(rxTransformer, userGateway);
     }
 }

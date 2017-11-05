@@ -6,9 +6,9 @@ package pl.edu.pwr.fows.fows2017.declarationInterface;
  */
 
 public interface AuthInterface {
-    void addUserAndLogin(String email, String password, String displayName);
+    Boolean addUserAndLogin(String email, String password, String displayName);
 
-    void login(String email, String password);
+    Boolean login(String email, String password);
 
     String getUserUid();
 
@@ -18,7 +18,7 @@ public interface AuthInterface {
 
     Boolean sendEmailVerification();
 
-    void sendPasswordResetEmail(String email);
+    Boolean sendPasswordResetEmail(String email);
 
     Boolean isEmailVerified();
 

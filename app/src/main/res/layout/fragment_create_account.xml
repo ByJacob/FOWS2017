@@ -46,7 +46,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_create_account_email"
                     app:met_floatingLabel="normal"
-                    app:met_minCharacters="1" />
+                    app:met_minCharacters="6" />
 
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/fragment_create_account_password2"
@@ -61,7 +61,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_create_account_password"
                     app:met_floatingLabel="normal"
-                    app:met_minCharacters="1" />
+                    app:met_minCharacters="6" />
 
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/fragment_create_account_name"

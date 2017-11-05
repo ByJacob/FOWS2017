@@ -8,16 +8,18 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import pl.edu.pwr.fows.fows2017.BuildConfig;
 import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.customViews.CustomSpinnerLoginAdapter;
 import pl.edu.pwr.fows.fows2017.presenter.LoginPresenter;
+import pl.edu.pwr.fows.fows2017.view.adapter.DrawerLoginAdapterView;
 
 /**
  * Project: FoWS2017
  * Created by Jakub Rosa on 05.11.2017.
  */
 
-public class DrawerLoginAdapter implements AdapterView.OnItemSelectedListener {
+public class DrawerLoginAdapter implements AdapterView.OnItemSelectedListener, DrawerLoginAdapterView {
 
     private final Spinner spinner;
     private final Context context;
@@ -33,12 +35,24 @@ public class DrawerLoginAdapter implements AdapterView.OnItemSelectedListener {
 
     public void setPresenter(LoginPresenter presenter) {
         this.presenter = presenter;
+        this.presenter.setLoginButtonView(this);
     }
 
-    public void setNotLogginCategories() {
+    @Override
+    public void setNotLoginCategories() {
         categoriesTag.clear();
+        categoriesTag.add(context.getResources().getString(R.string.anonymous));
         categoriesTag.add("LOGIN");
         categoriesTag.add("CREATE_ACCOUNT");
+        setSpinner(categoriesTag);
+    }
+
+    @Override
+    public void setLoginCategories(String user) {
+        categoriesTag.clear();
+        categoriesTag.add(user);
+        categoriesTag.add("ACCOUNT");
+        categoriesTag.add("SIGN_OUT");
         setSpinner(categoriesTag);
     }
 
@@ -56,7 +70,8 @@ public class DrawerLoginAdapter implements AdapterView.OnItemSelectedListener {
             presenter.showFragment(categoriesTag.get(position));
             spinner.setSelection(0);
             // Showing selected spinner item
-            Toast.makeText(adapterView.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+            if (BuildConfig.DEBUG)
+                Toast.makeText(adapterView.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
         }
     }
 

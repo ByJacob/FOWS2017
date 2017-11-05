@@ -24,12 +24,12 @@ public class LoginProvider {
                 .build();
     }
 
-    public void addUser(String email, String password, String displayName) {
-        authInterface.addUserAndLogin(email, password, displayName);
+    public Boolean addUser(String email, String password, String displayName) {
+        return authInterface.addUserAndLogin(email, password, displayName);
     }
 
-    public void loginUser(String email, String password) {
-        authInterface.login(email, password);
+    public Boolean loginUser(String email, String password) {
+        return authInterface.login(email, password);
     }
 
     public Boolean sendEmailVerification() {
@@ -41,7 +41,7 @@ public class LoginProvider {
                 && authInterface.updateDisplayName(user.getDisplayName());
     }
 
-    public void sendPasswordResetEmail(String email) {
-        authInterface.sendPasswordResetEmail(email);
+    public Boolean sendPasswordResetEmail(String email) {
+        return authInterface.sendPasswordResetEmail(email);
     }
 }

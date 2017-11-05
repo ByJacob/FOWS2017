@@ -51,4 +51,7 @@
     <string name="exception_pass_not_equal">Hasła nie są takie same</string>
     <string name="exception_fail_email">Niepoprawny e-mail</string>
     <string name="message_add_account">Dodano użytkownika. Sprawdź swój e-mail aby dokończyć aktywacji.</string>
+    <string name="anonymous" translatable="false">Anonimowy</string>
+    <string name="account">Konto</string>
+    <string name="signOut">Wyloguj się</string>
 </resources>

@@ -22,8 +22,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import javax.inject.Inject;
-
 import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.adapter.DrawerLoginAdapter;
 import pl.edu.pwr.fows.fows2017.adapter.DrawerMenuAdapter;
@@ -71,7 +69,7 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
         this.activity = activity;
         adapter.setPresenter(this.presenter);
         loginAdapter.setPresenter(this.loginPresenter);
-        loginAdapter.setNotLogginCategories();
+        loginAdapter.setNotLoginCategories();
         containerView = this.activity.findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
         mDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {

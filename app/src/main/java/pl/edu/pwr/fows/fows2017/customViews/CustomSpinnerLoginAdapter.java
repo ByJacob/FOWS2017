@@ -37,8 +37,11 @@ public class CustomSpinnerLoginAdapter extends ArrayAdapter {
         super(context, resource);
         this.categoriesTag = categoriesTag;
         this.categories = new ArrayList<>();
-        for(String tag: categoriesTag){
-            categories.add(context.getResources().getString(DrawerMenuItemMap.getTag(tag)));
+        for (String tag : categoriesTag) {
+            if (DrawerMenuItemMap.isTag(tag))
+                categories.add(context.getResources().getString(DrawerMenuItemMap.getTag(tag)));
+            else
+                categories.add(tag);
         }
         super.addAll(categories);
         this.context = context;
@@ -49,11 +52,11 @@ public class CustomSpinnerLoginAdapter extends ArrayAdapter {
         View layout = inflater.inflate(R.layout.row_navigation_spinner_text, viewGroup, false);
         initials = layout.findViewById(R.id.spinner_text_initials);
         StringBuilder stringInitials = new StringBuilder();
-        for(int i=0; i<categories.get(0).length(); i++){
+        for (int i = 0; i < categories.get(0).length(); i++) {
             char c = categories.get(0).charAt(i);
-            if(Character.isUpperCase(c))
+            if (Character.isUpperCase(c))
                 stringInitials.append(c);
-            if(stringInitials.length()>2)
+            if (stringInitials.length() > 2)
                 break;
         }
         initials.setText(stringInitials.toString());
