@@ -2,7 +2,6 @@ package pl.edu.pwr.fows.fows2017.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -16,14 +15,14 @@ import pl.edu.pwr.fows.fows2017.di.component.ActivityComponent;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentCreateAccountModule;
 import pl.edu.pwr.fows.fows2017.fragment.base.BaseFragment;
 import pl.edu.pwr.fows.fows2017.presenter.LoginPresenter;
-import pl.edu.pwr.fows.fows2017.view.FragmentLoginView;
+import pl.edu.pwr.fows.fows2017.view.FragmentCreateAccountView;
 
 /**
  * Project: FoWS2017
  * Created by Jakub Rosa on 05.11.2017.
  */
 
-public class FragmentCreateAccount extends BaseFragment implements FragmentLoginView {
+public class FragmentCreateAccount extends BaseFragment implements FragmentCreateAccountView {
 
     private MaterialEditText email;
     private MaterialEditText password;

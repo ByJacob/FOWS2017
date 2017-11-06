@@ -4,17 +4,11 @@ import pl.edu.pwr.fows.fows2017.view.base.BaseActivityAndFragmentView;
 
 /**
  * Project: FoWS2017
- * Created by Jakub Rosa on 05.11.2017.
+ * Created by Jakub Rosa on 06.11.2017.
  */
 
 public interface FragmentLoginView extends BaseActivityAndFragmentView {
-
-    Boolean isAllCorrect();
-    Boolean isCorrectPassword();
-    Boolean isCorrectEmail();
+    Boolean isNoEmpty();
     String getEmail();
     String getPassword();
-    String getName();
-    String getSurname();
-
 }

@@ -33,6 +33,7 @@ import pl.edu.pwr.fows.fows2017.usecase.CheckQuestionnaireVersionUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.FacebookPostsUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.GetUserUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.LecturesUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.LoginUserUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.MenuUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.MenuWithTagUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.OfferUrlUseCase;
@@ -161,5 +162,9 @@ public class UseCaseFactory {
 
     public UseCase<Observable<User>> getUser(){
         return new GetUserUseCase(rxTransformer, userGateway);
+    }
+
+    public UseCase<Observable<Boolean>> loginUser(String email, String password){
+        return new LoginUserUseCase(rxTransformer, userGateway, email, password);
     }
 }

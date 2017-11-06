@@ -4,15 +4,17 @@ import pl.edu.pwr.fows.fows2017.UseCaseFactory;
 import pl.edu.pwr.fows.fows2017.entity.User;
 import pl.edu.pwr.fows.fows2017.presenter.base.BasePresenter;
 import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
+import pl.edu.pwr.fows.fows2017.view.FragmentCreateAccountView;
 import pl.edu.pwr.fows.fows2017.view.FragmentLoginView;
 import pl.edu.pwr.fows.fows2017.view.adapter.DrawerLoginAdapterView;
+import pl.edu.pwr.fows.fows2017.view.base.BaseActivityAndFragmentView;
 
 /**
  * Project: FoWS2017
  * Created by Jakub Rosa on 05.11.2017.
  */
 
-public class LoginPresenter extends BasePresenter<FragmentLoginView> {
+public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
 
     private DrawerLoginAdapterView loginButtonView;
     private User user;
@@ -22,7 +24,7 @@ public class LoginPresenter extends BasePresenter<FragmentLoginView> {
     }
 
     @Override
-    public void onViewTaken(FragmentLoginView view) {
+    public void onViewTaken(FragmentCreateAccountView view) {
         this.view = view;
         updateUser();
         this.baseActivityView.disableLoadingBar();
@@ -34,7 +36,7 @@ public class LoginPresenter extends BasePresenter<FragmentLoginView> {
         baseActivityView.changeMainFragment(tag);
     }
 
-    public void createAccount(FragmentLoginView fragmentCreateAccount) {
+    public void createAccount(FragmentCreateAccountView fragmentCreateAccount) {
         if (!fragmentCreateAccount.isAllCorrect()) {
             baseActivityView.showMessage("INCOMPLETE", false);
         } else if (!fragmentCreateAccount.isCorrectPassword()) {
@@ -56,6 +58,7 @@ public class LoginPresenter extends BasePresenter<FragmentLoginView> {
         if (aBoolean) {
             baseActivityView.showMessage("ADD_ACCOUNT", null);
             updateUser();
+            baseActivityView.showPreviousFragment();
         } else {
             loginButtonView.setNotLoginCategories();
         }
@@ -74,10 +77,24 @@ public class LoginPresenter extends BasePresenter<FragmentLoginView> {
         if (user.getDisplayName().length() > 1)
             loginButtonView.setLoginCategories(user.getDisplayName());
         else
-            fetchUserFail(null);
+            fetchUserFail(null); //TODO add message when create fail
     }
 
     public void setLoginButtonView(DrawerLoginAdapterView loginButtonView) {
         this.loginButtonView = loginButtonView;
+    }
+
+    public void userLogin(FragmentLoginView fragmentLogin) {
+        factory.loginUser(fragmentLogin.getEmail(), fragmentLogin.getPassword()).execute().subscribe(this::onLoginSuccess);
+    }
+
+    private void onLoginSuccess(Boolean aBoolean) {
+        if(aBoolean){
+            baseActivityView.showMessage("LOGIN", null);
+            updateUser();
+            baseActivityView.showPreviousFragment();
+        } else {
+            loginButtonView.setNotLoginCategories(); //TODO add message when login fail
+        }
     }
 }

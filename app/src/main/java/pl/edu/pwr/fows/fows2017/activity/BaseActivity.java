@@ -38,6 +38,7 @@ import pl.edu.pwr.fows.fows2017.fragment.FragmentAgenda;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentContact;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentCreateAccount;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentHome;
+import pl.edu.pwr.fows.fows2017.fragment.FragmentLogin;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentNews;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentOrganiser;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentQuestionnaire;
@@ -185,6 +186,9 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
                             break;
                         case "CREATE_ACCOUNT":
                             fragment = new FragmentCreateAccount();
+                            break;
+                        case  "LOGIN":
+                            fragment = new FragmentLogin();
                             break;
                     }
                 }

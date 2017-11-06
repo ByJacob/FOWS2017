@@ -47,8 +47,10 @@
     <string name="login">Login</string>
     <string name="createAccount">Create account</string>
     <string name="loginWithFacebook">Login with Facebook</string>
-    <string name="email">E-mail adress*</string>
+    <string name="email">E-mail address*</string>
     <string name="password">Password*</string>
+    <string name="emailL" translatable="false">E-mail</string>
+    <string name="passwordL">Password</string>
     <string name="password2">Confirm Password*</string>
     <string name="userName">Name*</string>
     <string name="userSurname">Surname*</string>
@@ -58,5 +60,6 @@
     <string name="anonymous">Anonymous</string>
     <string name="account">Account</string>
     <string name="signOut">Sign Out</string>
+    <string name="message_login_success">Logging successful</string>
 
 </resources>

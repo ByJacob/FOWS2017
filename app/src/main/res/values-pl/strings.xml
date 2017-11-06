@@ -54,4 +54,6 @@
     <string name="anonymous" translatable="false">Anonimowy</string>
     <string name="account">Konto</string>
     <string name="signOut">Wyloguj się</string>
+    <string name="passwordL">Hasło</string>
+    <string name="message_login_success">Logowanie pomyślne</string>
 </resources>
