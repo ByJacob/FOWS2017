@@ -5,6 +5,7 @@ import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.util.concurrent.ExecutionException;
@@ -46,6 +47,22 @@ public class FirebaseAuthAPI implements AuthInterface {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String getToken() {
+        if (auth.getCurrentUser() != null) {
+            Task<GetTokenResult> idToken = auth.getCurrentUser().getIdToken(false);
+            try {
+                Tasks.await(idToken);
+                return idToken.getResult().getToken();
+            } catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+                return "";
+            }
+        }
+        else
+            return "";
     }
 
     @Override
@@ -114,7 +131,7 @@ public class FirebaseAuthAPI implements AuthInterface {
                 e.printStackTrace();
                 return false;
             }
-            return true;
+            return sendEmailVerification();
         } else
             return false;
     }

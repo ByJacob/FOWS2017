@@ -16,5 +16,7 @@ public interface FragmentCreateAccountView extends BaseActivityAndFragmentView {
     String getPassword();
     String getName();
     String getSurname();
+    String getUniversity();
+    String getCompany();
 
 }

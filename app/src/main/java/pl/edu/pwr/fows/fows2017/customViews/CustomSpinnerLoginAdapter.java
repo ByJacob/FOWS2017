@@ -59,6 +59,8 @@ public class CustomSpinnerLoginAdapter extends ArrayAdapter {
             if (stringInitials.length() > 2)
                 break;
         }
+        if(stringInitials.length()<1)
+            stringInitials.append("D");
         initials.setText(stringInitials.toString());
         text = layout.findViewById(R.id.spinner_text);
         text.setText(categories.get(0));

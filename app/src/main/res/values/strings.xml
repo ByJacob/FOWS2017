@@ -61,5 +61,7 @@
     <string name="account">Account</string>
     <string name="signOut">Sign Out</string>
     <string name="message_login_success">Logging successful</string>
+    <string name="userUniversity">University</string>
+    <string name="userCompany">Company</string>
 
 </resources>

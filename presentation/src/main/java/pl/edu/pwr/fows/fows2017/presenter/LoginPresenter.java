@@ -44,13 +44,13 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
         } else if (!fragmentCreateAccount.isCorrectEmail()) {
             baseActivityView.showMessage("FAIL_EMAIL", false);
         } else {
-            String email = fragmentCreateAccount.getEmail();
-            String password = fragmentCreateAccount.getPassword();
-            String name = fragmentCreateAccount.getName();
-            String surname = fragmentCreateAccount.getSurname();
-            String displayName = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase() +
-                    " " + surname.substring(0, 1).toUpperCase() + surname.substring(1).toLowerCase();
-            factory.addUserAndLogin(email, password, displayName).execute().subscribe(this::onAddSuccessUser);
+            factory.addUserAndLogin(fragmentCreateAccount.getEmail(),
+                    fragmentCreateAccount.getPassword(),
+                    fragmentCreateAccount.getName(),
+                    fragmentCreateAccount.getSurname(),
+                    fragmentCreateAccount.getUniversity(),
+                    fragmentCreateAccount.getCompany())
+                    .execute().subscribe(this::onAddSuccessUser);
         }
     }
 
@@ -73,9 +73,10 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
     }
 
     private void fetchUserSuccess(User user) {
-        this.user = user;
-        if (user.getDisplayName().length() > 1)
-            loginButtonView.setLoginCategories(user.getDisplayName());
+        if (!user.getName().isEmpty() && !user.getSurname().isEmpty()) {
+            this.user = user;
+            loginButtonView.setLoginCategories(user.getName() + " " + user.getSurname());
+        }
         else
             fetchUserFail(null); //TODO add message when create fail
     }

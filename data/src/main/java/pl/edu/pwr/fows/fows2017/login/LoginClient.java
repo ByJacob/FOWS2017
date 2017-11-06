@@ -1,6 +1,7 @@
 package pl.edu.pwr.fows.fows2017.login;
 
 import pl.edu.pwr.fows.fows2017.declarationInterface.AuthInterface;
+import pl.edu.pwr.fows.fows2017.declarationInterface.DatabaseInterface;
 import pl.edu.pwr.fows.fows2017.entity.User;
 import pl.edu.pwr.fows.fows2017.gateway.UserGateway;
 
@@ -13,13 +14,13 @@ public class LoginClient implements UserGateway {
 
     private LoginProvider provider;
 
-    public LoginClient(AuthInterface authInterface) {
-        this.provider = new LoginProvider(authInterface);
+    public LoginClient(AuthInterface authInterface, DatabaseInterface databaseInterface) {
+        this.provider = new LoginProvider(authInterface, databaseInterface);
     }
 
     @Override
-    public Boolean addUserAndLogin(String email, String password, String displayName) {
-        return provider.addUser(email, password, displayName);
+    public Boolean addUserAndLogin(String email, String password, String name, String surname, String university, String company) {
+        return provider.addUser(email, password, name, surname, university, company);
     }
 
     @Override

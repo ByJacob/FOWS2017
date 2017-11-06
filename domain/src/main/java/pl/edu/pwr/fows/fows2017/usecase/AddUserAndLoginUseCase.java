@@ -17,19 +17,27 @@ public class AddUserAndLoginUseCase extends AbstractRxObservableUseCase<Boolean>
     private UserGateway gateway;
     private String email;
     private String password;
-    private String displayName;
+    private String name;
+    private String surname;
+    private String university;
+    private String company;
 
     public AddUserAndLoginUseCase(FowsRxTransformerProvider rxTransformer, UserGateway gateway,
-                                  String email, String password, String displayName) {
+                                  String email, String password, String name, String surname,
+                                  String university, String company) {
         super(rxTransformer);
         this.gateway = gateway;
         this.email = email;
         this.password = password;
-        this.displayName = displayName;
+        this.name = name;
+        this.surname = surname;
+        this.university = university;
+        this.company = company;
     }
 
     @Override
     protected Observable<Boolean> createObservable() {
-        return Observable.fromCallable(() -> gateway.addUserAndLogin(email, password, displayName));
+        return Observable.fromCallable(() -> gateway.addUserAndLogin(email, password, name,
+                surname, university, company));
     }
 }

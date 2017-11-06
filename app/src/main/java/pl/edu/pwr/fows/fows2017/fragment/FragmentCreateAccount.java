@@ -29,6 +29,8 @@ public class FragmentCreateAccount extends BaseFragment implements FragmentCreat
     private MaterialEditText password2;
     private MaterialEditText name;
     private MaterialEditText surname;
+    private MaterialEditText university;
+    private MaterialEditText company;
     private Button createAccount;
     @Inject
     LoginPresenter presenter;
@@ -52,6 +54,8 @@ public class FragmentCreateAccount extends BaseFragment implements FragmentCreat
         password2 = getView().findViewById(R.id.fragment_create_account_password2);
         name = getView().findViewById(R.id.fragment_create_account_name);
         surname = getView().findViewById(R.id.fragment_create_account_surname);
+        company = getView().findViewById(R.id.fragment_create_account_company);
+        university = getView().findViewById(R.id.fragment_create_account_university);
         createAccount = getView().findViewById(R.id.fragment_create_account_button);
         createAccount.setOnClickListener(this::clickButtonCreateAccount);
     }
@@ -102,6 +106,16 @@ public class FragmentCreateAccount extends BaseFragment implements FragmentCreat
     @Override
     public String getSurname() {
         return surname.getText().toString();
+    }
+
+    @Override
+    public String getUniversity() {
+        return university.getText().toString();
+    }
+
+    @Override
+    public String getCompany() {
+        return university.getText().toString();
     }
 
 }

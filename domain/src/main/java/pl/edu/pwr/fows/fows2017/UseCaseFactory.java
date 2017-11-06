@@ -156,8 +156,11 @@ public class UseCaseFactory {
         return new SendFirebaseTokenUseCase(rxTransformer, firebaseTokenGateway, token, language);
     }
 
-    public UseCase<Observable<Boolean>> addUserAndLogin(String email, String password, String displayName){
-        return new AddUserAndLoginUseCase(rxTransformer,userGateway,email, password, displayName);
+    public UseCase<Observable<Boolean>> addUserAndLogin(String email, String password, String name,
+                                                        String surname, String university,
+                                                        String company){
+        return new AddUserAndLoginUseCase(rxTransformer,userGateway,email, password, name, surname,
+                university, company);
     }
 
     public UseCase<Observable<User>> getUser(){

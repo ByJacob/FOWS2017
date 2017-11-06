@@ -8,7 +8,7 @@ import pl.edu.pwr.fows.fows2017.entity.User;
  */
 
 public interface UserGateway {
-    Boolean addUserAndLogin(String email, String password, String displayName);
+    Boolean addUserAndLogin(String email, String password, String name, String surname, String university, String company);
     Boolean login(String email, String password);
     User getUser();
     Boolean sendEmailVerification();
