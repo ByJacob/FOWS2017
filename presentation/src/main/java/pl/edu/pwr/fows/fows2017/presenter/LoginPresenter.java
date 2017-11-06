@@ -4,10 +4,12 @@ import pl.edu.pwr.fows.fows2017.UseCaseFactory;
 import pl.edu.pwr.fows.fows2017.entity.User;
 import pl.edu.pwr.fows.fows2017.presenter.base.BasePresenter;
 import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
+import pl.edu.pwr.fows.fows2017.view.FragmentAccountView;
 import pl.edu.pwr.fows.fows2017.view.FragmentCreateAccountView;
 import pl.edu.pwr.fows.fows2017.view.FragmentLoginView;
 import pl.edu.pwr.fows.fows2017.view.adapter.DrawerLoginAdapterView;
 import pl.edu.pwr.fows.fows2017.view.base.BaseActivityAndFragmentView;
+import pl.edu.pwr.fows.fows2017.view.row.FragmentAccountRowView;
 
 /**
  * Project: FoWS2017
@@ -29,6 +31,16 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
         updateUser();
         this.baseActivityView.disableLoadingBar();
         this.view.continueLoading();
+    }
+
+    public void onViewTakenFragmentAccount(FragmentAccountView fragmentAccount) {
+        if(user!=null)
+            fragmentAccount.continueLoading();
+        else{
+            updateUser();
+            baseActivityView.showPreviousFragment();
+        }
+
     }
 
     public void showFragment(String tag) {
@@ -96,6 +108,29 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
             baseActivityView.showPreviousFragment();
         } else {
             loginButtonView.setNotLoginCategories(); //TODO add message when login fail
+        }
+    }
+
+    public void configureRowInAccount(FragmentAccountRowView holder, String tag) {
+        holder.setFirstText(tag);
+        switch (tag){
+            case "NAME":
+                holder.setSecondText(user.getName());
+                break;
+            case "SURNAME":
+                holder.setSecondText(user.getSurname());
+                break;
+            case "EMAIL":
+                holder.setSecondText(user.getEmail());
+                break;
+            case "UNIVERSITY":
+                holder.setSecondText(user.getUniversity());
+                break;
+            case "COMPANY":
+                holder.setSecondText(user.getCompany());
+                break;
+            default:
+                holder.setSecondText("");
         }
     }
 }

@@ -2,7 +2,7 @@ package pl.edu.pwr.fows.fows2017.di.component;
 
 import dagger.Subcomponent;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentCreateAccountModule;
-import pl.edu.pwr.fows.fows2017.fragment.FragmentCreateAccount;
+import pl.edu.pwr.fows.fows2017.fragment.loginUser.FragmentCreateAccount;
 
 /**
  * Project: FoWS2017

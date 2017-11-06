@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/row_fragment_account_action_icon"
+            android:layout_width="@dimen/fragment_account_row_expand_icon"
+            android:layout_height="@dimen/fragment_account_row_expand_icon"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="false"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="@dimen/fragment_account_row_start_end_padding"
+            android:foreground="?attr/selectableItemBackground"
+            app:srcCompat="@drawable/ic_arrow_right" />
+
+        <TextView
+            android:id="@+id/row_fragment_account_text"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/fragment_account_row_height"
+            android:layout_marginEnd="@dimen/fragment_account_row_end_text_padding"
+            android:layout_marginStart="@dimen/fragment_account_row_start_end_padding"
+            android:alpha="0.87"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/fragment_account_row_text_size"
+            tools:text="Imię" />
+
+        <TextView
+            android:id="@+id/row_fragment_account_second_text"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/fragment_account_row_height"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="@dimen/fragment_account_row_end_text_padding"
+            android:layout_toEndOf="@+id/row_fragment_account_text"
+            android:layout_toStartOf="@+id/row_fragment_account_action_icon"
+            android:alpha="0.54"
+            android:gravity="end|center_vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/fragment_account_row_text_second_size"
+            tools:text="Jakub" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

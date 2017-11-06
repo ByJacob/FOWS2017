@@ -3,6 +3,7 @@ package pl.edu.pwr.fows.fows2017.di.component;
 import dagger.Component;
 import pl.edu.pwr.fows.fows2017.activity.BaseActivity;
 import pl.edu.pwr.fows.fows2017.di.module.ActivityModule;
+import pl.edu.pwr.fows.fows2017.di.module.FragmentAccountModule;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentAgendaModule;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentContactModule;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentCreateAccountModule;
@@ -43,4 +44,6 @@ public interface ActivityComponent {
     FragmentCreateAccountComponent addModule(FragmentCreateAccountModule module);
 
     FragmentLoginComponent addModule(FragmentLoginModule module);
+
+    FragmentAccountComponent addModule(FragmentAccountModule module);
 }

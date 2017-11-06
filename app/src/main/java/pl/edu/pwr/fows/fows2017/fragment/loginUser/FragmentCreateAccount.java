@@ -1,4 +1,4 @@
-package pl.edu.pwr.fows.fows2017.fragment;
+package pl.edu.pwr.fows.fows2017.fragment.loginUser;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

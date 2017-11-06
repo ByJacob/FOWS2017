@@ -36,9 +36,10 @@ import pl.edu.pwr.fows.fows2017.firebase.LogEvent;
 import pl.edu.pwr.fows.fows2017.fragment.DrawerMenuFragment;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentAgenda;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentContact;
-import pl.edu.pwr.fows.fows2017.fragment.FragmentCreateAccount;
+import pl.edu.pwr.fows.fows2017.fragment.loginUser.FragmentAccount;
+import pl.edu.pwr.fows.fows2017.fragment.loginUser.FragmentCreateAccount;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentHome;
-import pl.edu.pwr.fows.fows2017.fragment.FragmentLogin;
+import pl.edu.pwr.fows.fows2017.fragment.loginUser.FragmentLogin;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentNews;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentOrganiser;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentQuestionnaire;
@@ -189,6 +190,9 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
                             break;
                         case  "LOGIN":
                             fragment = new FragmentLogin();
+                            break;
+                        case "ACCOUNT":
+                            fragment = new FragmentAccount();
                             break;
                     }
                 }
