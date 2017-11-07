@@ -50,6 +50,14 @@ public class FirebaseAuthAPI implements AuthInterface {
     }
 
     @Override
+    public Boolean signOut() {
+        if(auth.getCurrentUser() != null){
+            auth.signOut();
+        }
+        return true;
+    }
+
+    @Override
     public String getToken() {
         if (auth.getCurrentUser() != null) {
             Task<GetTokenResult> idToken = auth.getCurrentUser().getIdToken(false);

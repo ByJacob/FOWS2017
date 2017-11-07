@@ -33,7 +33,9 @@ import pl.edu.pwr.fows.fows2017.usecase.CheckQuestionnaireVersionUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.FacebookPostsUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.GetUserUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.LecturesUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.LoginUserExistAccountUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.LoginUserUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.LogoutUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.MenuUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.MenuWithTagUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.OfferUrlUseCase;
@@ -43,6 +45,7 @@ import pl.edu.pwr.fows.fows2017.usecase.QuestionnaireUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SendFirebaseTokenUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SendQuestionnaireUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SponsorUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.UpdateUserPasswordUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.base.UseCase;
 
 /**
@@ -169,5 +172,17 @@ public class UseCaseFactory {
 
     public UseCase<Observable<Boolean>> loginUser(String email, String password){
         return new LoginUserUseCase(rxTransformer, userGateway, email, password);
+    }
+
+    public UseCase<Observable<Boolean>> loginCurrentUser(){
+        return new LoginUserExistAccountUseCase(rxTransformer, userGateway);
+    }
+
+    public UseCase<Observable<Boolean>> updateUserPassword(String password){
+        return new UpdateUserPasswordUseCase(rxTransformer, userGateway, password);
+    }
+
+    public UseCase<Observable<Boolean>> logoutCurrentUser(){
+        return new LogoutUseCase(rxTransformer, userGateway);
     }
 }

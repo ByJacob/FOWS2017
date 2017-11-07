@@ -7,7 +7,9 @@ import java.io.IOException;
 import pl.edu.pwr.fows.fows2017.base.OkHttpProvider;
 import pl.edu.pwr.fows.fows2017.declarationInterface.AuthInterface;
 import pl.edu.pwr.fows.fows2017.declarationInterface.DatabaseInterface;
+import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterface;
 import pl.edu.pwr.fows.fows2017.entity.User;
+import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesAPIProvider;
 
 /**
  * Project: FoWS2017
@@ -18,10 +20,12 @@ public class LoginProvider extends OkHttpProvider{
 
     private final AuthInterface authInterface;
     private DatabaseInterface databaseInterface;
+    private SharedPreferencesDataInterface sharedPreferencesDataInterface;
 
-    public LoginProvider(AuthInterface authInterface, DatabaseInterface databaseInterface) {
+    public LoginProvider(AuthInterface authInterface, DatabaseInterface databaseInterface, SharedPreferencesDataInterface sharedPreferencesDataInterface) {
         this.authInterface = authInterface;
         this.databaseInterface = databaseInterface;
+        this.sharedPreferencesDataInterface = sharedPreferencesDataInterface;
     }
 
     public User getUser() {
@@ -39,15 +43,20 @@ public class LoginProvider extends OkHttpProvider{
     public Boolean addUser(String email, String password, String name, String surname, String university, String company) {
         String displayName = name + " " + surname;
         Boolean isSuccess = authInterface.addUserAndLogin(email, password, displayName);
-        if(isSuccess)
-            databaseInterface.sendUser(authInterface.getUserUid(), name, surname, email, university, company, authInterface.isEmailVerified());
+        if(isSuccess) {
+            databaseInterface.sendUser(authInterface.getUserUid(), name, surname, university, company, authInterface.isEmailVerified());
+            databaseInterface.updateUserEmail(authInterface.getUserUid(), email);
+        }
         return isSuccess;
     }
 
     public Boolean loginUser(String email, String password) {
         Boolean isLoginSuccess = authInterface.login(email, password);
-        if(isLoginSuccess)
-            databaseInterface.sendUser(authInterface.getUserUid(), authInterface.isEmailVerified());
+        if(isLoginSuccess) {
+            databaseInterface.updateUserVerify(authInterface.getUserUid(), authInterface.isEmailVerified());
+            sharedPreferencesDataInterface.save(SharedPreferencesAPIProvider.TAG_USER, email);
+            sharedPreferencesDataInterface.save(SharedPreferencesAPIProvider.TAG_PASSWORD, password);
+        }
         return isLoginSuccess;
     }
 
@@ -59,12 +68,46 @@ public class LoginProvider extends OkHttpProvider{
         Boolean isUpdate = authInterface.updateEmail(user.getEmail(), user.getPassword()) && authInterface.updatePassword(user.getPassword())
                 && authInterface.updateDisplayName(user.getName() + " " + user.getSurname());
         if(isUpdate)
-            databaseInterface.sendUser(authInterface.getUserUid(), user.getName(), user.getSurname(), user.getEmail(),
+            databaseInterface.sendUser(authInterface.getUserUid(), user.getName(), user.getSurname(),
                     user.getUniversity(), user.getCompany(), user.getVerify());
         return isUpdate;
     }
 
     public Boolean sendPasswordResetEmail(String email) {
         return authInterface.sendPasswordResetEmail(email);
+    }
+
+    public Boolean loginUser() {
+        String user = sharedPreferencesDataInterface.get(SharedPreferencesAPIProvider.TAG_USER, "");
+        String password = sharedPreferencesDataInterface.get(SharedPreferencesAPIProvider.TAG_PASSWORD, "");
+        if(user.isEmpty() || password.isEmpty())
+            return false;
+        return loginUser(user, password);
+    }
+
+    public Boolean updateUserPassword(String password) {
+        Boolean isUpdate = authInterface.updatePassword(password);
+        if(isUpdate)
+            sharedPreferencesDataInterface.save(SharedPreferencesAPIProvider.TAG_PASSWORD, password);
+        return isUpdate;
+    }
+
+    public Boolean updateUserEmail(String email) {
+        String password = sharedPreferencesDataInterface.get(SharedPreferencesAPIProvider.TAG_PASSWORD, "");
+        if(password.isEmpty())
+            return false;
+        Boolean isUpdate = authInterface.updateEmail(email, password);
+        if(isUpdate)
+            databaseInterface.updateUserEmail(authInterface.getUserUid(), email);
+        return isUpdate;
+    }
+
+    public Boolean signOutUser() {
+        Boolean isSuccess = authInterface.signOut();
+        if(isSuccess){
+            sharedPreferencesDataInterface.save(SharedPreferencesAPIProvider.TAG_USER, "");
+            sharedPreferencesDataInterface.save(SharedPreferencesAPIProvider.TAG_PASSWORD, "");
+        }
+        return isSuccess;
     }
 }

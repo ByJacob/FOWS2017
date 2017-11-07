@@ -54,6 +54,8 @@
     <string name="password2">Confirm Password*</string>
     <string name="userName">Name*</string>
     <string name="userSurname">Surname*</string>
+    <string name="userNameAccount">Name</string>
+    <string name="userSurnameAccount">Surname</string>
     <string name="exception_pass_not_equal">Passwords are not the same</string>
     <string name="exception_fail_email">Invalid email</string>
     <string name="message_add_account">Added user. Please check your email to finish the activation.</string>
@@ -63,5 +65,14 @@
     <string name="message_login_success">Logging successful</string>
     <string name="userUniversity">University</string>
     <string name="userCompany">Company</string>
+    <string name="fragment_row_account_info">Account information</string>
+    <string name="change_info">Data change</string>
+    <string name="change">Change</string>
+    <string name="cancel">Cancel</string>
+    <string name="change_password">change password</string>
+    <string name="message_update_success">The account has been updated</string>
+    <string name="exception_update_fail">An error occurred while updating your account</string>
+    <string name="signOutSuccess">Signed out successfully</string>
+    <string name="signOutFaill">Signed failed</string>
 
 </resources>

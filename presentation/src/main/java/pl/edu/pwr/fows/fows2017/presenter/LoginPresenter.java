@@ -8,7 +8,6 @@ import pl.edu.pwr.fows.fows2017.view.FragmentAccountView;
 import pl.edu.pwr.fows.fows2017.view.FragmentCreateAccountView;
 import pl.edu.pwr.fows.fows2017.view.FragmentLoginView;
 import pl.edu.pwr.fows.fows2017.view.adapter.DrawerLoginAdapterView;
-import pl.edu.pwr.fows.fows2017.view.base.BaseActivityAndFragmentView;
 import pl.edu.pwr.fows.fows2017.view.row.FragmentAccountRowView;
 
 /**
@@ -81,7 +80,7 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
     }
 
     private void fetchUserFail(Throwable throwable) {
-
+        loginButtonView.setNotLoginCategories();
     }
 
     private void fetchUserSuccess(User user) {
@@ -131,6 +130,41 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
                 break;
             default:
                 holder.setSecondText("");
+        }
+    }
+
+    public void loginDefaultUser() {
+        factory.loginCurrentUser().execute().subscribe(this::fetchDefaultUserSuccess);
+    }
+
+    private void fetchDefaultUserSuccess(Boolean aBoolean) {
+        if(aBoolean)
+            updateUser();
+    }
+
+    public void updatePassword(String password) {
+        user.setPassword(password);
+        factory.updateUserPassword(password).execute().subscribe(this::updatePasswordSuccess);
+    }
+
+    private void updatePasswordSuccess(Boolean aBoolean) {
+        if(aBoolean){
+            baseActivityView.showMessage("UPDATE_SUCCESS", null);
+        } else {
+            baseActivityView.showMessage("UPDATE_FAIL", false);
+        }
+    }
+
+    public void signOutUser() {
+        factory.logoutCurrentUser().execute().subscribe(this::logoutUserSuccess);
+    }
+
+    private void logoutUserSuccess(Boolean aBoolean) {
+        if(aBoolean) {
+            updateUser();
+            baseActivityView.showMessage("SIGN_OUT_SUCCESS", null);
+        } else {
+            baseActivityView.showMessage("SIGN_OUT_FAIL", null);
         }
     }
 }

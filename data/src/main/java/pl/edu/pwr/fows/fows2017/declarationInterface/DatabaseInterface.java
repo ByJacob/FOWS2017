@@ -8,7 +8,9 @@ package pl.edu.pwr.fows.fows2017.declarationInterface;
 public interface DatabaseInterface {
     int sendQuestionnaireAnswers(String uuid, Integer number, String question, String answer);
 
-    int sendUser(String uid, String name, String surname, String email, String university, String company, Boolean isVerify);
+    int sendUser(String uid, String name, String surname, String university, String company, Boolean isVerify);
 
-    int sendUser(String uid, Boolean isVerify);
+    int updateUserEmail(String uid, String email);
+
+    int updateUserVerify(String uid, Boolean isVerify);
 }

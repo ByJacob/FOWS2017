@@ -75,6 +75,7 @@
     <dimen name="fragment_account_row_start_end_padding">24dp</dimen>
     <dimen name="fragment_account_row_end_text_padding">16dp</dimen>
     <dimen name="fragment_account_row_height">48dp</dimen>
-    <dimen name="fragment_account_row_text_size">15sp</dimen>
-    <dimen name="fragment_account_row_text_second_size">12sp</dimen>
+    <dimen name="fragment_account_row_text_size">18sp</dimen>
+    <dimen name="fragment_account_row_text_second_size">14sp</dimen>
+    <dimen name="fragment_account_row_text_info_size">13sp</dimen>
 </resources>

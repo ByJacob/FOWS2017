@@ -2,6 +2,7 @@ package pl.edu.pwr.fows.fows2017.login;
 
 import pl.edu.pwr.fows.fows2017.declarationInterface.AuthInterface;
 import pl.edu.pwr.fows.fows2017.declarationInterface.DatabaseInterface;
+import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterface;
 import pl.edu.pwr.fows.fows2017.entity.User;
 import pl.edu.pwr.fows.fows2017.gateway.UserGateway;
 
@@ -14,8 +15,9 @@ public class LoginClient implements UserGateway {
 
     private LoginProvider provider;
 
-    public LoginClient(AuthInterface authInterface, DatabaseInterface databaseInterface) {
-        this.provider = new LoginProvider(authInterface, databaseInterface);
+    public LoginClient(AuthInterface authInterface, DatabaseInterface databaseInterface,
+                       SharedPreferencesDataInterface sharedPreferencesDataInterface) {
+        this.provider = new LoginProvider(authInterface, databaseInterface, sharedPreferencesDataInterface);
     }
 
     @Override
@@ -24,8 +26,18 @@ public class LoginClient implements UserGateway {
     }
 
     @Override
+    public Boolean login() {
+        return provider.loginUser();
+    }
+
+    @Override
     public Boolean login(String email, String password) {
         return provider.loginUser(email, password);
+    }
+
+    @Override
+    public Boolean signOut() {
+        return provider.signOutUser();
     }
 
     @Override
@@ -41,6 +53,16 @@ public class LoginClient implements UserGateway {
     @Override
     public Boolean updateUser(User user) {
         return provider.updateUser(user);
+    }
+
+    @Override
+    public Boolean updatePassword(String password) {
+        return provider.updateUserPassword(password);
+    }
+
+    @Override
+    public Boolean updateEmail(String email) {
+        return provider.updateUserEmail(email);
     }
 
     @Override

@@ -27,10 +27,9 @@ public class FirebaseDatabaseAPI implements DatabaseInterface {
     }
 
     @Override
-    public int sendUser(String uid, String name, String surname, String email, String university, String company, Boolean isVerify) {
+    public int sendUser(String uid, String name, String surname, String university, String company, Boolean isVerify) {
         database.getReference("users").child(uid).child("name").setValue(name);
         database.getReference("users").child(uid).child("surname").setValue(surname);
-        database.getReference("users").child(uid).child("email").setValue(email);
         if (university.length() > 1)
             database.getReference("users").child(uid).child("university").setValue(university);
         if (company.length() > 1)
@@ -40,7 +39,13 @@ public class FirebaseDatabaseAPI implements DatabaseInterface {
     }
 
     @Override
-    public int sendUser(String uid, Boolean isVerify) {
+    public int updateUserEmail(String uid, String email) {
+        database.getReference("users").child(uid).child("email").setValue(email);
+        return 1;
+    }
+
+    @Override
+    public int updateUserVerify(String uid, Boolean isVerify) {
         database.getReference("users").child(uid).child("verify").setValue(isVerify);
         return 1;
     }

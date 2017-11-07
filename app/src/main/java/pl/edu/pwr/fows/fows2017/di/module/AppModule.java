@@ -158,8 +158,9 @@ public class AppModule {
 
     @Provides
     @Singleton
-    UserGateway getUserGateway(AuthInterface auth, DatabaseInterface databaseInterface){
-        return new LoginClient(auth, databaseInterface);
+    UserGateway getUserGateway(AuthInterface auth, DatabaseInterface databaseInterface,
+                               SharedPreferencesDataInterface sharedPreferencesDataInterface){
+        return new LoginClient(auth, databaseInterface, sharedPreferencesDataInterface);
     }
 
     @Provides

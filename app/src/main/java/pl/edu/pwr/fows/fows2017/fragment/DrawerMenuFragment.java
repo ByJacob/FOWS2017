@@ -70,6 +70,7 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
         adapter.setPresenter(this.presenter);
         loginAdapter.setPresenter(this.loginPresenter);
         loginAdapter.setNotLoginCategories();
+        loginPresenter.loginDefaultUser();
         containerView = this.activity.findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
         mDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {

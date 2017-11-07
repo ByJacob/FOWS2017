@@ -51,9 +51,22 @@
     <string name="exception_pass_not_equal">Hasła nie są takie same</string>
     <string name="exception_fail_email">Niepoprawny e-mail</string>
     <string name="message_add_account">Dodano użytkownika. Sprawdź swój e-mail aby dokończyć aktywacji.</string>
-    <string name="anonymous" translatable="false">Anonimowy</string>
+    <string name="anonymous">Anonimowy</string>
     <string name="account">Konto</string>
     <string name="signOut">Wyloguj się</string>
     <string name="passwordL">Hasło</string>
     <string name="message_login_success">Logowanie pomyślne</string>
+    <string name="userUniversity">Uczelnia</string>
+    <string name="userCompany">Firma</string>
+    <string name="userNameAccount">Imię</string>
+    <string name="userSurnameAccount">Nazwisko</string>
+    <string name="fragment_row_account_info">Informacje o koncie</string>
+    <string name="change_info">Zmiana danych</string>
+    <string name="change">Zmiana</string>
+    <string name="cancel">Anuluj</string>
+    <string name="change_password">zmiana hasła</string>
+    <string name="message_update_success">Konto zostało zaktualizowane</string>
+    <string name="exception_update_fail">Wystąpił błąd podczas aktualizacji konta</string>
+    <string name="signOutSuccess">Wylogowano pomyślnie</string>
+    <string name="signOutFaill">Wylogowano niepomyślnie</string>
 </resources>

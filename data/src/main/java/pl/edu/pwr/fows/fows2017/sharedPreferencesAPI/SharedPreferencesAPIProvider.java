@@ -22,6 +22,8 @@ public class SharedPreferencesAPIProvider {
     public static final String TAG_FACEBOOK_POSTS = "_facebook_posts";
     public static final String TAG_LECTURES = "_lectures";
     public static final String TAG_QUESTIONNAIRE = "_questionnaire";
+    public static final String TAG_USER = "_user";
+    public static final String TAG_PASSWORD = "_password";
 
     private final SharedPreferencesDataInterface API;
 

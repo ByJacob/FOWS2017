@@ -9,9 +9,13 @@ import pl.edu.pwr.fows.fows2017.entity.User;
 
 public interface UserGateway {
     Boolean addUserAndLogin(String email, String password, String name, String surname, String university, String company);
+    Boolean login();
     Boolean login(String email, String password);
+    Boolean signOut();
     User getUser();
     Boolean sendEmailVerification();
     Boolean updateUser(User user);
+    Boolean updatePassword(String password);
+    Boolean updateEmail(String email);
     Boolean sendPasswordResetEmail(String email);
 }

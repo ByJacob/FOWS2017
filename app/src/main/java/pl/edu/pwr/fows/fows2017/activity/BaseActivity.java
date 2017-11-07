@@ -194,6 +194,10 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
                         case "ACCOUNT":
                             fragment = new FragmentAccount();
                             break;
+                        case "SIGN_OUT":
+                            loginPresenter.signOutUser();
+                            drawerFragment.closeDrawer();
+                            break;
                     }
                 }
                 if (fragment != null)
