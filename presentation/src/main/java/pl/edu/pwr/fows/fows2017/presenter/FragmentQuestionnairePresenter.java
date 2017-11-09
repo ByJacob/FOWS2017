@@ -95,8 +95,14 @@ public class FragmentQuestionnairePresenter extends BasePresenter<FragmentQuesti
     public void setAnswer() {
         Boolean isComplete = true;
         for (int i = 0; i < questionList.size(); i++) {
-            if (questionList.get(i).getType().contains("SELECT"))
-                isComplete = questionList.get(i).getUserAnswer().length() > 0;
+            if (questionList.get(i).getType().contains("SELECT")) {
+                if (questionList.get(i).getUserAnswer()==null){
+                    isComplete = false;
+                    continue;
+                }
+                if (questionList.get(i).getUserAnswer().isEmpty())
+                    isComplete = false;
+            }
         }
         if (isComplete)
             factory.sendQuestionnaire(questionList).execute()
