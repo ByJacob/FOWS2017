@@ -69,4 +69,6 @@
     <string name="exception_update_fail">Wystąpił błąd podczas aktualizacji konta</string>
     <string name="signOutSuccess">Wylogowano pomyślnie</string>
     <string name="signOutFaill">Wylogowano niepomyślnie</string>
+    <string name="exception_require_field">To pole nie może być puste!</string>
+    <string name="exception_login_fail">Niewłaściwa nazwa użytkownika lub/i hasło</string>
 </resources>

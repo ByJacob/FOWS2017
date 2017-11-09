@@ -97,6 +97,10 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
     }
 
     public void userLogin(FragmentLoginView fragmentLogin) {
+        if(fragmentLogin.getEmail().isEmpty() || fragmentLogin.getPassword().isEmpty())
+        {
+            fragmentLogin.showErrorEmpty();
+        }
         factory.loginUser(fragmentLogin.getEmail(), fragmentLogin.getPassword()).execute().subscribe(this::onLoginSuccess);
     }
 
@@ -106,7 +110,8 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
             updateUser();
             baseActivityView.showPreviousFragment();
         } else {
-            loginButtonView.setNotLoginCategories(); //TODO add message when login fail
+            loginButtonView.setNotLoginCategories();
+            baseActivityView.showMessage("LOGIN_FAIL", true);
         }
     }
 

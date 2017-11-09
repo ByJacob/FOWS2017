@@ -51,6 +51,8 @@ public class FragmentLogin extends BaseFragment implements FragmentLoginView {
     }
 
     private void onClickLogin(View view) {
+        email.setError("");
+        password.setError("");
         presenter.userLogin(this);
     }
 
@@ -78,5 +80,18 @@ public class FragmentLogin extends BaseFragment implements FragmentLoginView {
     @Override
     public String getPassword() {
         return password.getText().toString();
+    }
+
+    @Override
+    public void showErrorEmpty() {
+
+        if (getEmail().isEmpty()) {
+            email.setError(getString(R.string.exception_require_field));
+        }
+        if (getPassword().isEmpty()) {
+            password.setError(getString(R.string.exception_require_field));
+        }
+
+
     }
 }

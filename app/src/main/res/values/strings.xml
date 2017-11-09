@@ -74,5 +74,7 @@
     <string name="exception_update_fail">An error occurred while updating your account</string>
     <string name="signOutSuccess">Signed out successfully</string>
     <string name="signOutFaill">Signed failed</string>
+    <string name="exception_require_field">This field can not be empty!</string>
+    <string name="exception_login_fail">Wrong username and / or password</string>
 
 </resources>

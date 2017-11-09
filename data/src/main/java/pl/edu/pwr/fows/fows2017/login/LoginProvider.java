@@ -51,6 +51,8 @@ public class LoginProvider extends OkHttpProvider{
     }
 
     public Boolean loginUser(String email, String password) {
+        if(email.isEmpty() || password.isEmpty())
+            return false;
         Boolean isLoginSuccess = authInterface.login(email, password);
         if(isLoginSuccess) {
             databaseInterface.updateUserVerify(authInterface.getUserUid(), authInterface.isEmailVerified());

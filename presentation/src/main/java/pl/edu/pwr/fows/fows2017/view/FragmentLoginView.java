@@ -11,4 +11,6 @@ public interface FragmentLoginView extends BaseActivityAndFragmentView {
     Boolean isNoEmpty();
     String getEmail();
     String getPassword();
+
+    void showErrorEmpty();
 }
