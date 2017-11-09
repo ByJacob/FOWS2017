@@ -82,6 +82,7 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
     }
 
     private void fetchUserFail(Throwable throwable) {
+        throwable.printStackTrace();
         loginButtonView.setNotLoginCategories();
     }
 
@@ -89,6 +90,7 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
         if (!user.getName().isEmpty() && !user.getSurname().isEmpty()) {
             this.user = user;
             loginButtonView.setLoginCategories(user.getName() + " " + user.getSurname());
+            loginButtonView.setUserVerify(user.getVerify());
         } else
             fetchUserFail(null); //TODO add message when create fail
     }

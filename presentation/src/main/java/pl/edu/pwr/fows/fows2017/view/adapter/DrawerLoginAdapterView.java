@@ -8,4 +8,5 @@ package pl.edu.pwr.fows.fows2017.view.adapter;
 public interface DrawerLoginAdapterView {
     void setNotLoginCategories();
     void setLoginCategories(String user);
+    void setUserVerify(Boolean verify);
 }

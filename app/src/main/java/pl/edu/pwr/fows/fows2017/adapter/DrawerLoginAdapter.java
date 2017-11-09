@@ -25,11 +25,14 @@ public class DrawerLoginAdapter implements AdapterView.OnItemSelectedListener, D
     private final Context context;
     private LoginPresenter presenter;
     private ArrayList<String> categoriesTag;
+    private CustomSpinnerLoginAdapter adapter;
+    private Boolean isUser;
 
     public DrawerLoginAdapter(Spinner spinner, Context context) {
         this.spinner = spinner;
         this.context = context;
         categoriesTag = new ArrayList<>();
+        isUser = false;
         spinner.setOnItemSelectedListener(this);
     }
 
@@ -40,6 +43,7 @@ public class DrawerLoginAdapter implements AdapterView.OnItemSelectedListener, D
 
     @Override
     public void setNotLoginCategories() {
+        isUser = false;
         categoriesTag.clear();
         categoriesTag.add(context.getResources().getString(R.string.anonymous));
         categoriesTag.add("LOGIN");
@@ -49,6 +53,7 @@ public class DrawerLoginAdapter implements AdapterView.OnItemSelectedListener, D
 
     @Override
     public void setLoginCategories(String user) {
+        this.isUser = true;
         categoriesTag.clear();
         categoriesTag.add(user);
         categoriesTag.add("ACCOUNT");
@@ -56,8 +61,14 @@ public class DrawerLoginAdapter implements AdapterView.OnItemSelectedListener, D
         setSpinner(categoriesTag);
     }
 
+    @Override
+    public void setUserVerify(Boolean verify) {
+        if (adapter != null && isUser)
+            adapter.isVerify(verify);
+    }
+
     private void setSpinner(ArrayList<String> categoriesTag) {
-        CustomSpinnerLoginAdapter adapter = new CustomSpinnerLoginAdapter(context, R.layout.row_navigation_spinner_text, categoriesTag);
+        adapter = new CustomSpinnerLoginAdapter(context, R.layout.row_navigation_spinner_text, categoriesTag);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
