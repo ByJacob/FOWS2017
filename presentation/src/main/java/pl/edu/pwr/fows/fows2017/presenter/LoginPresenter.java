@@ -18,6 +18,7 @@ import pl.edu.pwr.fows.fows2017.view.row.FragmentAccountRowView;
 public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
 
     private DrawerLoginAdapterView loginButtonView;
+    private FragmentAccountView fragmentAccountView;
     private User user;
 
     public LoginPresenter(UseCaseFactory factory, BaseActivityView baseActivityView) {
@@ -33,9 +34,10 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
     }
 
     public void onViewTakenFragmentAccount(FragmentAccountView fragmentAccount) {
-        if(user!=null)
+        if (user != null) {
             fragmentAccount.continueLoading();
-        else{
+            this.fragmentAccountView = fragmentAccount;
+        } else {
             updateUser();
             baseActivityView.showPreviousFragment();
         }
@@ -87,8 +89,7 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
         if (!user.getName().isEmpty() && !user.getSurname().isEmpty()) {
             this.user = user;
             loginButtonView.setLoginCategories(user.getName() + " " + user.getSurname());
-        }
-        else
+        } else
             fetchUserFail(null); //TODO add message when create fail
     }
 
@@ -97,15 +98,14 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
     }
 
     public void userLogin(FragmentLoginView fragmentLogin) {
-        if(fragmentLogin.getEmail().isEmpty() || fragmentLogin.getPassword().isEmpty())
-        {
+        if (fragmentLogin.getEmail().isEmpty() || fragmentLogin.getPassword().isEmpty()) {
             fragmentLogin.showErrorEmpty();
         }
         factory.loginUser(fragmentLogin.getEmail(), fragmentLogin.getPassword()).execute().subscribe(this::onLoginSuccess);
     }
 
     private void onLoginSuccess(Boolean aBoolean) {
-        if(aBoolean){
+        if (aBoolean) {
             baseActivityView.showMessage("LOGIN", null);
             updateUser();
             baseActivityView.showPreviousFragment();
@@ -117,7 +117,7 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
 
     public void configureRowInAccount(FragmentAccountRowView holder, String tag) {
         holder.setFirstText(tag);
-        switch (tag){
+        switch (tag) {
             case "NAME":
                 holder.setSecondText(user.getName());
                 break;
@@ -143,17 +143,43 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
     }
 
     private void fetchDefaultUserSuccess(Boolean aBoolean) {
-        if(aBoolean)
+        if (aBoolean)
             updateUser();
     }
 
     public void updatePassword(String password) {
         user.setPassword(password);
-        factory.updateUserPassword(password).execute().subscribe(this::updatePasswordSuccess);
+        factory.updateUserPassword(password).execute().subscribe(this::updateSuccess);
     }
 
-    private void updatePasswordSuccess(Boolean aBoolean) {
-        if(aBoolean){
+    public void updateUserElement(String tag, String s) {
+        switch (tag) {
+            case "NAME":
+                user.setName(s);
+                break;
+            case "SURNAME":
+                user.setSurname(s);
+                break;
+            case "EMAIL":
+                user.setEmail(s);
+                break;
+            case "UNIVERSITY":
+                user.setUniversity(s);
+                break;
+            case "COMPANY":
+                user.setCompany(s);
+                break;
+        }
+        if (tag.equals("EMAIL"))
+            factory.updateUserEmail(user.getEmail()).execute().subscribe(this::updateSuccess);
+        else
+            factory.updateUser(user).execute().subscribe(this::updateSuccess);
+    }
+
+    private void updateSuccess(Boolean aBoolean) {
+        if (aBoolean) {
+            updateUser();
+            fragmentAccountView.updateInformation();
             baseActivityView.showMessage("UPDATE_SUCCESS", null);
         } else {
             baseActivityView.showMessage("UPDATE_FAIL", false);
@@ -165,7 +191,7 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
     }
 
     private void logoutUserSuccess(Boolean aBoolean) {
-        if(aBoolean) {
+        if (aBoolean) {
             updateUser();
             baseActivityView.showMessage("SIGN_OUT_SUCCESS", null);
         } else {

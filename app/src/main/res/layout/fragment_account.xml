@@ -36,12 +36,12 @@
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/fragment_account_recycler_view"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_below="@id/fragment_account_recycler_view"
                 android:alpha="0.87"
-                android:text="@string/fragment_row_account_info"
+                android:text="@string/passwordL"
                 android:textColor="@color/black"
                 android:textSize="@dimen/fragment_account_row_text_info_size" />
 

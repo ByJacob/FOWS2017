@@ -8,4 +8,5 @@ import pl.edu.pwr.fows.fows2017.view.base.BaseActivityAndFragmentView;
  */
 
 public interface FragmentAccountView extends BaseActivityAndFragmentView {
+    void updateInformation();
 }

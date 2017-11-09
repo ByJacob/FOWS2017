@@ -45,7 +45,9 @@ import pl.edu.pwr.fows.fows2017.usecase.QuestionnaireUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SendFirebaseTokenUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SendQuestionnaireUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SponsorUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.UpdateUserEmailUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.UpdateUserPasswordUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.UpdateUserUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.base.UseCase;
 
 /**
@@ -180,6 +182,14 @@ public class UseCaseFactory {
 
     public UseCase<Observable<Boolean>> updateUserPassword(String password){
         return new UpdateUserPasswordUseCase(rxTransformer, userGateway, password);
+    }
+
+    public UseCase<Observable<Boolean>> updateUserEmail(String email){
+        return new UpdateUserEmailUseCase(rxTransformer, userGateway, email);
+    }
+
+    public UseCase<Observable<Boolean>> updateUser(User user){
+        return new UpdateUserUseCase(rxTransformer, userGateway, user);
     }
 
     public UseCase<Observable<Boolean>> logoutCurrentUser(){

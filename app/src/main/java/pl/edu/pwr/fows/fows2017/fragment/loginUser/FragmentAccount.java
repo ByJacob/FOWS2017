@@ -104,4 +104,10 @@ public class FragmentAccount extends BaseFragment implements FragmentAccountView
         recyclerView.setAdapter(adapter);
 
     }
+
+    @Override
+    public void updateInformation() {
+        for(int i=0; i<recyclerView.getAdapter().getItemCount(); i++)
+            recyclerView.getAdapter().notifyItemChanged(i);
+    }
 }

@@ -68,6 +68,7 @@ public class FragmentAccountAdapter extends RecyclerView.Adapter<FragmentAccount
             actionIcon.setOnClickListener(this::actionIconClick);
             firstText = itemView.findViewById(R.id.row_fragment_account_text);
             secondText = itemView.findViewById(R.id.row_fragment_account_second_text);
+            secondText.setTextColor(context.getResources().getColor(R.color.black));
             this.inflater = inflater;
         }
 
@@ -85,6 +86,7 @@ public class FragmentAccountAdapter extends RecyclerView.Adapter<FragmentAccount
                         if (!originalSecondTextString.equals(changeEditText.getText().toString())) {
                             secondText.setText(changeEditText.getText().toString());
                             secondText.setTextColor(context.getResources().getColor(android.R.color.holo_green_dark));
+                            presenter.updateUserElement(firstText.getTag().toString(), changeEditText.getText().toString());
                         }
                     });
             alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, context.getResources().getString(R.string.cancel),
@@ -96,8 +98,10 @@ public class FragmentAccountAdapter extends RecyclerView.Adapter<FragmentAccount
         @Override
         public void setFirstText(String tag) {
             for (int i = 0; i < tags.length; i++) {
-                if (tags[i].equals(tag))
+                if (tags[i].equals(tag)) {
                     firstText.setText(tagsString[i]);
+                    firstText.setTag(tag);
+                }
             }
         }
 

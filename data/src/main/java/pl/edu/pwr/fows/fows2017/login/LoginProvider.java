@@ -67,11 +67,10 @@ public class LoginProvider extends OkHttpProvider{
     }
 
     public Boolean updateUser(User user) {
-        Boolean isUpdate = authInterface.updateEmail(user.getEmail(), user.getPassword()) && authInterface.updatePassword(user.getPassword())
-                && authInterface.updateDisplayName(user.getName() + " " + user.getSurname());
+        Boolean isUpdate = authInterface.updateDisplayName(user.getName() + " " + user.getSurname());
         if(isUpdate)
             databaseInterface.sendUser(authInterface.getUserUid(), user.getName(), user.getSurname(),
-                    user.getUniversity(), user.getCompany(), user.getVerify());
+                    user.getUniversity(), user.getCompany(), authInterface.isEmailVerified());
         return isUpdate;
     }
 
@@ -99,8 +98,12 @@ public class LoginProvider extends OkHttpProvider{
         if(password.isEmpty())
             return false;
         Boolean isUpdate = authInterface.updateEmail(email, password);
-        if(isUpdate)
+        if(isUpdate) {
             databaseInterface.updateUserEmail(authInterface.getUserUid(), email);
+            sharedPreferencesDataInterface.save(SharedPreferencesAPIProvider.TAG_USER, email);
+        }
+        else
+            loginUser();
         return isUpdate;
     }
 
