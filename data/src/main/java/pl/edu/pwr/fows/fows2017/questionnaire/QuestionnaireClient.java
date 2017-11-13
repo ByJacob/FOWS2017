@@ -3,6 +3,7 @@ package pl.edu.pwr.fows.fows2017.questionnaire;
 import java.io.IOException;
 import java.util.List;
 
+import pl.edu.pwr.fows.fows2017.declarationInterface.AuthInterface;
 import pl.edu.pwr.fows.fows2017.declarationInterface.DatabaseInterface;
 import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterface;
 import pl.edu.pwr.fows.fows2017.entity.Question;
@@ -20,8 +21,9 @@ public class QuestionnaireClient implements QuestionGateway, QuestionnaireVersio
     //private static final String URL = "http://192.168.0.28/fows2017/sections/android-questions.php";
     private QuestionnaireProvider provider;
 
-    public QuestionnaireClient(SharedPreferencesDataInterface sharedPreferences, DatabaseInterface databaseInterface) {
-        this.provider = new QuestionnaireProvider(URL, sharedPreferences, databaseInterface);
+    public QuestionnaireClient(SharedPreferencesDataInterface sharedPreferences, DatabaseInterface databaseInterface,
+                               AuthInterface authInterface) {
+        this.provider = new QuestionnaireProvider(URL, sharedPreferences, databaseInterface, authInterface);
     }
 
     @Override

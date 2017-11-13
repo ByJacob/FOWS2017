@@ -10,6 +10,8 @@ public interface AuthInterface {
 
     Boolean login(String email, String password);
 
+    Boolean loginAnonymously();
+
     Boolean signOut();
 
     String getToken();

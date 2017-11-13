@@ -50,6 +50,18 @@ public class FirebaseAuthAPI implements AuthInterface {
     }
 
     @Override
+    public Boolean loginAnonymously() {
+        Task<AuthResult> authResultTask = auth.signInAnonymously();
+        try {
+            Tasks.await(authResultTask);
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public Boolean signOut() {
         if(auth.getCurrentUser() != null){
             auth.signOut();

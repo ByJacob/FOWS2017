@@ -102,6 +102,8 @@ public class FragmentQuestionnairePresenter extends BasePresenter<FragmentQuesti
                 }
                 if (questionList.get(i).getUserAnswer().isEmpty())
                     isComplete = false;
+            } else if (questionList.get(i).getUserAnswer()==null) {
+                questionList.get(i).setUserAnswer("");
             }
         }
         if (isComplete)

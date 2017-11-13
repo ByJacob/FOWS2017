@@ -137,16 +137,18 @@ public class AppModule {
     @Provides
     @Singleton
     QuestionGateway getQuestionGateway(SharedPreferencesDataInterface sharedPreferences,
-                                       DatabaseInterface databaseInterface) {
-        return new QuestionnaireClient(sharedPreferences, databaseInterface);
+                                       DatabaseInterface databaseInterface,
+                                       AuthInterface authInterface) {
+        return new QuestionnaireClient(sharedPreferences, databaseInterface, authInterface);
     }
 
     @Provides
     @Singleton
     @Named("NetworkGateway")
     QuestionnaireVersionGateway getQuestionnaireVersionGateway(SharedPreferencesDataInterface sharedPreferences,
-                                                               DatabaseInterface databaseInterface) {
-        return new QuestionnaireClient(sharedPreferences, databaseInterface);
+                                                               DatabaseInterface databaseInterface,
+                                                               AuthInterface authInterface) {
+        return new QuestionnaireClient(sharedPreferences, databaseInterface, authInterface);
     }
 
     @Provides
