@@ -55,6 +55,8 @@ public class FragmentAccount extends BaseFragment implements FragmentAccountView
         presenter.onViewTakenFragmentAccount(this);
         passwordFrame = getView().findViewById(R.id.fragment_account_frame_password);
         configurePasswordFrame();
+        Button sendVerify = getView().findViewById(R.id.fragment_account_send_verify_email);
+        sendVerify.setOnClickListener(view -> presenter.sendEmailVerify());
     }
 
     private void configurePasswordFrame() {
@@ -109,5 +111,17 @@ public class FragmentAccount extends BaseFragment implements FragmentAccountView
     public void updateInformation() {
         for(int i=0; i<recyclerView.getAdapter().getItemCount(); i++)
             recyclerView.getAdapter().notifyItemChanged(i);
+    }
+
+    @Override
+    public void enableVerifyError(Boolean verify) {
+        if(getView()!=null) {
+            View viewById = getView().findViewById(R.id.fragment_account_error_verify_container);
+            if (verify) {
+                viewById.setVisibility(View.GONE);
+            } else {
+                viewById.setVisibility(View.VISIBLE);
+            }
+        }
     }
 }

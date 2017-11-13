@@ -85,7 +85,6 @@ public class FragmentAccountAdapter extends RecyclerView.Adapter<FragmentAccount
                     (dialogInterface, i) -> {
                         if (!originalSecondTextString.equals(changeEditText.getText().toString())) {
                             secondText.setText(changeEditText.getText().toString());
-                            secondText.setTextColor(context.getResources().getColor(android.R.color.holo_green_dark));
                             presenter.updateUserElement(firstText.getTag().toString(), changeEditText.getText().toString());
                         }
                     });

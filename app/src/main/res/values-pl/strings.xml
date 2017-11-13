@@ -71,4 +71,7 @@
     <string name="signOutFaill">Wylogowano niepomyślnie</string>
     <string name="exception_require_field">To pole nie może być puste!</string>
     <string name="exception_login_fail">Niewłaściwa nazwa użytkownika lub/i hasło</string>
+    <string name="fragment_row_account_verify_error">Twoje konto nie zostało zweryfikowane. Kliknij w odnośnik z e-maila lub wyślij mail ponownie.</string>
+    <string name="send_again">Wyślij ponownie</string>
+    <string name="message_email_verify">Wysłano ponownie e-mail weryfikacyjny. Sprawdź swoją pocztę</string>
 </resources>

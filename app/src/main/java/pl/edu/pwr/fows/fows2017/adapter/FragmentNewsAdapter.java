@@ -195,12 +195,12 @@ public class FragmentNewsAdapter extends RecyclerView.Adapter<FragmentNewsAdapte
         @Override
         public void openFacebook(String url) {
             Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse("fb://facewebmodal/f?href=" + url));
+            i.setData(Uri.parse(url));
             try {
                 context.startActivity(i);
             }catch( ActivityNotFoundException e) {
                 try {
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    Intent browserIntent = new Intent(Intent.CATEGORY_BROWSABLE, Uri.parse(url));
                     context.startActivity(browserIntent);
                 } catch (ActivityNotFoundException ee) {
                     ee.printStackTrace();

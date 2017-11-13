@@ -42,6 +42,7 @@ import pl.edu.pwr.fows.fows2017.usecase.OfferUrlUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.OrganisersUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.OrganizersUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.QuestionnaireUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.SendEmailVerifyUserUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SendFirebaseTokenUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SendQuestionnaireUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SponsorUseCase;
@@ -190,6 +191,10 @@ public class UseCaseFactory {
 
     public UseCase<Observable<Boolean>> updateUser(User user){
         return new UpdateUserUseCase(rxTransformer, userGateway, user);
+    }
+
+    public UseCase<Observable<Boolean>> sendEmailVerifycationUser(){
+        return new SendEmailVerifyUserUseCase(rxTransformer, userGateway);
     }
 
     public UseCase<Observable<Boolean>> logoutCurrentUser(){

@@ -37,6 +37,7 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
         if (user != null) {
             fragmentAccount.continueLoading();
             this.fragmentAccountView = fragmentAccount;
+            fragmentAccountView.enableVerifyError(user.getVerify());
         } else {
             updateUser();
             baseActivityView.showPreviousFragment();
@@ -57,6 +58,7 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
         } else if (!fragmentCreateAccount.isCorrectEmail()) {
             baseActivityView.showMessage("FAIL_EMAIL", false);
         } else {
+            baseActivityView.enableLoadingBar();
             factory.addUserAndLogin(fragmentCreateAccount.getEmail(),
                     fragmentCreateAccount.getPassword(),
                     fragmentCreateAccount.getName(),
@@ -68,6 +70,7 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
     }
 
     private void onAddSuccessUser(Boolean aBoolean) {
+        baseActivityView.disableLoadingBar();
         if (aBoolean) {
             baseActivityView.showMessage("ADD_ACCOUNT", null);
             updateUser();
@@ -82,7 +85,8 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
     }
 
     private void fetchUserFail(Throwable throwable) {
-        throwable.printStackTrace();
+        if (throwable != null)
+            throwable.printStackTrace();
         loginButtonView.setNotLoginCategories();
     }
 
@@ -102,11 +106,14 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
     public void userLogin(FragmentLoginView fragmentLogin) {
         if (fragmentLogin.getEmail().isEmpty() || fragmentLogin.getPassword().isEmpty()) {
             fragmentLogin.showErrorEmpty();
+        } else {
+            factory.loginUser(fragmentLogin.getEmail(), fragmentLogin.getPassword()).execute().subscribe(this::onLoginSuccess);
+            baseActivityView.enableLoadingBar();
         }
-        factory.loginUser(fragmentLogin.getEmail(), fragmentLogin.getPassword()).execute().subscribe(this::onLoginSuccess);
     }
 
     private void onLoginSuccess(Boolean aBoolean) {
+        baseActivityView.disableLoadingBar();
         if (aBoolean) {
             baseActivityView.showMessage("LOGIN", null);
             updateUser();
@@ -155,6 +162,7 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
     }
 
     public void updateUserElement(String tag, String s) {
+        baseActivityView.enableLoadingBar();
         switch (tag) {
             case "NAME":
                 user.setName(s);
@@ -179,6 +187,7 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
     }
 
     private void updateSuccess(Boolean aBoolean) {
+        baseActivityView.disableLoadingBar();
         if (aBoolean) {
             updateUser();
             fragmentAccountView.updateInformation();
@@ -199,5 +208,14 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
         } else {
             baseActivityView.showMessage("SIGN_OUT_FAIL", null);
         }
+    }
+
+    public void sendEmailVerify() {
+        factory.sendEmailVerifycationUser().execute().subscribe(this::sendEmailVerifySuccess);
+    }
+
+    private void sendEmailVerifySuccess(Boolean aBoolean) {
+        if (aBoolean)
+            baseActivityView.showMessage("SEND_VERIFY", null);
     }
 }
