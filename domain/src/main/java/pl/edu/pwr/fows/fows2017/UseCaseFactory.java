@@ -14,6 +14,7 @@ import pl.edu.pwr.fows.fows2017.entity.Lecture;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
 import pl.edu.pwr.fows.fows2017.entity.OrganiserTeam;
 import pl.edu.pwr.fows.fows2017.entity.Organizer;
+import pl.edu.pwr.fows.fows2017.entity.PrelegentsDay;
 import pl.edu.pwr.fows.fows2017.entity.Question;
 import pl.edu.pwr.fows.fows2017.entity.Sponsor;
 import pl.edu.pwr.fows.fows2017.entity.User;
@@ -126,11 +127,11 @@ public class UseCaseFactory {
         return new SponsorUseCase(rxTransformer, sponsorGateway);
     }
 
-    public  UseCase<Observable<List<Lecture>>> getLectures(){
+    public  UseCase<Observable<List<PrelegentsDay>>> getLectures(){
         return new LecturesUseCase(rxTransformer, lectureGateway);
     }
 
-    public UseCase<Observable<List<Lecture>>> getLecturesSharedPref(){
+    public UseCase<Observable<List<PrelegentsDay>>> getLecturesSharedPref(){
         return new LecturesUseCase(rxTransformer, lectureGatewaySharedPref);
     }
 

@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.presenter.FragmentAgendaPresenter;
 import pl.edu.pwr.fows.fows2017.view.row.FragmentAgendaRowViewHeader;
@@ -98,7 +97,6 @@ public class FragmentAgendaAdapter extends BaseExpandableListAdapter {
 
     private class HeaderHolder implements FragmentAgendaRowViewHeader {
 
-        private CircleImageView speakerPicture;
         private TextView time;
         private TextView speakerName;
         private TextView company;
@@ -109,7 +107,6 @@ public class FragmentAgendaAdapter extends BaseExpandableListAdapter {
         private TextView theme;
 
         public HeaderHolder(View parent) {
-            speakerPicture = parent.findViewById(R.id.row_fragment_agenda_spekacer_circle_view);
             time = parent.findViewById(R.id.row_fragment_agenda_time_text);
             speakerName = parent.findViewById(R.id.row_fragment_agenda_speaker_name_text);
             company = parent.findViewById(R.id.row_fragment_agenda_company_text);
@@ -122,7 +119,7 @@ public class FragmentAgendaAdapter extends BaseExpandableListAdapter {
 
         @Override
         public void displayDayHeader(String day) {
-            if (day.length()>1) {
+            if (day.length() > 1) {
                 this.day.setVisibility(View.VISIBLE);
                 this.day.setText(day);
             } else {
@@ -141,11 +138,6 @@ public class FragmentAgendaAdapter extends BaseExpandableListAdapter {
         }
 
         @Override
-        public void displaySpeakerPicture(String urlSpeaker) {
-            Picasso.with(context).load(urlSpeaker).into(speakerPicture);
-        }
-
-        @Override
         public void displayNameCompany(String name) {
             this.company.setText(name);
         }
@@ -153,6 +145,7 @@ public class FragmentAgendaAdapter extends BaseExpandableListAdapter {
         @Override
         public void displayTheme(String theme) {
             this.theme.setText(theme);
+
         }
 
         @Override
@@ -182,10 +175,12 @@ public class FragmentAgendaAdapter extends BaseExpandableListAdapter {
         private TextView description;
         private ImageView logo;
         private View parent;
+        private TextView theme;
 
         public ItemHolder(View parent) {
             this.description = parent.findViewById(R.id.row_fragment_agenda_description_text);
             this.logo = parent.findViewById(R.id.row_fragment_agenda_logo_image);
+            theme = parent.findViewById(R.id.row_fragment_agenda_theme_full_text);
             this.parent = parent;
         }
 
@@ -201,10 +196,15 @@ public class FragmentAgendaAdapter extends BaseExpandableListAdapter {
 
         @Override
         public void setStatusLecture(FragmentAgendaRowViewHeader.STATUS statusLecture) {
-            if(statusLecture== FragmentAgendaRowViewHeader.STATUS.AFTER)
+            if (statusLecture == FragmentAgendaRowViewHeader.STATUS.AFTER)
                 parent.setAlpha(0.5f);
             else
                 parent.setAlpha(1f);
+        }
+
+        @Override
+        public void displayTheme(String theme) {
+            this.theme.setText(theme);
         }
     }
 }

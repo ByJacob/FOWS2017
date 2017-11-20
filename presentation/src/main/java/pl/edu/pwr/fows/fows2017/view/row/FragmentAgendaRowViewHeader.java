@@ -10,7 +10,6 @@ public interface FragmentAgendaRowViewHeader {
     void displayDayHeader(String day);
     void displayTime(String time);
     void displaySpeaker(String name);
-    void displaySpeakerPicture(String urlSpeaker);
     void displayNameCompany(String name);
     void displayTheme(String theme);
     void setStatusLecture(STATUS statusLecture);

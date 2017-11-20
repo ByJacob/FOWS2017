@@ -5,6 +5,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import pl.edu.pwr.fows.fows2017.entity.Lecture;
+import pl.edu.pwr.fows.fows2017.entity.PrelegentsDay;
 
 /**
  * Project: FoWS2017
@@ -13,6 +14,6 @@ import pl.edu.pwr.fows.fows2017.entity.Lecture;
 
 public interface LectureGateway {
 
-    List<Lecture> getLectures() throws IOException;
+    List<PrelegentsDay> getPrelegentsDay() throws IOException;
 
 }

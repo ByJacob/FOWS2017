@@ -9,12 +9,21 @@
     android:paddingEnd="@dimen/fragment_agenda_row_item_vertical_padding"
     android:paddingStart="@dimen/fragment_agenda_row_item_vertical_padding"
     android:paddingTop="@dimen/fragment_agenda_row_item_top_padding">
-
+    <TextView
+        android:id="@+id/row_fragment_agenda_theme_full_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:alpha="0.70"
+        android:textColor="@color/black"
+        android:textSize="@dimen/fragment_agenda_row_header_secondary_text_size"
+        tools:text="Temat" />
     <TextView
         android:id="@+id/row_fragment_agenda_description_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:alpha="0.7"
+        android:layout_marginBottom="8dp"
+        android:alpha="0.65"
         android:textColor="@color/black"
         android:textSize="@dimen/fragment_agenda_row_header_secondary_text_size"
         tools:text="Opis" />

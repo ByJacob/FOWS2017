@@ -11,4 +11,6 @@ public interface FragmentAgendaRowViewItem {
     void displayLogo(String urlLogo);
 
     void setStatusLecture(FragmentAgendaRowViewHeader.STATUS statusLecture);
+
+    void displayTheme(String theme);
 }
