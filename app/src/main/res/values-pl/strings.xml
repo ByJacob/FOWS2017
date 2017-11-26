@@ -74,4 +74,5 @@
     <string name="fragment_row_account_verify_error">Twoje konto nie zostało zweryfikowane. Kliknij w odnośnik z e-maila lub wyślij mail ponownie.</string>
     <string name="send_again">Wyślij ponownie</string>
     <string name="message_email_verify">Wysłano ponownie e-mail weryfikacyjny. Sprawdź swoją pocztę</string>
+    <string name="contest">Konkurs</string>
 </resources>

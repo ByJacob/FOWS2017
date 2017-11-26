@@ -3,7 +3,6 @@ package pl.edu.pwr.fows.fows2017.di.module;
 import android.app.Application;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.auth.FirebaseAuth;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -13,12 +12,14 @@ import dagger.Provides;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import pl.edu.pwr.fows.fows2017.contest.ContestClient;
 import pl.edu.pwr.fows.fows2017.declarationInterface.AuthInterface;
 import pl.edu.pwr.fows.fows2017.declarationInterface.DatabaseInterface;
 import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterface;
 import pl.edu.pwr.fows.fows2017.facebookPost.FacebookClient;
 import pl.edu.pwr.fows.fows2017.firebase.LogEvent;
 import pl.edu.pwr.fows.fows2017.firebaseToken.FirebaseTokenClient;
+import pl.edu.pwr.fows.fows2017.gateway.ContestQuestionGateway;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
 import pl.edu.pwr.fows.fows2017.gateway.FirebaseTokenGateway;
 import pl.edu.pwr.fows.fows2017.gateway.LectureGateway;
@@ -163,6 +164,12 @@ public class AppModule {
     UserGateway getUserGateway(AuthInterface auth, DatabaseInterface databaseInterface,
                                SharedPreferencesDataInterface sharedPreferencesDataInterface){
         return new LoginClient(auth, databaseInterface, sharedPreferencesDataInterface);
+    }
+
+    @Provides
+    @Singleton
+    ContestQuestionGateway getContestQuestion(){
+        return new ContestClient();
     }
 
     @Provides

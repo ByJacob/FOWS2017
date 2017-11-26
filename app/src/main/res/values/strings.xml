@@ -79,5 +79,6 @@
     <string name="fragment_row_account_verify_error">Your account has not been verified. Click on the link from the email or email again.</string>
     <string name="send_again">Send again</string>
     <string name="message_email_verify">Again you sent an e-mail verification. Check your email</string>
+    <string name="contest">Contest</string>
 
 </resources>

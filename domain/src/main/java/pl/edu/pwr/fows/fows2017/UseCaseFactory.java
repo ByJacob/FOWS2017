@@ -9,6 +9,7 @@ import javax.inject.Named;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import pl.edu.pwr.fows.fows2017.aux_data.FowsRxTransformerProvider;
+import pl.edu.pwr.fows.fows2017.entity.ContestQuestion;
 import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
 import pl.edu.pwr.fows.fows2017.entity.Lecture;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
@@ -18,6 +19,7 @@ import pl.edu.pwr.fows.fows2017.entity.PrelegentsDay;
 import pl.edu.pwr.fows.fows2017.entity.Question;
 import pl.edu.pwr.fows.fows2017.entity.Sponsor;
 import pl.edu.pwr.fows.fows2017.entity.User;
+import pl.edu.pwr.fows.fows2017.gateway.ContestQuestionGateway;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
 import pl.edu.pwr.fows.fows2017.gateway.FirebaseTokenGateway;
 import pl.edu.pwr.fows.fows2017.gateway.LectureGateway;
@@ -32,6 +34,7 @@ import pl.edu.pwr.fows.fows2017.gateway.UserGateway;
 import pl.edu.pwr.fows.fows2017.usecase.AddUserAndLoginUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.CheckQuestionnaireVersionUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.FacebookPostsUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.GetContestUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.GetUserUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.LecturesUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.LoginUserExistAccountUseCase;
@@ -74,6 +77,7 @@ public class UseCaseFactory {
     private final QuestionnaireVersionGateway questionnaireVersionGatewaySharedPref;
     private final FirebaseTokenGateway firebaseTokenGateway;
     private final UserGateway userGateway;
+    private ContestQuestionGateway contestQuestionGateway;
 
     @Inject
     public UseCaseFactory(FowsRxTransformerProvider rxTransformer, MenuGateway menuGateway,
@@ -89,7 +93,8 @@ public class UseCaseFactory {
                           @Named("NetworkGateway") QuestionnaireVersionGateway questionnaireVersionGateway,
                           @Named("LocalGateway") QuestionnaireVersionGateway questionnaireVersionGatewaySharedPref,
                           FirebaseTokenGateway firebaseTokenGateway,
-                          UserGateway userGateway){
+                          UserGateway userGateway,
+                          ContestQuestionGateway contestQuestionGateway){
         this.menuGateway = menuGateway;
         this.rxTransformer = rxTransformer;
         this.facebookPostGateway = facebookPostGateway;
@@ -105,6 +110,7 @@ public class UseCaseFactory {
         this.questionnaireVersionGatewaySharedPref = questionnaireVersionGatewaySharedPref;
         this.firebaseTokenGateway = firebaseTokenGateway;
         this.userGateway = userGateway;
+        this.contestQuestionGateway = contestQuestionGateway;
     }
 
     public UseCase<Observable<List<Menu>>> getMenuUseCase(){
@@ -200,5 +206,9 @@ public class UseCaseFactory {
 
     public UseCase<Observable<Boolean>> logoutCurrentUser(){
         return new LogoutUseCase(rxTransformer, userGateway);
+    }
+
+    public UseCase<Observable<List<ContestQuestion>>> getContestQuestion(){
+        return new GetContestUseCase(rxTransformer, contestQuestionGateway);
     }
 }
