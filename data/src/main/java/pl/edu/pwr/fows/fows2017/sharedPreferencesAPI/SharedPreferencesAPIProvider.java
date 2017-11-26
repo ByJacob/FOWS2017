@@ -29,6 +29,7 @@ public class SharedPreferencesAPIProvider {
     public static final String TAG_QUESTIONNAIRE = "_questionnaire";
     public static final String TAG_USER = "_user";
     public static final String TAG_PASSWORD = "_password";
+    public static final String TAG_CONTEST = "_contest";
 
     private final SharedPreferencesDataInterface API;
 

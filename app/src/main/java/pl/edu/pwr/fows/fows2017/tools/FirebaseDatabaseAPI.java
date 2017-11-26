@@ -1,5 +1,7 @@
 package pl.edu.pwr.fows.fows2017.tools;
 
+import android.os.SystemClock;
+
 import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONArray;
@@ -66,5 +68,16 @@ public class FirebaseDatabaseAPI implements DatabaseInterface {
     public int updateUserVerify(String uid, Boolean isVerify) {
         database.getReference("users").child(uid).child("verify").setValue(isVerify);
         return 1;
+    }
+
+    @Override
+    public void sendAnswer(HashMap<String, String> answers, String nameContest, String name) {
+        SntpClient client = new SntpClient();
+        client.requestTime("0.pl.pool.ntp.org", 120);
+        long now = client.getNtpTime() + SystemClock.elapsedRealtime() - client.getNtpTimeReference();
+        name = now + "-" + name;
+        nameContest = nameContest.replace(".", "");
+        name = name.replace(".","-dot-");
+        database.getReference("contestAnswer").child(nameContest).child(name).setValue(answers);
     }
 }

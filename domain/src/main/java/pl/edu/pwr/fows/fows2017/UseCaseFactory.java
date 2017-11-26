@@ -1,5 +1,6 @@
 package pl.edu.pwr.fows.fows2017;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -46,6 +47,7 @@ import pl.edu.pwr.fows.fows2017.usecase.OfferUrlUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.OrganisersUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.OrganizersUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.QuestionnaireUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.SendContestAnswerUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SendEmailVerifyUserUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SendFirebaseTokenUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SendQuestionnaireUseCase;
@@ -210,5 +212,9 @@ public class UseCaseFactory {
 
     public UseCase<Observable<List<ContestQuestion>>> getContestQuestion(){
         return new GetContestUseCase(rxTransformer, contestQuestionGateway);
+    }
+
+    public UseCase<Observable<Boolean>> sendContestAnswer(HashMap<String, String> answer){
+        return new SendContestAnswerUseCase(rxTransformer, contestQuestionGateway, answer);
     }
 }

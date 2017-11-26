@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import pl.edu.pwr.fows.fows2017.declarationInterface.AuthInterface;
+import pl.edu.pwr.fows.fows2017.declarationInterface.DatabaseInterface;
+import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterface;
 import pl.edu.pwr.fows.fows2017.entity.ContestQuestion;
 import pl.edu.pwr.fows.fows2017.gateway.ContestQuestionGateway;
 
@@ -19,8 +22,8 @@ public class ContestClient implements ContestQuestionGateway {
     private String urlVersion = "https://fows-2017.firebaseio.com/contest/version.json";
     private ContestProvider provider;
 
-    public ContestClient() {
-        provider = new ContestProvider(urlQuestion, urlVersion);
+    public ContestClient(SharedPreferencesDataInterface sharedPreferences, DatabaseInterface databaseInterface, AuthInterface authInterface) {
+        provider = new ContestProvider(urlQuestion, urlVersion, sharedPreferences, databaseInterface, authInterface);
     }
 
     @Override
@@ -35,6 +38,6 @@ public class ContestClient implements ContestQuestionGateway {
 
     @Override
     public boolean sendAnswers(HashMap<String, String> answers) {
-        return false;
+        return provider.sendAnswers(answers);
     }
 }

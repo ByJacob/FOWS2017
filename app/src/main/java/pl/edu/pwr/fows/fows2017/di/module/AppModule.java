@@ -168,8 +168,10 @@ public class AppModule {
 
     @Provides
     @Singleton
-    ContestQuestionGateway getContestQuestion(){
-        return new ContestClient();
+    ContestQuestionGateway getContestQuestion(SharedPreferencesDataInterface sharedPreferences,
+                                              DatabaseInterface databaseInterface,
+                                              AuthInterface authInterface){
+        return new ContestClient(sharedPreferences, databaseInterface, authInterface);
     }
 
     @Provides

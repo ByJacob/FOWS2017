@@ -58,6 +58,7 @@ public class FragmentCreateAccount extends BaseFragment implements FragmentCreat
         university = getView().findViewById(R.id.fragment_create_account_university);
         createAccount = getView().findViewById(R.id.fragment_create_account_button);
         createAccount.setOnClickListener(this::clickButtonCreateAccount);
+        presenter.onViewTaken(this);
     }
 
     @Override
