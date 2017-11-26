@@ -130,9 +130,9 @@ public class FragmentHomePresenter extends BasePresenter<FragmentHomeView> {
                         view.displayLecture(df.format(lectures.get(i).getPrelegents().get(j).getStartTime(dayString)), description, false, true);
                     return;
                 }
-                if (i == lectures.size() - 1)
-                    isNext = !isNext;
             }
+            if (i == lectures.size() - 1)
+                isNext = !isNext;
         }
         for (int i = 0; i < lectures.size() && isNext; i++) {
             String dayString = lectures.get(i).getDate();
@@ -162,7 +162,7 @@ public class FragmentHomePresenter extends BasePresenter<FragmentHomeView> {
     public void displaySponsor() {
         Random random = new Random();
         Integer pos1 = random.nextInt(sponsors.size());
-        while (Objects.equals(pos1, lastPos1)) {
+        while (Objects.equals(pos1, lastPos1) || sponsors.get(pos1).size()==0) {
             pos1 = random.nextInt(sponsors.size());
         }
         lastPos1 = pos1;
