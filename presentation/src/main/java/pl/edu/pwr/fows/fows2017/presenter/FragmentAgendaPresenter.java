@@ -2,14 +2,13 @@ package pl.edu.pwr.fows.fows2017.presenter;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
 import pl.edu.pwr.fows.fows2017.UseCaseFactory;
-import pl.edu.pwr.fows.fows2017.entity.Lecture;
+import pl.edu.pwr.fows.fows2017.entity.PrelegentsDay;
 import pl.edu.pwr.fows.fows2017.presenter.base.BasePresenter;
 import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
 import pl.edu.pwr.fows.fows2017.view.FragmentAgendaView;
@@ -23,7 +22,7 @@ import pl.edu.pwr.fows.fows2017.view.row.FragmentAgendaRowViewItem;
 
 public class FragmentAgendaPresenter extends BasePresenter<FragmentAgendaView> {
 
-    private List<Lecture> lectures;
+    private List<PrelegentsDay> lectures;
 
     public FragmentAgendaPresenter(UseCaseFactory factory, BaseActivityView baseActivityView) {
         super(factory, baseActivityView);
@@ -36,7 +35,7 @@ public class FragmentAgendaPresenter extends BasePresenter<FragmentAgendaView> {
         factory.getLectures().execute().subscribe(this::onLecturesFetchSuccess, this::onLecturesFetchFail);
     }
 
-    private void onLecturesFetchSuccess(List<Lecture> lectures) {
+    private void onLecturesFetchSuccess(List<PrelegentsDay> lectures) {
         baseActivityView.disableLoadingBar();
         this.lectures = lectures;
         view.continueLoading();
@@ -49,10 +48,10 @@ public class FragmentAgendaPresenter extends BasePresenter<FragmentAgendaView> {
         throwable.printStackTrace();
     }
 
-    private void OnLecturesSharedPrefFetchSuccess(List<Lecture> lectures) {
+    private void OnLecturesSharedPrefFetchSuccess(List<PrelegentsDay> lectures) {
         baseActivityView.disableLoadingBar();
         this.lectures = lectures;
-        if(lectures.size()<1) {
+        if (lectures.size() < 1) {
             baseActivityView.showMessage("NETWORK", true);
         } else {
             baseActivityView.showMessage("NETWORK", false);
@@ -61,66 +60,96 @@ public class FragmentAgendaPresenter extends BasePresenter<FragmentAgendaView> {
     }
 
     public int getLecturesCount() {
-        return lectures.size();
+        Integer sum = 0;
+        for (int i = 0; i < lectures.size(); i++) {
+            sum += lectures.get(i).getPrelegents().size();
+        }
+        return sum;
     }
 
 
     public void configureRowItem(FragmentAgendaRowViewItem holder, Integer position, Locale locale) {
+        Integer dayPosition = 0;
+        while (position >= lectures.get(dayPosition).getPrelegents().size()) {
+            position -= lectures.get(dayPosition).getPrelegents().size();
+            dayPosition++;
+        }
         if (Objects.equals(locale.getLanguage(), "pl"))
-            holder.displayDescription(lectures.get(position).getDescriptionPL());
+            holder.displayDescription(lectures.get(dayPosition).getPrelegents().get(position).getDescriptionPL());
         else
-            holder.displayDescription(lectures.get(position).getDescriptionEN());
-        holder.displayLogo(lectures.get(position).getLogoURL());
-        holder.setStatusLecture(getStatusLecture(position));
+            holder.displayDescription(lectures.get(dayPosition).getPrelegents().get(position).getDescriptionEN());
+        holder.setStatusLecture(getStatusLecture(dayPosition, position));
+        holder.displayLogo(lectures.get(dayPosition).getPrelegents().get(position).getLogo());
+        String theme = "";
+        if (Objects.equals(locale.getLanguage(), "pl"))
+            theme = lectures.get(dayPosition).getPrelegents().get(position).getThemePL();
+        else
+            theme = lectures.get(dayPosition).getPrelegents().get(position).getThemeEN();
+        holder.displayTheme(theme);
     }
 
     public void configureRowHeader(FragmentAgendaRowViewHeader holder, int position, Locale locale) {
+        Integer dayPosition = 0;
+        while (position >= lectures.get(dayPosition).getPrelegents().size()) {
+            position -= lectures.get(dayPosition).getPrelegents().size();
+            dayPosition++;
+        }
+        String dayString = lectures.get(dayPosition).getDate();
         DateFormat df = new SimpleDateFormat("HH:mm", locale);
         DateFormat day = new SimpleDateFormat("dd' 'MMMM' 'yyyy", locale);
-        holder.displayNameCompany(lectures.get(position).getCompany());
-        holder.displaySpeaker(lectures.get(position).getSpeaker());
-        holder.displaySpeakerPicture(lectures.get(position).getSpeakerPictureSmall());
+        holder.displayNameCompany(lectures.get(dayPosition).getPrelegents().get(position).getCompany());
+        holder.displaySpeaker(lectures.get(dayPosition).getPrelegents().get(position).getPrelegent());
+        String theme = "";
         if (Objects.equals(locale.getLanguage(), "pl"))
-            holder.displayTheme(lectures.get(position).getThemePL());
+            theme = lectures.get(dayPosition).getPrelegents().get(position).getThemePL();
         else
-            holder.displayTheme(lectures.get(position).getThemeEN());
-        holder.displayTime(df.format(lectures.get(position).getStartTime())
-                + "-" + df.format(lectures.get(position).getEndTime()));
-        if (position>0){
-            if (getDayInYear(position-1) < getDayInYear(position)){
-                holder.displayDayHeader(day.format(lectures.get(position).getStartTime()));
-            } else {
-                holder.displayDayHeader("");
-            }
+            theme = lectures.get(dayPosition).getPrelegents().get(position).getThemeEN();
+        if (lectures.get(dayPosition).getPrelegents().get(position).getPrelegent().length() > 1)
+            holder.displayTheme(theme);
+        else {
+            holder.displaySpeaker(theme);
+            holder.displayTheme("");
         }
-        else
-            holder.displayDayHeader(day.format(lectures.get(position).getStartTime()));
-        holder.setStatusLecture(getStatusLecture(position));
+        holder.displayTime(df.format(lectures.get(dayPosition).getPrelegents().get(position).getStartTime(dayString))
+                + "-" + df.format(lectures.get(dayPosition).getPrelegents().get(position).getEndTime(dayString)));
+
+        if (position - 1 < 0) {
+            holder.displayDayHeader(day.format(lectures.get(dayPosition).getPrelegents().get(position).getStartTime(dayString)));
+        } else {
+            holder.displayDayHeader("");
+        }
+        holder.setStatusLecture(getStatusLecture(dayPosition, position));
     }
 
     public void finishLoading() {
-        for(int i=0; i<lectures.size(); i++){
-            if (getStatusLecture(i)== FragmentAgendaRowViewHeader.STATUS.NOW){
-                view.scrollToListPosition(i);
-                return;
-            }
+        for (int i = 0; i < lectures.size(); i++) {
+            for (int j = 0; j < lectures.get(i).getPrelegents().size(); j++)
+                if (getStatusLecture(i, j) == FragmentAgendaRowViewHeader.STATUS.NOW) {
+                    view.scrollToListPosition(i);
+                    return;
+                }
         }
     }
 
-    private Integer getDayInYear(Integer positionLectures){
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(lectures.get(positionLectures).getStartTime());
-        return cal.get(Calendar.DAY_OF_YEAR);
-    }
 
-    private FragmentAgendaRowViewHeader.STATUS getStatusLecture(Integer position){
+    private FragmentAgendaRowViewHeader.STATUS getStatusLecture(Integer dayPosition, Integer position) {
         Date now = new Date(System.currentTimeMillis());
-        if (now.before(lectures.get(position).getStartTime()))
+        String dayString = lectures.get(dayPosition).getDate();
+        if (now.before(lectures.get(dayPosition).getPrelegents().get(position).getStartTime(dayString)))
             return FragmentAgendaRowViewHeader.STATUS.BEFORE;
-        else if (now.after(lectures.get(position).getStartTime()) && now.before(lectures.get(position).getEndTime()))
+        else if (now.after(lectures.get(dayPosition).getPrelegents().get(position).getStartTime(dayString))
+                && now.before(lectures.get(dayPosition).getPrelegents().get(position).getEndTime(dayString)))
             return FragmentAgendaRowViewHeader.STATUS.NOW;
         else
             return FragmentAgendaRowViewHeader.STATUS.AFTER;
     }
 
+    public boolean isDescription(int position) {
+        Integer dayPosition = 0;
+        while (position >= lectures.get(dayPosition).getPrelegents().size()) {
+            position -= lectures.get(dayPosition).getPrelegents().size();
+            dayPosition++;
+        }
+        return lectures.get(dayPosition).getPrelegents().get(position).getDescriptionPL().length() > 1;
+    }
 }

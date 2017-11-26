@@ -1,6 +1,7 @@
 apply plugin: 'java'
 
 dependencies {
+    final FIREBASE_VERSION = '11.4.2'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(path: ':domain')
     compile 'javax.inject:javax.inject:1'

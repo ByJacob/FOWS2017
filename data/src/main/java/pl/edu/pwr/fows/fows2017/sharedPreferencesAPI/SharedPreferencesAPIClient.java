@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterface;
 import pl.edu.pwr.fows.fows2017.entity.FacebookPost;
 import pl.edu.pwr.fows.fows2017.entity.Lecture;
+import pl.edu.pwr.fows.fows2017.entity.PrelegentsDay;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
 import pl.edu.pwr.fows.fows2017.gateway.LectureGateway;
 import pl.edu.pwr.fows.fows2017.gateway.QuestionnaireVersionGateway;
@@ -32,7 +33,7 @@ public class SharedPreferencesAPIClient implements FacebookPostGateway, LectureG
 
 
     @Override
-    public List<Lecture> getLectures() {
+    public List<PrelegentsDay> getPrelegentsDay() {
         return provider.getLectures();
     }
 

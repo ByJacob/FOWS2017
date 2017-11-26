@@ -5,15 +5,16 @@
     <dimen name="navigation_item_icon_margin_left_right">16dp</dimen>
     <dimen name="navigation_item_text_left_margin">72dp</dimen>
     <dimen name="navigation_header_texts_height">56dp</dimen>
-    <dimen name="navigation_header_texts_left_margin">@dimen/navigation_item_icon_margin_left_right</dimen>
+    <dimen name="navigation_header_texts_left_margin">8dp</dimen>
     <dimen name="navigation_avatar_left_margin">@dimen/navigation_item_icon_margin_left_right</dimen>
     <dimen name="navigation_header_bottom_padding">8dp</dimen>
     <dimen name="navigation_list_top_margin">8dp</dimen>
-
+    <dimen name="navigation_login_text_icon_size">13sp</dimen>
     <dimen name="fragment_home_item_size">24sp</dimen>
     <dimen name="fragment_home_item_margin">16dp</dimen>
     <dimen name="fragment_home_logo_padding">8dp</dimen>
     <dimen name="fragment_home_logo_paddingX2">16dp</dimen>
+    <dimen name="fragment_home_icon_size">70dp</dimen>
 
     <dimen name="fragment_news_row_left_padding">24dp</dimen>
     <dimen name="fragment_news_header_height">48dp</dimen>
@@ -70,4 +71,12 @@
     <dimen name="fragment_organiser_row_texts_padding_vertical">16dp</dimen>
     <dimen name="fragment_organiser_row_ptext_size">24sp</dimen>
     <dimen name="fragment_organiser_row_ptext_padding_top">20dp</dimen>
+    <dimen name="fragment_account_row_expand_icon">24dp</dimen>
+    <dimen name="fragment_account_row_start_end_padding">24dp</dimen>
+    <dimen name="fragment_account_row_end_text_padding">16dp</dimen>
+    <dimen name="fragment_account_row_height">48dp</dimen>
+    <dimen name="fragment_account_row_text_size">18sp</dimen>
+    <dimen name="fragment_account_row_text_second_size">14sp</dimen>
+    <dimen name="fragment_account_row_text_info_size">13sp</dimen>
+    <dimen name="fragment_account_row_text_error_size">17sp</dimen>
 </resources>

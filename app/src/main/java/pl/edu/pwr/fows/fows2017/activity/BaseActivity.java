@@ -1,7 +1,6 @@
 package pl.edu.pwr.fows.fows2017.activity;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +14,6 @@ import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -38,7 +36,10 @@ import pl.edu.pwr.fows.fows2017.firebase.LogEvent;
 import pl.edu.pwr.fows.fows2017.fragment.DrawerMenuFragment;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentAgenda;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentContact;
+import pl.edu.pwr.fows.fows2017.fragment.loginUser.FragmentAccount;
+import pl.edu.pwr.fows.fows2017.fragment.loginUser.FragmentCreateAccount;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentHome;
+import pl.edu.pwr.fows.fows2017.fragment.loginUser.FragmentLogin;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentNews;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentOrganiser;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentQuestionnaire;
@@ -47,6 +48,7 @@ import pl.edu.pwr.fows.fows2017.fragment.base.BaseFragment;
 import pl.edu.pwr.fows.fows2017.map.DrawerMenuItemMap;
 import pl.edu.pwr.fows.fows2017.map.SnackBarMessageMap;
 import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
+import pl.edu.pwr.fows.fows2017.presenter.LoginPresenter;
 import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
 
 /**
@@ -59,6 +61,9 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
     @SuppressWarnings("CanBeFinal")
     @Inject
     DrawerMenuPresenter menuPresenter;
+    @SuppressWarnings("CanBeFinal")
+    @Inject
+    LoginPresenter loginPresenter;
     @SuppressWarnings("CanBeFinal")
     @Inject
     Activity activity;
@@ -179,10 +184,25 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
                             break;
                         case "ORGANISERS":
                             fragment = new FragmentOrganiser();
+                            break;
+                        case "CREATE_ACCOUNT":
+                            fragment = new FragmentCreateAccount();
+                            break;
+                        case  "LOGIN":
+                            fragment = new FragmentLogin();
+                            break;
+                        case "ACCOUNT":
+                            fragment = new FragmentAccount();
+                            break;
+                        case "SIGN_OUT":
+                            loginPresenter.signOutUser();
+                            drawerFragment.closeDrawer();
+                            break;
                     }
                 }
                 if (fragment != null)
                     try {
+                        drawerFragment.closeDrawer();
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.container_body, fragment, tag).addToBackStack(tag).commit();
                         if (getSupportActionBar() != null && DrawerMenuItemMap.getTag(tag) != null)
@@ -315,7 +335,8 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
 
     @Override
     public void continueLoading() {
-        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar, menuPresenter, activity);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, findViewById(R.id.drawer_layout),
+                mToolbar, menuPresenter, activity, loginPresenter);
         changeMainFragment(openFragmentTag);
     }
 }

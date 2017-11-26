@@ -29,8 +29,14 @@
             style="?android:attr/progressBarStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/container_toolbar"
-            android:visibility="invisible" />
+            android:layout_below="@id/container_toolbar"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@android:drawable/screen_background_dark_transparent"
+            android:elevation="12dp"
+            android:padding="100dp"
+            android:visibility="invisible"
+            tools:visibility="visible" />
 
         <FrameLayout
             android:id="@+id/container_body"

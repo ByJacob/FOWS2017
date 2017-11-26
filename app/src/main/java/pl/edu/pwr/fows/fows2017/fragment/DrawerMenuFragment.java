@@ -16,9 +16,17 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import pl.edu.pwr.fows.fows2017.R;
+import pl.edu.pwr.fows.fows2017.adapter.DrawerLoginAdapter;
 import pl.edu.pwr.fows.fows2017.adapter.DrawerMenuAdapter;
 import pl.edu.pwr.fows.fows2017.presenter.DrawerMenuPresenter;
+import pl.edu.pwr.fows.fows2017.presenter.LoginPresenter;
 import pl.edu.pwr.fows.fows2017.view.DrawerMenuView;
 
 /**
@@ -32,10 +40,12 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private DrawerMenuAdapter adapter;
+    private DrawerLoginAdapter loginAdapter;
     private View containerView;
     private final DrawerMenuView fragment = this;
 
     public DrawerMenuPresenter presenter;
+    public LoginPresenter loginPresenter;
     @SuppressWarnings("FieldCanBeLocal")
     private Activity activity;
 
@@ -48,13 +58,19 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer_menu, container, false);
         recyclerView = layout.findViewById(R.id.drawerList);
         adapter = new DrawerMenuAdapter(getActivity());
+        loginAdapter = new DrawerLoginAdapter(layout.findViewById(R.id.nav_spinner), getContext());
         return layout;
     }
 
-    public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar, final DrawerMenuPresenter presenter, Activity activity) {
+    public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar, final DrawerMenuPresenter presenter,
+                      Activity activity, LoginPresenter loginPresenter) {
         this.presenter = presenter;
+        this.loginPresenter = loginPresenter;
         this.activity = activity;
         adapter.setPresenter(this.presenter);
+        loginAdapter.setPresenter(this.loginPresenter);
+        loginAdapter.setNotLoginCategories();
+        loginPresenter.loginDefaultUser();
         containerView = this.activity.findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
         mDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
@@ -95,7 +111,19 @@ public class DrawerMenuFragment extends Fragment implements DrawerMenuView{
 
     @Override
     public void continueLoading() {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("menu");
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                presenter.changeMenusInDatabase();
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        databaseReference.addValueEventListener(postListener);
     }
 
     private void setRecyclerView(final DrawerMenuView fragment) {

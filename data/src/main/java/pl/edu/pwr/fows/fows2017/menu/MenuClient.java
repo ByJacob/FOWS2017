@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
 import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
 
@@ -15,7 +14,7 @@ import pl.edu.pwr.fows.fows2017.gateway.MenuGateway;
 
 public class MenuClient implements MenuGateway {
 
-    private final static String URL = "http://fows.pwr.edu.pl/sections/android-menu.php?android";
+    private final static String URL = "https://fows-2017.firebaseio.com/menu.json";
     private final MenuProvider provider;
 
     @Inject
@@ -34,10 +33,10 @@ public class MenuClient implements MenuGateway {
 
     @Override
     public Menu getMenu(String tag) {
-            try {
-                return provider.getMenu(tag);
-            } catch (Exception e) {
-                return provider.getMenuDefaultConstruct(tag);
-            }
+        try {
+            return provider.getMenu(tag);
+        } catch (Exception e) {
+            return provider.getMenuDefaultConstruct(tag);
+        }
     }
 }

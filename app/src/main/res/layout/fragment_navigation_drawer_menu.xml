@@ -12,9 +12,9 @@
     <RelativeLayout
         android:id="@+id/nav_header_container"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="84dp"
         android:layout_alignParentTop="true"
-        android:background="@drawable/navigation_drawer_header_background"
+        android:background="@drawable/tlo_menu"
         android:gravity="bottom"
         android:hapticFeedbackEnabled="true"
         android:paddingBottom="@dimen/navigation_header_bottom_padding">
@@ -27,50 +27,66 @@
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/logo_fows" />
 
-        <RelativeLayout
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/nav_text_contener"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/navigation_header_texts_height"
+        android:layout_below="@+id/nav_header_container"
+        android:background="@color/menu1"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/navigation_header_texts_left_margin">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/navigation_header_texts_height"
-            android:layout_below="@+id/imageView"
-            android:layout_marginStart="@dimen/navigation_header_texts_left_margin"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:orientation="vertical"
-                tools:ignore="UselessParent">
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:text="@string/address"
+                android:textColor="@color/white" />
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif"
-                    android:text="@string/address"
-                    android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/fows_title"
+                android:textColor="@color/white"
+                android:textSize="@dimen/navigation_text_size" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="@string/fows_title"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/navigation_text_size" />
-            </LinearLayout>
+    </RelativeLayout>
 
-        </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/nav_login_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/navigation_item_height"
+        android:layout_below="@+id/nav_text_contener"
+        android:layout_marginTop="@dimen/navigation_list_top_margin">
+
+        <Spinner
+            android:id="@+id/nav_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/drawerList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/nav_header_container"
-        android:layout_marginTop="@dimen/navigation_list_top_margin" >
+        android:layout_below="@+id/nav_login_container"
+        android:layout_marginTop="@dimen/navigation_list_top_margin">
 
     </android.support.v7.widget.RecyclerView>
 

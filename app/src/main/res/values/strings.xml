@@ -33,7 +33,7 @@
     <string name="fragment_row_questionaire_send">Send</string>
     <string name="message_send">Thank you for completing the questionnaire. It was sent correctly.</string>
     <string name="message_questionnaire_done">This questionnaire has already been completed by you. Thanks :)</string>
-    <string name="exception_incomplete">No questions answered with star (*)</string>
+    <string name="exception_incomplete">No fields filled with star (*)</string>
     <string name="offers">Which offers do you want to open?</string>
     <string name="offer1">Partnership proposal</string>
     <string name="offer2">Media partnership</string>
@@ -44,5 +44,40 @@
     <string name="MediaPartners_10">Media Partners</string>
     <string name="AwardSponsors_12">Award Sponsors</string>
     <string name="menu_item_organisers">Organisers</string>
+    <string name="login">Login</string>
+    <string name="createAccount">Create account</string>
+    <string name="loginWithFacebook">Login with Facebook</string>
+    <string name="email">E-mail address*</string>
+    <string name="password">Password*</string>
+    <string name="emailL" translatable="false">E-mail</string>
+    <string name="passwordL">Password</string>
+    <string name="password2">Confirm Password*</string>
+    <string name="userName">Name*</string>
+    <string name="userSurname">Surname*</string>
+    <string name="userNameAccount">Name</string>
+    <string name="userSurnameAccount">Surname</string>
+    <string name="exception_pass_not_equal">Passwords are not the same</string>
+    <string name="exception_fail_email">Invalid email</string>
+    <string name="message_add_account">Added user. Please check your email to finish the activation.</string>
+    <string name="anonymous">Anonymous</string>
+    <string name="account">Account</string>
+    <string name="signOut">Sign Out</string>
+    <string name="message_login_success">Logging successful</string>
+    <string name="userUniversity">University</string>
+    <string name="userCompany">Company</string>
+    <string name="fragment_row_account_info">Account information</string>
+    <string name="change_info">Data change</string>
+    <string name="change">Change</string>
+    <string name="cancel">Cancel</string>
+    <string name="change_password">change password</string>
+    <string name="message_update_success">The account has been updated</string>
+    <string name="exception_update_fail">An error occurred while updating your account</string>
+    <string name="signOutSuccess">Signed out successfully</string>
+    <string name="signOutFaill">Signed failed</string>
+    <string name="exception_require_field">This field can not be empty!</string>
+    <string name="exception_login_fail">Wrong username and / or password</string>
+    <string name="fragment_row_account_verify_error">Your account has not been verified. Click on the link from the email or email again.</string>
+    <string name="send_again">Send again</string>
+    <string name="message_email_verify">Again you sent an e-mail verification. Check your email</string>
 
 </resources>

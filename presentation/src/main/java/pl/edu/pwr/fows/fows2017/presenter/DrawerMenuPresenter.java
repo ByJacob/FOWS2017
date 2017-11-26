@@ -39,6 +39,14 @@ public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
         this.view = view;
     }
 
+    public void changeMenusInDatabase() {
+        super.factory.getMenuUseCase().execute().subscribe(this::onMenusChangeListFetchSuccess);
+    }
+
+    private void onMenusChangeListFetchSuccess(List<Menu> menus) {
+        this.menus = menus;
+    }
+
     public void openFragment(String tag) {
         if (view != null)
             view.closeDrawer();
@@ -65,7 +73,7 @@ public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
     }
 
     public void menuDrawerSlide(DrawerMenuView fragment) {
-        if (System.currentTimeMillis() - 500L > lastTimestampRefresh) {
+        if (System.currentTimeMillis() - 1000L > lastTimestampRefresh) {
             lastTimestampRefresh = System.currentTimeMillis();
             fragment.refreshMenuIcon();
         }
@@ -88,6 +96,7 @@ public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
         this.menus = menus;
         baseActivityView.disableLoadingBar();
         baseActivityView.continueLoading();
+        view.continueLoading();
     }
 
     public void clickOffer(Locale locale) {
@@ -103,7 +112,7 @@ public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
         baseActivityView.startMaps(LOCATION_D20_ID.replace(",", "%2C").replace(" ", "+"));
     }
 
-    public void sendToken(String token, Locale locale){
+    public void sendToken(String token, Locale locale) {
         factory.sendFirebaseToken(token, locale.getLanguage()).execute().subscribe(this::onSendSuccess, this::onSendFail);
     }
 
@@ -112,7 +121,7 @@ public class DrawerMenuPresenter extends BasePresenter<DrawerMenuView> {
     }
 
     private void onSendSuccess(Boolean isNewToken) {
-        if(isNewToken)
+        if (isNewToken)
             baseActivityView.sendLogEvent();
     }
 }

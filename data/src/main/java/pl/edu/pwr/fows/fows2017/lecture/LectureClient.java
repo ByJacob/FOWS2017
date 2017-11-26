@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterface;
 import pl.edu.pwr.fows.fows2017.entity.Lecture;
+import pl.edu.pwr.fows.fows2017.entity.PrelegentsDay;
 import pl.edu.pwr.fows.fows2017.gateway.LectureGateway;
 
 /**
@@ -17,7 +18,7 @@ import pl.edu.pwr.fows.fows2017.gateway.LectureGateway;
 
 public class LectureClient implements LectureGateway {
 
-    private final String URL = "http://fows.pwr.edu.pl/agenda-date.php?android";
+    private final String URL = "https://fows-2017.firebaseio.com/agenda.json";
     private LectureProvider provider;
 
     @Inject
@@ -28,7 +29,7 @@ public class LectureClient implements LectureGateway {
 
 
     @Override
-    public List<Lecture> getLectures() throws IOException {
+    public List<PrelegentsDay> getPrelegentsDay() throws IOException {
         return provider.getLectures();
     }
 }

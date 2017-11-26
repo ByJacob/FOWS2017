@@ -32,6 +32,8 @@ public class JsonParserFacebookPosts {
         String reportDate = df.format(today);
         for (int i = 0; i < data.length(); i++) {
             JSONObject post = data.getJSONObject(i);
+            if(!post.has("full_picture"))
+                continue;
             String full_picture = post.getString("full_picture");
             String message = post.getString("message");
             String picture = post.getString("picture");

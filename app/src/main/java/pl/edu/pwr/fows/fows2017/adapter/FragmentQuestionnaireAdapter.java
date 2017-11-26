@@ -106,6 +106,7 @@ public class FragmentQuestionnaireAdapter extends RecyclerView.Adapter<FragmentQ
             otherButton = itemView.findViewById(R.id.row_fragment_questionnaire_other_button);
             otherText = itemView.findViewById(R.id.row_fragment_questionnaire_other_text);
             setOtherTextChangedListener();
+            otherText.setOnClickListener(view -> {});
             otherText.addTextChangedListener(this.onOtherTextChange);
             answerButtons = new ArrayList<>();
         }

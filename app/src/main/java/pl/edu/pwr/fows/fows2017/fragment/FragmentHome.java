@@ -12,6 +12,11 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
@@ -22,6 +27,7 @@ import pl.edu.pwr.fows.fows2017.R;
 import pl.edu.pwr.fows.fows2017.di.component.ActivityComponent;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentHomeModule;
 import pl.edu.pwr.fows.fows2017.fragment.base.BaseFragment;
+import pl.edu.pwr.fows.fows2017.map.DrawerMenuItemMap;
 import pl.edu.pwr.fows.fows2017.presenter.FragmentHomePresenter;
 import pl.edu.pwr.fows.fows2017.tools.Utils;
 import pl.edu.pwr.fows.fows2017.view.FragmentHomeView;
@@ -80,7 +86,19 @@ public class FragmentHome extends BaseFragment implements FragmentHomeView {
 
     @Override
     public void continueLoading() {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("menu");
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                presenter.refreshMainIcon();
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        databaseReference.addValueEventListener(postListener);
     }
 
     @Override
@@ -101,7 +119,7 @@ public class FragmentHome extends BaseFragment implements FragmentHomeView {
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         Picasso.with(getActivity()).load(url).into(logo);
-                        TranslateAnimation animation2 = new TranslateAnimation(0, 0, logoHeight*1.2f, 0);
+                        TranslateAnimation animation2 = new TranslateAnimation(0, 0, logoHeight * 1.2f, 0);
                         animation2.setDuration(500);
                         parentLogo.startAnimation(animation2);
                     }
@@ -135,7 +153,7 @@ public class FragmentHome extends BaseFragment implements FragmentHomeView {
                 day = getString(R.string.finish1);
                 theme = getString(R.string.finish2);
             }
-            if(!isAgenda) {
+            if (!isAgenda) {
                 day = getString(R.string.notStart2);
                 theme = getString(R.string.notStart1);
             }
@@ -177,6 +195,46 @@ public class FragmentHome extends BaseFragment implements FragmentHomeView {
             if (isNext != null) {
                 Runnable task2 = () -> presenter.displayLecture(!isNext);
                 handler.postDelayed(task2, 8000);
+            }
+        }
+    }
+
+    @Override
+    public void updateIcon(Integer position, String tag) {
+        if (position > 0 && position < 5 && getView() != null) {
+            Integer name = DrawerMenuItemMap.getTag(tag);
+            Integer icon = DrawerMenuItemMap.getMainIcon(tag);
+            TextView textName = null;
+            ImageView imageIcon = null;
+            ConstraintLayout container = null;
+            switch (position) {
+                case 1:
+                    textName = getView().findViewById(R.id.fragment_home_textView_11);
+                    imageIcon = getView().findViewById(R.id.fragment_home_imageView_11);
+                    container = getView().findViewById(R.id.fragment_menu_layout_item1);
+                    break;
+                case 2:
+                    textName = getView().findViewById(R.id.fragment_home_textView_12);
+                    imageIcon = getView().findViewById(R.id.fragment_home_imageView_12);
+                    container = getView().findViewById(R.id.fragment_menu_layout_item2);
+                    break;
+                case 3:
+                    textName = getView().findViewById(R.id.fragment_home_textView_21);
+                    imageIcon = getView().findViewById(R.id.fragment_home_imageView_21);
+                    container = getView().findViewById(R.id.fragment_menu_layout_item3);
+                    break;
+                case 4:
+                    textName = getView().findViewById(R.id.fragment_home_textView_22);
+                    imageIcon = getView().findViewById(R.id.fragment_home_imageView_22);
+                    container = getView().findViewById(R.id.fragment_menu_layout_item4);
+                    break;
+            }
+            if (textName != null && imageIcon != null && container != null) {
+                if (!Objects.equals(textName.getText().toString(), getString(name))) {
+                    textName.setText(name);
+                    Picasso.with(getContext()).load(icon).into(imageIcon);
+                    container.setTag(tag);
+                }
             }
         }
     }

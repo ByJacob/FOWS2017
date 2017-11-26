@@ -14,8 +14,10 @@ import pl.edu.pwr.fows.fows2017.entity.Lecture;
 import pl.edu.pwr.fows.fows2017.entity.Menu;
 import pl.edu.pwr.fows.fows2017.entity.OrganiserTeam;
 import pl.edu.pwr.fows.fows2017.entity.Organizer;
+import pl.edu.pwr.fows.fows2017.entity.PrelegentsDay;
 import pl.edu.pwr.fows.fows2017.entity.Question;
 import pl.edu.pwr.fows.fows2017.entity.Sponsor;
+import pl.edu.pwr.fows.fows2017.entity.User;
 import pl.edu.pwr.fows.fows2017.gateway.FacebookPostGateway;
 import pl.edu.pwr.fows.fows2017.gateway.FirebaseTokenGateway;
 import pl.edu.pwr.fows.fows2017.gateway.LectureGateway;
@@ -26,18 +28,28 @@ import pl.edu.pwr.fows.fows2017.gateway.OrganizerGateway;
 import pl.edu.pwr.fows.fows2017.gateway.QuestionGateway;
 import pl.edu.pwr.fows.fows2017.gateway.QuestionnaireVersionGateway;
 import pl.edu.pwr.fows.fows2017.gateway.SponsorGateway;
+import pl.edu.pwr.fows.fows2017.gateway.UserGateway;
+import pl.edu.pwr.fows.fows2017.usecase.AddUserAndLoginUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.CheckQuestionnaireVersionUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.FacebookPostsUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.GetUserUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.LecturesUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.LoginUserExistAccountUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.LoginUserUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.LogoutUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.MenuUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.MenuWithTagUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.OfferUrlUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.OrganisersUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.OrganizersUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.QuestionnaireUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.SendEmailVerifyUserUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SendFirebaseTokenUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SendQuestionnaireUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.SponsorUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.UpdateUserEmailUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.UpdateUserPasswordUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.UpdateUserUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.base.UseCase;
 
 /**
@@ -61,6 +73,7 @@ public class UseCaseFactory {
     private final QuestionnaireVersionGateway questionnaireVersionGateway;
     private final QuestionnaireVersionGateway questionnaireVersionGatewaySharedPref;
     private final FirebaseTokenGateway firebaseTokenGateway;
+    private final UserGateway userGateway;
 
     @Inject
     public UseCaseFactory(FowsRxTransformerProvider rxTransformer, MenuGateway menuGateway,
@@ -75,7 +88,8 @@ public class UseCaseFactory {
                           QuestionGateway questionGateway,
                           @Named("NetworkGateway") QuestionnaireVersionGateway questionnaireVersionGateway,
                           @Named("LocalGateway") QuestionnaireVersionGateway questionnaireVersionGatewaySharedPref,
-                          FirebaseTokenGateway firebaseTokenGateway){
+                          FirebaseTokenGateway firebaseTokenGateway,
+                          UserGateway userGateway){
         this.menuGateway = menuGateway;
         this.rxTransformer = rxTransformer;
         this.facebookPostGateway = facebookPostGateway;
@@ -90,6 +104,7 @@ public class UseCaseFactory {
         this.questionnaireVersionGateway = questionnaireVersionGateway;
         this.questionnaireVersionGatewaySharedPref = questionnaireVersionGatewaySharedPref;
         this.firebaseTokenGateway = firebaseTokenGateway;
+        this.userGateway = userGateway;
     }
 
     public UseCase<Observable<List<Menu>>> getMenuUseCase(){
@@ -112,11 +127,11 @@ public class UseCaseFactory {
         return new SponsorUseCase(rxTransformer, sponsorGateway);
     }
 
-    public  UseCase<Observable<List<Lecture>>> getLectures(){
+    public  UseCase<Observable<List<PrelegentsDay>>> getLectures(){
         return new LecturesUseCase(rxTransformer, lectureGateway);
     }
 
-    public UseCase<Observable<List<Lecture>>> getLecturesSharedPref(){
+    public UseCase<Observable<List<PrelegentsDay>>> getLecturesSharedPref(){
         return new LecturesUseCase(rxTransformer, lectureGatewaySharedPref);
     }
 
@@ -146,5 +161,44 @@ public class UseCaseFactory {
 
     public UseCase<Observable<Boolean>> sendFirebaseToken(String token, String language){
         return new SendFirebaseTokenUseCase(rxTransformer, firebaseTokenGateway, token, language);
+    }
+
+    public UseCase<Observable<Boolean>> addUserAndLogin(String email, String password, String name,
+                                                        String surname, String university,
+                                                        String company){
+        return new AddUserAndLoginUseCase(rxTransformer,userGateway,email, password, name, surname,
+                university, company);
+    }
+
+    public UseCase<Observable<User>> getUser(){
+        return new GetUserUseCase(rxTransformer, userGateway);
+    }
+
+    public UseCase<Observable<Boolean>> loginUser(String email, String password){
+        return new LoginUserUseCase(rxTransformer, userGateway, email, password);
+    }
+
+    public UseCase<Observable<Boolean>> loginCurrentUser(){
+        return new LoginUserExistAccountUseCase(rxTransformer, userGateway);
+    }
+
+    public UseCase<Observable<Boolean>> updateUserPassword(String password){
+        return new UpdateUserPasswordUseCase(rxTransformer, userGateway, password);
+    }
+
+    public UseCase<Observable<Boolean>> updateUserEmail(String email){
+        return new UpdateUserEmailUseCase(rxTransformer, userGateway, email);
+    }
+
+    public UseCase<Observable<Boolean>> updateUser(User user){
+        return new UpdateUserUseCase(rxTransformer, userGateway, user);
+    }
+
+    public UseCase<Observable<Boolean>> sendEmailVerifycationUser(){
+        return new SendEmailVerifyUserUseCase(rxTransformer, userGateway);
+    }
+
+    public UseCase<Observable<Boolean>> logoutCurrentUser(){
+        return new LogoutUseCase(rxTransformer, userGateway);
     }
 }

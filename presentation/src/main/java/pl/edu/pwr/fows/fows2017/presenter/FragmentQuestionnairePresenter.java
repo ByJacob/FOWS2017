@@ -56,18 +56,20 @@ public class FragmentQuestionnairePresenter extends BasePresenter<FragmentQuesti
     }
 
     public void configureRow(FragmentQuestionnaireRowView holder, int position, Locale locale) {
-        holder.setType(Question.getTypeString(questionList.get(position).getType()));
+        holder.setType(questionList.get(position).getType());
         String isRequired = "";
-        if (Question.getTypeString(questionList.get(position).getType()).contains("SELECT"))
+        if (questionList.get(position).getType().contains("SELECT"))
             isRequired = "*";
         if (Objects.equals(locale.getLanguage(), "pl")) {
             holder.setQuestion((position + 1) + isRequired + "." + questionList.get(position).getQuestionPL());
-            holder.setAnswer(questionList.get(position).getAnswersPL(), position);
+            holder.setAnswer(questionList.get(position).getAnswerPL(), position);
         } else {
             holder.setQuestion((position + 1) + isRequired + "." + questionList.get(position).getQuestionEN());
-            holder.setAnswer(questionList.get(position).getAnswersEN(), position);
+            holder.setAnswer(questionList.get(position).getAnswerEN(), position);
         }
         String userAnswer = questionList.get(position).getUserAnswer();
+        if(userAnswer == null)
+            userAnswer = "";
         String tag = userAnswer.split(":")[0];
         if (tag.length() > 2)
             holder.restoreAnswer(tag, userAnswer.replace(tag + ":", ""));
@@ -83,7 +85,7 @@ public class FragmentQuestionnairePresenter extends BasePresenter<FragmentQuesti
         String answer;
         String[] tagSplit = tag.split("_");
         if (Objects.equals(text, tag))
-            answer = questionList.get(Integer.parseInt(tagSplit[0])).getAnswersPL().get(Integer.parseInt(tagSplit[1]));
+            answer = questionList.get(Integer.parseInt(tagSplit[0])).getAnswerPL().get(Integer.parseInt(tagSplit[1]));
         else
             answer = text;
         answer = tag + ":" + answer;
@@ -93,8 +95,16 @@ public class FragmentQuestionnairePresenter extends BasePresenter<FragmentQuesti
     public void setAnswer() {
         Boolean isComplete = true;
         for (int i = 0; i < questionList.size(); i++) {
-            if (Question.getTypeString(questionList.get(i).getType()).contains("SELECT"))
-                isComplete = questionList.get(i).getUserAnswer().length() > 0;
+            if (questionList.get(i).getType().contains("SELECT")) {
+                if (questionList.get(i).getUserAnswer()==null){
+                    isComplete = false;
+                    continue;
+                }
+                if (questionList.get(i).getUserAnswer().isEmpty())
+                    isComplete = false;
+            } else if (questionList.get(i).getUserAnswer()==null) {
+                questionList.get(i).setUserAnswer("");
+            }
         }
         if (isComplete)
             factory.sendQuestionnaire(questionList).execute()

@@ -1,14 +1,15 @@
 package pl.edu.pwr.fows.fows2017.lecture;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import pl.edu.pwr.fows.fows2017.base.OkHttpProvider;
 import pl.edu.pwr.fows.fows2017.declarationInterface.SharedPreferencesDataInterface;
-import pl.edu.pwr.fows.fows2017.entity.Lecture;
-import pl.edu.pwr.fows.fows2017.parser.JsonParserLecture;
+import pl.edu.pwr.fows.fows2017.entity.PrelegentsDay;
 import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesAPIProvider;
 
 /**
@@ -18,7 +19,7 @@ import pl.edu.pwr.fows.fows2017.sharedPreferencesAPI.SharedPreferencesAPIProvide
 
 public class LectureProvider extends OkHttpProvider {
 
-    private final List<Lecture> lectures = new ArrayList<>();
+    private final List<PrelegentsDay> lectures = new ArrayList<>();
     private final String url;
     private final SharedPreferencesDataInterface gatewaySharedPref;
 
@@ -27,15 +28,12 @@ public class LectureProvider extends OkHttpProvider {
         this.gatewaySharedPref = gatewaySharedPref;
     }
 
-    public List<Lecture> getLectures() throws IOException {
-        String response;
-        if (lectures.size() < 1) {
-            response = run(url);
-            gatewaySharedPref.save(SharedPreferencesAPIProvider.TAG_LECTURES, response);
-            List<Lecture> tmpLectures = JsonParserLecture.parseJson(response);
-            for(int i=0; i<tmpLectures.size(); i++)
-                lectures.add(tmpLectures.get(i));
-        }
+    public List<PrelegentsDay> getLectures() throws IOException {
+        Gson gson = new Gson();
+        String response = run(url);
+        gatewaySharedPref.save(SharedPreferencesAPIProvider.TAG_LECTURES, response);
+        PrelegentsDay[] tmp = gson.fromJson(response, PrelegentsDay[].class);
+        lectures.addAll(Arrays.asList(tmp));
         return lectures;
     }
 }
