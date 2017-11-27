@@ -7,8 +7,8 @@ android {
         applicationId "pl.edu.pwr.fows.fows2017"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 112
-        versionName "1.12"
+        versionCode 113
+        versionName "1.13"
     }
     configurations {
         all {

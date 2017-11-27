@@ -1,5 +1,7 @@
 package pl.edu.pwr.fows.fows2017.presenter.base;
 
+import java.util.HashMap;
+
 import pl.edu.pwr.fows.fows2017.UseCaseFactory;
 import pl.edu.pwr.fows.fows2017.view.BaseActivityView;
 import pl.edu.pwr.fows.fows2017.view.base.BaseActivityAndFragmentView;
@@ -21,7 +23,5 @@ public abstract class BasePresenter<T extends BaseActivityAndFragmentView> {
     }
 
     public abstract void onViewTaken(T view);
-
-
 
 }

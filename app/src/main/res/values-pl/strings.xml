@@ -27,7 +27,7 @@
     <string name="fragment_row_questionnaire_other">Inne</string>
     <string name="fragment_row_questionnaire_answer">Odpowiedź</string>
     <string name="fragment_row_questionaire_send">Wyślij</string>
-    <string name="message_send">Dziękujemy za wypełnienie ankiety. Została ona poprawnie przesłana.</string>
+    <string name="message_send">Wysłano poprawnie</string>
     <string name="message_questionnaire_done">Ta ankieta została już wypełniona przez Ciebie. Dziękujemy :)</string>
     <string name="exception_incomplete">Nie wypełniono pól z gwiazdką (*)</string>
     <string name="offers">Którą oferte chcesz otworzyć ?</string>
@@ -74,4 +74,8 @@
     <string name="fragment_row_account_verify_error">Twoje konto nie zostało zweryfikowane. Kliknij w odnośnik z e-maila lub wyślij mail ponownie.</string>
     <string name="send_again">Wyślij ponownie</string>
     <string name="message_email_verify">Wysłano ponownie e-mail weryfikacyjny. Sprawdź swoją pocztę</string>
+    <string name="contest">Konkurs</string>
+    <string name="exception_not_loggin">Jesteś niezalogowany. Nie możesz wziąć udziału w konkursie. Najpierw stwórz i potwierdź konto.</string>
+    <string name="exception_not_verified">Twoje konto nie jest zweryfikowane. Masz niższy priorytet przy udzielaniu odpowiedzi na pytania.</string>
+    <string name="message_contest_complete">Odpowiedzi do konkursu zostały już wysłane</string>
 </resources>

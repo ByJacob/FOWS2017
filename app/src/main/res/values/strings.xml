@@ -31,7 +31,7 @@
     <string name="fragment_row_questionnaire_other" >Other</string>
     <string name="fragment_row_questionnaire_answer">Answer</string>
     <string name="fragment_row_questionaire_send">Send</string>
-    <string name="message_send">Thank you for completing the questionnaire. It was sent correctly.</string>
+    <string name="message_send">Sent correctly</string>
     <string name="message_questionnaire_done">This questionnaire has already been completed by you. Thanks :)</string>
     <string name="exception_incomplete">No fields filled with star (*)</string>
     <string name="offers">Which offers do you want to open?</string>
@@ -79,5 +79,9 @@
     <string name="fragment_row_account_verify_error">Your account has not been verified. Click on the link from the email or email again.</string>
     <string name="send_again">Send again</string>
     <string name="message_email_verify">Again you sent an e-mail verification. Check your email</string>
+    <string name="contest">Contest</string>
+    <string name="exception_not_loggin">You are not logged in. You can not take part in the competition. First, create and confirm your account.</string>
+    <string name="exception_not_verified">Your account is not verified. You have lower priority when answering questions.</string>
+    <string name="message_contest_complete">Replies to the contest have already been sent</string>
 
 </resources>

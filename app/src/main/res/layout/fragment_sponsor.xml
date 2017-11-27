@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <ScrollView
@@ -25,12 +26,18 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/fragment_sponsor_title_text_size" />
 
-            <GridLayout
+            <com.google.android.flexbox.FlexboxLayout
                 android:id="@+id/fragment_news_row_0"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:columnCount="@integer/fragment_sponsor_column_count" />
+                android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/fragment_questionnaire_row_question_vertical_padding"
+                android:paddingStart="@dimen/fragment_questionnaire_row_question_vertical_padding"
+                app:alignContent="flex_start"
+                app:alignItems="stretch"
+                app:flexWrap="wrap"
+                app:justifyContent="center">
+
+            </com.google.android.flexbox.FlexboxLayout>
 
             <TextView
                 android:id="@+id/textView8"
@@ -43,12 +50,17 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/fragment_sponsor_title_text_size" />
 
-            <GridLayout
+            <com.google.android.flexbox.FlexboxLayout
                 android:id="@+id/fragment_news_row_1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:columnCount="@integer/fragment_sponsor_column_count" />
+                android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/fragment_questionnaire_row_question_vertical_padding"
+                android:paddingStart="@dimen/fragment_questionnaire_row_question_vertical_padding"
+                app:alignContent="flex_start"
+                app:alignItems="stretch"
+                app:flexWrap="wrap"
+                app:justifyContent="center" />
+
 
             <TextView
                 android:id="@+id/textView9"
@@ -61,27 +73,38 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/fragment_sponsor_title_text_size" />
 
-            <GridLayout
+            <com.google.android.flexbox.FlexboxLayout
                 android:id="@+id/fragment_news_row_2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:columnCount="@integer/fragment_sponsor_column_count" />
+                android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/fragment_questionnaire_row_question_vertical_padding"
+                android:paddingStart="@dimen/fragment_questionnaire_row_question_vertical_padding"
+                app:alignContent="flex_start"
+                app:alignItems="stretch"
+                app:flexWrap="wrap"
+                app:justifyContent="center" />
 
-            <GridLayout
+            <com.google.android.flexbox.FlexboxLayout
                 android:id="@+id/fragment_news_row_4"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:columnCount="@integer/fragment_sponsor_column_count">
+                android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/fragment_questionnaire_row_question_vertical_padding"
+                android:paddingStart="@dimen/fragment_questionnaire_row_question_vertical_padding"
+                app:alignContent="flex_start"
+                app:alignItems="stretch"
+                app:flexWrap="wrap"
+                app:justifyContent="center" />
 
-            </GridLayout>
-
-            <GridLayout
+            <com.google.android.flexbox.FlexboxLayout
                 android:id="@+id/fragment_news_row_6"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:columnCount="@integer/fragment_sponsor_column_count" />
+                android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/fragment_questionnaire_row_question_vertical_padding"
+                android:paddingStart="@dimen/fragment_questionnaire_row_question_vertical_padding"
+                app:alignContent="flex_start"
+                app:alignItems="stretch"
+                app:flexWrap="wrap"
+                app:justifyContent="center" />
 
             <TextView
                 android:id="@+id/textView10"
@@ -94,12 +117,16 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/fragment_sponsor_title_text_size" />
 
-            <GridLayout
+            <com.google.android.flexbox.FlexboxLayout
                 android:id="@+id/fragment_news_row_8"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:columnCount="@integer/fragment_sponsor_column_count" />
+                android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/fragment_questionnaire_row_question_vertical_padding"
+                android:paddingStart="@dimen/fragment_questionnaire_row_question_vertical_padding"
+                app:alignContent="flex_start"
+                app:alignItems="stretch"
+                app:flexWrap="wrap"
+                app:justifyContent="center" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -112,12 +139,16 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/fragment_sponsor_title_text_size" />
 
-            <GridLayout
+            <com.google.android.flexbox.FlexboxLayout
                 android:id="@+id/fragment_news_row_10"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:columnCount="@integer/fragment_sponsor_column_count" />
+                android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/fragment_questionnaire_row_question_vertical_padding"
+                android:paddingStart="@dimen/fragment_questionnaire_row_question_vertical_padding"
+                app:alignContent="flex_start"
+                app:alignItems="stretch"
+                app:flexWrap="wrap"
+                app:justifyContent="center" />
 
             <TextView
                 android:id="@+id/textView12"
@@ -130,12 +161,16 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/fragment_sponsor_title_text_size" />
 
-            <GridLayout
+            <com.google.android.flexbox.FlexboxLayout
                 android:id="@+id/fragment_news_row_12"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:columnCount="@integer/fragment_sponsor_column_count" />
+                android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/fragment_questionnaire_row_question_vertical_padding"
+                android:paddingStart="@dimen/fragment_questionnaire_row_question_vertical_padding"
+                app:alignContent="flex_start"
+                app:alignItems="stretch"
+                app:flexWrap="wrap"
+                app:justifyContent="center" />
 
         </LinearLayout>
     </ScrollView>

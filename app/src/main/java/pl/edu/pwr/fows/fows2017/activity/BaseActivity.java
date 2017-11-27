@@ -36,6 +36,7 @@ import pl.edu.pwr.fows.fows2017.firebase.LogEvent;
 import pl.edu.pwr.fows.fows2017.fragment.DrawerMenuFragment;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentAgenda;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentContact;
+import pl.edu.pwr.fows.fows2017.fragment.FragmentContest;
 import pl.edu.pwr.fows.fows2017.fragment.loginUser.FragmentAccount;
 import pl.edu.pwr.fows.fows2017.fragment.loginUser.FragmentCreateAccount;
 import pl.edu.pwr.fows.fows2017.fragment.FragmentHome;
@@ -197,6 +198,9 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityView 
                         case "SIGN_OUT":
                             loginPresenter.signOutUser();
                             drawerFragment.closeDrawer();
+                            break;
+                        case "CONTEST":
+                            fragment = new FragmentContest();
                             break;
                     }
                 }

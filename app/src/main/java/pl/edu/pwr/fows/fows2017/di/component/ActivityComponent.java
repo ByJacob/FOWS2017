@@ -6,6 +6,7 @@ import pl.edu.pwr.fows.fows2017.di.module.ActivityModule;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentAccountModule;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentAgendaModule;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentContactModule;
+import pl.edu.pwr.fows.fows2017.di.module.FragmentContestModule;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentCreateAccountModule;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentHomeModule;
 import pl.edu.pwr.fows.fows2017.di.module.FragmentLoginModule;
@@ -46,4 +47,6 @@ public interface ActivityComponent {
     FragmentLoginComponent addModule(FragmentLoginModule module);
 
     FragmentAccountComponent addModule(FragmentAccountModule module);
+
+    FragmentContestComponent addModule(FragmentContestModule module);
 }

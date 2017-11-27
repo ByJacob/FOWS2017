@@ -33,6 +33,7 @@ public class LectureProvider extends OkHttpProvider {
         String response = run(url);
         gatewaySharedPref.save(SharedPreferencesAPIProvider.TAG_LECTURES, response);
         PrelegentsDay[] tmp = gson.fromJson(response, PrelegentsDay[].class);
+        lectures.clear();
         lectures.addAll(Arrays.asList(tmp));
         return lectures;
     }
