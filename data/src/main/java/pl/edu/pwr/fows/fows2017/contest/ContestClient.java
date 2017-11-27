@@ -40,4 +40,9 @@ public class ContestClient implements ContestQuestionGateway {
     public boolean sendAnswers(HashMap<String, String> answers) {
         return provider.sendAnswers(answers);
     }
+
+    @Override
+    public boolean isComplete() {
+        return provider.checkVersion();
+    }
 }

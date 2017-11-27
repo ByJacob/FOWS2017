@@ -53,6 +53,14 @@ public class FragmentContestPresenter extends BasePresenter<FragmentContestView>
         baseActivityView.disableLoadingBar();
         if(!user.getVerify())
             baseActivityView.showMessage("NOT_VERIFIED", false);
+        factory.isContestComplete().execute().subscribe(this::onFetchContestStatusSuccess);
+    }
+
+    private void onFetchContestStatusSuccess(Boolean aBoolean) {
+        if(!aBoolean){
+            baseActivityView.showPreviousFragment();
+            baseActivityView.showMessage("CONTEST_DONE", null);
+        }
     }
 
     public int getQuestionsSize() {

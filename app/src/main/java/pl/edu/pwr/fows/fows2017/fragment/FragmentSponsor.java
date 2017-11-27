@@ -1,7 +1,10 @@
 package pl.edu.pwr.fows.fows2017.fragment;
 
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.widget.LinearLayout;
 
 import javax.inject.Inject;
@@ -45,7 +48,9 @@ public class FragmentSponsor extends BaseFragment implements FragmentSponsorView
 
     @Override
     public void continueLoading() {
-        FragmentSponsorAdapter adapter = new FragmentSponsorAdapter(getActivity());
+        Point point = new Point();
+        getActivity().getWindowManager().getDefaultDisplay().getSize(point);
+        FragmentSponsorAdapter adapter = new FragmentSponsorAdapter(getActivity(), point.x);
         adapter.setPresenter(presenter);
         adapter.setParent(parent);
         adapter.display();

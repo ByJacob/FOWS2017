@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import pl.edu.pwr.fows.fows2017.base.OkHttpProvider;
 import pl.edu.pwr.fows.fows2017.declarationInterface.AuthInterface;
@@ -55,5 +56,10 @@ public class ContestProvider extends OkHttpProvider{
             return true;
         }
         return false;
+    }
+
+    public boolean checkVersion() {
+        String test = sharedPreferences.get(SharedPreferencesAPIProvider.TAG_CONTEST, "");
+        return !Objects.equals(test, version);
     }
 }

@@ -13,4 +13,5 @@ import pl.edu.pwr.fows.fows2017.entity.ContestQuestion;
 public interface ContestQuestionGateway {
     List<ContestQuestion> getQuestions();
     boolean sendAnswers(HashMap<String, String> answers);
+    boolean isComplete();
 }

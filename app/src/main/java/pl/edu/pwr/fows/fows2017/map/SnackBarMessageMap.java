@@ -11,14 +11,14 @@ public class SnackBarMessageMap {
     private static final String[] tags = {"NETWORK", "BROWSER", "MAP", "DISABLE", "SEND",
             "QUESTIONNAIRE_DONE", "INCOMPLETE", "PASS_NOT_EQUAL", "FAIL_EMAIL", "ADD_ACCOUNT", "LOGIN",
             "UPDATE_SUCCESS", "UPDATE_FAIL", "SIGN_OUT_SUCCESS", "SIGN_OUT_FAIL", "LOGIN_FAIL",
-            "SEND_VERIFY", "NOT_LOGIN","NOT_VERIFIED"};
+            "SEND_VERIFY", "NOT_LOGIN","NOT_VERIFIED","CONTEST_DONE"};
     private static final Integer[] textsId = {R.string.exception_network, R.string.exception_browser,
             R.string.exception_map, R.string.exception_disable, R.string.message_send,
             R.string.message_questionnaire_done, R.string.exception_incomplete,
             R.string.exception_pass_not_equal, R.string.exception_fail_email, R.string.message_add_account,
             R.string.message_login_success,R.string.message_update_success, R.string.exception_update_fail, R.string.signOutSuccess, R.string.signOutFaill,
             R.string.exception_login_fail, R.string.message_email_verify, R.string.exception_not_loggin,
-            R.string.exception_not_verified};
+            R.string.exception_not_verified, R.string.message_contest_complete};
 
     public static Integer getTag(String tag) {
         for(int i=0; i<tags.length;  i++){

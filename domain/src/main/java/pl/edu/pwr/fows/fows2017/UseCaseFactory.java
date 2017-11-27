@@ -37,6 +37,7 @@ import pl.edu.pwr.fows.fows2017.usecase.CheckQuestionnaireVersionUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.FacebookPostsUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.GetContestUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.GetUserUseCase;
+import pl.edu.pwr.fows.fows2017.usecase.IsContestCompleteUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.LecturesUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.LoginUserExistAccountUseCase;
 import pl.edu.pwr.fows.fows2017.usecase.LoginUserUseCase;
@@ -216,5 +217,9 @@ public class UseCaseFactory {
 
     public UseCase<Observable<Boolean>> sendContestAnswer(HashMap<String, String> answer){
         return new SendContestAnswerUseCase(rxTransformer, contestQuestionGateway, answer);
+    }
+
+    public UseCase<Observable<Boolean>> isContestComplete(){
+        return new IsContestCompleteUseCase(rxTransformer, contestQuestionGateway);
     }
 }
