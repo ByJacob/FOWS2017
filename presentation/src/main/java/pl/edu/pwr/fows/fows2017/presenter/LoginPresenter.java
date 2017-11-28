@@ -77,6 +77,7 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
             baseActivityView.showPreviousFragment();
         } else {
             loginButtonView.setNotLoginCategories();
+            baseActivityView.showMessage("EMAIL_EXIST", true);
         }
     }
 
@@ -91,6 +92,7 @@ public class LoginPresenter extends BasePresenter<FragmentCreateAccountView> {
     }
 
     private void fetchUserSuccess(User user) {
+
         if (!user.getName().isEmpty() && !user.getSurname().isEmpty()) {
             this.user = user;
             loginButtonView.setLoginCategories(user.getName() + " " + user.getSurname());

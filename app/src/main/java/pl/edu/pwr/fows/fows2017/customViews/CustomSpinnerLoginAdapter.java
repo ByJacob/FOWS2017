@@ -79,6 +79,8 @@ public class CustomSpinnerLoginAdapter extends ArrayAdapter {
         this.verify = verify;
     }
     public void setVerify(){
+        if(verify==null)
+            verify = false;
         if(verify){
             imageView.setImageResource(R.drawable.ic_navigation_item);
             imageView.setAlpha(0.54f);

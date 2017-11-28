@@ -72,7 +72,7 @@ public class FirebaseAuthAPI implements AuthInterface {
     @Override
     public String getToken() {
         if (auth.getCurrentUser() != null) {
-            Task<GetTokenResult> idToken = auth.getCurrentUser().getIdToken(false);
+            Task<GetTokenResult> idToken = auth.getCurrentUser().getIdToken(true);
             try {
                 Tasks.await(idToken);
                 return idToken.getResult().getToken();

@@ -94,6 +94,13 @@ public class User {
         private String password;
 
         private Builder() {
+            surname="";
+            university="";
+            name="";
+            verify=false;
+            company="";
+            email="";
+            password="";
         }
 
         public static Builder anUser() {

@@ -83,5 +83,6 @@
     <string name="exception_not_loggin">You are not logged in. You can not take part in the competition. First, create and confirm your account.</string>
     <string name="exception_not_verified">Your account is not verified. You have lower priority when answering questions.</string>
     <string name="message_contest_complete">Replies to the contest have already been sent</string>
+    <string name="exception_email_exist">A user with such an e-mail address already exists</string>
 
 </resources>
