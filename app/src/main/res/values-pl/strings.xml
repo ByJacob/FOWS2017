@@ -79,4 +79,5 @@
     <string name="exception_not_verified">Twoje konto nie jest zweryfikowane. Masz niższy priorytet przy udzielaniu odpowiedzi na pytania.</string>
     <string name="message_contest_complete">Odpowiedzi do konkursu zostały już wysłane</string>
     <string name="exception_email_exist">Użytkownik o takim adresie e-mail już istnieje</string>
+    <string name="Partners_9">Partnerzy Honorowi</string>
 </resources>

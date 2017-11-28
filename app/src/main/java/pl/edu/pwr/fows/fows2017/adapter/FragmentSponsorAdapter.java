@@ -30,6 +30,7 @@ public class FragmentSponsorAdapter {
     private static final Float SIZE_2_COLUMN_TAKES = 300f / MAX_SIZE;
     private static final Float SIZE_4_COLUMN_TAKES = 200f / MAX_SIZE;
     private static final Float SIZE_6_COLUMN_TAKES = 100f / MAX_SIZE;
+    private static final Float SIZE_7_COLUMN_TAKES = 200f / MAX_SIZE;
     private static final Float SIZE_8_COLUMN_TAKES = 100f / MAX_SIZE;
     private static final Float SIZE_10_COLUMN_TAKES = 100f / MAX_SIZE;
     private static final Float SIZE_12_COLUMN_TAKES = 100f / MAX_SIZE;
@@ -80,14 +81,18 @@ public class FragmentSponsorAdapter {
                     scale = SIZE_6_COLUMN_TAKES;
                     break;
                 case 5:
+                    flex = parent.findViewById(R.id.fragment_news_row_7);
+                    scale = SIZE_7_COLUMN_TAKES;
+                    break;
+                case 6:
                     flex = parent.findViewById(R.id.fragment_news_row_8);
                     scale = SIZE_8_COLUMN_TAKES;
                     break;
-                case 6:
+                case 7:
                     flex = parent.findViewById(R.id.fragment_news_row_10);
                     scale = SIZE_10_COLUMN_TAKES;
                     break;
-                case 7:
+                case 8:
                     flex = parent.findViewById(R.id.fragment_news_row_12);
                     scale = SIZE_12_COLUMN_TAKES;
                     break;

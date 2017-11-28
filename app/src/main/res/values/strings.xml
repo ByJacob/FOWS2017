@@ -84,5 +84,5 @@
     <string name="exception_not_verified">Your account is not verified. You have lower priority when answering questions.</string>
     <string name="message_contest_complete">Replies to the contest have already been sent</string>
     <string name="exception_email_exist">A user with such an e-mail address already exists</string>
-
+    <string name="Partners_9">Honorary Partner</string>
 </resources>

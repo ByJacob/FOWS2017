@@ -107,6 +107,27 @@
                 app:justifyContent="center" />
 
             <TextView
+                android:id="@+id/textView17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="0.87"
+                android:gravity="center"
+                android:padding="@dimen/fragment_sponsor_title_padding"
+                android:text="@string/Partners_9"
+                android:textColor="@color/black"
+                android:textSize="@dimen/fragment_sponsor_title_text_size" />
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/fragment_news_row_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/fragment_questionnaire_row_question_vertical_padding"
+                android:paddingStart="@dimen/fragment_questionnaire_row_question_vertical_padding"
+                app:alignContent="flex_start"
+                app:alignItems="stretch"
+                app:flexWrap="wrap"
+                app:justifyContent="center" />
+            <TextView
                 android:id="@+id/textView10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
